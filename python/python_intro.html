@@ -1,0 +1,639 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh_tw" lang="zh_tw">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.4: http://docutils.sourceforge.net/" />
+<title>Python 程式語言簡介</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger
+:Contact: goodger@users.sourceforge.net
+:Date: $Date: 2005-06-06 15:09:07 +0200 (Mon, 06 Jun 2005) $
+:Version: $Revision: 3442 $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+*/
+
+/* "! important" is used here to override other ``margin-top`` and
+   ``margin-bottom`` styles that are later in the stylesheet or 
+   more specific.  See http://www.w3.org/TR/CSS1#the-cascade */
+
+body {
+  font-family: Calibri, Georgia, Times New Roman, Times,  Free Times;
+  background-color: #666666;
+}
+
+div.document {
+  background-color: white;
+  clear: both;
+  width: 50em;
+  margin: 0 auto 0 auto;
+  padding: 0.5em;
+  border: 2px ridge black;
+}
+
+.first {
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em;
+  border-top: 2px solid #888888;
+  border-bottom: 2px solid #888888;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin-left: 1em ;
+  border: medium outset ; 
+  padding: 1em ;
+  background-color: #ffffee ;
+  /* width: 40% ; */
+  /* float: right ; */
+ /*  clear: right */ }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+div.section h1, div.section h2, div.section h3, 
+div.section h4, div.section h5, div.section h6 {
+  padding-left: 0.3em;
+  padding-bottom: 0.3em;
+  border-left: 2px solid gray;
+  border-bottom: 2px solid gray;
+}
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em; }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left {
+  clear: left }
+
+img.align-right {
+  clear: right }
+
+img.borderless {
+  border: 0 }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font-family: serif ;
+  font-size: 100% }
+
+pre.line-block {
+  font-family: serif ;
+  font-size: 100% }
+
+pre.literal-block, pre.doctest-block {
+  white-space: pre-wrap;       /* css-3 */
+  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word;       /* Internet Explorer 5.5+ */
+  margin-left: 2em ;
+  margin-right: 2em ;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  padding-left: 1em;
+  padding-right: 1em;
+  border: 1px dotted black;
+}
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid thin gray }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  border-spacing: 0;
+  border: 1 solid black;
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-top: solid thin black;
+  border-left: solid thin black }
+
+table.footnote td.label a {
+  text-decoration: none;
+}
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  border: 0; 
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+tt.docutils {
+}
+
+tt.ltst {
+  font-weight: bold;
+}
+
+tt.ltem {
+  font-style: italic;
+}
+
+ul.auto-toc {
+  list-style-type: none }
+
+/* vim: set ai et nu sw=2 ts=2: */
+
+</style>
+</head>
+<body>
+<div class="document" id="python">
+<h1 class="title">Python 程式語言簡介</h1>
+<table class="docinfo" frame="void" rules="none">
+<col class="docinfo-name" />
+<col class="docinfo-content" />
+<tbody valign="top">
+<tr class="field"><th class="docinfo-name">author:</th><td class="field-body">Yung-Yu Chen (yungyuc) <a class="reference" href="http://blog.seety.org/everydaywork/">http://blog.seety.org/everydaywork/</a> &lt;<a class="reference" href="mailto:yyc&#64;seety.org">yyc&#64;seety.org</a>&gt;</td>
+</tr>
+<tr class="field"><th class="docinfo-name">copyright:</th><td class="field-body">© 2005, all rights reserved</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="id1" name="id1">目錄</a></p>
+<ul class="auto-toc simple">
+<li><a class="reference" href="#id2" id="id36" name="id36">1&nbsp;&nbsp;&nbsp;Python 是什麼？</a></li>
+<li><a class="reference" href="#id4" id="id37" name="id37">2&nbsp;&nbsp;&nbsp;安裝 Python 執行環境</a></li>
+<li><a class="reference" href="#id11" id="id38" name="id38">3&nbsp;&nbsp;&nbsp;Python 基本語法</a><ul class="auto-toc">
+<li><a class="reference" href="#id16" id="id39" name="id39">3.1&nbsp;&nbsp;&nbsp;開始撰寫</a></li>
+<li><a class="reference" href="#id17" id="id40" name="id40">3.2&nbsp;&nbsp;&nbsp;檔案處理與字串</a></li>
+<li><a class="reference" href="#id18" id="id41" name="id41">3.3&nbsp;&nbsp;&nbsp;使用模組</a></li>
+<li><a class="reference" href="#id19" id="id42" name="id42">3.4&nbsp;&nbsp;&nbsp;縮排、縮排、縮排</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#id20" id="id43" name="id43">4&nbsp;&nbsp;&nbsp;Python 的應用</a></li>
+<li><a class="reference" href="#id23" id="id44" name="id44">5&nbsp;&nbsp;&nbsp;參考資料</a></li>
+</ul>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id2" name="id2">1&nbsp;&nbsp;&nbsp;Python 是什麼？</a></h1>
+<p>各位好，今天我們要來介紹 Python 這一套功能強大、直譯式並且物件導向的程式語言。你或許聽過，或許沒聽過，但現在有機會來認識它了。</p>
+<p>功能強大的直譯式程式語言不只有 Python，為什麼我們單單要來介紹它呢？Python 有幾項特點：</p>
+<ol class="arabic">
+<li><p class="first">容易撰寫。</p>
+<p>Python 具有許多物件導向的特性，然而並不要求一定得用物件導向的方式撰寫。撇開物件導向的議題不談，Python 通常可以靠比較短的程式碼完成比較多的功能，或者可以寫得比較清楚。</p>
+</li>
+<li><p class="first">功能強大。</p>
+<p>Python 自 1990 年由 Guido van Rossum 在荷蘭的 <a class="reference" href="http://www.cwi.ml/">CWI</a> 開始發展以來，從 0.9 進步到今天的 2.4.2，不但累積了相當完整的標準程式庫 (模組)，更有無以計數的非標準模組，而且絕大部分都是開放原始碼的。單以內建的模組來講，從簡單的數學運算、字串處理、網際網路協定連線、網際網路資料處理、各種壓縮格式，以及 POSIX 與主要作業系統的支援功能等等，含括的範圍非常地廣泛。</p>
+</li>
+</ol>
+<ol class="arabic" start="3">
+<li><p class="first">跨平台。</p>
+<p>各種主要的作業系統都支援 Python。Python 程式常常不需要修改，便可以同時在 Linux 與 Windows 平台上執行，即使撰寫 GUI 程式 (透過 PyGTK, wxPython 等 binding) 也是一樣。所撰寫的 Python 程式透過標準的 <tt class="docutils literal"><span class="pre">distutils</span></tt> (模組) 進行包裝後，用標準的方式即可安裝於各種平台；在 Windows 下更可以自動產生方便的可執行 installer。</p>
+</li>
+<li><p class="first">容易擴充。</p>
+<p>Python 算是執行效率不錯的直譯式語言，但畢竟比不上 C 和 Fortran。然而只要我們想，大可以 C/C++ 或 Fortran 撰寫高效率的模組；這些模組的使用方式，與內建模組以及用 Python 撰寫的模組完全一樣。最好的是，撰寫的方法並不困難。</p>
+</li>
+</ol>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id4" name="id4">2&nbsp;&nbsp;&nbsp;安裝 Python 執行環境</a></h1>
+<p>如果你使用 Linux，特別是 Debian GNU/Linux 的話，這個環境對 Python 是非常和善的，只要用 <tt class="docutils literal"><span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">python</span></tt> 即可安裝 Python 直譯器。若在安裝 Debian 的時候有選擇 task，那麼 Debian installer 可能已經幫你把 Python 裝好了。無論如何，安裝不費吹灰之力。</p>
+<p>Debian 把 Python 直譯器拆成好幾個套件：<tt class="docutils literal"><span class="pre">python</span></tt>, <tt class="docutils literal"><span class="pre">python-doc</span></tt>, <tt class="docutils literal"><span class="pre">python-profiler</span></tt> 與 <tt class="docutils literal"><span class="pre">python-dev</span></tt>。非開發人員的系統上通常只會安裝 <tt class="docutils literal"><span class="pre">python</span></tt> 套件，它包含了直譯器程式與相關二進位程式庫；如果我們想寫 Python 程式的話 (這是你在看這篇文章的目的之一，不是嗎？)，<tt class="docutils literal"><span class="pre">python-doc</span></tt> 與 <tt class="docutils literal"><span class="pre">python-profiler</span></tt> 也應該要安裝起來。<tt class="docutils literal"><span class="pre">python-dev</span></tt> 包含的則是用來以其它語言開發延伸模組用的部分。</p>
+<p>雖然目前最新版的 Python 已是 2.4.2 了，但 Debian 預設的 Python 版本仍是 2.3.5。Python 2.4 作了許多增強，但 Python 2.3 的套件 (協力套件) 支援性還是比較廣泛的。如果你想使用 2.4 版的 Python (或是倒回去 2.2, 2.1 版)，請 <tt class="docutils literal"><span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">python2.4</span></tt> (可以把 <tt class="docutils literal"><span class="pre">2.4</span></tt> 改成 <tt class="docutils literal"><span class="pre">2.2</span></tt>, <tt class="docutils literal"><span class="pre">2.1</span></tt>，以安裝相對的版本)。這些不同版本的 Python 能夠共存在 Debian 裡，有需要時可以手動叫用。在其它的 Linux distribution 上，使用預裝的 Python 即可。</p>
+<p>如果你希望自己手動編譯 Python，請到下載頁<a class="footnote-reference" href="#id25" id="id5" name="id5"><sup>2</sup></a>下載 source code distribution。熟練的程式員可能喜歡這樣作，然而當你有品質良好的 Debian 套件可以用的時候，需要自行編譯的機會就不是那麼多了。</p>
+<p>Python 在 2.4 以後的版本加入了許多好用的語言功能與模組，在執行效率上也有所增進。如果你對新的 Generator Expressions<a class="footnote-reference" href="#id26" id="id6" name="id6"><sup>3</sup></a>、Decorators<a class="footnote-reference" href="#id27" id="id7" name="id7"><sup>4</sup></a> 與其它新增的功能<a class="footnote-reference" href="#id28" id="id8" name="id8"><sup>5</sup></a>有興趣，非常推薦使用 Python 2.4。</p>
+<p>這是一本 Linux 專門雜誌，不過既然要談跨平台能力高強的 Python，實在不能不提一下 Windows 下的 Python 安裝。Windows 當然是沒有內建 Python 的，但 Windows 版 Python 的安裝和普通的應用程式一模一樣，你只要從 Python 的下載頁<a class="footnote-reference" href="#id25" id="id9" name="id9"><sup>2</sup></a>把安裝程式抓下來，然後執行，所有選項都使用預設值即可完成。實在非常地簡單。</p>
+<p>為了仔細地說明，我們拿 Python 2.3.5 安裝程式來當作範例，請至 <a class="reference" href="http://www.python.org/2.3.5/">http://www.python.org/2.3.5/</a> 下載 Windows 版的安裝程式 (Python-2.3.5.exe)。執行了安裝程式之後，我們會看到這個畫面：</p>
+<img alt="python_intro_pix/python23inst01.png" src="python_intro_pix/python23inst01.png" />
+<p>Python 並不大；安裝完畢以後也只佔用了 20MB 多一點的磁碟空間，所以最好裝在安裝程式所建議的這個位置。未來我們若自行安裝了任何外加的 Python 模組或套件，也會放在這個目錄裡面；不過 Python 套件通常都很小，我們還是不必擔心空間問題。接著按 Next (下一步)，選擇是否要備份可能會被覆蓋的檔案：</p>
+<img alt="python_intro_pix/python23inst02.png" src="python_intro_pix/python23inst02.png" />
+<p>如果你是第一次安裝 Python，當然選不選備份都沒有差別；應該不會有被覆蓋的檔案。按 Next 選要安裝的組件：</p>
+<img alt="python_intro_pix/python23inst03.png" src="python_intro_pix/python23inst03.png" />
+<p>完全安裝也只需要 20MB 的空間，我們沒必要就不取消任何一個項目。最後一個可以選擇的是程式集裡出現的名稱，這就隨你喜好了：</p>
+<img alt="python_intro_pix/python23inst04.png" src="python_intro_pix/python23inst04.png" />
+<p>只用了四個畫面就設定完畢，這比安裝遊戲還簡單。最後一個畫面只是請求確認安裝，按下 Next 就開始安裝了：</p>
+<img alt="python_intro_pix/python23inst05.png" src="python_intro_pix/python23inst05.png" />
+<p>如果你將來後悔了，到程式集裡的 Python 2.3 (看你有沒有改過) 就可以找到反安裝程式。</p>
+<p>我們順便也展示一下在 Windows 下安裝 Python 模組有多簡單。Python 下有一個非常方便的影像處理程式庫：Python Imaging Library (PIL)<a class="footnote-reference" href="#id29" id="id10" name="id10"><sup>6</sup></a>，我們用它來示範。因為剛剛示範的是 Python 2.3，所以這裡也用 Python 2.3 版的包裝檔。請下載 <tt class="docutils literal"><span class="pre">PIL-1.1.5.win32-py2.3.exe</span></tt> 檔，點擊後開始安裝：</p>
+<img alt="python_intro_pix/pil115inst01.png" src="python_intro_pix/pil115inst01.png" style="width: 640px;" />
+<p>一開始是歡迎畫面，按下 Next 後繼續流程，會請求你指定要安裝的 Python 位置：</p>
+<img alt="python_intro_pix/pil115inst02.png" src="python_intro_pix/pil115inst02.png" style="width: 640px;" />
+<p>我們可以在一台電腦裡安裝好幾個不同的 Python；如果你有這麼作，此處便提供一個指定 Python installation 的機會。接下去確認安裝動作：</p>
+<img alt="python_intro_pix/pil115inst03.png" src="python_intro_pix/pil115inst03.png" style="width: 640px;" />
+<p>按下 Next 以後就開始安裝：</p>
+<img alt="python_intro_pix/pil115inst04.png" src="python_intro_pix/pil115inst04.png" style="width: 640px;" />
+<p>很快就會裝完，最後按 Finish 即結束安裝動作。</p>
+<img alt="python_intro_pix/pil115inst05.png" src="python_intro_pix/pil115inst05.png" style="width: 640px;" />
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id11" name="id11">3&nbsp;&nbsp;&nbsp;Python 基本語法</a></h1>
+<p>受限於篇幅，本文不可能學一般書籍的作法來列出 Python 所有的語法元素；我們要用幾個簡單的範例程式，從 Python 最有特色的地方進行介紹。由於這麼作無法精確完整地描述 Python 的寫法，所以推薦你繼續 (依序) 閱讀葉平 (PingYeh) 教授的 Python 教材<a class="footnote-reference" href="#id30" id="id12" name="id12"><sup>7</sup></a> (中文)、Python Online Tutorial<a class="footnote-reference" href="#id31" id="id13" name="id13"><sup>8</sup></a>，以及比較硬的 Python Language Reference<a class="footnote-reference" href="#id32" id="id14" name="id14"><sup>9</sup></a>；另外，Dive into Python<a class="footnote-reference" href="#id33" id="id15" name="id15"><sup>10</sup></a> 也是一本可以在網路上免費下載的好書，值得參考。</p>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="id16" name="id16">3.1&nbsp;&nbsp;&nbsp;開始撰寫</a></h2>
+<p>讓我們來寫 Python 程式吧！Python 程式通常會存成 <tt class="docutils literal"><span class="pre">.py</span></tt> 檔，在 Windows 下的 Python 安裝程式會自動把這種副檔名和 Python 直譯器程式關聯起來，所以在指令行介面 (<tt class="docutils literal"><span class="pre">cmd.exe</span></tt>) 下輸入 &quot;<tt class="docutils literal"><span class="pre">blahblah.py</span></tt>&quot; 這樣的字眼，就會執行這個程式。而在 Linux 或其它 Unix-like 的系統裡面，就要再打開該檔案的執行權限 (通常以 <tt class="docutils literal"><span class="pre">chmod</span> <span class="pre">a+x</span> <span class="pre">blahblah.py</span></tt> 進行)。不管你使用哪種系統，我們還是先來 <tt class="docutils literal"><span class="pre">hello.py</span></tt> 一下：</p>
+<pre class="literal-block">
+#!/usr/bin/env python
+print &quot;Hello, world&quot;
+
+</pre>
+<p>執行的結果是 (Linux 環境)：</p>
+<pre class="literal-block">
+$ ./hello.py
+Hello, world
+</pre>
+<p>要讓 Python 程式在 Windows 下執行的關鍵是副檔名 <tt class="docutils literal"><span class="pre">.py</span></tt>，而要在 Linux 下執行的關鍵除了執行權限要設定之外，還有一個就是 <tt class="docutils literal"><span class="pre">hello.py</span></tt> 第一行的「標頭」。在 Linux 下所有像 Python 這類的指令稿，在檔案的最前頭都必須要指定所使用的直譯器；在這裡寫為 &quot;<tt class="docutils literal"><span class="pre">#!/usr/bin/env</span> <span class="pre">python</span></tt>&quot;，表示使用系統路徑裡第一個找到的 <tt class="docutils literal"><span class="pre">python</span></tt> 直譯器 (你的系統裡可能裝了不止一個 Python 喔)，也就是預設的直譯器。如果沒有這個「標頭」，Linux 就不知道它是個 Python 程式了。</p>
+<div class="note">
+<p class="first admonition-title">註記</p>
+<p class="last">另一方面，在 Linux 下並不一定要把 Python 程式的副檔名取為 <tt class="docutils literal"><span class="pre">.py</span></tt>；事實上許多以 Python 指令稿撰寫的軟體都沒有副檔名，乍看之下和一般的程式沒什麼兩樣。舉個例子，你可以安裝一下 <tt class="docutils literal"><span class="pre">meld</span></tt> 這個 GUI 的 diff 工具，跑起來順得很；如果沒有特別提起，許多人也不會想到它完全是用 Python 寫的吧。</p>
+</div>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="id17" name="id17">3.2&nbsp;&nbsp;&nbsp;檔案處理與字串</a></h2>
+<p>再來一個讀取檔案的例子 <tt class="docutils literal"><span class="pre">fileproc.py</span></tt>：</p>
+<pre class="literal-block">
+#!/usr/bin/env python
+f = open( &quot;/var/log/messages&quot; )
+lines = f.readlines()
+f.close()
+for line in lines:
+    print line
+
+</pre>
+<p>從第 2 行開始，程式會先打開 <tt class="docutils literal"><span class="pre">/var/log/messages</span></tt> 這個檔案 (Linux 的標準紀錄檔之一)，然後用檔案物件 (<tt class="docutils literal"><span class="pre">open</span></tt> 函式會傳回檔案物件，我們取名為 <tt class="docutils literal"><span class="pre">f</span></tt>) 的 <tt class="docutils literal"><span class="pre">readlines()</span></tt> 方法一次讀取所有的文字行，然後在第 4 行關閉檔案。接著是重要的迴圈敘述；<tt class="docutils literal"><span class="pre">lines</span></tt> 是用來存放所有文字行的列表，<tt class="docutils literal"><span class="pre">for</span> <span class="pre">line</span> <span class="pre">in</span> <span class="pre">lines</span></tt> 這個敘述的意思是「一次取 <tt class="docutils literal"><span class="pre">lines</span></tt> 列表中的一個項目，取名為 <tt class="docutils literal"><span class="pre">line</span></tt>」。在 <tt class="docutils literal"><span class="pre">for</span></tt> 迴圈敘述後加上冒號，換行然後「縮排」，同一段縮排的程式表示是一個區塊；我們這個 <tt class="docutils literal"><span class="pre">for</span></tt> 迴圈的區塊裡只包含了一行敘述，就是把 <tt class="docutils literal"><span class="pre">line</span></tt> 印到螢幕上。</p>
+<p><tt class="docutils literal"><span class="pre">/var/log/messages</span></tt> 檔裡的資料應該很多，你會看到一大堆字串跑過螢幕。這就表示程式執行成功了。在 Windows 下，請更換一下 <tt class="docutils literal"><span class="pre">open()</span></tt> 函式所打開的檔案，只要是純文字檔即可。</p>
+<div class="note">
+<p class="first admonition-title">註記</p>
+<p class="last">Windows 和 Linux 用來分隔目錄的字元是不同的。在 Windows 下要用反斜線 (<tt class="docutils literal"><span class="pre">\</span></tt>) 而非斜線 (<tt class="docutils literal"><span class="pre">/</span></tt>) 來分隔目錄，不過因為 <tt class="docutils literal"><span class="pre">\</span></tt> 符號在 Python 裡表示脫逸字元，所以在雙引號裡，你要用連續兩個的 <tt class="docutils literal"><span class="pre">\\</span></tt> 才能表示一個反斜線。否則 Python 可能會和你抱怨找不到檔案。</p>
+</div>
+<p>Python 裡的字串可以用單引號 (<tt class="docutils literal"><span class="pre">'</span></tt>) 或用雙引號 (<tt class="docutils literal"><span class="pre">&quot;</span></tt>) 包圍的文字來表示，效果一樣。我們接下來要說明 Python 字串處理能力，順便展示 Python 的互動式環境。在 Windows 下打開指令行介面 (<tt class="docutils literal"><span class="pre">cmd.exe</span></tt>)，輸入 <tt class="docutils literal"><span class="pre">C:\Python23\python</span></tt>；在 Linux 下的終端機內直接輸入 <tt class="docutils literal"><span class="pre">python</span></tt>，都可以進入互動式環境：</p>
+<pre class="literal-block">
+$ python
+Python 2.3.5 (#2, Aug 30 2005, 15:50:26)
+[GCC 4.0.2 20050821 (prerelease) (Debian 4.0.1-6)] on linux2
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+&gt;&gt;&gt;
+</pre>
+<p>在 Linux 下要跳出時是按 Ctrl-D，而在 Windows 下則是按 Ctrl-Z。通常 Python 互動式環境的提示符號是如上的 <tt class="docutils literal"><span class="pre">&gt;&gt;&gt;</span></tt>。讓我們試著輸入以下指令：</p>
+<pre class="literal-block">
+&gt;&gt;&gt; print &quot;a b c&quot;.split()
+['a', 'b', 'c']
+</pre>
+<p>字串在 Python 裡也是一種物件，所以我們可以如上呼叫字串方法 <tt class="docutils literal"><span class="pre">split()</span></tt>。在不加參數的情況下，<tt class="docutils literal"><span class="pre">split()</span></tt> 方法會用字串裡的廣義空白 (包含空白、跳格與斷行等字元；連續的廣義空白字元視為單一的廣義空白) 來把字串斷成多個字串，並傳回包含這些字串的列表。我們可以指定列表元素的索引值來單獨存取這些字串：</p>
+<pre class="literal-block">
+&gt;&gt;&gt; print 'this is an apple'.split()[2]
+an
+</pre>
+<p>這樣就取出了編號 2 的第三個單字 &quot;an&quot;。我們可以把這個技巧應用在之前讀取檔案的程式裡；只要知道檔案的格式，就能篩選出我們想要的字串資料。</p>
+<p>如果我們想把字串寫進檔案，首先要用寫入模式來開啟新檔：</p>
+<pre class="literal-block">
+f = open( &quot;newfilename.txt&quot;, 'w' )
+</pre>
+<p>再用檔案物件的 <tt class="docutils literal"><span class="pre">write()</span></tt> 方法來寫入字串：</p>
+<pre class="literal-block">
+f.write( &quot;string data&quot; )
+</pre>
+<p>最後不要忘了 <tt class="docutils literal"><span class="pre">close()</span></tt>。</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="id18" name="id18">3.3&nbsp;&nbsp;&nbsp;使用模組</a></h2>
+<p>Python 模組 (module) 是一種非常方便的設計；適當地利用模組可以在不汙染命名空間的情況下獲得最多的額外功能。模組的匯入是利用 <tt class="docutils literal"><span class="pre">import</span></tt> 敘述：</p>
+<pre class="literal-block">
+import sys
+</pre>
+<p>它匯入了最常用的 <tt class="docutils literal"><span class="pre">sys</span></tt> 內建模組。如果我們想處理指令行引數，就要靠 <tt class="docutils literal"><span class="pre">sys</span></tt> 模組裡的變數 <tt class="docutils literal"><span class="pre">argv</span></tt>：</p>
+<pre class="literal-block">
+#!/usr/bin/env python
+import sys
+print sys.argv
+
+</pre>
+<p>把這個程式存為 <tt class="docutils literal"><span class="pre">echoargs.py</span></tt>，然後執行：</p>
+<pre class="literal-block">
+$ ./echoargs.py arg1 arg2
+['./echoargs.py', 'arg1', 'arg2']
+</pre>
+<p>它把所有的指令行引數都印了出來，以列表的形式。<tt class="docutils literal"><span class="pre">sys.argv</span></tt> 這個變數實際上是個列表，它與 C 程式 <tt class="docutils literal"><span class="pre">main()</span></tt> 進入點函式的 <tt class="docutils literal"><span class="pre">argv</span></tt> 參數有異曲同工之妙，連名字都取作一樣；只是更為好用，因為 Python 的列表比 C 陣列自動化得太多，我們不必擔心列表項目的個數問題，Python 會幫我們處理好的。</p>
+<p>Python 還有許多其它的模組，基本上都是以相同的方式匯入並使用的，請參閱線上手冊。</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="id19" name="id19">3.4&nbsp;&nbsp;&nbsp;縮排、縮排、縮排</a></h2>
+<p>Python 程式語言的一個最大的特色就是以縮排定義程式結構。不像 C, C++, Java 等語言用括號定義程式區塊 (類別、函式、條件判斷和迴圈等)，在 Python 裡，行首的「空白字元個數」 (即縮排) 就定義了區塊結構。許多會寫像</p>
+<pre class="literal-block">
+int main(){
+    int i;
+  double d;
+      d = 1.d0;
+        i = 2;
+}
+</pre>
+<p>這種程式的人一開始會非常不習慣這種作法；但所有程式設計的書都會告訴你程式碼應該要排整齊，亂排只會增加往後維護的困難度而已。Python 強迫程式員把程式寫得漂亮，這不單簡化了往後的維護工作，更去掉了程式裡那些擾人的括號，對減少程式碼長度來說效果良好。</p>
+<div class="note">
+<p class="first admonition-title">註記</p>
+<p class="last">適當地縮短程式碼的行數絕對是好事。一個函式能在一頁裡列完，就能比兩三頁長的函式更易讀易懂，也更不容易寫錯。</p>
+</div>
+<p>在 Python 裡，</p>
+<pre class="literal-block">
+print &quot;Hi&quot;
+      print &quot;hi&quot;
+</pre>
+<p>是不合法的，要寫成</p>
+<pre class="literal-block">
+print &quot;Hi&quot;
+print &quot;hi&quot;
+</pre>
+<p>才可以。相對地，</p>
+<pre class="literal-block">
+if 1 == 1:
+print &quot;1 == 1, of course&quot;
+</pre>
+<p>是錯誤的寫法，要寫成像</p>
+<pre class="literal-block">
+if 1 == 1:
+    print &quot;1 == 1, of course&quot;
+</pre>
+<p>這樣才對。</p>
+<p>至於一次縮排要縮多少個字元，Python 並沒有進行限制，甚至不同的段落空白不一樣長也可以；只要同一個區塊的行首空白數相同即可。然而經驗告訴我們，第一，「絕對不要用跳格鍵」，如果你用 VIM 寫程式，可以用 <tt class="docutils literal"><span class="pre">:set</span> <span class="pre">et</span></tt> 打開跳格鍵的空白取代功能 (好一點的編輯器一定都有這種功能，你的編輯器沒有的話，可能該考慮換一個了)；第二，縮排字元數要固定。Python 的爸爸 Guido van Rossum 喜歡用 4 個字元進行縮排，許多人都覺得這樣很好。</p>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id20" name="id20">4&nbsp;&nbsp;&nbsp;Python 的應用</a></h1>
+<p>本文對 Python 作了粗淺的介紹，其實還非常地殘缺不全。你可能仍然不太了解 Python，所以最後我們要用一點篇幅來看看目前 Python 這個語言究竟有用在哪些地方？看過以後，你或許會比較有繼續研究下去的動力。</p>
+<ol class="arabic simple">
+<li>Zope 應用程式伺服器與相關系統。Zope 是一套以 Python 撰寫的高效率應用程式伺服器，主要用於網頁應用程式的開發；而在 Zope 之上則有 Plone 這套全功能的內容管理系統。Zope 與 Python 的發展息息相關，嶄新的 ZopeX3 與 Python 模組系統有相當優雅的結合，即使你對網頁應用程式沒興趣，其程式碼也非常值得參考。</li>
+<li>科學計算。在要求效率的科學計算領域，Python 是強力工具。SciPy, Matplotlib, ScientificPython 等等都是專為科學計算設計的套件，而另有一些工具可以用來彌補身為描述式語言的 Python 在執行效率上先天弱勢的缺點，請參考 SciPy 網頁上的報告<a class="footnote-reference" href="#id34" id="id21" name="id21"><sup>11</sup></a>，基本上可以讓以 Python 為主體的程式和純 C++ 程式的執行效率差距在 10% 以內。</li>
+<li>Web application。在 Python 上有許多以網頁應用為標的的計畫，在 Python wiki 上有好幾組列表<a class="footnote-reference" href="#id35" id="id22" name="id22"><sup>12</sup></a>，光應用程式框架就有二十個左右，其中 Django 和 Turbogears 是近來討論最多的框架，值得注意。</li>
+<li>圖形介面程式。以 Python 撰寫一般的圖形介面程式是相當理想的選擇。GTK、Qt 和 wxWidget 等常用的 GUI 框架都有 Python binding，程式員可以丟開複雜的 C/C++ 介面，把記憶體管理交給 Python，用最快的速度製作程式的雛形。若應用環境允許，直接以 Python 程式碼發行更是方便的選擇。</li>
+<li>作業系統管理。談到作業系統管理很難不提到 Perl，Perl 一直以來都是 Unix-like 系統上的瑞士刀，而且是最高級的那一種。然而 Perl 程式設計的藝術性也造成了一些問題，Python 可能是更輕鬆的另一種選擇。在處理字串上，Perl 仍然勝過 Python 不少，但在字串處理不那麼吃動的系統上，譬如 Windows，配合 win32all 套件，Python 可能就比 Perl 更合適了。</li>
+</ol>
+<p>以上列出的是 Python 被大量應用的領域；沒有提到的地方代表了筆者的見聞不足，尚請讀者指正。</p>
+<p>在下一期的內容裡，我們要來討論一些以 Python 管理 Linux 作業系統的技巧；一方面看看如何實際應用 Python，再方面進一步地深入 Python 的程式設計。</p>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id23" name="id23">5&nbsp;&nbsp;&nbsp;參考資料</a></h1>
+<table class="docutils footnote" frame="void" id="id24" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a name="id24">[1]</a></td><td>Python: <a class="reference" href="http://www.python.org/">http://www.python.org/</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id25" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a name="id25">[2]</a></td><td><em>(<a class="fn-backref" href="#id5">1</a>, <a class="fn-backref" href="#id9">2</a>)</em> Python 下載頁: <a class="reference" href="http://www.python.org/download/">http://www.python.org/download/</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id26" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id6" name="id26">[3]</a></td><td>PEP 289 Generator Expressions in Python 2.4: <a class="reference" href="http://docs.python.org/whatsnew/node4.html">http://docs.python.org/whatsnew/node4.html</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id27" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id7" name="id27">[4]</a></td><td>PEP 318 Decorators for Functions and Methods in Python 2.4: <a class="reference" href="http://docs.python.org/whatsnew/node6.html">http://docs.python.org/whatsnew/node6.html</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id28" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id8" name="id28">[5]</a></td><td>Python 2.4 新增項目: <a class="reference" href="http://docs.python.org/whatsnew/whatsnew24.html">http://docs.python.org/whatsnew/whatsnew24.html</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id29" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id10" name="id29">[6]</a></td><td>PIL: <a class="reference" href="http://www.pythonware.com/products/pil/">http://www.pythonware.com/products/pil/</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id30" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id12" name="id30">[7]</a></td><td>葉平的 Python 教材: <a class="reference" href="http://www.ossacc.org/Download/TM/OssaccTM/Python/">http://www.ossacc.org/Download/TM/OssaccTM/Python/</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id31" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id13" name="id31">[8]</a></td><td>Python Tutorial: <a class="reference" href="http://docs.python.org/tut/tut.html">http://docs.python.org/tut/tut.html</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id32" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id14" name="id32">[9]</a></td><td>Python Language Reference: <a class="reference" href="http://docs.python.org/ref/ref.html">http://docs.python.org/ref/ref.html</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id33" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id15" name="id33">[10]</a></td><td>Dive into Python: <a class="reference" href="http://diveintopython.org/">http://diveintopython.org/</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id34" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id21" name="id34">[11]</a></td><td>SciPy 的效能比較: <a class="reference" href="http://www.scipy.org/documentation/weave/weaveperformance.html">http://www.scipy.org/documentation/weave/weaveperformance.html</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id35" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id22" name="id35">[12]</a></td><td>Python web programming: <a class="reference" href="http://wiki.python.org/moin/WebProgramming">http://wiki.python.org/moin/WebProgramming</a></td></tr>
+</tbody>
+</table>
+<!-- vim:set et nu: -->
+</div>
+</div>
+</body>
+</html>

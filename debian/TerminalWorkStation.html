@@ -1,0 +1,1496 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh_tw" lang="zh_tw">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.4: http://docutils.sourceforge.net/" />
+<title>終端機工作環境</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger
+:Contact: goodger@users.sourceforge.net
+:Date: $Date: 2005-06-06 15:09:07 +0200 (Mon, 06 Jun 2005) $
+:Version: $Revision: 3442 $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+*/
+
+/* "! important" is used here to override other ``margin-top`` and
+   ``margin-bottom`` styles that are later in the stylesheet or 
+   more specific.  See http://www.w3.org/TR/CSS1#the-cascade */
+
+body {
+  font-family: Calibri, Georgia, Times New Roman, Times,  Free Times;
+  background-color: #666666;
+}
+
+div.document {
+  background-color: white;
+  clear: both;
+  width: 50em;
+  margin: 0 auto 0 auto;
+  padding: 0.5em;
+  border: 2px ridge black;
+}
+
+.first {
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em;
+  border-top: 2px solid #888888;
+  border-bottom: 2px solid #888888;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin-left: 1em ;
+  border: medium outset ; 
+  padding: 1em ;
+  background-color: #ffffee ;
+  /* width: 40% ; */
+  /* float: right ; */
+ /*  clear: right */ }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+div.section h1, div.section h2, div.section h3, 
+div.section h4, div.section h5, div.section h6 {
+  padding-left: 0.3em;
+  padding-bottom: 0.3em;
+  border-left: 2px solid gray;
+  border-bottom: 2px solid gray;
+}
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em; }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left {
+  clear: left }
+
+img.align-right {
+  clear: right }
+
+img.borderless {
+  border: 0 }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font-family: serif ;
+  font-size: 100% }
+
+pre.line-block {
+  font-family: serif ;
+  font-size: 100% }
+
+pre.literal-block, pre.doctest-block {
+  white-space: pre-wrap;       /* css-3 */
+  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word;       /* Internet Explorer 5.5+ */
+  margin-left: 2em ;
+  margin-right: 2em ;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  padding-left: 1em;
+  padding-right: 1em;
+  border: 1px dotted black;
+}
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid thin gray }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  border-spacing: 0;
+  border: 1 solid black;
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-top: solid thin black;
+  border-left: solid thin black }
+
+table.footnote td.label a {
+  text-decoration: none;
+}
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  border: 0; 
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+tt.docutils {
+}
+
+tt.ltst {
+  font-weight: bold;
+}
+
+tt.ltem {
+  font-style: italic;
+}
+
+ul.auto-toc {
+  list-style-type: none }
+
+/* vim: set ai et nu sw=2 ts=2: */
+
+</style>
+</head>
+<body>
+<div class="document" id="id1">
+<h1 class="title">終端機工作環境</h1>
+<table class="docinfo" frame="void" rules="none">
+<col class="docinfo-name" />
+<col class="docinfo-content" />
+<tbody valign="top">
+<tr class="field"><th class="docinfo-name">author:</th><td class="field-body">Yung-Yu Chen (yungyuc) <a class="reference" href="http://blog.seety.org/everydaywork/">http://blog.seety.org/everydaywork/</a> &lt;<a class="reference" href="mailto:yyc&#64;seety.org">yyc&#64;seety.org</a>&gt;</td>
+</tr>
+<tr class="field"><th class="docinfo-name">copyright:</th><td class="field-body">© 2006, all rights reserved</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="id2" name="id2">目錄</a></p>
+<ul class="auto-toc simple">
+<li><a class="reference" href="#id3" id="id59" name="id59">1&nbsp;&nbsp;&nbsp;緒論</a></li>
+<li><a class="reference" href="#id4" id="id60" name="id60">2&nbsp;&nbsp;&nbsp;檔案的檢視與編輯</a></li>
+<li><a class="reference" href="#id11" id="id61" name="id61">3&nbsp;&nbsp;&nbsp;基本組態</a><ul class="auto-toc">
+<li><a class="reference" href="#id12" id="id62" name="id62">3.1&nbsp;&nbsp;&nbsp;語言與地區組態</a></li>
+<li><a class="reference" href="#bash" id="id63" name="id63">3.2&nbsp;&nbsp;&nbsp;bash 下的常用功能</a><ul class="auto-toc">
+<li><a class="reference" href="#ulimit" id="id64" name="id64">3.2.1&nbsp;&nbsp;&nbsp;ulimit</a></li>
+<li><a class="reference" href="#umask" id="id65" name="id65">3.2.2&nbsp;&nbsp;&nbsp;umask</a></li>
+<li><a class="reference" href="#locale" id="id66" name="id66">3.2.3&nbsp;&nbsp;&nbsp;locale</a></li>
+<li><a class="reference" href="#dircolors" id="id67" name="id67">3.2.4&nbsp;&nbsp;&nbsp;dircolors</a></li>
+<li><a class="reference" href="#alias" id="id68" name="id68">3.2.5&nbsp;&nbsp;&nbsp;alias</a></li>
+<li><a class="reference" href="#id22" id="id69" name="id69">3.2.6&nbsp;&nbsp;&nbsp;指令提示符號</a></li>
+<li><a class="reference" href="#id24" id="id70" name="id70">3.2.7&nbsp;&nbsp;&nbsp;指令與路徑自動補齊</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#hdparm" id="id71" name="id71">3.3&nbsp;&nbsp;&nbsp;hdparm</a><ul class="auto-toc">
+<li><a class="reference" href="#etc-hdparm-conf" id="id72" name="id72">3.3.1&nbsp;&nbsp;&nbsp;/etc/hdparm.conf</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference" href="#id30" id="id73" name="id73">4&nbsp;&nbsp;&nbsp;使用者與權限</a><ul class="auto-toc">
+<li><a class="reference" href="#id31" id="id74" name="id74">4.1&nbsp;&nbsp;&nbsp;使用者及群組的管理</a></li>
+<li><a class="reference" href="#id40" id="id75" name="id75">4.2&nbsp;&nbsp;&nbsp;檔案系統的權限設定</a><ul class="auto-toc">
+<li><a class="reference" href="#id41" id="id76" name="id76">4.2.1&nbsp;&nbsp;&nbsp;權限的意涵</a></li>
+<li><a class="reference" href="#id42" id="id77" name="id77">4.2.2&nbsp;&nbsp;&nbsp;權限的設定</a></li>
+<li><a class="reference" href="#id43" id="id78" name="id78">4.2.3&nbsp;&nbsp;&nbsp;權限遮罩</a></li>
+<li><a class="reference" href="#id44" id="id79" name="id79">4.2.4&nbsp;&nbsp;&nbsp;管理檔案與目錄的擁有者</a></li>
+<li><a class="reference" href="#id45" id="id80" name="id80">4.2.5&nbsp;&nbsp;&nbsp;遞迴處理與注意事項</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#su-sudo" id="id81" name="id81">4.3&nbsp;&nbsp;&nbsp;su/sudo 的基本應用</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#id48" id="id82" name="id82">5&nbsp;&nbsp;&nbsp;系統的標準啟動機制</a><ul class="auto-toc">
+<li><a class="reference" href="#sysv-init" id="id83" name="id83">5.1&nbsp;&nbsp;&nbsp;SysV Init 啟動程序</a></li>
+<li><a class="reference" href="#runlevel" id="id84" name="id84">5.2&nbsp;&nbsp;&nbsp;runlevel 管理</a></li>
+<li><a class="reference" href="#init-d" id="id85" name="id85">5.3&nbsp;&nbsp;&nbsp;自訂 init.d 的內容</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#id53" id="id86" name="id86">6&nbsp;&nbsp;&nbsp;常用的工具程式</a><ul class="auto-toc">
+<li><a class="reference" href="#screen" id="id87" name="id87">6.1&nbsp;&nbsp;&nbsp;screen</a></li>
+<li><a class="reference" href="#tar-gzip" id="id88" name="id88">6.2&nbsp;&nbsp;&nbsp;tar 與 gzip</a></li>
+<li><a class="reference" href="#bzip2-zip-rar" id="id89" name="id89">6.3&nbsp;&nbsp;&nbsp;bzip2, zip 與 rar</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#id58" id="id90" name="id90">7&nbsp;&nbsp;&nbsp;結語與展望</a></li>
+</ul>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id2" id="id3" name="id3">1&nbsp;&nbsp;&nbsp;緒論</a></h1>
+<p>本文將說明如何建構一個 Debian (基於 sarge) 終端機工作站 (Terminal Workstation)。所謂的終端機工作站，這裡定義成只具有 CLI (Command Line Interface) 介面，提供使用者以遠端連線或控制台方式使用的計算機系統。</p>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id2" id="id4" name="id4">2&nbsp;&nbsp;&nbsp;檔案的檢視與編輯</a></h1>
+<p>Un*x/Debian 是 File-Based 的作業系統，對系統的所有組態與操作，在形式上就是對檔案系統的操作。所以，在開始調整系統之前的第一課，就是要了解如何檢視與編輯檔案。</p>
+<p>在剛裝好一個最基本的 Debian 時，我們只有 <tt class="docutils literal"><span class="pre">more</span></tt> 這個檔案檢視工具<a class="footnote-reference" href="#id6" id="id5" name="id5"><sup>1</sup></a>。我們可以另外安裝 <tt class="docutils literal"><span class="pre">less</span></tt>：</p>
+<table class="docutils footnote" frame="void" id="id6" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id5" name="id6">[1]</a></td><td>當然我們可以用 cat 來把檔案的內容傾印到螢幕上，但會一次從頭捲到尾，以人類的眼力而言是沒辦法看得那麼快的。</td></tr>
+</tbody>
+</table>
+<pre class="literal-block">
+closet:~# apt-get install less
+Reading Package Lists... Done
+Building Dependency Tree... Done
+The following NEW packages will be installed:
+  less
+0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.
+Need to get 0B/102kB of archives.
+After unpacking 262kB of additional disk space will be used.
+Selecting previously deselected package less.
+(Reading database ... 11792 files and directories currently installed.)
+Unpacking less (from .../archives/less_381-3_i386.deb) ...
+Setting up less (381-3) ...
+</pre>
+<p>less 的功能比 more 更多 (這是一個挺吊詭的句子，programmer 的幽默吧，我想)。more 只能往下捲頁，也就是說，它不能回到之前曾經看過的上一頁，或是上一行；less 除了可以往上捲頁之外，還有許多額外的功能 (例如上下搜尋、存檔等)，請參考 <tt class="docutils literal"><span class="pre">less(1)</span></tt>。</p>
+<p>關於檔案的編輯，我們通常會使用 vi，vi 是 Unix 作業系統內最早出現的全螢幕編輯器<a class="footnote-reference" href="#id8" id="id7" name="id7"><sup>2</sup></a>。建立完畢 Debian Bare System 之後，系統內只有 <tt class="docutils literal"><span class="pre">nvi</span></tt> 這個套件，它是一個只支援原始 vi 指令的 vi clone。一般來說，我們會再安裝另一個具有許多先進功能的 vi clone -- vim：</p>
+<table class="docutils footnote" frame="void" id="id8" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id7" name="id8">[2]</a></td><td>在 vi 出現以前，我們最多只有行編輯器。活在現在這個 Word 當道的時代，很難想像一次只能編輯一行，而且沒有任何格式的文字編輯器，但行編輯器已經比打卡片要強上太多了。</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id9" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id13" name="id9">[3]</a></td><td>值得一提的是，vim 有原始碼可以下載，所以它當然是 OSS (Open Source Software)，不過它同時也是 Charityware。如果你喜歡這個軟體，並且願意支持它，除了可以直接捐助/註冊 (都一樣，如果你的老闆不喜歡你「捐助」vim，那就「註冊」它，最低 10 塊歐元) vim 之外，他們也希望你可以捐款幫助烏干達 (Uganda) 的難民小朋友。</td></tr>
+</tbody>
+</table>
+<pre class="literal-block">
+closet:~# apt-get install vim
+Reading Package Lists... Done
+Building Dependency Tree... Done
+The following extra packages will be installed:
+  libgpmg1 vim-common
+Suggested packages:
+  gpm ctags vim-doc
+The following NEW packages will be installed:
+  libgpmg1 vim vim-common
+0 upgraded, 3 newly installed, 0 to remove and 0 not upgraded.
+Need to get 3955kB of archives.
+After unpacking 11.4MB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+.
+.
+.
+</pre>
+<p>Debian 會把 <tt class="docutils literal"><span class="pre">/usr/bin/vi</span></tt> 對應到 vim，所以以後使用的 vi，事實上就會是 vim，而非原始的 nvi 了。如果你完全沒有接觸過 vi/vim 的話，vim 提供了 <tt class="docutils literal"><span class="pre">vimtutor(1)</span></tt> 這個簡介模式。相關的使用資訊請參考 <tt class="docutils literal"><span class="pre">vim(1)</span></tt>，以及 vim 的網站<a class="citation-reference" href="#vim" id="id10" name="id10">[VIM]</a>。</p>
+<p>在 Debian 裡還有一個常用的檔案內容搜尋工具 -- grep (Base System 內已安裝)，它可以把文字檔案的內容「抓」出來：</p>
+<pre class="literal-block">
+closet:~# grep grep /usr/share/doc/grep/README
+This is GNU grep, the &quot;fastest grep in the west&quot; (we hope).  All
+GNU grep is provided &quot;as is&quot; with no warranty.  The exact terms
+GNU grep is based on a fast lazy-state deterministic matcher (about
+twice as fast as stock Unix egrep) hybridized with a Boyer-Moore-Gosper
+than Unix grep or egrep.  (Regular expressions containing backreferencing
+See the file TODO for ideas on how you could help us improve grep.
+include the word &quot;grep&quot; in your Subject: header field.
+</pre>
+<p><tt class="docutils literal"><span class="pre">/usr/share/doc</span></tt> 是 Debian 用來放置所有與套件相關的文件檔的位置。以上的例子會把 grep 這個套件的 README 裡面，包含了 &quot;grep&quot; 字樣的部分印到螢幕上，你可以自己再 <tt class="docutils literal"><span class="pre">less</span> <span class="pre">/usr/share/doc/grep/README</span></tt> 檢查一下看看  <tt class="docutils literal"><span class="pre">grep</span></tt> 作得對不對。<tt class="docutils literal"><span class="pre">grep</span> <span class="pre">-r</span></tt> 參數會遞迴地在目錄結構下搜尋。相關的資訊請參考 <tt class="docutils literal"><span class="pre">grep(1)</span></tt>。</p>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id2" id="id11" name="id11">3&nbsp;&nbsp;&nbsp;基本組態</a></h1>
+<div class="section">
+<h2><a class="toc-backref" href="#id2" id="id12" name="id12">3.1&nbsp;&nbsp;&nbsp;語言與地區組態</a></h2>
+<p>在全球化的浪潮之下，大部份的軟體都已經不能如以往僅僅提供單一語言版本，而必須能夠允許執行在不同語言的環境之下。在 Linux 中，GNU 標準 C 程式庫提供了 gettext 設施，允許程式設計師在統一的架構下進行國際化 (i18n, Internationalization) 與本地化 (l10n, Localization) 的工作。</p>
+<p>而與系統組態相關的工具就是 locale。我們可以把 locale 當成某個語言所使用的計算機內碼，以及與相關本地化之後系統訊息的集合。在 Debian 下，由 locales 這個套件提供所有 locale 的相關資訊：</p>
+<pre class="literal-block">
+closet:~# apt-get install locales
+Reading Package Lists... Done
+Building Dependency Tree... Done
+locales is already the newest version.
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+1 not fully installed or removed.
+Need to get 0B of archives.
+After unpacking 0B of additional disk space will be used.
+Setting up locales (2.3.2.ds1-12) ...
+</pre>
+<p>apt-get (dpkg) 進行到這裡，就會開始組態 locales 套件：</p>
+<ol class="arabic">
+<li><p class="first">首先會出現如<a class="reference" href="#id15">圖 1</a>的畫面<a class="footnote-reference" href="#id9" id="id13" name="id13"><sup>3</sup></a>，按上下或換頁鍵就可以移動游標，再以空白鍵選擇想要產生的 locale (方框中會出現 <tt class="docutils literal"><span class="pre">*</span></tt> 號)，然後用跳格鍵跳到 <tt class="docutils literal"><span class="pre">&lt;OK&gt;</span></tt>。</p>
+<table class="docutils footnote" frame="void" id="id14" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id17" name="id14">[4]</a></td><td><p class="first last">這是 dialog 式的組態畫面，我們也可以把 dpkg 設定為使用其它套件組態方式，例如純文字。</p>
+</td></tr>
+</tbody>
+</table>
+<p>以正體中文環境來說，可以選擇 <tt class="docutils literal"><span class="pre">zh_TW.UTF-8</span></tt>，也就是 Unicode 環境；另外我們會看到 <tt class="docutils literal"><span class="pre">zh_TW.Big5</span></tt> 這個 locale，如果你的工作環境很依靠 Big5 這種不方便的內碼，可能得一起選起來產生。在將 Debian 與 Windows (NT) 介接使用時，我們會發現 Unicode 環境可以省下我們不少處理中文問題時的力氣。</p>
+</li>
+<li><p class="first">接著 dpkg 會讓我們選擇系統預設的 locale (如<a class="reference" href="#id16">圖 2</a>)，我們最好先不要設定任何預設值 (故選 None)。</p>
+</li>
+<li><p class="first">然後 dpkg 會呼叫 <tt class="docutils literal"><span class="pre">locale-gen</span></tt> 來產生相關的 locale 檔案：</p>
+<pre class="literal-block">
+Generating locales...
+  zh_TW.UTF-8... done
+Generation complete.
+</pre>
+</li>
+</ol>
+<p>組態完畢之後，系統上就產生好了我們剛剛所選擇的 locale 資料。</p>
+<div class="figure" id="id15">
+<img alt="TerminalWorkStation_pix/locales010-select-UTF8.png" src="TerminalWorkStation_pix/locales010-select-UTF8.png" />
+<p class="caption">圖 1: 選擇要產生的 locales}</p>
+</div>
+<div class="figure" id="id16">
+<img alt="TerminalWorkStation_pix/locales020-select-default.none.png" src="TerminalWorkStation_pix/locales020-select-default.none.png" />
+<p class="caption">圖 2: 選擇預設的 locale</p>
+</div>
+<p>shell 會查詢 <tt class="docutils literal"><span class="pre">LC_*</span></tt> 系列的環境變數，來決定應該如何回應使用者的輸入，這些環境變數有：</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">LC_CTYPE</span></tt>：字元的類別。</li>
+<li><tt class="docutils literal"><span class="pre">LC_COLLATE</span></tt>：字元的比較順序。</li>
+<li><tt class="docutils literal"><span class="pre">LC_TIME</span></tt>：日期與時間格式。</li>
+<li><tt class="docutils literal"><span class="pre">LC_NUMBER</span></tt>：非財務的數字格式。</li>
+<li><tt class="docutils literal"><span class="pre">LC_MONETARY</span></tt>：財務上的數字格式。</li>
+<li><tt class="docutils literal"><span class="pre">LC_MESSAGES</span></tt>：系統訊息的格式。</li>
+<li><tt class="docutils literal"><span class="pre">LC_PAPER</span></tt>：紙張格式。</li>
+<li><tt class="docutils literal"><span class="pre">LC_NAME</span></tt>：姓名格式。</li>
+<li><tt class="docutils literal"><span class="pre">LC_ADDRESS</span></tt>：地址與所在位置的格式。</li>
+<li><tt class="docutils literal"><span class="pre">LC_TELEPHONE</span></tt>：電話號碼格式。</li>
+<li><tt class="docutils literal"><span class="pre">LC_MEASUREMENT</span></tt>：度量衡格式。</li>
+<li><tt class="docutils literal"><span class="pre">LC_IDENTIFICATION</span></tt>：locale 資訊的元資料 (Metadata)。</li>
+</ul>
+<p>另外還有兩個特別的環境變數：</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">LANG</span></tt>：系統語言。</li>
+<li><tt class="docutils literal"><span class="pre">LC_ALL</span></tt>：代表所有的 <tt class="docutils literal"><span class="pre">LC_*</span></tt> 設定。</li>
+</ul>
+<p>請注意，要在程式開始執行之前就先作這些環境設定，所以我們必須在 bash 的 profile 檔裡設定這些環境變數，才能在 login shell 裡馬上套用 locale。</p>
+<p>一般來說，如果終端機不支援非 ASCII 字元的話，在 profile 裡設定 &quot;C&quot;, &quot;POSIX&quot; 之外的 locale，螢幕上的字可能就會出不來，所以預設的 locale 通常會用 &quot;POSIX&quot; (亦即 None)。然後系統上的使用者可以在自己 bash 的 profile 裡設定相關的變數來啟用 locale。通常我們只需要</p>
+<pre class="literal-block">
+export LC_CTYPE=zh_TW.UTF-8
+</pre>
+<p>讓 shell 知道我們是輸入 Unicode 字元就可以了，系統訊息和其它資訊的本地化並不是那麼重要<a class="footnote-reference" href="#id14" id="id17" name="id17"><sup>4</sup></a>。另外，如果我們使用連到工作站進行操作，則如<a class="reference" href="#id19">圖 3</a>，應該也要在「Windows :: Translation :: Received data assumed to be in which character set」設定正確的字元集 (Character Set, Charset)，才能使用 Unicode (UTF-8)。</p>
+<table class="docutils footnote" frame="void" id="id18" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id20" name="id18">[5]</a></td><td>以現階段而言，RedHat, Mandrake 和 SuSE 所包裝的一些程式，可能有比較好的正體/簡體中文本地化，Debian 就作得不是那麼多。</td></tr>
+</tbody>
+</table>
+<div class="figure" id="id19">
+<img alt="TerminalWorkStation_pix/locales030-PuTTY-UTF8.png" src="TerminalWorkStation_pix/locales030-PuTTY-UTF8.png" />
+<p class="caption">圖 3: PuTTY 的字元集設定</p>
+</div>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id2" id="bash" name="bash">3.2&nbsp;&nbsp;&nbsp;bash 下的常用功能</a></h2>
+<p>讓我們用一個 <tt class="docutils literal"><span class="pre">.bashrc</span></tt> 檔的內容來說明 bash 下各種功能的組態與使用：</p>
+<pre class="literal-block">
+# ~/.bashrc: executed by bash(1) for non-login shells.
+
+# let the coredump file sized 0
+ulimit -c 0
+
+# let the umask set to rwx------
+umask 077
+
+# let locale be Unicode for Tranditional Chinese
+export LC_CTYPE=&quot;zh_TW.UTF-8&quot;
+
+# enable color support of ls
+eval `dircolors -b ~/.dir_colors`
+
+# add handy aliases
+alias j='jobs -l'
+alias f=fg
+alias b=bg
+alias ls='ls -F --color=auto'
+alias ll='ls -l'
+alias la='ls -a'
+alias lla='ls -al'
+alias telnet='telnet -8'
+alias t=telnet
+alias scr=screen
+alias s=&quot;screen -r&quot;
+alias rm=rm
+alias mv=mv
+alias cp=cp
+alias vi=vim
+alias px='ps x'
+alias dfh='df -h'
+
+# set a fancy prompt
+PS1='\h[\u]\w\n\$ '
+
+# set up application settings
+export LESS='-r -MM'
+export EDITOR=vim
+export PAGER=less
+export BLOCKSIZE=K
+</pre>
+<p>每個使用者在他的家目錄裡可以放一個 <tt class="docutils literal"><span class="pre">.bashrc</span></tt> 檔案，作為 bash 的設定檔<a class="footnote-reference" href="#id18" id="id20" name="id20"><sup>5</sup></a>。這個檔案裡面通常會放一些全域的設定指令，讓我們一進入系統就可以存取這些功能。</p>
+<table class="docutils footnote" frame="void" id="id21" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id26" name="id21">[6]</a></td><td>記得要在 <tt class="docutils literal"><span class="pre">~/.profile</span></tt> 裡加一行 <tt class="docutils literal"><span class="pre">.</span> <span class="pre">~/.bashrc</span></tt>，不然 login shell 和用其它方法叫起來的 shell，設定會不一致喔。</td></tr>
+</tbody>
+</table>
+<div class="section">
+<h3><a class="toc-backref" href="#id2" id="ulimit" name="ulimit">3.2.1&nbsp;&nbsp;&nbsp;ulimit</a></h3>
+<p>首先是 <tt class="docutils literal"><span class="pre">ulimit</span></tt> (第 4 行)，這是一個 shell 指令 (亦即你不能直接 man 到，請改 man <tt class="docutils literal"><span class="pre">bash</span> <span class="pre">(1)</span></tt>)，用來設定 shell 所提供資源的上限。對使用者而言，只有 <tt class="docutils literal"><span class="pre">ulimit</span> <span class="pre">-c</span></tt> 和 <tt class="docutils literal"><span class="pre">ulimit</span> <span class="pre">-s</span></tt> 比較常用：</p>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">ulimit</span> <span class="pre">-c</span></tt>：core dump 的檔案大小。</p>
+<p>如果你像我一樣不在乎程式是怎麼當掉的，就可以設成 0，免得程式當掉之後還要收拾 core dump 檔案。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">ulimit</span> <span class="pre">-s</span></tt>：堆疊的大小。</p>
+<p>堆疊如果設太小，有些程式會無法執行，合適的設定得參考使用者所會執行的應用程式。</p>
+</li>
+</ul>
+<p>其它的資源設定，請參考 bash 的 manpage。</p>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id2" id="umask" name="umask">3.2.2&nbsp;&nbsp;&nbsp;umask</a></h3>
+<p>其次是 <tt class="docutils literal"><span class="pre">umask</span></tt> shell 指令 (第 7 行)，它用來指定我們在新建檔案時，所會套用的預設權限。關於 Debian 下檔案系統的權限設定，我們到「<a class="reference" href="#id40">檔案系統的權限設定</a>」裡再作一個完整的說明。目前我們只要知道，如果希望新建的檔案與目錄：</p>
+<ul class="simple">
+<li>只有自己能讀寫；設成 <tt class="docutils literal"><span class="pre">077</span></tt>，</li>
+<li>只有自己能寫，但其它人都能讀；設成 <tt class="docutils literal"><span class="pre">022</span></tt>，</li>
+<li>所有人都可以讀寫；設定 <tt class="docutils literal"><span class="pre">000</span></tt>。</li>
+</ul>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id2" id="locale" name="locale">3.2.3&nbsp;&nbsp;&nbsp;locale</a></h3>
+<p>我們也常在 <tt class="docutils literal"><span class="pre">~/.bashrc</span></tt> 裡設定自己要用的 locale，如第 10 行。關於 locale 應該怎麼設，請參考「<a class="reference" href="#id12">語言與地區組態</a>」。</p>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id2" id="dircolors" name="dircolors">3.2.4&nbsp;&nbsp;&nbsp;dircolors</a></h3>
+<p>神奇的第 13 行，則是為了讓 <tt class="docutils literal"><span class="pre">ls</span></tt> 可以用顏色來分辨不同副檔名型態的檔案，而預先準備好副檔名與顏色的對應資料。<tt class="docutils literal"><span class="pre">dircolors</span></tt> 這個程式會讀取顏色與副檔名型態的對應設定檔 (即 <tt class="docutils literal"><span class="pre">~/.dir_colors</span></tt> 參數)，然後把資料整理好之後，輸出成「設定 <tt class="docutils literal"><span class="pre">$LS_COLORS</span></tt> 環境變數用的指令字串」 (<tt class="docutils literal"><span class="pre">ls</span></tt> 的顏色設定，基本上會根據這個環境變數)，而其 <tt class="docutils literal"><span class="pre">-b</span></tt> 參數則是用來指定輸出成 bash 的指令格式，所以我們會在第 13 行裡看到這個部分：</p>
+<pre class="literal-block">
+dircolors -b ~/.dir_colors
+</pre>
+<p>如果我們想知道 <tt class="docutils literal"><span class="pre">dircolors</span></tt> 的對應檔該怎麼寫，就執行</p>
+<pre class="literal-block">
+$ dircolors -p
+</pre>
+<p>它會把預設的對應檔內容列出來。因為這些預設值應該會蠻長的，所以我們可以把結果先輸出到檔案之後再慢慢看：</p>
+<pre class="literal-block">
+$ dircolors -p &gt; ~/.dir_colors_test
+</pre>
+<p>看完之後，其實我們可以直接就用它來修改成我們喜歡的版本，然後再</p>
+<pre class="literal-block">
+$ cp ~/.dir_colors_test ~/.dir_colors
+</pre>
+<p>把檔案改成比較合適的檔名。</p>
+<p>繼續看神奇的第 13 行。<tt class="docutils literal"><span class="pre">eval</span></tt> shell 指令會把接在其後的字串接成一行之後，當成指令執行，而被 ` 包起來的字串，則會傳回被執行之後的結果。所以要在 <tt class="docutils literal"><span class="pre">~/.bashrc</span></tt> 裡正確設定 <tt class="docutils literal"><span class="pre">$LS_COLORS</span></tt> 環境變數，一定要照第 13 行的寫法，不然，如果只寫成</p>
+<pre class="literal-block">
+dircolors -b ~/.dir_colors
+</pre>
+<p>的話，那麼一進入系統，就會看見螢幕上列出來</p>
+<pre class="literal-block">
+LS_COLORS='......';
+export LS_COLORS
+</pre>
+<p>這類的字串，完全不會去設定環境變數的。</p>
+<p>有了第 13 行，下</p>
+<pre class="literal-block">
+$ ls --color=auto
+</pre>
+<p>的時候，根據我們的對應檔內容，不同副檔名的檔案就會以不同的顏色顯示了。</p>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id2" id="alias" name="alias">3.2.5&nbsp;&nbsp;&nbsp;alias</a></h3>
+<p>第 15 到 32 行是我們在 Debian 中會常常用到的 alias (別名)，有些是 shell 指令 (如 <tt class="docutils literal"><span class="pre">jobs</span></tt>, <tt class="docutils literal"><span class="pre">fg</span></tt>, <tt class="docutils literal"><span class="pre">bg</span></tt> 等)，有些是公用程式 (如 <tt class="docutils literal"><span class="pre">rm</span></tt>, <tt class="docutils literal"><span class="pre">mv</span></tt>, <tt class="docutils literal"><span class="pre">cp</span></tt> 等)。其中某些相關指令與工具的用途，我們之後會作說明，沒有特別說明的，可以自行查詢 manpage。</p>
+<p>如果在進入了系統之後，想要取消掉已設定的 alias，可以用 <tt class="docutils literal"><span class="pre">unalias</span></tt> shell 指令。</p>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id2" id="id22" name="id22">3.2.6&nbsp;&nbsp;&nbsp;指令提示符號</a></h3>
+<p>在 <tt class="docutils literal"><span class="pre">~/.bashrc</span></tt> 的第 35 行設定了 <tt class="docutils literal"><span class="pre">PS1</span></tt> shell 變數。這個變數的字串值會用來指定 shell 命令列的提示符號。當我們剛安裝好一個 Debian 環境，進入 shell 的時候，通常只會看到簡單的提示符號：</p>
+<pre class="literal-block">
+hostname:~#
+</pre>
+<p>它的格式是 <tt class="docutils literal"><span class="pre">&lt;hostname&gt;:&lt;cwd&gt;#</span></tt>，亦即主機名稱，中間隔一個冒號，然後接目前的工作目錄 (<tt class="docutils literal"><span class="pre">~</span></tt> 符號代表目前使用者的家目錄)。</p>
+<p>在 bash 的設定檔裡指定 <tt class="docutils literal"><span class="pre">PS1</span></tt> shell 變數，就可以改變 shell 的提示符號。第 35 行中這個字串值中各種元素所代表的意義分別是：</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">\h</span></tt>：本機名稱。</li>
+<li><tt class="docutils literal"><span class="pre">\u</span></tt>：目前使用者名稱。</li>
+<li><tt class="docutils literal"><span class="pre">\w</span></tt>：目前工作目錄，若位於家目錄，則顯示 <tt class="docutils literal"><span class="pre">~</span></tt>。</li>
+<li><tt class="docutils literal"><span class="pre">\n</span></tt>：換行。</li>
+</ul>
+<p>這樣子設定之後，當重新登入系統之後，提示符號會變成：</p>
+<pre class="literal-block">
+hostname[username]~
+$
+</pre>
+<p>變成兩行了。把提示符號變成兩行有一個好處：不會因為目前工作目錄太深[#]而讓指令的輸入位置跑到螢幕的太右邊去，而一定能從左邊數來的第三個字元開始輸入指令。</p>
+<table class="docutils footnote" frame="void" id="id23" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id27" name="id23">[7]</a></td><td>也就是指目前工作目錄的完整路徑太長。</td></tr>
+</tbody>
+</table>
+<p>我們可以參考 bash 的 manpage，或是示範的這些元素自行組合喜歡的提示符號。設計出來的提示符號若能提供足夠的執行資訊，又不會太複雜的話，那就算是很理想了。</p>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id2" id="id24" name="id24">3.2.7&nbsp;&nbsp;&nbsp;指令與路徑自動補齊</a></h3>
+<p>Debian 下的 bash 預設會打開自動補齊 (auto completion) 的功能，可以套用在指令以及路徑上。</p>
+<p>自動補齊用法簡單，而且威力強大，我們先以指令的自動補齊進行說明。假設我們在提示符號之後輸入了 <tt class="docutils literal"><span class="pre">cp</span></tt> 這兩個字元，然後馬上連按兩次 Tab (跳格) 鍵，會看到：</p>
+<pre class="literal-block">
+$ cp
+cp       cpan     cpio     cpp      cpp-3.3
+</pre>
+<p>bash 把在目前搜尋路徑裡找得到的程式或是 shell 指令列都了出來。假設我們要執行的是 <tt class="docutils literal"><span class="pre">cpio</span></tt>，那麼再多輸入一個 <tt class="docutils literal"><span class="pre">i</span></tt>：</p>
+<pre class="literal-block">
+$ cpi
+</pre>
+<p>然後只要再按一下 Tab 鍵，bash 會幫我們自動補齊成</p>
+<pre class="literal-block">
+$ cpio
+</pre>
+<p>這是因為 bash 知道，目前唯一找得到是由 <tt class="docutils literal"><span class="pre">cpi</span></tt> 開頭的指令只有 <tt class="docutils literal"><span class="pre">cpio</span></tt>，們就是要執行它 (如果沒打錯的話)。</p>
+<p>路徑自動補齊的用法和指令的類似。舉例來講，如果我們想找 <tt class="docutils literal"><span class="pre">/var/log/lastlog</span></tt> 這個檔案，先輸入</p>
+<pre class="literal-block">
+$ ll /va
+</pre>
+<p>然後按一下 Tab，就會自動補成</p>
+<pre class="literal-block">
+$ ll /var/
+</pre>
+<p>因為根目錄裡只有 <tt class="docutils literal"><span class="pre">/var/</span></tt> 是以 <tt class="docutils literal"><span class="pre">/va</span></tt> 開頭的，所以補齊起來不會錯，一定是我們要的 (前提當然還是沒有打錯字)。再接著加上 <tt class="docutils literal"><span class="pre">l</span></tt>：</p>
+<pre class="literal-block">
+$ ll /var/
+</pre>
+<p>按一下 Tab 卻沒有補東西，表示以此開頭的路徑不唯一。多按兩下 Tab，就會列出符合條件的路徑</p>
+<pre class="literal-block">
+$ ll /var/l
+lib    local  lock   log
+</pre>
+<p>我們要進的是 <tt class="docutils literal"><span class="pre">/var/log</span></tt>，所以加上 <tt class="docutils literal"><span class="pre">og</span></tt>，再按 Tab 之後會補成</p>
+<pre class="literal-block">
+$ ll /var/log/
+</pre>
+<p>此時如果連按兩下 Tab，bash 會把這個目錄之下的所有路徑都列出來 (這招以後會常常用到)：</p>
+<pre class="literal-block">
+$ ls /var/log/
+apache2            exim               messages           samba
+auth.log           faillog            messages.0         syslog
+auth.log.0         fontconfig.log     messages.1.gz      syslog.0
+auth.log.1.gz      installer.log      messages.2.gz      syslog.1.gz
+auth.log.2.gz      installer.timings  mysql              syslog.2.gz
+btmp               kern.log           mysql.log          syslog.3.gz
+daemon.log         kern.log.0         mysql.log.1.gz     syslog.4.gz
+daemon.log.0       kern.log.1.gz      mysql.log.2.gz     syslog.5.gz
+daemon.log.1.gz    ksymoops           mysql.log.3.gz     syslog.6.gz
+daemon.log.2.gz    lastlog            mysql.log.4.gz     user.log
+debug              lpr.log            mysql.log.5.gz     user.log.0
+debug.0            mail.err           mysql.log.6.gz     user.log.1.gz
+debug.1.gz         mail.info          mysql.log.7.gz     uucp.log
+debug.2.gz         mail.log           news               wtmp
+dmesg              mail.warn          postgresql
+</pre>
+<p>我們一看就知道，只有我們要找的 <tt class="docutils literal"><span class="pre">lastlog</span></tt> 是以 <tt class="docutils literal"><span class="pre">la</span></tt> 開頭的，為了好好發揮偷懶的人性，我們只加打 <tt class="docutils literal"><span class="pre">la</span></tt>：</p>
+<pre class="literal-block">
+$ ll /var/log/la
+</pre>
+<p>然後按下 Tab，就補齊了：</p>
+<pre class="literal-block">
+$ ll /var/log/lastlog
+</pre>
+<p>OK，按下 Enter：</p>
+<pre class="literal-block">
+$ ll /var/log/lastlog
+-rw-rw-r--    1 root     utmp       293460 Oct 21 16:36 /var/log/lastlog
+</pre>
+<p>利用這個方法，我們在執行指令的時候，就可以搜尋用作參數的檔名是否存在，而且 bash 會幫我們確定檔名的正確性。如果沒有自動補齊的功能，要記得那麼多指令、檔案路徑的名稱幾乎是不可能的事情，所以，對於使用文字模式介面的工作者來說，自動補齊不可或缺。</p>
+<p>將來，Tab 鍵會是我們的好朋友，你會常常按它的。</p>
+</div>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id2" id="hdparm" name="hdparm">3.3&nbsp;&nbsp;&nbsp;hdparm</a></h2>
+<p>hdparm 這個工具提供一個管道，讓系統管理員存取 Linux 核心的 ATA/IDE 驅動程式的設定。現代的 ATA 裝置愈往高速化發展，與 PC 最早架構下的 IDE 已經有了很大的不同，裝置的多樣化也讓組態的部分變得複雜，於是需要使用像 hdparm 這樣的工具來對 ATA 裝置的驅動參數進行調整。</p>
+<p>hdparm 不屬於 Debian base system 的一部分，所以我們要手動安裝它：</p>
+<pre class="literal-block">
+$ apt-get install hdparm
+</pre>
+<p>執行時需要 superuser 權限。</p>
+<p>我們可以用以下的語法來檢視 ATA 裝置的狀態：</p>
+<pre class="literal-block">
+$ hdparm /dev/hda
+
+/dev/hda:
+ multcount    = 16 (on)
+ IO_support   =  1 (32-bit)
+ unmaskirq    =  0 (off)
+ using_dma    =  1 (on)
+ keepsettings =  0 (off)
+ readonly     =  0 (off)
+ readahead    =  8 (on)
+ geometry     = 9729/255/63, sectors = 156301488, start = 0
+</pre>
+<p>對 ATA 裝置，尤其是硬碟效能最有影響的兩個參數是 IO_support 和 using_dma，分別要用 <tt class="docutils literal"><span class="pre">-c</span></tt> 和 <tt class="docutils literal"><span class="pre">-d</span></tt> 來設定：</p>
+<pre class="literal-block">
+$ hdparm -c0 -d0 /dev/hda
+
+/dev/hda:
+ setting 32-bit IO_support flag to 0
+ setting using_dma to 0 (off)
+ IO_support   =  0 (default 16-bit)
+ using_dma    =  0 (off)
+</pre>
+<p>以上會關掉 32 位元 IO_support 和 using_dma，這兩個功能如果被關掉，磁碟的存取效率會大幅降低，我們來測試看看 (參數 <tt class="docutils literal"><span class="pre">-t</span></tt> 會直接存取裝置進行讀取測試；參數 <tt class="docutils literal"><span class="pre">-T</span></tt> 會使用裝置上的快取進行讀取測試)[#]：</p>
+<table class="docutils footnote" frame="void" id="id25" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id32" name="id25">[8]</a></td><td>用 hdparm 設定了裝置參數之後，最好再執行一次 <tt class="docutils literal"><span class="pre">hdparm</span> <span class="pre">/dev/hda</span></tt> 來檢查一下狀態是否已確實更新，然後才進行測試。這是因為設定裝置需要花一點時間，執行完設定指令之後如果馬上進行測試，裝置的設定動作可能還沒有完成，所以會測試到舊的設定資料。</td></tr>
+</tbody>
+</table>
+<pre class="literal-block">
+$ hdparm -tT /dev/hda
+
+/dev/hda:
+ Timing buffer-cache reads:   1980 MB in  2.00 seconds = 990.00 MB/sec
+ Timing buffered disk reads:   12 MB in  3.64 seconds =   3.30 MB/sec
+</pre>
+<p>以下的參數會把這兩個選項開回去：</p>
+<pre class="literal-block">
+$ hdparm -c 1 -d 1 /dev/hda
+
+/dev/hda:
+ setting 32-bit IO_support flag to 1
+ setting using_dma to 1 (on)
+ IO_support   =  1 (32-bit)
+ using_dma    =  1 (on)
+</pre>
+<p>然後進行測試：</p>
+<pre class="literal-block">
+$ hdparm -tT /dev/hda
+
+/dev/hda:
+ Timing buffer-cache reads:   1964 MB in  2.00 seconds = 982.00 MB/sec
+ Timing buffered disk reads:  138 MB in  3.02 seconds =  45.70 MB/sec
+</pre>
+<p>我們會發現，這兩個選項不管有沒有打開，有快取的測試值都差不多，但如果看直接存取裝置的讀取速度，就會發現速度差了 13 倍多。</p>
+<p>現在的新硬碟幾乎都支援 32 位元 IO 和 DMA 通道，就算磁碟舊到不支援這兩種存取模式，驅動程式也會幫我們處理好相容性的問題。不管在任何一個系統上，建議最好都把 32 位元 IO 和 DMA 通道打開，如果一來，不只可以提高磁碟的存取效率，也能大量地減少磁碟在存取時耗用的 CPU 時間。</p>
+<p>在使用 <tt class="docutils literal"><span class="pre">hdparm</span></tt> 時有一點要特別注意。那就是除非磁碟中的資料不太重要，損壞也沒有關係，&quot;hdparm (8)`` 裡面有標上 <tt class="docutils literal"><span class="pre">(DANGEROUS)</span></tt> 字樣的參數，就不要隨便設定了。這些參數中有一部分，可能會對磁碟造成永久性的傷害。</p>
+<div class="section">
+<h3><a class="toc-backref" href="#id2" id="etc-hdparm-conf" name="etc-hdparm-conf">3.3.1&nbsp;&nbsp;&nbsp;/etc/hdparm.conf</a></h3>
+<p>在 Debian 的 hdparm 套件內，同時包含了存取 Linux 核心驅動程式的程式 <tt class="docutils literal"><span class="pre">hdparm</span></tt>，還有用來在開機時自動進行設定的 <tt class="docutils literal"><span class="pre">init.d</span></tt> script (<tt class="docutils literal"><span class="pre">/etc/init.d/hdparm</span></tt>)<a class="footnote-reference" href="#id21" id="id26" name="id26"><sup>6</sup></a>，及其設定檔 <tt class="docutils literal"><span class="pre">/etc/hdparm.conf``。在用作伺服器的</span> <span class="pre">Debian</span> <span class="pre">系統上，其磁碟機通常是不會常常地新增移除，那麼我們可以把磁碟機的設定直接寫在</span> <span class="pre">on-boot</span> <span class="pre">設定檔</span> <span class="pre">(</span></tt>/etc/hdparm.conf``) 內，每次重新開機之後，就不必手動重新設定了<a class="footnote-reference" href="#id23" id="id27" name="id27"><sup>7</sup></a>。</p>
+<table class="docutils footnote" frame="void" id="id28" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id34" name="id28">[9]</a></td><td>Debian GNU/Linux 採用 SysV 形式的啟動指令稿 (script)，所以 hdparm 在 <tt class="docutils literal"><span class="pre">/etc/init.d</span></tt> 和 <tt class="docutils literal"><span class="pre">/etc/rcX.d</span></tt> 裡會有相關的項目，用符合 Debian 慣例的方法，在開機時自動啟動。至於所謂的 SysV 啟動架構是怎麼一回事，我們之後會在「<a class="reference" href="#sysv-init">SysV Init 啟動程序</a>」裡說明。</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id29" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id36" name="id29">[10]</a></td><td>雖然 <tt class="docutils literal"><span class="pre">hdparm</span></tt> 有 <tt class="docutils literal"><span class="pre">-k</span></tt> 與 <tt class="docutils literal"><span class="pre">-K</span></tt> 參數可以設定 keep_settings_over_reset 和 keep_features_over_reset，但問題是第一，有些設定不能用 <tt class="docutils literal"><span class="pre">-k</span></tt> 和 <tt class="docutils literal"><span class="pre">-K</span></tt> 來設，第二，有些 ATA 裝置不吃 keep over reset 信號。所以還是寫在 <tt class="docutils literal"><span class="pre">hdparm.conf</span></tt> 裡面比較保險。</td></tr>
+</tbody>
+</table>
+<p>Debian hdparm 套件裡預設的 <tt class="docutils literal"><span class="pre">/etc/hdparm.conf</span></tt> 檔案，已經把所有指令與參數的對應都說明清楚了，這裡我們不用再重複列一遍所有的指令，舉個例子說明就行了。前面提過，我們可以設定磁碟機的 32 位元 IO 和 DMA 通道，假設系統上只有一個 ATA 磁碟，那麼它在 Debian 中的裝置代號會是 <tt class="docutils literal"><span class="pre">/dev/hda</span></tt>，而設定它的 <tt class="docutils literal"><span class="pre">hdparm.conf</span></tt> 可以寫成：</p>
+<pre class="literal-block">
+quiet
+/dev/hda {
+        dma = on
+        io32_support = 1
+}
+</pre>
+<p>如此一來，每次開機的時候，就等於會執行一次</p>
+<pre class="literal-block">
+$ hdparm -d 1 -c 1 -q /dev/hda
+</pre>
+<p>指令。如果我們有兩顆磁碟，而且都接在 primary IDE channel 上，也都想在開機時設定 32 位元 IO 和 DMA 通道，那麼 <tt class="docutils literal"><span class="pre">hdparm.conf</span></tt> 要寫成：</p>
+<pre class="literal-block">
+quiet
+/dev/hda {
+        dma = on
+        io32_support = 1
+}
+/dev/hdb {
+        dma = on
+        io32_support = 1
+}
+</pre>
+<p>這樣就等於在開機時執行</p>
+<pre class="literal-block">
+$ hdparm -d 1 -c 1 -q /dev/hda
+$ hdparm -d 1 -c 1 -q /dev/hdb
+</pre>
+<p>其它的磁碟組態或參數設定，請參考 <tt class="docutils literal"><span class="pre">hdparm</span> <span class="pre">(8)</span></tt> 以及 <tt class="docutils literal"><span class="pre">/etc/hdparm.conf</span></tt>。照著這些參考資料照貓畫虎就不會錯了。</p>
+</div>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id2" id="id30" name="id30">4&nbsp;&nbsp;&nbsp;使用者與權限</a></h1>
+<div class="section">
+<h2><a class="toc-backref" href="#id2" id="id31" name="id31">4.1&nbsp;&nbsp;&nbsp;使用者及群組的管理</a></h2>
+<p>Debian 裡的使用者 (user) 與群組 (group) 資料，可以直接從本地的密碼檔裡取得 (本地使用者)，也可以從外部取得<a class="footnote-reference" href="#id25" id="id32" name="id32"><sup>8</sup></a>。這裡我們只討論本地使用者的管理，至於外部的使用者資料來源，則留待討論相關主題的時候再處理。</p>
+<table class="docutils footnote" frame="void" id="id33" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id37" name="id33">[11]</a></td><td>NIS、Samba (NT Domain/Active Directory)、LDAP 等都可以成為 Debian 的使用者與群組資料來源。</td></tr>
+</tbody>
+</table>
+<p>我們可以用 <tt class="docutils literal"><span class="pre">adduser</span></tt> 這個指令來新增使用者，並且設定使用者的相關資料，在其中，最重要的是使用者的登入密碼。要刪除使用者，可以使用 <tt class="docutils literal"><span class="pre">deluser</span></tt> 指令，不過除非特別指定，否則它不會移除使用者的家目錄 (以便萬一是誤殺，雖然使用者的基本資訊不見了，但還可以把使用者自己存的資料救回來)。<tt class="docutils literal"><span class="pre">adduser</span></tt> 和 <tt class="docutils literal"><span class="pre">deluser</span></tt> 都有許多參數，請參考 <tt class="docutils literal"><span class="pre">adduser(8)</span></tt> 和 <tt class="docutils literal"><span class="pre">deluser(8)</span></tt>。另外，Debian 還有一組管理使用者帳號的指令：<tt class="docutils literal"><span class="pre">useradd(8)</span></tt> 和 <tt class="docutils literal"><span class="pre">userdel(8)</span></tt>，在此不予贅述，請自行查閱 manpage<a class="footnote-reference" href="#id28" id="id34" name="id34"><sup>9</sup></a>。</p>
+<table class="docutils footnote" frame="void" id="id35" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id46" name="id35">[12]</a></td><td><tt class="docutils literal"><span class="pre">adduser/deluser</span></tt> 由 adduser 套件所提供；<tt class="docutils literal"><span class="pre">useradd/userdel</span></tt> 則是由 passwd 套件所提供的。</td></tr>
+</tbody>
+</table>
+<p>使用者的資料會存到 <tt class="docutils literal"><span class="pre">/etc/passwd</span></tt> 裡面，包括使用者的登入名稱 (就是一般我們講的使用者名稱)、使用者識別碼 (uid)、使用者所屬群組識別碼 (gid)、使用者的家目錄路徑、使用者的 shell，以及其它並非必要的相關資訊。</p>
+<p>至於密碼，則會經過某種加密程序之後，另外存在 <tt class="docutils literal"><span class="pre">/etc/shadow</span></tt> 這個檔案裡面。當系統需要核對使用者密碼的時候，會把使用者輸入的字串經過同樣的程序加密，然後加以比對。如果兩者相同，表示密碼驗證成功；如果不同，則表示輸入的字串不是正確的密碼。</p>
+<p>因為密碼並不是以明碼 (plaintext) 儲存的，所以 <tt class="docutils literal"><span class="pre">shadow</span></tt> 檔本身就具備一定的安全性。不過我們最好還是將密碼本身和其它資料分檔儲存，減少密碼資料被不當存取的機會。這是因為，如果某個系統的密碼檔被惡意的第三者竊取，即使密碼本身不能直接被反向解碼成原本的字串<a class="footnote-reference" href="#id29" id="id36" name="id36"><sup>10</sup></a>，但仍可以透過試誤法或基於試誤法的密文攻擊法來「猜」出正確的密碼<a class="footnote-reference" href="#id33" id="id37" name="id37"><sup>11</sup></a>，那麼，惡意的第三者就可以進入你的系統。我們很難知道惡意的第三者在我們的系統裡幹了些什麼事，也許我們所有的資料都被竊取，而且所有的操作都被紀錄起來，回傳到他那邊去。最快速而完整的解決方法通常就是重建系統。</p>
+<table class="docutils footnote" frame="void" id="id38" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id49" name="id38">[13]</a></td><td>密碼的加密過程，理論上是使用密碼學上的單向函數。舉例來講，假設 f(x)=y 是一個單向函數，則可以把 x 輸入 f(x) 得到 y，但找不到另一個 g(y)=x 來從 y 反算回 x。現有的加密法並未使用完全的單向函數，但使 g(y)=x 的運算量極大於 f(x)=y，讓攻擊者不能在合理的時間 (利用試誤法所需使用的時間) 內反算回密碼。</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id39" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id51" name="id39">[14]</a></td><td>配合字典攻擊法，猜中的機會還不低。因為一般使用者會使用的密碼來來去去就是那幾種規則，真正照規定設密碼的使用者從古到今都是少之又少。</td></tr>
+</tbody>
+</table>
+<p>我們可以這樣說，儲存密碼的 <tt class="docutils literal"><span class="pre">shadow</span></tt> 檔非常重要，絕對不能落到別人的手上。</p>
+<p>superuser 可以用 <tt class="docutils literal"><span class="pre">passwd</span></tt> 這個指令修改任何一個本地使用者的密碼，而一般使用者則只能用 <tt class="docutils literal"><span class="pre">passwd</span></tt> 來修改自己的密碼。要修改整個密碼檔的內容 (當然只有 superuser 需要這麼作)，請使用 <tt class="docutils literal"><span class="pre">vipw</span></tt> 指令，不要直接編輯 <tt class="docutils literal"><span class="pre">/etc/passwd</span></tt> 檔。</p>
+<p>每個使用者都必須屬於某個群組。``adduser`` 指令在建立使用者的時候，預設就會建立一個與該使用者同名的群組，並將其指定給該使用者。群組不能屬於另一個群組，但同一個使用者除了預設群組之外，還可以屬於其它多個群組。</p>
+<p>儲存本地群組資訊 (群組資訊當然也可以從外部取得) 的檔案是 <tt class="docutils literal"><span class="pre">/etc/group</span></tt>，可以用 <tt class="docutils literal"><span class="pre">vigr</span></tt> 指令來修改它 (當然也只有 superuser 可以這樣作)，而要指定使用者的預設群組，則要用 <tt class="docutils literal"><span class="pre">vipw</span></tt> 修改使用者資料，不能用 <tt class="docutils literal"><span class="pre">vigr</span></tt>。<tt class="docutils literal"><span class="pre">/etc/group</span></tt> 檔案的格式寫法，基本上是先列出所有的本地群組 (包含其 gid)，然後指定屬於該群組的成員使用者名稱。它不會是空的，所以一樣可以照貓畫虎。</p>
+<p>與 Windows (NT) 系統相比，Debian GNU/Linux 的使用者與群組設定簡單了很多，也比較不能作那麼結構化的設定。不過，適當地組合使用者與群組的關係，還是可以達到大部分的管理要求。相關的作法，我們等到有需要實際組態的時候，再好好地來討論討論，才會弄得比較清楚。</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id2" id="id40" name="id40">4.2&nbsp;&nbsp;&nbsp;檔案系統的權限設定</a></h2>
+<div class="section">
+<h3><a class="toc-backref" href="#id2" id="id41" name="id41">4.2.1&nbsp;&nbsp;&nbsp;權限的意涵</a></h3>
+<p>Debian 下的每個檔案系統項目 (包含檔案、目錄與符號連結) 都具有使用者與群組這兩個屬性，也就是這個項目的擁有者，所以權限屬性就會分成 u (使用者本身)、g (群組本身) 與 o (其它) 三種，每一種類別則可以設定 r (可讀取)、w (可寫入) 及 x (可執行) 基本權限。舉個例子，假設我們有個檔案叫 <tt class="docutils literal"><span class="pre">thepaper</span></tt>，它的權限是：</p>
+<pre class="literal-block">
+$ ls -al thepaper
+-rw-r-----    1 userme   groupme         0 Oct 22 10:44 thepaper
+</pre>
+<p><tt class="docutils literal"><span class="pre">ls</span> <span class="pre">-al</span></tt> 的結果所列出的權限就是照 ugo (使用者、群組、其它) 所排的，所以 <tt class="docutils literal"><span class="pre">thepaper</span></tt> 這個檔案的權限設定是：</p>
+<ul class="simple">
+<li>userme 使用者可以讀取、寫入檔案，不能執行。</li>
+<li>groupme 群組的成員可以讀取檔案，不能寫入也不能執行。</li>
+<li>既不是 userme 也非 groupme 群組成員的使用者，不能讀取檔案，也不能寫入和執行；什麼也不能作。</li>
+</ul>
+<p>如果這個檔案是一個程式檔 (或 script)，則我們需要它的執行權限，才能執行它。</p>
+<p>另外，對一個目錄而言，執行權限代表是否可以進入或列出該目錄的內容。所以，要使用某個目錄，使用者不只需要它的讀取權限，也必須具有執行的權限。</p>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id2" id="id42" name="id42">4.2.2&nbsp;&nbsp;&nbsp;權限的設定</a></h3>
+<p>檔案的權限 (有時候也稱為模式，mode)，我們可以用 <tt class="docutils literal"><span class="pre">chmod</span></tt> 指令來設定，語法是「<tt class="docutils literal"><span class="pre">chmod</span> <span class="pre">&lt;權限&gt;</span> <span class="pre">&lt;檔名&gt;</span></tt>」，其中 <tt class="docutils literal"><span class="pre">&lt;權限&gt;</span></tt> 的描述方式有兩種，讓我們來看一下範例：</p>
+<pre class="literal-block">
+$ ls -al thepaper
+-rw-r-----    1 userme   groupme         0 Oct 22 10:44 thepaper
+$ chmod g-r thepaper ; ls -al thepaper
+-rw-------    1 userme   groupme         0 Oct 22 10:44 thepaper
+$ chmod og+w thepaper ; ls -al thepaper
+-rw---w--w    1 userme   groupme         0 Oct 22 10:44 thepaper
+$ chmod u-rw thepaper ; ls -al thepaper
+------w--w    1 userme   groupme         0 Oct 22 10:44 thepaper
+$ chmod ugo+rwx thepaper ; ls -al thepaper
+-rwxrwxrwx    1 userme   groupme         0 Oct 22 10:44 thepaper*
+$ chmod 644 thepaper ; ls -al thepaper
+-rw-r--r--    1 userme   groupme         0 Oct 22 10:44 thepaper
+</pre>
+<ul>
+<li><p class="first">第一種描述權限的方法是使用「``[主體符號][+-][權限符號]``」的格式；主體符號有：</p>
+<ul class="simple">
+<li>u 代表使用者本身、</li>
+<li>g 代表群組、</li>
+<li>o 代表其它人，</li>
+</ul>
+<p>而權限符號有：</p>
+<ul class="simple">
+<li>r 代表讀取權限、</li>
+<li>w 代表寫入權限、</li>
+<li>x 代表執行權限。</li>
+</ul>
+<p>各符號可以加以排列組合，如上面例子裡的</p>
+<ul class="simple">
+<li>第 3 行，取消掉 thepaper 檔案，群組的讀取權限，</li>
+<li>第 5 行，設定擁有群組與其它使用者有寫入 thepaper 檔案的權限，</li>
+<li>第 7 行，取消擁有者對 thepaper 檔案的讀取與寫入權限，</li>
+<li>第 9 行，把讀取、寫入與執行 thepaper 檔案的權限設定給擁有者、擁有群組及其它使用者。</li>
+</ul>
+<p>另外，要指定所有的使用者時，如果我們不想寫 ugo 這麼冗長的一串符號，也可以用 a 來代替；a 這個符號的意思就是指所有的使用者，亦即 ugo (當然事實上 ugo 也沒多長，不過一個字母總是比三個字母短得多)。</p>
+</li>
+<li><p class="first">第二種方法，則是把每一個 rwx 權限看成一個八進位的數字，而用三個八進位數字來連續設定擁有者、擁有群組與其它使用者的權限。</p>
+<p>如果把 rwx 中任一個權限的已設定情況當作 1，未設定情況當作 0，則 <tt class="docutils literal"><span class="pre">--x</span></tt> (不可讀取、不可寫入、可以執行) 的二進位值應該是 <tt class="docutils literal"><span class="pre">001</span></tt>；<tt class="docutils literal"><span class="pre">-w-</span></tt> (不可讀取、可以寫入、不可執行) 則是 <tt class="docutils literal"><span class="pre">010</span></tt>；``r--`` (可以讀取、不可寫入、不可執行) 是 <tt class="docutils literal"><span class="pre">100</span></tt>。再把這些二進位值換底到八進位，則</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">--x</span></tt> = 1</li>
+<li><tt class="docutils literal"><span class="pre">-w-</span></tt> = 2</li>
+<li><tt class="docutils literal"><span class="pre">r--</span></tt> = 4</li>
+</ul>
+<p>如果依照 ugo 的順序，如 <tt class="docutils literal"><span class="pre">rw-r--r--</span></tt> 這樣的權限就會變成 644，例如第 11 行。</p>
+<p>常用的八進位權限有 644 (<tt class="docutils literal"><span class="pre">rw-r--r--</span></tt>) 和 755 (<tt class="docutils literal"><span class="pre">rwxr-xr-x</span></tt>)，前者可用於一般的檔案，後者則用於可執行檔、目錄或 script。</p>
+</li>
+</ul>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id2" id="id43" name="id43">4.2.3&nbsp;&nbsp;&nbsp;權限遮罩</a></h3>
+<p>還記得之前在「umask__` 」的時候提到了 umask 的設定嗎？umask 是在建立檔案與目錄的時候，指定權限用的遮罩 (mask)。這個遮罩會與檔案和目錄的權限進行布林代數裡的 XOR (eXclusive OR) 運算，假設 umask 022：</p>
+<ul>
+<li><p class="first">如果對象是檔案，新建檔案的權限會設定為</p>
+<pre class="literal-block">
+110 110 110 XOR 000 010 010 = 110 100 100
+</pre>
+<p>即 644。</p>
+</li>
+<li><p class="first">如果對象是目錄，新建目錄的權限會設定為</p>
+<pre class="literal-block">
+111 111 111 XOR 000 010 010 = 111 101 101
+</pre>
+<p>即 755。</p>
+</li>
+</ul>
+<p>XOR 是一種二元運算子，當兩個數字進行 XOR 運算時，我們要先把這兩個數字的底換到二進位。然後，利用以下的真值表來一位一位地比較這兩個數字：</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<tbody valign="top">
+<tr><td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr><td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>你可以用我們在上面進行的兩次 XOR 運算，來驗證看看是不是照這個規則作出來的。</p>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id2" id="id44" name="id44">4.2.4&nbsp;&nbsp;&nbsp;管理檔案與目錄的擁有者</a></h3>
+<p>如果我們想改變檔案與目錄的擁有者或擁有群組，則要使用 <tt class="docutils literal"><span class="pre">chown</span></tt> 這個指令，它的語法是「<tt class="docutils literal"><span class="pre">chown</span> <span class="pre">&lt;使用者[.群組]&gt;</span> <span class="pre">&lt;檔案&gt;\</span> <span class="pre">」，不想修改擁有群組的話，群組的部分可以忽略。如果我們只想改變擁有群組的話，也可以改用</span> <span class="pre">``chgrp</span></tt> 指令，語法一樣是 <tt class="docutils literal"><span class="pre">chown</span> <span class="pre">&lt;群組&gt;</span> <span class="pre">&lt;檔案&gt;</span></tt>，但不能改變擁有者。</p>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id2" id="id45" name="id45">4.2.5&nbsp;&nbsp;&nbsp;遞迴處理與注意事項</a></h3>
+<p>如果我們想以遞迴的方式改變一整個目錄下的檔案權限，或是擁有者和擁有群組，<tt class="docutils literal"><span class="pre">chmod</span></tt>, <tt class="docutils literal"><span class="pre">chown</span></tt>, <tt class="docutils literal"><span class="pre">chgrp</span></tt> 都支援以 <tt class="docutils literal"><span class="pre">-R</span></tt> 參數，執行遞迴作業。不過，因為一般的檔案不需要執行權限就可以正常運作，但目錄卻需要執行權限才能進入，所以用 <tt class="docutils literal"><span class="pre">chmod</span> <span class="pre">-R</span></tt> 遞迴地修改檔案權限時，常常會出現一些超乎想像的結果，多半是不小心取消掉目錄的執行權限，或是把所有檔案都變成可讀取的 (如果我們有使用 <tt class="docutils literal"><span class="pre">ls</span> <span class="pre">--color</span></tt> 的話，就會看到一大片綠綠的檔案)。這種情況可以配合 <tt class="docutils literal"><span class="pre">find</span></tt> 及其 <tt class="docutils literal"><span class="pre">-type</span></tt> 和 <tt class="docutils literal"><span class="pre">-exec</span></tt> 參數來克服，詳細的用法，請參考 <tt class="docutils literal"><span class="pre">find(1)</span></tt>。</p>
+<p>另外，superuser 可以修改檔案的擁有者與擁有群組，不受限制。但一般使用者基本上只能修改檔案的擁有群組，並且自己必須是該被「修改至」群組的成員。</p>
+</div>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id2" id="su-sudo" name="su-sudo">4.3&nbsp;&nbsp;&nbsp;su/sudo 的基本應用</a></h2>
+<p><tt class="docutils literal"><span class="pre">su</span></tt> 這個工具程式很重要，它可以用來「化身」成其它使用者。不過，前提是你得知道要變成的使用者的密碼。</p>
+<p>通常，我們用 <tt class="docutils literal"><span class="pre">su</span></tt> 來變身成 superuser：</p>
+<pre class="literal-block">
+thehost[theuser]~
+$ su
+password:
+thehost[root]/home/theuser
+$
+</pre>
+<p><tt class="docutils literal"><span class="pre">su</span></tt> 後面不接任何使用者名稱，表示要變成 root (superuser)。打密碼的時候不會顯示出來 (否則不就被人看光光了)，只要密碼正確，我們就會變成 root，可以看見提示符號裡顯示我們變成 root，而且本來是家目錄的 <tt class="docutils literal"><span class="pre">/home/theuser</span></tt> 路徑，也因為換了一個身份而變成不是家目錄了 (才從簡寫符號 <tt class="docutils literal"><span class="pre">~</span></tt> 變回原路徑顯示)。這樣進入的 root shell，就會是 non-login interactive shell，省下了一道重新登入的步驟，不過 bash 啟動時的設定檔也會不一樣<a class="footnote-reference" href="#id35" id="id46" name="id46"><sup>12</sup></a>。</p>
+<table class="docutils footnote" frame="void" id="id47" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id54" name="id47">[15]</a></td><td>所以，這就是為什麼我們希望在 profile 檔裡不作設定只引入 rc 檔的內容，來讓 login interactive shell 和 non-login interactive shell 的設定檔內容一致的原因之一。當然，偶爾也會有一些特別的需求，得讓 login 或 non-login shell 的設定檔與對方不同。</td></tr>
+</tbody>
+</table>
+<p><tt class="docutils literal"><span class="pre">su+</span> <span class="pre">可以接</span> <span class="pre">``-c</span> <span class="pre">&lt;command&gt;</span></tt> 參數，其中的 <tt class="docutils literal"><span class="pre">&lt;command&gt;</span></tt> 是化身後要執行的指令。</p>
+<p><tt class="docutils literal"><span class="pre">su</span></tt> 有時候不太方便，而且缺乏彈性；要化身成對方，一定要知道對方的密碼。因此有了 <tt class="docutils literal"><span class="pre">sudo</span></tt> 這個工具的出現。我們可以把 <tt class="docutils literal"><span class="pre">sudo</span></tt> 當成是不需要知道對方密碼的 <tt class="docutils literal"><span class="pre">su</span> <span class="pre">-c</span></tt>，因為 <tt class="docutils literal"><span class="pre">sudo</span></tt> 一次只能化身執行一個指令，而不會進入 shell，而且執行時只需要輸入自己的密碼 (而非對方)。</p>
+<p><tt class="docutils literal"><span class="pre">sudo</span></tt> 有一個設定檔 <tt class="docutils literal"><span class="pre">/etc/sudoers</span></tt>，帳號名稱有列在其中的使用者才能使用 <tt class="docutils literal"><span class="pre">sudo</span></tt>，並且受該檔案內的設定控制。<tt class="docutils literal"><span class="pre">/etc/sudoers</span></tt> 要用 <tt class="docutils literal"><span class="pre">visudo</span></tt> 這個指令來管理，最好不要直接修改它的內容。<tt class="docutils literal"><span class="pre">sudoers</span></tt> 可以接受相當精密的設定 (請參見 <tt class="docutils literal"><span class="pre">sudoers(5)</span></tt>)，但如果我們只是要賦予讓某個使用者 superuser 的權限，這樣寫就可以了：</p>
+<pre class="literal-block">
+theuser ALL=(ALL) ALL
+</pre>
+<p>表示不管 theuser 從哪裡進入系統，都讓它能以任何使用者與群組的身分執行任何程式。</p>
+<p>同樣地，在不加上 <tt class="docutils literal"><span class="pre">-u</span> <span class="pre">&lt;other</span> <span class="pre">user&gt;</span></tt> 的情況下，<tt class="docutils literal"><span class="pre">sudo</span></tt> 預設是化身成 <tt class="docutils literal"><span class="pre">root</span></tt> 執行指令的。</p>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id2" id="id48" name="id48">5&nbsp;&nbsp;&nbsp;系統的標準啟動機制</a></h1>
+<div class="section">
+<h2><a class="toc-backref" href="#id2" id="sysv-init" name="sysv-init">5.1&nbsp;&nbsp;&nbsp;SysV Init 啟動程序</a></h2>
+<p>在 Debian 系統開機的過程中，當核心啟動完畢之後第一個被執行起來的行程 (process) 是 <tt class="docutils literal"><span class="pre">init</span></tt>。之後的所有其它程式，都要透過 <tt class="docutils literal"><span class="pre">init</span></tt> 這個程式，或是被 <tt class="docutils literal"><span class="pre">init</span></tt> 所啟動的程式來啟動，所以它是系統內所有運作中的程式，最遠的那一位祖先。</p>
+<p>整個 Debian GNU/Linux 系統的啟動組態，用不負責任的講法，可以說都靠 <tt class="docutils literal"><span class="pre">init</span></tt> 的設定檔來指定。不過啟動一個系統並非易事，基於便於管理的理由，全部的設定其實是沒辦法寫在單一設定檔裡面的。<tt class="docutils literal"><span class="pre">init</span></tt> 的設定檔是最主要的，但為了配合 <tt class="docutils literal"><span class="pre">init</span></tt> 的動作，我們還需要一整組的設定檔和工具程式，共同組成一個完整的框架。</p>
+<p>Debian (或者應該講大部分的 Linux distribution) 採用 SysV 風格的組態模式，整個系統啟動的結構是由 <tt class="docutils literal"><span class="pre">sysvinit</span></tt> (包裝了 <tt class="docutils literal"><span class="pre">init</span></tt> 程式), <tt class="docutils literal"><span class="pre">initscripts</span></tt> 和 <tt class="docutils literal"><span class="pre">sysv-rc</span></tt> 等套件所組成的，這些套件是 Debian Base System 的一部分，不必擔心會沒有安裝。</p>
+<p><tt class="docutils literal"><span class="pre">init</span></tt> 啟動的時候，會去讀 <tt class="docutils literal"><span class="pre">/etc/inittab</span></tt> 這個設定檔。在 <tt class="docutils literal"><span class="pre">inittab</span></tt> 裡有 7 種 runlevel：0, 1, 2, 3, 4, 5, 6，一般 Debian 預設的 runlevel 是 2<a class="footnote-reference" href="#id38" id="id49" name="id49"><sup>13</sup></a>。我們可以把 runlevel 當成是不同的「啟動模式設定」，因為不同的 runlevel 可以組態不同的程式啟動順序與設定。其中，runlevel 0 保留給系統結束之用，它會依序關閉所有執行中的程式；runlevel 6 則是保留給重新啟動之用；runlevel 1 是單使用者模式，而 runlevel 2$sim$5 則是一般使用的多使用者模式。</p>
+<table class="docutils footnote" frame="void" id="id50" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a name="id50">[16]</a></td><td>見該檔內 <tt class="docutils literal"><span class="pre">id:2:initdefault:</span></tt> 的這一行。</td></tr>
+</tbody>
+</table>
+<p>如果我們詳細檢閱 <tt class="docutils literal"><span class="pre">inittab</span></tt> 檔案的內容，會發現根據這個設定檔所設定的 <tt class="docutils literal"><span class="pre">init</span></tt> 程序基本上是</p>
+<ol class="arabic">
+<li><p class="first">先指定預設的 runlevel，</p>
+</li>
+<li><p class="first">接著執行 <tt class="docutils literal"><span class="pre">/etc/init.d/rcS</span></tt> 這個 shell script，</p>
+</li>
+<li><p class="first">然後根據 runlevel 的值，執行 <tt class="docutils literal"><span class="pre">/etc/init.d/rc</span></tt> (這也是一個 shell script)。</p>
+<p>假設 <tt class="docutils literal"><span class="pre">X</span></tt> 代表 runlevel 的值，則 <tt class="docutils literal"><span class="pre">/etc/init.d/rc</span></tt> 會依照 <tt class="docutils literal"><span class="pre">/etc/rcX.d</span></tt> 目錄內各 script 檔的順序，一個一個地執行這些 script。</p>
+</li>
+</ol>
+<p>再配合一些其它的設定，有興趣的話請參考 <tt class="docutils literal"><span class="pre">inittab(5)</span></tt>。</p>
+<p>以上我們簡單地描述了一下 Debian GNU/Linux 的系統啟動程序，其實在啟動的時候，系統作了許多事情，不過這裡我們沒有篇幅去詳細說明。如果想要進一步了解關於 Debian 系統啟動的資訊，可以參考相關套件的說明與 manpage，以及 Linux Kernel Documentation。</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id2" id="runlevel" name="runlevel">5.2&nbsp;&nbsp;&nbsp;runlevel 管理</a></h2>
+<p><tt class="docutils literal"><span class="pre">sysv-rc</span></tt> 套件提供了 <tt class="docutils literal"><span class="pre">update-rc.d</span></tt> 工具，幫助我們處理 <tt class="docutils literal"><span class="pre">/etc/rcX.d</span></tt> 這些目錄的管理工作。</p>
+<p>系統啟動時要執行的各種服務 (daemon) 與程式，在 SysV Init 的架構下，都會放一個至少接受 <tt class="docutils literal"><span class="pre">start</span></tt> 與 <tt class="docutils literal"><span class="pre">stop</span></tt> 參數的 shell script 在 <tt class="docutils literal"><span class="pre">/etc/init.d</span></tt> 下面。當我們要啟動這個服務<a class="footnote-reference" href="#id39" id="id51" name="id51"><sup>14</sup></a>時，只要執行</p>
+<table class="docutils footnote" frame="void" id="id52" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a name="id52">[17]</a></td><td>通常是服務才需要在系統啟動的同時也啟動，應用程式一般不需要這麼處理。不過在「<a class="reference" href="#hdparm">hdparm</a>」提到的 <tt class="docutils literal"><span class="pre">hdparm</span></tt> 這個工具算是一個特例。</td></tr>
+</tbody>
+</table>
+<pre class="literal-block">
+$ /etc/init.d/servicename start
+</pre>
+<p>即可；相對地，要停止該服務，就下</p>
+<pre class="literal-block">
+$ /etc/init.d/servicename stop
+</pre>
+<p>不過我們的 <tt class="docutils literal"><span class="pre">init</span></tt> 要看的目錄是 <tt class="docutils literal"><span class="pre">/etc/rcX.d</span></tt>，而非 <tt class="docutils literal"><span class="pre">/etc/init.d</span></tt>，不是嗎？事實上，``/etc/rcX.d`` 裡面所放的檔案，都是連到 <tt class="docutils literal"><span class="pre">../init.d/servicename</span></tt> 的符號連結：</p>
+<pre class="literal-block">
+$ ls -o /etc/rc2.d
+lrwxrwxrwx  1 root 18 Jun 23 20:57 S10sysklogd -&gt; ../init.d/sysklogd*
+lrwxrwxrwx  1 root 15 Jun 23 20:57 S11klogd -&gt; ../init.d/klogd*
+lrwxrwxrwx  1 root 13 Jun 23 20:57 S14ppp -&gt; ../init.d/ppp*
+lrwxrwxrwx  1 root 15 Jun 24 10:09 S15bind9 -&gt; ../init.d/bind9*
+.
+.
+.
+</pre>
+<p>利用這個技巧，可以自由地排列服務的啟動 (或關閉) 順序，而且不會干擾到這些 script 檔真正的擺放位置 (檔名)。</p>
+<p>如果我們想改變 <tt class="docutils literal"><span class="pre">/etc/rcX.d</span></tt> 裡的符號連結設定，千萬不要自己下 <tt class="docutils literal"><span class="pre">ln</span> <span class="pre">-s</span></tt>，而要用 <tt class="docutils literal"><span class="pre">update-rc.d</span></tt>。舉例來講，假設我們不希望名稱伺服器在開機的時候自動啟動：</p>
+<pre class="literal-block">
+$ update-rc.d bind9 remove
+update-rc.d: /etc/init.d/bind9 exists during rc.d purge (continuing)
+ Removing any system startup links for /etc/init.d/bind9 ...
+   /etc/rc0.d/K85bind9
+   /etc/rc1.d/K85bind9
+   /etc/rc2.d/S15bind9
+   /etc/rc3.d/S15bind9
+   /etc/rc4.d/S15bind9
+   /etc/rc5.d/S15bind9
+   /etc/rc6.d/K85bind9
+$ ls -o /etc/rc2.d
+lrwxrwxrwx  1 root 18 Jun 23 20:57 S10sysklogd -&gt; ../init.d/sysklogd*
+lrwxrwxrwx  1 root 15 Jun 23 20:57 S11klogd -&gt; ../init.d/klogd*
+lrwxrwxrwx  1 root 13 Jun 23 20:57 S14ppp -&gt; ../init.d/ppp*
+.
+.
+.
+</pre>
+<p><tt class="docutils literal"><span class="pre">rc2.d</span></tt> 裡的 <tt class="docutils literal"><span class="pre">bind9</span></tt> 不見了 (其它 runlevel 裡的也一起清掉了)。我們加了 <tt class="docutils literal"><span class="pre">-f</span></tt> 參數，是因為如果 <tt class="docutils literal"><span class="pre">/etc/init.d</span></tt> 的原 script 還在的話，在不加 <tt class="docutils literal"><span class="pre">-f</span></tt> 的情況下，<tt class="docutils literal"><span class="pre">update-rc.d</span></tt> 會禁止清除符號連結。如果想設回來，可以這樣作：</p>
+<pre class="literal-block">
+$ update-rc.d bind9 defaults
+ Adding system startup for /etc/init.d/bind9 ...
+   /etc/rc0.d/K20bind9 -&gt; ../init.d/bind9
+   /etc/rc1.d/K20bind9 -&gt; ../init.d/bind9
+   /etc/rc6.d/K20bind9 -&gt; ../init.d/bind9
+   /etc/rc2.d/S20bind9 -&gt; ../init.d/bind9
+   /etc/rc3.d/S20bind9 -&gt; ../init.d/bind9
+   /etc/rc4.d/S20bind9 -&gt; ../init.d/bind9
+   /etc/rc5.d/S20bind9 -&gt; ../init.d/bind9
+$ ls -o /etc/rc2.d
+lrwxrwxrwx  1 root 18 Jun 23 20:57 S10sysklogd -&gt; ../init.d/sysklogd*
+lrwxrwxrwx  1 root 15 Jun 23 20:57 S11klogd -&gt; ../init.d/klogd*
+lrwxrwxrwx  1 root 13 Jun 23 20:57 S14ppp -&gt; ../init.d/ppp*
+.
+.
+lrwxrwxrwx  1 root 15 Oct 27 11:14 S20bind9 -&gt; ../init.d/bind9*
+.
+.
+.
+</pre>
+<p>哇，不過順序和原本的不太一樣，啟動和關閉都變成 20 了，原本各是 15 和 85 的。
+讓我們重作一次：</p>
+<pre class="literal-block">
+$ update-rc.d bind9 defaults 15 85
+ Adding system startup for /etc/init.d/bind9 ...
+   /etc/rc0.d/K85bind9 -&gt; ../init.d/bind9
+   /etc/rc1.d/K85bind9 -&gt; ../init.d/bind9
+   /etc/rc6.d/K85bind9 -&gt; ../init.d/bind9
+   /etc/rc2.d/S15bind9 -&gt; ../init.d/bind9
+   /etc/rc3.d/S15bind9 -&gt; ../init.d/bind9
+   /etc/rc4.d/S15bind9 -&gt; ../init.d/bind9
+   /etc/rc5.d/S15bind9 -&gt; ../init.d/bind9
+$ ls -o /etc/rc2.d
+lrwxrwxrwx  1 root 18 Jun 23 20:57 S10sysklogd -&gt; ../init.d/sysklogd*
+lrwxrwxrwx  1 root 15 Jun 23 20:57 S11klogd -&gt; ../init.d/klogd*
+lrwxrwxrwx  1 root 13 Jun 23 20:57 S14ppp -&gt; ../init.d/ppp*
+lrwxrwxrwx  1 root 15 Oct 27 11:21 S15bind9 -&gt; ../init.d/bind9*
+.
+.
+.
+</pre>
+<p>這麼一來就和原來的設定一模一樣了。</p>
+<p>剛剛的例子裡面有 <tt class="docutils literal"><span class="pre">update-rc.d</span></tt> 的兩種用法：刪除符號連結與重建符號連結。我們另外還可以用</p>
+<pre class="literal-block">
+update-rc.d servicename start NN runlevellist .
+</pre>
+<p>來調整任意 runlevel 裡的啟動或關閉符號連結，請參考 <tt class="docutils literal"><span class="pre">update-rc.d(8)</span></tt>。</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id2" id="init-d" name="init-d">5.3&nbsp;&nbsp;&nbsp;自訂 init.d 的內容</a></h2>
+<p>如果我們在系統上自行安裝了服務，希望它能在開機時自動執行，則需要為服務撰寫專用的 init.d script。另一個比較不好的方法是把啟動指令寫到 <tt class="docutils literal"><span class="pre">/etc/init.d/rcS</span></tt>，或是其含入的 <tt class="docutils literal"><span class="pre">/etc/rc.boot</span></tt> 目錄內容 (這個目錄預設不存在) 裡面。第二個方法不好在它太依靠 <tt class="docutils literal"><span class="pre">/etc/init.d/rcS</span></tt> 的內容了，當我們昇級 Debian 的時候，該檔案的內容很可能會改變，我們的設定就付諸流水了。</p>
+<p>撰寫專用的 init.d script 不但提供 SysV Init 架構下的統一管理介面，也不會因為系統套件的昇級而洗掉我們辛苦寫下的設定，但缺點就是一開始作的時候比較麻煩一點。不過我們既然有幸讀到這一段，那這個缺點自然也就不算缺點了 。</p>
+<p>一般的 init.d script 至少提供 <tt class="docutils literal"><span class="pre">start</span></tt>, <tt class="docutils literal"><span class="pre">stop</span></tt>, <tt class="docutils literal"><span class="pre">restart</span></tt> 等三個參數，分別會啟動、停止與重新啟動服務。我們還是拿 bind9 (很有名的名稱伺服器軟體) 來當例子，假設我們改變了 bind9 的 zone 檔案，要重新啟動 bind9：</p>
+<pre class="literal-block">
+$ /etc/init.d/bind9 restart
+Stopping domain name service: named.
+Starting domain name service: named.
+</pre>
+<p>如果我們臨時想停止 bind9 的服務，可以</p>
+<pre class="literal-block">
+$ /etc/init.d/bind9 stop
+Stopping domain name service: named.
+</pre>
+<p>再啟動：</p>
+<pre class="literal-block">
+$ /etc/init.d/bind9 start
+Starting domain name service: named.
+</pre>
+<p>init.d script 的操作幾乎都是這樣。有時我們會多用 <tt class="docutils literal"><span class="pre">reload</span></tt> 或 <tt class="docutils literal"><span class="pre">force-reload</span></tt> 參數，不過在絕大多數的情況下，<tt class="docutils literal"><span class="pre">start</span></tt>, <tt class="docutils literal"><span class="pre">stop</span></tt>, <tt class="docutils literal"><span class="pre">restart</span></tt> 就夠了。</p>
+<p>當我們要自製 init.d script 的時候，不需要從頭來一遍，<tt class="docutils literal"><span class="pre">/etc/init.d/skeleton</span></tt> 可以用來當作範本。我們來作一個沒用的服務試試看。先從 <tt class="docutils literal"><span class="pre">skeleton</span></tt> 複製一份新檔：</p>
+<pre class="literal-block">
+$ cp /etc/init.d/skeleton /etc/init.d/useless ; ls /etc/init.d/useless
+/etc/init.d/useless*
+</pre>
+<p>這個檔必須要有執行權限，否則不能正常運作；如果它還沒有被設定執行權限 (但這情形一般是不會發生的)，請</p>
+<pre class="literal-block">
+$ chmod a+x /etc/init.d/useless
+</pre>
+<p>準備好了之後，我們就 <tt class="docutils literal"><span class="pre">vi</span> <span class="pre">/etc/init.d/useless</span></tt>。</p>
+<p>首先要修改其中的變數設定：</p>
+<pre class="literal-block">
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+DESC=&quot;some daemon&quot;
+NAME=daemon
+DAEMON=/usr/sbin/$NAME
+PIDFILE=/var/run/$NAME.pid
+SCRIPTNAME=/etc/init.d/$NAME
+</pre>
+<p>其中的 <tt class="docutils literal"><span class="pre">DESC</span></tt> 是一段用來描述服務的字串，我們應該要改成自己的版本：</p>
+<pre class="literal-block">
+DESC=&quot;useless service&quot;
+</pre>
+<p><tt class="docutils literal"><span class="pre">NAME</span></tt> 用作 Debian 指令 <tt class="docutils literal"><span class="pre">start-stop-daemon</span></tt> 的參數，通常會設成 <tt class="docutils literal"><span class="pre">DAEMON</span></tt> 所指定的路徑的檔名 (basename)：</p>
+<pre class="literal-block">
+NAME=hostname
+</pre>
+<p><tt class="docutils literal"><span class="pre">DAEMON</span></tt> 是我們要執行的那個程式的完整路徑：</p>
+<pre class="literal-block">
+DAEMON=/bin/$NAME
+</pre>
+<p><tt class="docutils literal"><span class="pre">PIDFILE</span></tt> 和 <tt class="docutils literal"><span class="pre">SCRIPTNAME</span></tt> 通常使用預設的寫法，它們分别是作為紀錄服務的行程 ID (pid) 和這個 init.d script 本身的路徑之用。因為我們這個 init.d script 的檔名是 <tt class="docutils literal"><span class="pre">useless</span></tt>，與要執行的程式不同，所以 <tt class="docutils literal"><span class="pre">SCRIPTNAME</span></tt> 應該改一下：</p>
+<pre class="literal-block">
+SCRIPTNAME=/etc/init.d/useless
+</pre>
+<p>這樣填完以後，我們的服務就可以動了：</p>
+<pre class="literal-block">
+$ ./useless start
+Starting useless service: hostnamethehostname
+.
+$ ./useless stop
+Stopping useless service: hostname$
+</pre>
+<p>我們這台機器的名字是 thehostname，而 <tt class="docutils literal"><span class="pre">hostname</span></tt> 這個指令是用來顯示主機名稱的。所以，我們會看到服務在啟動之後 (<tt class="docutils literal"><span class="pre">hostname</span></tt> 的字樣)，<tt class="docutils literal"><span class="pre">hostname</span></tt> 的執行結果 <tt class="docutils literal"><span class="pre">thehostname</span></tt> 也被印出來了。不過，結束行程的指令好像怪怪的？</p>
+<p>沒錯，這種執行結果有點不正常，因為 <tt class="docutils literal"><span class="pre">hostname</span></tt> 本身是一個前景程式，而不是一個服務。服務程式既然要用來服務其它使用者或程式，就要能一直在系統裡運作，如果這種程式跑在前景的話，終端機行程一結束，程式也會跟著結束，服務就死掉了。如果一個服務程式不會自己跑到背景去，或者我們硬想把一個前景應用程式跑成服務 (像 <tt class="docutils literal"><span class="pre">hostname</span></tt> 這樣)，那麼要在 <tt class="docutils literal"><span class="pre">start-stop-daemon</span></tt> 的參數上動一點手腳。</p>
+<p>我們剛剛用 <tt class="docutils literal"><span class="pre">hostname</span></tt> 這個程式當作例子，是因為它是最簡單的一個程式，而且會印出訊息。不過 <tt class="docutils literal"><span class="pre">hostname</span></tt> 這個程式太簡單了，它的執行真的是一瞬間的事，實在不太像是要長時間運行的服務，所以我們把 <tt class="docutils literal"><span class="pre">DAEMON</span></tt> 換成另外一種跑得比較久的程式：</p>
+<pre class="literal-block">
+NAME=sleep
+DAEMON=/bin/$NAME
+</pre>
+<p><tt class="docutils literal"><span class="pre">sleep</span></tt> 這個程式後面還要接一個整數值參數，來指定要睡覺的秒數，所以我們再加寫一個變數：</p>
+<pre class="literal-block">
+ARGUMENTS=1000
+</pre>
+<p>再來，我們改一下 <tt class="docutils literal"><span class="pre">useless</span></tt> 中的 <tt class="docutils literal"><span class="pre">d_start()</span></tt> 副程式：</p>
+<pre class="literal-block">
+d_start() {
+  start-stop-daemon --start --quiet --pidfile $PIDFILE \
+    --background --make-pidfile \
+    --exec $DAEMON -- $ARGUMENTS
+}
+</pre>
+<p>比原來多了 <tt class="docutils literal"><span class="pre">--background</span></tt> 和 <tt class="docutils literal"><span class="pre">--make-pidfile</span></tt> 參數，用來強制把 <tt class="docutils literal"><span class="pre">sleep</span></tt> 丟到背景，並且建立 pid 檔案。另外還在最後面加了 <tt class="docutils literal"><span class="pre">--</span> <span class="pre">$ARGUMENTS</span></tt>，這會把 <tt class="docutils literal"><span class="pre">$ARGUMENTS</span></tt> 的內容字串指定給 <tt class="docutils literal"><span class="pre">sleep</span></tt> 程式當參數。</p>
+<p>讓我們再試一次：</p>
+<pre class="literal-block">
+$ sudo /etc/init.d/useless start
+Starting useless service: sleep.
+$ sudo /etc/init.d/useless restart
+Restarting useless service: sleep.
+$ sudo /etc/init.d/useless stop
+Stopping useless service: sleep.
+</pre>
+<p>這樣就都正常了。不過，各種不同的程式常常需要很多怪怪的處理方法，才能把它們丟到背景去當成服務，例如我們在 <tt class="docutils literal"><span class="pre">start-stop-daemon</span></tt> 的參數上所下的手腳，請參考 <tt class="docutils literal"><span class="pre">start-stop-daemon(8)</span></tt>。有時候除了利用 <tt class="docutils literal"><span class="pre">start-stop-daemon</span></tt> 的參數外，還得另外寫一些 shell script 程式來處理額外的問題，這就比較需要靠管理上的經驗了。我建議可以多看看 <tt class="docutils literal"><span class="pre">/etc/init.d</span></tt> 目錄裡其它服務的寫法，抄來用在自己的 script 裡面。</p>
+<p>一旦為服務寫好了 init.d script，就可以套用我們之前在「<a class="reference" href="#runlevel">runlevel 管理</a>」裡所討論的 SysV runlevel 管理模式。</p>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id2" id="id53" name="id53">6&nbsp;&nbsp;&nbsp;常用的工具程式</a></h1>
+<p>為了方便操作，以及解決一些必要的操作問題，我們手邊應該要有一套工具程式。當然，視日常作業的型態，所需要的工具程式也會有所不同，但還是有一定會用到的基本工具組。對於這些工具組，我們應該要能熟悉到一個相當的程度，才不會妨礙我們的工作能力與效率。</p>
+<div class="section">
+<h2><a class="toc-backref" href="#id2" id="screen" name="screen">6.1&nbsp;&nbsp;&nbsp;screen</a></h2>
+<p>screen 是一個終端機模擬器，是遠端使用者的福音，是 CLI 使用者的寶貝。</p>
+<p>screen 具備包括 VT100 和 ANSI 終端機的模擬能力，但更重要的是它可以簡單地同時管理許多個終端機。screen 在我列的常用工具程式裡排第一個，至少對我來說是非常非常地重要。不過很可惜，我找不出除了文字之外，描述它重要性的其它方法。</p>
+<p>想像一下，如果我從我的 Windows 用 PuTTY 連到了 <tt class="docutils literal"><span class="pre">thehost</span></tt> 主機上，開始 <tt class="docutils literal"><span class="pre">vi</span> <span class="pre">/etc/inittab</span></tt>，想要改一些系統的啟動設定。改到一半我發現，到底某個我要用的指令碼叫什麼名字，想去參考一下 <tt class="docutils literal"><span class="pre">inittab(5)</span></tt>。這時候我有兩個選擇：</p>
+<ul class="simple">
+<li>用 shell 的行程控制功能，先 Ctrl-Z 暫停 (suspend) 目前的 <tt class="docutils literal"><span class="pre">vi</span></tt> 行程，回到 shell 以後 <tt class="docutils literal"><span class="pre">man</span> <span class="pre">inittab</span></tt>。看完以後，用 <tt class="docutils literal"><span class="pre">fg</span></tt> 叫回原來的 <tt class="docutils literal"><span class="pre">vi</span></tt> 繼續編輯。</li>
+<li>再開一個 PuTTY，登入另一個 shell 執行 <tt class="docutils literal"><span class="pre">man</span> <span class="pre">inittab</span></tt>，同時在原來的連線裡編輯 <tt class="docutils literal"><span class="pre">/etc/inittab</span></tt>。</li>
+</ul>
+<p>第一個方法的缺點是我沒辦法同時看著 <tt class="docutils literal"><span class="pre">/etc/inittab</span></tt> 的內容和 manpage。指令那麼多，不小心忘掉是常有的事，到時候又要重來一次。第二個方法好一點，但就是我的 Windows 辛苦點，要多跑一個 PuTTY，而且兩個視窗又沒有編號，不小心可能會弄混掉<a class="footnote-reference" href="#id47" id="id54" name="id54"><sup>15</sup></a> 。</p>
+<table class="docutils footnote" frame="void" id="id55" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a name="id55">[18]</a></td><td>若說要先關掉原來的 <tt class="docutils literal"><span class="pre">vi</span></tt>，看完 manpage 之後再重新 <tt class="docutils literal"><span class="pre">vi</span> <span class="pre">/etc/inittab</span></tt>，那實在不夠聰明。</td></tr>
+</tbody>
+</table>
+<p>screen 可以完全解決這個問題。進入 shell 之後，在第一時間執行</p>
+<pre class="literal-block">
+$ screen
+</pre>
+<p>以使用 screen 的終端機模擬功能。在 screen 裡面可以直接開啟新的終端機，每個終端機都有編號 (我們也可以另外為個別的終端機取名字)。</p>
+<p>screen 另外也具備行程 (session) 管理的能力，每一個 screen session 都可以被 detach (拆卸) 和 attach (或稱 reattach，接合或接續)。當我們的上班時間結束，但工作還沒有結束，又不想關掉我們的編輯器和正在編譯的工作時 (或是任何程式)，可以直接把 screen session detach 掉。這些程式 (包括 shell) 並不會結束，而會一直留在系統裡面，等到明天來上班了，只要再把這個 session 接回來，原來的工作都還會在那裡，等著我們繼續進行 (準備好解決那些 make error 了嗎)。</p>
+<p>這種行程管理能力非常好用。如果我本來在控制台前面操作 Debain，突然有需要回到 Windows 工作機上繼續操作，那麼只需要 detach :: 走回 Windows :: attach，原來的作業完全不會被中斷。又如果我在辦公室沒有把工作作完，那麼 detach :: 回家 :: attach，又可以從同一個地方繼續工作。</p>
+<p>更方便的是，假設我的 Windows 在我連到 Debian 上進行遠端作業的時候很忠實地出現了藍底白字，我可以完全不用擔心會因為終端機當機而讓我在 Debian 上的工作被不正常結束。因為對 Debian 上的程式來說，我在使用的終端機是 screen，PuTTY 這個終端機當掉沒有關係，screen 不會因為這種小事就出問題。當我重新啟動我的 Windows，或是我移到另一個系統重新連線到 Debian 之後，只要再 attach 這個 session，一切可以照舊進行。就像什麼事都沒有發生過一樣。</p>
+<p>工具還是要實際用過，才會知道該怎麼用。我們在<a class="reference" href="#id56">表 1</a>裡列出了進入 screen 程式之後，常用來控制 screen 的快速鍵 (快速鍵均以 <tt class="docutils literal"><span class="pre">Ctrl-a</span></tt> 開始，然後接另外一個鍵；例如 <tt class="docutils literal"><span class="pre">Ctrl-a,</span> <span class="pre">w</span></tt> 表示先按一次 <tt class="docutils literal"><span class="pre">Ctrl-a``，再按</span> <span class="pre">``w</span></tt>；如果寫成 <tt class="docutils literal"><span class="pre">Ctrl-a,</span> <span class="pre">w/Ctrl-w</span></tt> 的話，表示第二個鍵是按 <tt class="docutils literal"><span class="pre">w</span></tt> 或 <tt class="docutils literal"><span class="pre">Ctrl-w</span></tt> 都可以)。</p>
+<p id="id56">表 1: screen 常用快速鍵</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><tt class="docutils literal"><span class="pre">Ctrl-a,</span> <span class="pre">w/Ctrl-w</span></tt></td>
+<td>從螢幕的左下方開始，列出目前所有的終端機；目前使用中的終端機會以 <tt class="docutils literal"><span class="pre">*</span></tt> 表示出來。</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">Ctrl-a,</span> <span class="pre">?</span></tt></td>
+<td>顯示說明畫面，列出所有 screen 的快速鍵；按空白或 Enter 可以離開說明畫面。</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">Ctrl-a,</span> <span class="pre">c/Ctrl-c</span></tt></td>
+<td>建立新的終端機 (視窗)。</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">Ctrl-a,</span> <span class="pre">&lt;number&gt;</span></tt></td>
+<td>切換到 <tt class="docutils literal"><span class="pre">&lt;number&gt;</span></tt> 號終端機。</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">Ctrl-a,</span> <span class="pre">Ctrl-a</span></tt></td>
+<td>回到上一個使用中的終端機。</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">Ctrl-a,</span> <span class="pre">a</span></tt></td>
+<td>送出真正的 <tt class="docutils literal"><span class="pre">Ctrl-a</span></tt> 訊號。</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">Ctrl-a,</span> <span class="pre">k/Ctrl-k</span></tt></td>
+<td>強迫結束目前的終端機。</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">Ctrl-a,</span> <span class="pre">d/Ctrl-d</span></tt></td>
+<td>detach 目前的 screen session。</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">Ctrl-a,</span> <span class="pre">s/Ctrl-s</span></tt></td>
+<td>關閉終端機的輸出 (停止把輸入資料回應到螢幕上的動作)。</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">Ctrl-a,</span> <span class="pre">q/Ctrl-q</span></tt></td>
+<td>開啟終端機的輸出 (把輸入的資料回應到螢幕上)。</td>
+</tr>
+</tbody>
+</table>
+<p>如果要關閉 screen 所開出來的終端機，在該終端機的 shell 裡輸入 <tt class="docutils literal"><span class="pre">exit</span></tt>，離開這個 shell 就可以了；當 screen 的最後一個終端機被關閉的時候，screen 程式就會結束該行程，同時結束程式本身的執行。</p>
+<p><a class="reference" href="#id57">表 2</a> 列出了 <tt class="docutils literal"><span class="pre">screen</span></tt> 常用的參數；若要 attach 先前被 detach 的 screen session，一定要在執行 <tt class="docutils literal"><span class="pre">screen</span></tt> 的時候用參數指定，否則 <tt class="docutils literal"><span class="pre">screen</span></tt> 會建立新的 session。</p>
+<p id="id57">表 2: screen 常用參數</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="92%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><tt class="docutils literal"><span class="pre">-ls</span></tt></td>
+<td>列出系統目前存在在的 session。</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">-r</span> <span class="pre">[session</span> <span class="pre">name]</span></tt></td>
+<td>attach 系統中的 session，並且允許使用 <tt class="docutils literal"><span class="pre">[session</span> <span class="pre">name]</span></tt> 來以名稱指定要接續哪一個 session；如果沒有輸入的話，預設會接回唯一的一個 session；如果系統中存在超過一個以上的 session，則一定要指定接續的名稱。session 的名稱可以透過 <tt class="docutils literal"><span class="pre">screen</span> <span class="pre">-ls</span></tt> 查得。</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">-d</span> <span class="pre">[session</span> <span class="pre">name]</span></tt></td>
+<td>從外部強迫 detach session，可以用 <tt class="docutils literal"><span class="pre">[session</span> <span class="pre">name]</span></tt> 指定要 detach 的 session 名稱。以 <tt class="docutils literal"><span class="pre">-d</span></tt> 配合其它參數會有額外的效果，請參考 <tt class="docutils literal"><span class="pre">screen(1)</span></tt>。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id2" id="tar-gzip" name="tar-gzip">6.2&nbsp;&nbsp;&nbsp;tar 與 gzip</a></h2>
+<p>Debian 下預設一定會安裝 <tt class="docutils literal"><span class="pre">tar</span></tt> 和 <tt class="docutils literal"><span class="pre">gzip</span></tt> 程式，因為 deb 套件檔就是用 <tt class="docutils literal"><span class="pre">tar</span></tt> 和 <tt class="docutils literal"><span class="pre">gzip</span></tt> 進行打包的；這兩個程式分別包裝在同名的套件內。</p>
+<p>要解開 <tt class="docutils literal"><span class="pre">tar</span></tt> 的包裝檔 (一般稱之 tarball)，我們可以下這樣的指令：</p>
+<pre class="literal-block">
+$ tar xvfz /path/to/tarball.tar.gz
+.
+.
+.
+</pre>
+<p>以 <tt class="docutils literal"><span class="pre">.gz</span></tt> 結尾的檔案通常意指 gzip 壓縮檔，所以我們在 <tt class="docutils literal"><span class="pre">tar</span></tt> 後面加上選項 <tt class="docutils literal"><span class="pre">z</span></tt>；<tt class="docutils literal"><span class="pre">tar</span></tt> 的選項 <tt class="docutils literal"><span class="pre">x</span></tt> 表示要解開 tarball，<tt class="docutils literal"><span class="pre">v</span></tt> 表示顯示相關資訊，而 <tt class="docutils literal"><span class="pre">f</span></tt> 表示我們要指定一個檔案，不從標準輸入讀資料進來。</p>
+<p>在以前沒有 gnu tar 的時候，要解開一個又 <tt class="docutils literal"><span class="pre">tar</span></tt> 又 <tt class="docutils literal"><span class="pre">gzip</span></tt> 過的檔案得這樣子作：</p>
+<pre class="literal-block">
+$ gunzip -c /path/to/tarball.tar.gz | tar xv
+.
+.
+.
+</pre>
+<p><tt class="docutils literal"><span class="pre">gunzip</span> <span class="pre">-c</span></tt> 表示解開 gzip 檔之後，用管線 (pipe) 導向到 <tt class="docutils literal"><span class="pre">tar</span></tt> 去，交給它來繼續拆 tarball。</p>
+<p>如果我們對某個 gzip 檔直接 <tt class="docutils literal"><span class="pre">gunzip</span></tt> 的話，結果會是</p>
+<pre class="literal-block">
+$ ls tarball.tar*
+tarball.tar.gz
+$ gunzip tarball.tar.gz ; ls tarball.tar*
+tarball.tar
+</pre>
+<p>讓原本那個 gzip 檔的 <tt class="docutils literal"><span class="pre">.gz</span></tt> 副檔名不見了。反之，如果 <tt class="docutils literal"><span class="pre">gzip</span></tt> 它</p>
+<pre class="literal-block">
+$ ls tarball.tar*
+tarball.tar
+$ gzip tarball.tar ; ls tarball.tar*
+tarball.tar.gz
+</pre>
+<p>則會加上 <tt class="docutils literal"><span class="pre">.gz</span></tt> 副檔名。</p>
+<p><tt class="docutils literal"><span class="pre">tar</span> <span class="pre">cvf</span></tt> 可以建立新的 tarball，語法是：</p>
+<pre class="literal-block">
+tar cvf &lt;tarball&gt; &lt;list of files to be added&gt;
+</pre>
+<p>這種未經壓縮的 tarball，副檔名通常會取成 <tt class="docutils literal"><span class="pre">.tar</span></tt>。如果我們想用 <tt class="docutils literal"><span class="pre">gzip</span></tt> 來進行壓縮，選項加個 <tt class="docutils literal"><span class="pre">z</span></tt>，改成 <tt class="docutils literal"><span class="pre">tar</span> <span class="pre">cvfz</span></tt> 就可以了。通常經過 <tt class="docutils literal"><span class="pre">gzip</span></tt> 壓縮的 tarball 副檔名是 <tt class="docutils literal"><span class="pre">.tgz</span></tt> 或 <tt class="docutils literal"><span class="pre">.tar.gz</span></tt>。</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id2" id="bzip2-zip-rar" name="bzip2-zip-rar">6.3&nbsp;&nbsp;&nbsp;bzip2, zip 與 rar</a></h2>
+<p>Debian 也配有 bzip2, zip 和 rar 等壓縮格式需用的程式。</p>
+<p>bzip2 套件裡包含了 <tt class="docutils literal"><span class="pre">bzip2</span></tt> 與 <tt class="docutils literal"><span class="pre">bunzip2</span></tt> 這一對壓縮與解壓縮程式，以及一些相關的工具程式。bzip2 和 gzip 一樣，只能對單一的檔案進行壓縮與解壓縮，所以若要壓縮一組檔案，我們會先包在一個 tarball 裡，再用 bzip2 進行壓縮。bzip2 的操作方法和 gzip 差不多，壓縮用</p>
+<pre class="literal-block">
+bzip2 &lt;file to be compressed&gt;
+</pre>
+<p>解壓縮用</p>
+<pre class="literal-block">
+bunzip2 &lt;file to be decompressed&gt;
+</pre>
+<p>bzip2 也會自動附上或摘除識別用的副檔名 <tt class="docutils literal"><span class="pre">bz2</span></tt>。bzip2 的壓縮率比 gzip 更好，Debian 的 Linux 核心原始碼套件就是用 <tt class="docutils literal"><span class="pre">bzip2</span></tt> 來壓的。</p>
+<p>要處理 PKZIP 的 <tt class="docutils literal"><span class="pre">.zip</span></tt> 格式壓縮檔，我們需要安裝 zip 與 unzip 套件，分別提供壓縮與解壓縮用的 <tt class="docutils literal"><span class="pre">zip</span></tt> 與 <tt class="docutils literal"><span class="pre">unzip</span></tt>。這兩個套件是由 InfoZIP 所開發的工具程式。<tt class="docutils literal"><span class="pre">zip</span></tt> 可以用來壓縮多個檔案，語法是</p>
+<pre class="literal-block">
+zip &lt;zip file name&gt; &lt;list of files to be added&gt;
+</pre>
+<p>如果被壓縮的項目有目錄，那麼要加上 <tt class="docutils literal"><span class="pre">-r</span></tt> 選項，指定進行遞迴壓縮作業：</p>
+<pre class="literal-block">
+zip -r &lt;zip file name&gt; &lt;list of files to be added&gt;
+</pre>
+<p>解壓縮動作的語法則和 <tt class="docutils literal"><span class="pre">gunip</span></tt>, <tt class="docutils literal"><span class="pre">bunzip2</span></tt> 一樣，只要接上被解壓縮的檔名：</p>
+<pre class="literal-block">
+unzip &lt;file to be decompressed&gt;
+</pre>
+<p>就可以了。</p>
+<p>RAR-lab 的 <tt class="docutils literal"><span class="pre">.rar</span></tt> 壓縮檔，也是常見的格式。Debian 中的 rar 和 unrar 兩個套件都提供解壓縮 <tt class="docutils literal"><span class="pre">.rar</span></tt> 檔案的能力，但 rar 是原 RAR-lab 所發行的 shareware，使用的話應該要在 40 天內註冊。unrar 則是可以一直使用的，但它不能執行壓縮作業。</p>
+<p>要建立 <tt class="docutils literal"><span class="pre">.rar</span></tt> 壓縮檔，我們用以下的語法呼叫 <tt class="docutils literal"><span class="pre">rar</span></tt>：</p>
+<pre class="literal-block">
+rar a &lt;rar file name&gt; &lt;list of files to be added&gt;
+</pre>
+<p>解壓縮的話，則可以用</p>
+<pre class="literal-block">
+rar x &lt;file to be decompressed&gt;
+</pre>
+<p>或是</p>
+<pre class="literal-block">
+unrar x &lt;file to be decompressed&gt;
+</pre>
+<p>關於這些工具程式的詳細使用方法，請參考 <tt class="docutils literal"><span class="pre">bzip2(1)</span></tt>, <tt class="docutils literal"><span class="pre">bunzip2(1)</span></tt>, <tt class="docutils literal"><span class="pre">zip(1)</span></tt>, <tt class="docutils literal"><span class="pre">unzip(1)</span></tt>, <tt class="docutils literal"><span class="pre">rar(1)+</span></tt> <tt class="docutils literal"><span class="pre">unrar(1)</span></tt>。</p>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id2" id="id58" name="id58">7&nbsp;&nbsp;&nbsp;結語與展望</a></h1>
+<p>本文基於 Debian Bare System 一文cite{bib:debian:bare_sys}所建立的基礎，
+說明如何利用 Debian 套件來建構一個方便的 CLI 終端機工作站，
+並對相關的使用模式與組態手段進行討論。
+主要包含了檔案的內容編輯操作、重要的 system-wide 系統設定與 shell 功能、
+使用者的管理及檔案的權限設定，以及操作系統時常會用到的工具程式等等內容。</p>
+<p>這樣的一個終端機工作站的建構與使用經驗，
+可以作為實作特定服務或進行特定操作時的基礎。
+未來，我們可以結合各種不同的操作與組態技巧，
+配上相關作業的專門知識，實作出更結構化與自動化的應用系統。</p>
+<table class="docutils citation" frame="void" id="vim" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id10" name="vim">[VIM]</a></td><td><a class="reference" href="http://www.vim.org/">http://www.vim.org/</a></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</body>
+</html>

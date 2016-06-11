@@ -1,0 +1,647 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh_tw" lang="zh_tw">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.4: http://docutils.sourceforge.net/" />
+<title>Linux Vserver</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger
+:Contact: goodger@users.sourceforge.net
+:Date: $Date: 2005-06-06 15:09:07 +0200 (Mon, 06 Jun 2005) $
+:Version: $Revision: 3442 $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+*/
+
+/* "! important" is used here to override other ``margin-top`` and
+   ``margin-bottom`` styles that are later in the stylesheet or 
+   more specific.  See http://www.w3.org/TR/CSS1#the-cascade */
+
+body {
+  font-family: Calibri, Georgia, Times New Roman, Times,  Free Times;
+  background-color: #666666;
+}
+
+div.document {
+  background-color: white;
+  clear: both;
+  width: 50em;
+  margin: 0 auto 0 auto;
+  padding: 0.5em;
+  border: 2px ridge black;
+}
+
+.first {
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em;
+  border-top: 2px solid #888888;
+  border-bottom: 2px solid #888888;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin-left: 1em ;
+  border: medium outset ; 
+  padding: 1em ;
+  background-color: #ffffee ;
+  /* width: 40% ; */
+  /* float: right ; */
+ /*  clear: right */ }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+div.section h1, div.section h2, div.section h3, 
+div.section h4, div.section h5, div.section h6 {
+  padding-left: 0.3em;
+  padding-bottom: 0.3em;
+  border-left: 2px solid gray;
+  border-bottom: 2px solid gray;
+}
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em; }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left {
+  clear: left }
+
+img.align-right {
+  clear: right }
+
+img.borderless {
+  border: 0 }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font-family: serif ;
+  font-size: 100% }
+
+pre.line-block {
+  font-family: serif ;
+  font-size: 100% }
+
+pre.literal-block, pre.doctest-block {
+  white-space: pre-wrap;       /* css-3 */
+  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word;       /* Internet Explorer 5.5+ */
+  margin-left: 2em ;
+  margin-right: 2em ;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  padding-left: 1em;
+  padding-right: 1em;
+  border: 1px dotted black;
+}
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid thin gray }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  border-spacing: 0;
+  border: 1 solid black;
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-top: solid thin black;
+  border-left: solid thin black }
+
+table.footnote td.label a {
+  text-decoration: none;
+}
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  border: 0; 
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+tt.docutils {
+}
+
+tt.ltst {
+  font-weight: bold;
+}
+
+tt.ltem {
+  font-style: italic;
+}
+
+ul.auto-toc {
+  list-style-type: none }
+
+/* vim: set ai et nu sw=2 ts=2: */
+
+</style>
+</head>
+<body>
+<div class="document" id="linux-vserver">
+<h1 class="title">Linux Vserver</h1>
+<table class="docinfo" frame="void" rules="none">
+<col class="docinfo-name" />
+<col class="docinfo-content" />
+<tbody valign="top">
+<tr class="field"><th class="docinfo-name">author:</th><td class="field-body">Yung-Yu Chen (yungyuc) &lt;<a class="reference" href="mailto:yyc&#64;seety.org">yyc&#64;seety.org</a>&gt;</td>
+</tr>
+<tr class="field"><th class="docinfo-name">date:</th><td class="field-body">2005/12/15</td>
+</tr>
+<tr class="field"><th class="docinfo-name">copyright:</th><td class="field-body">© 2005, all rights reserved.</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="id1" name="id1">目錄</a></p>
+<ul class="auto-toc simple">
+<li><a class="reference" href="#what-is-vserver" id="id20" name="id20">1&nbsp;&nbsp;&nbsp;What is vserver?</a></li>
+<li><a class="reference" href="#why-vserver" id="id21" name="id21">2&nbsp;&nbsp;&nbsp;Why vserver?</a></li>
+<li><a class="reference" href="#debian-vserver" id="id22" name="id22">3&nbsp;&nbsp;&nbsp;安裝 Debian 提供的 vserver 套件</a></li>
+<li><a class="reference" href="#host-os" id="id23" name="id23">4&nbsp;&nbsp;&nbsp;調整 host OS</a></li>
+<li><a class="reference" href="#vserver" id="id24" name="id24">5&nbsp;&nbsp;&nbsp;建立 vserver</a></li>
+<li><a class="reference" href="#id8" id="id25" name="id25">6&nbsp;&nbsp;&nbsp;進行 vserver 的基本組態</a><ul class="auto-toc">
+<li><a class="reference" href="#id9" id="id26" name="id26">6.1&nbsp;&nbsp;&nbsp;啟動與進入 vserver</a></li>
+<li><a class="reference" href="#init" id="id27" name="id27">6.2&nbsp;&nbsp;&nbsp;移掉不必要的 init 指令稿</a></li>
+<li><a class="reference" href="#base-config" id="id28" name="id28">6.3&nbsp;&nbsp;&nbsp;base-config</a></li>
+<li><a class="reference" href="#id11" id="id29" name="id29">6.4&nbsp;&nbsp;&nbsp;安裝基本套件</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#x-window-in-vserver" id="id30" name="id30">7&nbsp;&nbsp;&nbsp;X window in vserver</a></li>
+<li><a class="reference" href="#id12" id="id31" name="id31">8&nbsp;&nbsp;&nbsp;其它</a></li>
+<li><a class="reference" href="#references" id="id32" name="id32">9&nbsp;&nbsp;&nbsp;References</a></li>
+</ul>
+</div>
+<p>Linux 是一種相當穩定的作業系統，一台同時用作桌面環境和伺服器的電腦，常常可以幾個月都不必重新開機。各 Linux distribution 使用的多半是開放原始碼/自由軟體，所以都有完整的套件管理系統，例如 RedHat/Fedora/Mandriva 的 rpm、SuSE 的 yast 以及 Debian 的 apt。Linux 的使用者透過它們，可以對系統作比較精細的控制，也容易進行各種軟體昇級工作。不過，Linux 再怎麼穩定、套件管理系統再怎麼完整方便，也總是會出錯，這個時候就會讓使用者或伺服器管理員開始傷腦筋了。</p>
+<p>對於用作伺服器的 Linux 電腦來說，資訊安全則是另一個要擔心的問題。專門的伺服器一定會套用多重的防護措施，然而對於公開服務的伺服器來說，來自於網路四面八方的攻擊實在是防不勝防；敏感資料如果可以的話，最好不要曝露在外部網路上，而伺服器資料一定會備份再備份。單獨伺服器的安全性特別難維護，因為性質不同的伺服工作得集中在一台電腦上，很難實作比較理想的伺服網路架構，幾乎無法解決。</p>
+<p>基於這些穩定性和安全性方面的考慮，許多 Linux 使用者都期待有一種能在同一台電腦上執行多個獨立作業系統，又不會像 VMware 等虛擬機器一樣損耗效能的技術；如此一來，以上的問題都可以獲得很大程度的解決，同時還能提供更佳的使用性。vserver (linux-vserver) 就是這樣的一項技術。</p>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="what-is-vserver" name="what-is-vserver">1&nbsp;&nbsp;&nbsp;What is vserver?</a></h1>
+<p>vserver 是一項為 Linux 加入虛擬作業系統能力的技術，實作這項技術的計畫叫作 <a class="reference" href="http://linux-vserver.org/">linux-vserver</a> (簡稱 vserver)；這個計畫對 Linux 核心進行修改，以核心修補配合管理工具的方式進行散佈。vserver 能在同一個 Linux 核心之下同時執行多個彼此無關的作業系統，並且完全不會消耗額外的運算能力 (與 VMware, VPC, XEN 等虛擬機器技術不同)。</p>
+<p>我們可以把 vserver 視為一種強化的 chroot (changed root) 技術，在 host OS 上透過內容切換 (content switching) 的方式實作出獨立的 Linux 執行環境 (guest OS)。由於 Un*x 是一種檔案導向的作業系統，單純的 chroot 環境就已經具有相當程度的獨立性，而 linux-vserver 則進一步在 Linux 核心上動手腳，讓各個 vserver 能完全地獨立出來，就好像真的是不同的系統一樣。在 vserver 內可以安裝與 host OS 完全不同的 Linux distribution，使用不同的網路設定、不同的虛擬終端機、不同的 X；host OS 和 guest OS 唯一必須具備的關聯是核心。因為 guest OS 是 host OS 核心裡的一個特別執行環境，所以 vserver 會限制 guest OS 對核心的操作；guest OS 不能新增移除核心模組、不能修改與核心有關的任何參數。</p>
+<p>vserver 可以說是「自核心以下，完全獨立」的超級 chroot。</p>
+<p>不會損耗運算能力的 vserver 技術很適合各種基於 Linux 的應用。虛擬機器技術的缺點就是會在轉譯機器碼的時候損耗過多的運算能力，所以多半只會安裝在比較高效能的電腦上執行特別的功能或進行測試；vserver 則可應用在各種 Linux 原生的環境下，提供與原先幾乎完全相同的運算能力與操作性。這兩者是不同取向的技術；我們不能在 vserver 上安裝 Windows 或 OSX，但卻能在同一套硬體上，同時運作不同「身份」的 Linux、提供不同的服務、執行不同的程式，彼此間都不會互相干涉。</p>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="why-vserver" name="why-vserver">2&nbsp;&nbsp;&nbsp;Why vserver?</a></h1>
+<p>想要保持系統的穩定又想玩玩新奇的玩意兒？那麼 vserver 似乎是最佳的選擇了。</p>
+<p>linux-vserver 計畫<a class="reference" href="http://linux-vserver.org/short+presentation">說</a>：「你可能會想，虛擬伺服器 (vserver) 看起來很酷，但大概不是對所有人都有用吧。<strong>錯</strong>！」vserver 真的很有用，對一般使用者來說，它<strong>至少</strong>可以讓系統更加強固穩定：安裝 host OS 作 container，再使用 vserver 進行日常工作。以 Debian GNU/Linux 來說，有了 vserver 之後，我們就能夠採取以下的系統管理模式：</p>
+<ol class="arabic simple">
+<li>安裝基本的 stable 作 host OS：用穩定版的 Debain 安裝 host OS 來處理基本的磁碟與網路管理作業；避免系統因為上游套件的一點問題而無法使用 (或不方便使用)。</li>
+<li>在 stable Debian host OS 上安裝 linux-vserver：可以視需要安裝多個 vserver；在其中沒有執行程式的情況下，只會佔用相當少量的記憶體，對運算能力的影響幾乎是 0。在 vserver 裡執行的程式效能與在 host OS 裡完全相同。</li>
+<li>在 vserver 裡工作：<ul>
+<li>vserver 裡面安裝的軟體，不會影響 host OS。</li>
+<li>測試新程式或系統時可建立獨立的 vserver；在 vserver 裡面隨便怎麼玩，host OS 都不會壞，也不會干擾到日常作業用的 vserver。</li>
+<li>用 vserver 提供網路服務；將危險限制在獨立的 vserver 內部。</li>
+</ul>
+</li>
+</ol>
+<p>所以，不管是日常作業、系統開發或網路伺服，vserver 都可以幫助我們。得此工具，夫復何求？</p>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="debian-vserver" name="debian-vserver">3&nbsp;&nbsp;&nbsp;安裝 Debian 提供的 vserver 套件</a></h1>
+<p>Debian GNU/Linux (以下簡稱 Debian) 是一套結構完整、套件豐富的 distribution，為求方便，我們用它來討論 vserver 的使用；其它的 Linux distribution 一樣可以使用 vserver。</p>
+<p>在 Debian 裡面有三個相關的套件：<tt class="docutils literal"><span class="pre">kernel-patch-vserver</span></tt>, <tt class="docutils literal"><span class="pre">util-vserver</span></tt>, <tt class="docutils literal"><span class="pre">vserver-debiantools</span></tt>。<tt class="docutils literal"><span class="pre">linux-vserver</span></tt> 是 linux-vserver 計畫所發行的核心修補 (patch)，可以套用在 Debian 的 2.6.8, 2.6.11 和 2.6.12 (經過筆者的測試) 核心上面 (也支援 2.4 的核心，但我未測試)，這是一定要安裝的套件。</p>
+<div class="note">
+<p class="first admonition-title">註記</p>
+<p class="last">在筆者測試過的這幾個版本的核心裡面，2.6.11是最穩定，最沒有問題的版本。</p>
+</div>
+<p><tt class="docutils literal"><span class="pre">util-vserver</span></tt> 是一組用來管理 vserver 的工具程式集，也是 linux-vserver 計畫的一部分；<tt class="docutils literal"><span class="pre">vserver-debiantools</span></tt> 則是 Debian 特別為 vserver 開發的工具程式集。這兩者雖非絕對必要，但少了它們也幾乎就沒辦法管理 vserver，所以一般來說三個套件我們都會安裝：</p>
+<pre class="literal-block">
+$ apt-get -t sid kernel-patch-vserver util-vserver vserver-debiantools
+</pre>
+<p>因為 sarge 裡的 <tt class="docutils literal"><span class="pre">vserver-debiantools</span></tt> <a class="reference" href="http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=319856">還有問題</a>，所以改用 unstable (即 sid) 裡新的 vserver 相關套件。</p>
+<p>當然還需要取得核心原始碼：</p>
+<pre class="literal-block">
+$ apt-get -t sid kernel-source-2.6.11
+$ mkdir /usr/src/work; cd /usr/src/work
+$ tar xfj /usr/src/kernel-source-2.6.11.tar.bz2
+$ mv kernel-source-2.6.11 kernel-source-2.6.11vserver
+</pre>
+<div class="note">
+<p class="first admonition-title">註記</p>
+<p>別忘了先裝 <tt class="docutils literal"><span class="pre">libncurses5-dev</span></tt>。也別忘了 <tt class="docutils literal"><span class="pre">kernel-package</span></tt> (提供 <tt class="docutils literal"><span class="pre">make-kpkg</span></tt>) 和 <tt class="docutils literal"><span class="pre">dpkg-dev</span></tt>。</p>
+<p>2.6.12 核心可以用 <tt class="docutils literal"><span class="pre">gcc-4.0</span></tt> 編譯，舊 (&lt;=2.6.11) 核心則要用 <tt class="docutils literal"><span class="pre">gcc-3.3</span></tt>。如果系統 gcc 的版本不一樣，那在 <tt class="docutils literal"><span class="pre">make-kpkg</span></tt> 之前加入相對的 <tt class="docutils literal"><span class="pre">MAKEFLAGS=&quot;CC=gcc-4.0&quot;</span></tt> 或 <tt class="docutils literal"><span class="pre">MAKEFLAGS=&quot;CC=gcc-3.3&quot;</span></tt> 即可。因為我們的 <tt class="docutils literal"><span class="pre">make-kpkg</span></tt> 動作會直接套用修補檔，所以在之前先組態一下會比較好：</p>
+<pre class="last literal-block">
+$ make menuconfig
+</pre>
+</div>
+<p>然後用 (參考<a class="footnote-reference" href="#id17" id="id5" name="id5"><sup>4</sup></a>)：</p>
+<pre class="literal-block">
+$ make-kpkg --rootcmd fakeroot \
+--revision custom01 --append-to-version +vserver \
+--added-patches vserver \
+--initrd --config menuconfig binary-arch
+</pre>
+<p>這一行指令，以 <tt class="docutils literal"><span class="pre">make-kpkg</span></tt> (它是 <tt class="docutils literal"><span class="pre">kernel-package</span></tt> 套件的一部分) 這個工具來建立 Debian 的核心包裝檔 (.deb)。其中的 <tt class="docutils literal"><span class="pre">--added-patches</span> <span class="pre">vserver</span></tt> 會在編譯之前把 vserver 修補上去 (修補檔放在 <tt class="docutils literal"><span class="pre">/usr/src/patches</span></tt> 裡面)，然後用 menuconfig 以確認 vserver 相關的組態 (<tt class="docutils literal"><span class="pre">--config</span> <span class="pre">menuconfig</span></tt>)。最後編譯，完成之後會在上一層目錄裡 (此處即 <tt class="docutils literal"><span class="pre">/usr/src/work</span></tt>) 產生：</p>
+<pre class="literal-block">
+kernel-headers-2.6.11+vserver_custom01_i386.deb
+kernel-image-2.6.11+vserver_custom01_i386.deb
+</pre>
+<p>兩個檔案。</p>
+<div class="note">
+<p class="first admonition-title">註記</p>
+<p>用 <tt class="docutils literal"><span class="pre">--append-to-version</span> <span class="pre">+vserver</span></tt> 作出來的核心，在 <tt class="docutils literal"><span class="pre">uname</span> <span class="pre">-r</span></tt> 執行的結果裡會變成 <tt class="docutils literal"><span class="pre">2.6.11+vserver</span></tt>。有些利用 <tt class="docutils literal"><span class="pre">uname</span></tt> 檢查核心版號的程式會因此而無法判斷核心的版本。我們可以把這些程式用來判斷核心版本的 shell script 從</p>
+<pre class="literal-block">
+`uname -r`
+</pre>
+<p>改為</p>
+<pre class="literal-block">
+`uname -r | cut -d+ -f1`
+</pre>
+<p class="last">亦即利用 <tt class="docutils literal"><span class="pre">cut</span></tt> 工具把 <tt class="docutils literal"><span class="pre">+vserver</span></tt> 從版號裡移掉即可。</p>
+</div>
+<p>我們要用 <tt class="docutils literal"><span class="pre">dpkg</span> <span class="pre">-i</span> <span class="pre">kernel-image-2.6.12+vserver_custom01_i386.deb</span></tt> 來把建好的核心安裝到系統裡面；<tt class="docutils literal"><span class="pre">kernel-headers-2.6.12+vserver_custom01_i386.deb</span></tt> 套件則是此核心的標頭檔，通常也要一併安裝，以供某些會用到核心參數的程式，或是 3rd party 的驅動程式編譯使用。</p>
+<p>裝好了核心檔案、適當地修改 boot loader (lilo/grub)，再用 patched kernel 重新開機以後，系統就具備了 vserver 的能力。此後即可使用 <tt class="docutils literal"><span class="pre">util-vserver</span></tt> 或 <tt class="docutils literal"><span class="pre">vserver-debiantools</span></tt> 套件裡的工具來管理 vserver。</p>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="host-os" name="host-os">4&nbsp;&nbsp;&nbsp;調整 host OS</a></h1>
+<p>因為 vserver 是一種配合 content-switching 技術的 chroot 環境，所以許多伺服程式需要調整組態來配合，<tt class="docutils literal"><span class="pre">ssh</span></tt> 就是其中之一。幾乎所有的系統上都需要這個服務，所以我們先說明如何處理。</p>
+<p><tt class="docutils literal"><span class="pre">ssh</span></tt> 預設會對系統上所有的 IP 位址進行監聽 (0.0.0.0)，這個行為與 vserver 的運作相衝突。如果不改變此行為，那麼所有連往 vserver IP 的 ssh 連線都會被 host OS 上的 sshd 攔下來，讓 vserver 的 sshd 失效。我們要把 host OS 的 <tt class="docutils literal"><span class="pre">/etc/ssh/sshd_config</span></tt> 的這一行：</p>
+<pre class="literal-block">
+#ListenAddress 0.0.0.0
+</pre>
+<p>改為</p>
+<pre class="literal-block">
+ListenAddress 69.90.134.201 # host OS 的 IP，可多行
+ListenAddress 127.0.0.1 # host OS 的 loopback
+</pre>
+<p>然後重新啟動 ssh server。如果 host OS 上有其它伺服器的話，也需要作類似的修改。</p>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="vserver" name="vserver">5&nbsp;&nbsp;&nbsp;建立 vserver</a></h1>
+<p>我們用 <tt class="docutils literal"><span class="pre">utils-vserver</span></tt> 提供的總管工具 <tt class="docutils literal"><span class="pre">vserver</span></tt> 來建立 vserver (請參考<a class="footnote-reference" href="#id18" id="id6" name="id6"><sup>5</sup></a>)：</p>
+<pre class="literal-block">
+$ REMOVE_PACKAGES=&quot;sparc-utils,dhcp-client,lilo,makedev,pcmcia-cs,ppp,\
+pppconfig,pppoe,pppoeconf,setserial,syslinux,fdutils,libpcap0,\
+iptables,pciutils&quot;
+$ vserver cosmos build -m debootstrap --hostname cosmos \
+--interface eth0:192.168.200.1/24 --interface lo:127.0.0.1/8 \
+-- -d sarge -- --exclude=$REMOVE_PACKAGES
+</pre>
+<div class="note">
+<p class="first admonition-title">註記</p>
+<p>這個動作會去抓取所需的套件，用 <tt class="docutils literal"><span class="pre">debootstrap</span></tt> 安裝 base system。在 <tt class="docutils literal"><span class="pre">-d</span> <span class="pre">sarge</span></tt> 後面可以接 <tt class="docutils literal"><span class="pre">-m</span> <span class="pre">URL</span></tt> 來指定 <tt class="docutils literal"><span class="pre">debootstrap</span></tt> 的鏡像來源，未指定的話 <tt class="docutils literal"><span class="pre">vserver</span></tt> 會使用預設值；使用本機的鏡像可以節省大量的時間。</p>
+<p class="last">這裡之所以不使用 <tt class="docutils literal"><span class="pre">vserver-debiantools</span></tt> 提供的 <tt class="docutils literal"><span class="pre">newvserver</span></tt> 工具，是希望對 vserver 進行比較通用的講解；Debian host OS 才會有 <tt class="docutils literal"><span class="pre">vserver-debiantools</span></tt> 套件，但 <tt class="docutils literal"><span class="pre">utils-vserver</span></tt> 則是可以在所有 distribution 上使用的。</p>
+</div>
+<p><tt class="docutils literal"><span class="pre">cosmos</span></tt> 是 vserver 的名字，請隨便取你喜歡的。如此建立出來的 vserver 會採用 vserver2 的設定模式，與 legacy 設定模式不同；vserver2 設定模式的詳細說明請參考大花頁<a class="footnote-reference" href="#id16" id="id7" name="id7"><sup>3</sup></a>，不過我先警告一下，它很<strong>花</strong>。</p>
+<p>所有 vserver 的組態都放在 <tt class="docutils literal"><span class="pre">/etc/vservers</span></tt> 之下；各 vserver 預設的根目錄結構則位於 <tt class="docutils literal"><span class="pre">/var/lib/vserver</span></tt>。</p>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id8" name="id8">6&nbsp;&nbsp;&nbsp;進行 vserver 的基本組態</a></h1>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="id9" name="id9">6.1&nbsp;&nbsp;&nbsp;啟動與進入 vserver</a></h2>
+<p>作到這裡，已經可以用：</p>
+<pre class="literal-block">
+$ vserver cosmos start
+</pre>
+<p>啟動 cosmos vserver，而用</p>
+<pre class="literal-block">
+$ vserver cosmos enter
+</pre>
+<p>則會把我們帶進 cosmos。</p>
+<p>剛建好的 vserver 什麼套件都沒有裝，所以沒有 locale，所以若 host OS 有設定 locale 的話，進入 vserver 裡面時的畫面就會亂亂的；把目前執行環境的 locale 改成 <tt class="docutils literal"><span class="pre">C</span></tt> 即可解決 (<tt class="docutils literal"><span class="pre">LC_ALL=C</span> <span class="pre">LANG=C</span> <span class="pre">LANGUAGE=C</span></tt>)。</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="init" name="init">6.2&nbsp;&nbsp;&nbsp;移掉不必要的 init 指令稿</a></h2>
+<p>參考 Step-by-Step Guide<a class="footnote-reference" href="#id15" id="id10" name="id10"><sup>2</sup></a>，我也把以下的 init 指令稿 symbolic link 刪除了：</p>
+<pre class="literal-block">
+cd /home/vservers/DebianSid/etc/rc0.d
+rm K20makedev K25hwclock.sh S30urandom S31umountnfs.sh \
+S35networking S36ifupdown S40umountfs S90halt K89klogd
+
+cd /home/vservers/DebianSid/etc/rc6.d
+rm K20makedev K25hwclock.sh S30urandom S31umountnfs.sh\
+S35networking S36ifupdown S40umountfs S90reboot K89klogd
+
+cd /home/vservers/DebianSid/etc/rcS.d
+rm S05keymap.sh S48console-screen.sh S50hwclock.sh S40networking \
+S45mountnfs.sh S10checkroot.sh S02mountvirtfs
+rm S30procps.sh S35mountall.sh S36mountvirtfs S39ifupdown \
+S30checkfs.sh S18ifupdown-clean S18hwclockfirst.sh
+
+cd /home/vservers/DebianSid/etc/rc2.d
+rm S20makedev S11klogd
+</pre>
+<div class="sidebar">
+<p class="first sidebar-title">要小心!!</p>
+<p>我把刪除 init 指令稿 symbolic link 的動作寫成一個 shell script，結果不小心在 <strong>host OS 裡</strong>執行下去...</p>
+<p class="last">花了好多時間才建回來...</p>
+</div>
+<p>作完以後，就可以在 host OS 裡用 <tt class="docutils literal"><span class="pre">vserver</span> <span class="pre">cosmos</span> <span class="pre">stop</span></tt> 和 <tt class="docutils literal"><span class="pre">vserver</span> <span class="pre">cosmos</span> <span class="pre">restart</span></tt> 安全地關閉 vserver 了。</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="base-config" name="base-config">6.3&nbsp;&nbsp;&nbsp;base-config</a></h2>
+<p>用以上程序安裝的 vserver 並不會自動進行 <tt class="docutils literal"><span class="pre">base-config</span></tt>，所以我們必須進入 vserver，執行一次 <tt class="docutils literal"><span class="pre">base-config</span></tt>，再繼續安裝/設定你的 vserver。</p>
+<p><tt class="docutils literal"><span class="pre">base-config</span></tt> 裡的 Set up users and passwords 是一定要作的；這要作過之後，vserver 裡面才會有 <tt class="docutils literal"><span class="pre">/etc/shadow</span></tt>。timezone 也可以在這個時候設定，但其餘的東西則是到 vserver 裡面的組態檔裡面去改可能會比較方便。</p>
+<p>另一個重要的檔案是 vserver 裡的 <tt class="docutils literal"><span class="pre">/etc/hosts</span></tt>。一開始這個檔案是不存在的，我們要自行建立，在其中寫入本機的 IP 與 FQDN 及主機名稱的對照。許多服務程式需要取得本機的名稱及 IP 位址，如果缺少這個檔案的資訊，執行就會失敗或者不正常。</p>
+<p>以 cosmos 舉例來說，<tt class="docutils literal"><span class="pre">hosts</span></tt> 檔的內容會像是：</p>
+<pre class="literal-block">
+127.0.0.1 localhost.localdomain localhost
+192.168.200.1 cosmos.your.domain cosmos
+</pre>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="id11" name="id11">6.4&nbsp;&nbsp;&nbsp;安裝基本套件</a></h2>
+<p>剛作完 <tt class="docutils literal"><span class="pre">base-config</span></tt> 之後的 Debian 還非常生素，我們至少要安裝兩個套件：</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">locales</span></tt>: 用來產生系統所需的地域資料定義。</li>
+<li><tt class="docutils literal"><span class="pre">ssh</span></tt>: 為 vserver 開啟一個遠端連線的端口，方便我們從 host OS 或其它位置來管理它。請記得修改 <tt class="docutils literal"><span class="pre">ListenAddress</span></tt>。</li>
+</ul>
+<p>還有一些不是一定要安裝，但很常用到的套件：</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">vim</span></tt>: debootstrap 會安裝一個 <tt class="docutils literal"><span class="pre">nvi</span></tt>，提供基本的 vi 編輯環境，不過非常陽春。通常我們會安裝 <tt class="docutils literal"><span class="pre">vim</span></tt> 取代這個簡單的 <tt class="docutils literal"><span class="pre">nvi</span></tt> 程式。</li>
+<li><tt class="docutils literal"><span class="pre">less</span></tt>: 比原始的 <tt class="docutils literal"><span class="pre">more</span></tt> 方便很多的分頁器。</li>
+<li><tt class="docutils literal"><span class="pre">sudo</span></tt>: 系統管理工具；用來取代 <tt class="docutils literal"><span class="pre">su</span></tt> 大部分的功能。</li>
+<li><tt class="docutils literal"><span class="pre">screen</span></tt>: 在同一次登入裡提供多個虛擬終端機的工具。</li>
+</ul>
+<p>安裝之前請先寫好系統的 <tt class="docutils literal"><span class="pre">sources.list</span></tt>。最簡單的方法就是回到 host OS 裡複製一份：</p>
+<pre class="literal-block">
+$ cp /etc/apt/sources.list /var/lib/vservers/cosmos/etc/apt/source.list
+</pre>
+<div class="note">
+<p class="first admonition-title">註記</p>
+<p class="last">symbolic link 是沒有用的；不要忘記 vserver 裡面可是一個 chroot 環境。</p>
+</div>
+<p>先 <tt class="docutils literal"><span class="pre">apt-get</span> <span class="pre">update</span></tt>，然後我們就可以 <tt class="docutils literal"><span class="pre">apt-get</span> <span class="pre">install</span></tt> 它們了。</p>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="x-window-in-vserver" name="x-window-in-vserver">7&nbsp;&nbsp;&nbsp;X window in vserver</a></h1>
+<p>vserver 是可以執行 X 的！這也是 vserver 的賣點之一。</p>
+<p>vserver 既然能跑 X，那麼就可以把原本在 host OS 裡執行的 X 桌面改放到 vserver 裡跑，這樣子好處多多。例如筆者不喜歡伺服器的家目錄裡有一堆 &quot;<tt class="docutils literal"><span class="pre">.</span></tt>&quot; 開頭的檔案和目錄，但 X 桌面環境無可避免地會製造出很多這種組態檔；使用 vserver 來跑 X，就可以把這些組態檔侷限到其它目錄裡面去。另外，比較不穩定的 X 程式也不致於影響主機的運作。而且，利用 vserver，我們很容易就可以在同一台主機上執行多個 X server。</p>
+<div class="note">
+<p class="first admonition-title">註記</p>
+<p class="last">使用的 X 程式一多，組態檔和目錄常常上百個，管理起來很麻煩。</p>
+</div>
+<p>vserver 要執行 X 需要作一些調整：先打開 vserver 的 <tt class="docutils literal"><span class="pre">CAP_SYS_RAWIO</span></tt>，請在 <tt class="docutils literal"><span class="pre">/etc/vservers/cosmos/bcapabilities</span></tt> 檔案 (預設並沒有這個檔案，請自己建一個新的) 裡寫入 <tt class="docutils literal"><span class="pre">CAP_SYS_RAWIO</span></tt>，其次要為 vserver 建立 <tt class="docutils literal"><span class="pre">mem</span></tt> 與一些 <tt class="docutils literal"><span class="pre">tty</span></tt> 裝置：</p>
+<pre class="literal-block">
+$ mknod /var/lib/vservers/cosmos/dev/mem c 1 1
+$ chmod 640 /var/lib/vservers/cosmos/dev/mem
+$ chown root.kmem /var/lib/vservers/cosmos/dev/mem
+$ mknod /var/lib/vservers/cosmos/dev/tty1 c 4 1
+$ chmod 600 /var/lib/vservers/cosmos/dev/tty1
+$ chown root.tty /var/lib/vservers/cosmos/dev/tty1
+$ mknod /var/lib/vservers/cosmos/dev/tty7 c 4 7
+$ chmod 600 /var/lib/vservers/cosmos/dev/tty7
+$ chown root.tty /var/lib/vservers/cosmos/dev/tty7
+$ mknod /var/lib/vservers/cosmos/dev/tty8 c 4 8
+$ chmod 600 /var/lib/vservers/cosmos/dev/tty8
+$ chown root.tty /var/lib/vservers/cosmos/dev/tty8
+$ mknod /var/lib/vservers/cosmos/dev/tty9 c 4 9
+$ chmod 600 /var/lib/vservers/cosmos/dev/tty9
+$ chown root.tty /var/lib/vservers/cosmos/dev/tty9
+</pre>
+<p>然後就可以在 vserver 裡用一般的方式來安裝 X：</p>
+<pre class="literal-block">
+$ apt-get install x-window-system
+</pre>
+<p>我們可以手動安裝 gnome, KDE 桌面環境與其它各種軟體。如果嫌麻煩的話，也可以用 <tt class="docutils literal"><span class="pre">tasksel</span></tt> 來安裝 Desktop environment。</p>
+<p>在 vserver 裡面安裝組態 X 的工作與在 host OS 裡沒什麼不同，反倒是啟動比較有學問。如果想使用 <tt class="docutils literal"><span class="pre">startx</span></tt>，得先給 vserver 指定一個文字模式 tty，登入以後才能用 <tt class="docutils literal"><span class="pre">startx</span></tt> 啟動 X。如果不想那麼麻煩，那麼可以改用 gdm (或 xdm/kdm) 來啟動 X；這個好處是只要啟動 vserver，馬上就可以登入 X 桌面，省掉登入 vserver 文字終端機的動作。</p>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id12" name="id12">8&nbsp;&nbsp;&nbsp;其它</a></h1>
+<p>有人提供了一些 vserver 常用的裝置<a class="footnote-reference" href="#id19" id="id13" name="id13"><sup>6</sup></a>，可以參考一下；其中 <tt class="docutils literal"><span class="pre">random</span></tt> 和 <tt class="docutils literal"><span class="pre">urandom</span></tt> (及其權限設定) 對使用 TLS/SSL 的程式蠻重要的。</p>
+<p>在 vserver 內安裝大部分的伺服程式時，多半只需要注意一下不要讓程式監聽到所有 IP (0.0.0.0) 即可，其它的設定方式則和 vserver 外一樣。其中，安裝 NIS 客戶端的時候，請注意 vserver 裡一定要有 <tt class="docutils literal"><span class="pre">lo</span></tt> 裝置，如果 NIS 客戶端不能存取 loopback 的話，將無法繫結 NIS 伺服器。</p>
+<p>本文以 Debian 來簡介 linux-vserver 的基本使用，熟悉了這項技術之後，相信還能變化出更多的應用。希望大家 vserver 愉快！</p>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="references" name="references">9&nbsp;&nbsp;&nbsp;References</a></h1>
+<table class="docutils footnote" frame="void" id="id14" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a name="id14">[1]</a></td><td>Linux Vservers: <a class="reference" href="http://deb.riseup.net/vserver/">http://deb.riseup.net/vserver/</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id15" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id10" name="id15">[2]</a></td><td>Step-by-Step Guide 2.6: <a class="reference" href="http://linux-vserver.org/Step-by-Step+Guide+2.6">http://linux-vserver.org/Step-by-Step+Guide+2.6</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id16" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id7" name="id16">[3]</a></td><td>大花頁：<a class="reference" href="http://www.nongnu.org/util-vserver/doc/conf/configuration.html">http://www.nongnu.org/util-vserver/doc/conf/configuration.html</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id17" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id5" name="id17">[4]</a></td><td><a class="reference" href="http://deb.riseup.net/vserver/preparing/">http://deb.riseup.net/vserver/preparing/</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id18" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id6" name="id18">[5]</a></td><td><a class="reference" href="http://deb.riseup.net/vserver/create-instance/">http://deb.riseup.net/vserver/create-instance/</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id19" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id13" name="id19">[6]</a></td><td><a class="reference" href="http://www.paul.sladen.org/vserver/archives/200202/0190.html">http://www.paul.sladen.org/vserver/archives/200202/0190.html</a></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</body>
+</html>

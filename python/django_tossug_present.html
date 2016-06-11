@@ -1,0 +1,627 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh_tw" lang="zh_tw">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.4: http://docutils.sourceforge.net/" />
+<title>Django, how to start</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger
+:Contact: goodger@users.sourceforge.net
+:Date: $Date: 2005-06-06 15:09:07 +0200 (Mon, 06 Jun 2005) $
+:Version: $Revision: 3442 $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+*/
+
+/* "! important" is used here to override other ``margin-top`` and
+   ``margin-bottom`` styles that are later in the stylesheet or 
+   more specific.  See http://www.w3.org/TR/CSS1#the-cascade */
+
+body {
+  font-family: Calibri, Georgia, Times New Roman, Times,  Free Times;
+  background-color: #666666;
+}
+
+div.document {
+  background-color: white;
+  clear: both;
+  width: 50em;
+  margin: 0 auto 0 auto;
+  padding: 0.5em;
+  border: 2px ridge black;
+}
+
+.first {
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em;
+  border-top: 2px solid #888888;
+  border-bottom: 2px solid #888888;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin-left: 1em ;
+  border: medium outset ; 
+  padding: 1em ;
+  background-color: #ffffee ;
+  /* width: 40% ; */
+  /* float: right ; */
+ /*  clear: right */ }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+div.section h1, div.section h2, div.section h3, 
+div.section h4, div.section h5, div.section h6 {
+  padding-left: 0.3em;
+  padding-bottom: 0.3em;
+  border-left: 2px solid gray;
+  border-bottom: 2px solid gray;
+}
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em; }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left {
+  clear: left }
+
+img.align-right {
+  clear: right }
+
+img.borderless {
+  border: 0 }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font-family: serif ;
+  font-size: 100% }
+
+pre.line-block {
+  font-family: serif ;
+  font-size: 100% }
+
+pre.literal-block, pre.doctest-block {
+  white-space: pre-wrap;       /* css-3 */
+  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word;       /* Internet Explorer 5.5+ */
+  margin-left: 2em ;
+  margin-right: 2em ;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  padding-left: 1em;
+  padding-right: 1em;
+  border: 1px dotted black;
+}
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid thin gray }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  border-spacing: 0;
+  border: 1 solid black;
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-top: solid thin black;
+  border-left: solid thin black }
+
+table.footnote td.label a {
+  text-decoration: none;
+}
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  border: 0; 
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+tt.docutils {
+}
+
+tt.ltst {
+  font-weight: bold;
+}
+
+tt.ltem {
+  font-style: italic;
+}
+
+ul.auto-toc {
+  list-style-type: none }
+
+/* vim: set ai et nu sw=2 ts=2: */
+
+</style>
+</head>
+<body>
+<div class="document" id="django-how-to-start">
+<h1 class="title">Django, how to start</h1>
+<table class="docinfo" frame="void" rules="none">
+<col class="docinfo-name" />
+<col class="docinfo-content" />
+<tbody valign="top">
+<tr class="field"><th class="docinfo-name">author:</th><td class="field-body">Yung-Yu Chen (yungyuc) <a class="reference" href="http://blog.seety.org/everydaywork/">http://blog.seety.org/everydaywork/</a> &lt;<a class="reference" href="mailto:yyc&#64;seety.org">yyc&#64;seety.org</a>&gt;</td>
+</tr>
+<tr class="field"><th class="docinfo-name">copyright:</th><td class="field-body">© 2006, Creative Common licensed.</td>
+</tr>
+</tbody>
+</table>
+<p>作者警告：本簡報內的資訊多未經嚴格查證，請讀者務必注意。</p>
+<div class="contents handout topic">
+<p class="topic-title first"><a id="id1" name="id1">目錄</a></p>
+<ul class="simple">
+<li><a class="reference" href="#id2" id="id17" name="id17">學習緣起</a></li>
+<li><a class="reference" href="#id3" id="id18" name="id18">簡報結構</a></li>
+<li><a class="reference" href="#id4" id="id19" name="id19">Django 的特性</a></li>
+<li><a class="reference" href="#id5" id="id20" name="id20">Django 的優勢</a></li>
+<li><a class="reference" href="#id6" id="id21" name="id21">Django 與資料庫</a></li>
+<li><a class="reference" href="#id7" id="id22" name="id22">Django 的佈署</a></li>
+<li><a class="reference" href="#id8" id="id23" name="id23">Django 的缺點</a></li>
+<li><a class="reference" href="#django-dist-dev" id="id24" name="id24">Django dist/dev 須知</a></li>
+<li><a class="reference" href="#django-based-webapp" id="id25" name="id25">開發 Django-based webapp</a></li>
+<li><a class="reference" href="#django-admin-py-command" id="id26" name="id26">django-admin.py command</a></li>
+<li><a class="reference" href="#id10" id="id27" name="id27">執行後的目錄結構</a></li>
+<li><a class="reference" href="#id11" id="id28" name="id28">模板須另行建立</a></li>
+<li><a class="reference" href="#i18n-l10n" id="id29" name="id29">i18n/l10n</a></li>
+<li><a class="reference" href="#admin-app" id="id30" name="id30">內建的 admin app</a></li>
+<li><a class="reference" href="#id13" id="id31" name="id31">模板的特性</a></li>
+<li><a class="reference" href="#id14" id="id32" name="id32">模板的繼承</a></li>
+<li><a class="reference" href="#syndication" id="id33" name="id33">Syndication</a></li>
+<li><a class="reference" href="#middleware" id="id34" name="id34">Middleware</a></li>
+<li><a class="reference" href="#id15" id="id35" name="id35">靜態資料被分別處理</a></li>
+<li><a class="reference" href="#id16" id="id36" name="id36">完</a></li>
+</ul>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id2" name="id2">學習緣起</a></h1>
+<ul class="simple">
+<li>不大懂程式設計。</li>
+<li>COREBlog 不太夠用，想弄一個適合自己的 blog 軟體：<ul>
+<li>要很方便地取用 reStructuredText 的各種能力。</li>
+<li>一個禮拜花一個小時左右，何時能用不知道。</li>
+</ul>
+</li>
+<li>尋找 light-weight web programming framework：<ul>
+<li>感覺 Django 比 TurboGears 適合我。</li>
+</ul>
+</li>
+<li>Fun.</li>
+</ul>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id3" name="id3">簡報結構</a></h1>
+<ul class="simple">
+<li><a class="reference" href="#django">Django 技術概觀</a>。</li>
+<li><a class="reference" href="#id9">Django 開發極簡入門</a>。</li>
+<li><a class="reference" href="#id12">我所知道，你對 Django 可能會感興趣的部分</a>。</li>
+</ul>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id4" name="id4"><span id="django"></span>Django 的特性</a></h1>
+<ul class="simple">
+<li>純粹的 Python package。</li>
+<li>MVC 程式設計架構。<ul>
+<li>Django 中亦稱 MTV: Model-Template-View。</li>
+<li>物件化的資料庫模型。</li>
+<li>可延伸的模板系統。</li>
+<li>使用 regex 管理 URL。</li>
+</ul>
+</li>
+<li>內建的管理介面 (admin app) 以及必要的支援功能 (使用者/群組、行程等)。</li>
+<li>Ajax (正於 magic-removal branch 內開發)。</li>
+</ul>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id5" name="id5">Django 的優勢</a></h1>
+<ul class="simple">
+<li>已實際佈署 production site。</li>
+<li>高效能；內建有可自訂的快取機制。</li>
+<li>開發模式穩定。<ul>
+<li>Django 開發人員將 /trunk 保持在穩定可用的狀態，開發中版本存在於 /branches 中。</li>
+</ul>
+</li>
+<li>Linux/Windows/MacOS 通吃。</li>
+<li>It's in Python, and Pythonic.</li>
+</ul>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id6" name="id6">Django 與資料庫</a></h1>
+<ul class="simple">
+<li>穩定支援 postgresql, mysql 與 sqlite(3)。<ul>
+<li>官方建議使用 postgresql。</li>
+<li>Oracle 與 MSSQL 支援刻正開發中，應已有可用的版本。</li>
+</ul>
+</li>
+<li>目前一個 webapp 僅能使用一個資料庫，此乃受限於 Django 所採用的 ORM。</li>
+</ul>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id7" name="id7">Django 的佈署</a></h1>
+<ul class="simple">
+<li>內建開發用的 web server。<ul>
+<li>官方建議「絕對不要」用內建的 web server 提供任何非開發用途的服務。</li>
+</ul>
+</li>
+<li>已知可佈署於 Apache1/2, lighttpd, twisted 三種 web server，支援 mod_python, SCGI, FCGI 三種模式。<ul>
+<li>在 Apache1/2 下，支援 mod_python (效率最高) 與 SCGI, FCGI。</li>
+<li>使用 twisted 時可為 webapp 提供單一包裝的發行版本，不需另行安裝 web server。</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id8" name="id8">Django 的缺點</a></h1>
+<ul class="simple">
+<li>0.91 中有許多的 magic，目前正在 magic-removal branch 中處理。<ul>
+<li>最明顯的 magic 存在於 ORM。</li>
+</ul>
+</li>
+<li>沒有 CGI 模式，需要長效執行的行程。</li>
+<li>Multi-threading 似乎有問題，但正在處理中。</li>
+</ul>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="django-dist-dev" name="django-dist-dev"><span id="id9"></span>Django dist/dev 須知</a></h1>
+<ul class="simple">
+<li>Django 仍在開發中，不定期發行，安裝需使用 setuptools。<ul>
+<li>/trunk 相當穩定，為官方建議的安裝來源。</li>
+</ul>
+</li>
+<li>Django package/vcs 裡含有相當完整而及時的文件。<ul>
+<li>仍有不足之處，須至官網查詢。</li>
+<li>Django trac 有更多更新快速的資訊 (howto 不少會放在 trac wiki 裡面)。</li>
+</ul>
+</li>
+<li>開發動作大都發生於 branches，trunk 多是 bugfix 與資訊 (翻譯、文件) 更新。</li>
+</ul>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="django-based-webapp" name="django-based-webapp">開發 Django-based webapp</a></h1>
+<ul class="simple">
+<li>開發版的 Django 基本上不需要安裝。<ul>
+<li><tt class="docutils literal"><span class="pre">svn</span> <span class="pre">co</span> <span class="pre">http://code.djangoproject.com/svn/django/trunk</span> <span class="pre">django_svn</span></tt> 後，讓 <tt class="docutils literal"><span class="pre">$PYTHONPATH</span></tt> 裡包含有 <tt class="docutils literal"><span class="pre">django_svn/django</span></tt> package 即可。<ul>
+<li>我習慣在開發目錄裡作一個 symlink 到 <tt class="docutils literal"><span class="pre">django_svn/django</span></tt>。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>所有開發從執行 django/bin/django-admin.py 工具程式開始。</li>
+</ul>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="django-admin-py-command" name="django-admin-py-command">django-admin.py command</a></h1>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">django-admin.py</span> <span class="pre">startproject</span> <span class="pre">&lt;name&gt;</span></tt>:<ul>
+<li>project 可視為整個 webapp。</li>
+</ul>
+</li>
+<li><tt class="docutils literal"><span class="pre">django-admin.py</span> <span class="pre">startapp</span> <span class="pre">&lt;name&gt;</span></tt>:<ul>
+<li>app(lication) 可視為一 webapp 中的功能模組。</li>
+</ul>
+</li>
+</ul>
+<pre class="literal-block">
+$ django-admin.py startproject testp
+$ django-admin.py startapp testa
+$ mv testa testp/
+</pre>
+<ul class="simple">
+<li>得到 database model 和 webapp view。</li>
+</ul>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id10" name="id10">執行後的目錄結構</a></h1>
+<pre class="literal-block">
+testp/
+|-- __init__.py
+|-- manage.py
+|-- settings.py   &lt;-- project-wide settings.
+|-- testa
+|   |-- __init__.py
+|   |-- models    &lt;-- present one db.
+|   |   |-- __init__.py
+|   |   `-- testa.py  &lt;-- present one table.
+|   `-- views.py  &lt;-- MVC Controller.
+`-- urls.py       &lt;-- url regex.
+</pre>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id11" name="id11">模板須另行建立</a></h1>
+<ul class="simple">
+<li>模板 (template) 即 MVC 中的 view。</li>
+<li>所有模板需以 <tt class="docutils literal"><span class="pre">.html</span></tt> 副檔名結尾。<ul>
+<li>很容易忘記，開發時請特別注意。</li>
+</ul>
+</li>
+<li>存放模板的目錄設定於 project <tt class="docutils literal"><span class="pre">setting.py</span></tt>，為一 list。</li>
+<li>模板與 app 有 fallback 綁定。<ul>
+<li>fallback 提供 app developer 預設模板的能力。</li>
+<li>django/contrib/admin app 使用 fallback 來提供預設的 admin 介面模板。</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="i18n-l10n" name="i18n-l10n">i18n/l10n</a></h1>
+<ul class="simple">
+<li>使用 django/bin/make-messages.py 工具從 <tt class="docutils literal"><span class="pre">.po</span></tt> 產生 <tt class="docutils literal"><span class="pre">.mo</span></tt>。</li>
+<li>只進行 /trunk 的翻譯；/branches 定期會從 /trunk merge 更新，包括翻譯的部分。<ul>
+<li>避免 <tt class="docutils literal"><span class="pre">.po</span></tt> msg-id 衝突。</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="admin-app" name="admin-app"><span id="id12"></span>內建的 admin app</a></h1>
+<ul class="simple">
+<li>Frameless.</li>
+<li>i18n/l10n ready.</li>
+<li>配合內建的 user/group/permission app，支援認證。</li>
+<li>已有部分使用 ajax widget。</li>
+</ul>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id13" name="id13">模板的特性</a></h1>
+<ul class="simple">
+<li>可存取 Python object, object method, tuple, list, dictionary。</li>
+<li>雖須以 <tt class="docutils literal"><span class="pre">.html</span></tt> 結尾，但實可產生任何文字格式資料。</li>
+<li>提供 filter 進行通用的資料操作。</li>
+<li>i18n/l10n ready。</li>
+<li>變數以 <tt class="docutils literal"><span class="pre">{{</span> <span class="pre">var</span> <span class="pre">}}</span></tt> 表示；(功能) 標籤以 <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">tag</span> <span class="pre">%}</span></tt> 表示；filter 以 <tt class="docutils literal"><span class="pre">{{</span> <span class="pre">var|filter</span> <span class="pre">}}</span></tt> 表示。</li>
+<li>利用自行撰寫的 Python 模組，可建立自訂的新標籤。</li>
+</ul>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id14" name="id14">模板的繼承</a></h1>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">{</span> <span class="pre">block</span> <span class="pre">name</span> <span class="pre">}</span></tt> 同時用於：<ul>
+<li>定義可被其它模板繼承取代的區塊，</li>
+<li>取代所繼承模板的區塊內容。</li>
+</ul>
+</li>
+<li><tt class="docutils literal"><span class="pre">{</span> <span class="pre">extends</span> <span class="pre">&quot;name&quot;</span> <span class="pre">}</span></tt> 宣告此模板所繼承自的模板。</li>
+</ul>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="syndication" name="syndication">Syndication</a></h1>
+<ul class="simple">
+<li>由 django.contrib.syndication 提供支援 Atom 及 RSS1, RSS2 的能力。<ul>
+<li>本質上是一組 Django view/template。</li>
+<li>webapp 開發者僅需定義相關的類別模型。</li>
+<li>使用已存在的 model (ORM)，不必定義新的。</li>
+</ul>
+</li>
+<li>置於 project package 內。</li>
+</ul>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="middleware" name="middleware">Middleware</a></h1>
+<ul class="simple">
+<li>平行於 Django 的 MTV 架構，介於 Django 所處理的 HTTP request/response 之間。<ul>
+<li>提供 HTTP 資料的全域性處理能力。</li>
+</ul>
+</li>
+<li>Django cache 由此實作。</li>
+<li>Django 由此實作 session 支援。</li>
+</ul>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id15" name="id15">靜態資料被分別處理</a></h1>
+<ul class="simple">
+<li>Django 將靜態資料 (HTML, CSS, 圖片、影像) 交由 web server 處理。<ul>
+<li>靜態資料的伺服能力完全取決於所使用的 web server，與 Django 無涉。</li>
+<li>仍提供伺服靜態資料的 view，但官方不建議使用於 production site。</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id16" name="id16">完</a></h1>
+<p>謝謝大家</p>
+<!-- vim: set ai et nu: -->
+</div>
+</div>
+</body>
+</html>

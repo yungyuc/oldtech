@@ -1,0 +1,630 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh_tw" lang="zh_tw">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.4: http://docutils.sourceforge.net/" />
+<title>以 Python Imaging Library 進行影像資料處理</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger
+:Contact: goodger@users.sourceforge.net
+:Date: $Date: 2005-06-06 15:09:07 +0200 (Mon, 06 Jun 2005) $
+:Version: $Revision: 3442 $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+*/
+
+/* "! important" is used here to override other ``margin-top`` and
+   ``margin-bottom`` styles that are later in the stylesheet or 
+   more specific.  See http://www.w3.org/TR/CSS1#the-cascade */
+
+body {
+  font-family: Calibri, Georgia, Times New Roman, Times,  Free Times;
+  background-color: #666666;
+}
+
+div.document {
+  background-color: white;
+  clear: both;
+  width: 50em;
+  margin: 0 auto 0 auto;
+  padding: 0.5em;
+  border: 2px ridge black;
+}
+
+.first {
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em;
+  border-top: 2px solid #888888;
+  border-bottom: 2px solid #888888;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin-left: 1em ;
+  border: medium outset ; 
+  padding: 1em ;
+  background-color: #ffffee ;
+  /* width: 40% ; */
+  /* float: right ; */
+ /*  clear: right */ }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+div.section h1, div.section h2, div.section h3, 
+div.section h4, div.section h5, div.section h6 {
+  padding-left: 0.3em;
+  padding-bottom: 0.3em;
+  border-left: 2px solid gray;
+  border-bottom: 2px solid gray;
+}
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em; }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left {
+  clear: left }
+
+img.align-right {
+  clear: right }
+
+img.borderless {
+  border: 0 }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font-family: serif ;
+  font-size: 100% }
+
+pre.line-block {
+  font-family: serif ;
+  font-size: 100% }
+
+pre.literal-block, pre.doctest-block {
+  white-space: pre-wrap;       /* css-3 */
+  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word;       /* Internet Explorer 5.5+ */
+  margin-left: 2em ;
+  margin-right: 2em ;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  padding-left: 1em;
+  padding-right: 1em;
+  border: 1px dotted black;
+}
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid thin gray }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  border-spacing: 0;
+  border: 1 solid black;
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-top: solid thin black;
+  border-left: solid thin black }
+
+table.footnote td.label a {
+  text-decoration: none;
+}
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  border: 0; 
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+tt.docutils {
+}
+
+tt.ltst {
+  font-weight: bold;
+}
+
+tt.ltem {
+  font-style: italic;
+}
+
+ul.auto-toc {
+  list-style-type: none }
+
+/* vim: set ai et nu sw=2 ts=2: */
+
+</style>
+</head>
+<body>
+<div class="document" id="python-imaging-library">
+<h1 class="title">以 Python Imaging Library 進行影像資料處理</h1>
+<table class="docinfo" frame="void" rules="none">
+<col class="docinfo-name" />
+<col class="docinfo-content" />
+<tbody valign="top">
+<tr class="field"><th class="docinfo-name">author:</th><td class="field-body">Yung-Yu Chen (yungyuc) <a class="reference" href="http://blog.seety.org/everydaywork/">http://blog.seety.org/everydaywork/</a> &lt;<a class="reference" href="mailto:yyc&#64;seety.org">yyc&#64;seety.org</a>&gt;</td>
+</tr>
+<tr class="field"><th class="docinfo-name">copyright:</th><td class="field-body">Copyright 2006, all rights reserved</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="id1" name="id1">目錄</a></p>
+<ul class="auto-toc simple">
+<li><a class="reference" href="#id2" id="id8" name="id8">1&nbsp;&nbsp;&nbsp;影像與圖形資料的處理</a><ul class="auto-toc">
+<li><a class="reference" href="#pil" id="id9" name="id9">1.1&nbsp;&nbsp;&nbsp;PIL 能為你作的事</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#id3" id="id10" name="id10">2&nbsp;&nbsp;&nbsp;轉換圖檔格式</a></li>
+<li><a class="reference" href="#id4" id="id11" name="id11">3&nbsp;&nbsp;&nbsp;改變影像與製作縮圖</a></li>
+<li><a class="reference" href="#id5" id="id12" name="id12">4&nbsp;&nbsp;&nbsp;修改圖形內容</a></li>
+<li><a class="reference" href="#id6" id="id13" name="id13">5&nbsp;&nbsp;&nbsp;用 PIL 製作新影像</a></li>
+<li><a class="reference" href="#id7" id="id14" name="id14">6&nbsp;&nbsp;&nbsp;結語</a></li>
+</ul>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id2" name="id2">1&nbsp;&nbsp;&nbsp;影像與圖形資料的處理</a></h1>
+<p>上一回我們談過了圖形介面程式的撰寫，這一次我們要討論圖形 (影像) 本身的處理，而討論的內容將會集中在 Python Imaging Library (PIL) 這一套程式庫上。</p>
+<p>PIL 是 Python 下最有名的影像處理套件，由許多不同的模組所組成，並且提供了許多的處理功能，允許我們在簡單的 Python 程式裡進行影像的處理。使用像 PIL 許樣的程式庫套件可以幫助我們把精力集中在影像處理的工作本身，避免迷失在底層的演算法裡面。</p>
+<p>由於影像處理牽涉到了大量的數學運算，因此 PIL 中有許多的模組是用 C 語言所寫成的，以提昇處理的效率。不過，在使用的時候，我們當然不必在意這樣的問題，只管放心地用就是了。</p>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="pil" name="pil">1.1&nbsp;&nbsp;&nbsp;PIL 能為你作的事</a></h2>
+<p>PIL 具備 (但不限於) 以下的能力：</p>
+<ul class="simple">
+<li>數十種圖檔格式的讀寫能力。常見的 JPEG, PNG, BMP, GIF, TIFF 等格式，都在 PIL 的支援之列。另外，PIL 也支援黑白、灰階、自訂調色盤、RGB true color、帶有透明屬性的 RBG true color、CMYK 及其它數種的影像模式。相當齊全。</li>
+<li>基本的影像資料操作：裁切、平移、旋轉、改變尺寸、調置 (transpose)、剪下與貼上等等。</li>
+<li>強化圖形：亮度、色調、對比、銳利度。</li>
+<li>色彩處理。</li>
+<li>PIL 提供十數種濾鏡 (filter)。當然，這個數目遠遠不能與 Photoshop® 或 GIMP® 這樣的專業特效處理軟體相比；但 PIL 提供的這些濾鏡可以用在 Python 程式裡面，提供批次化處理的能力。</li>
+<li>PIL 可以在影像中繪圖製點、線、面、幾何形狀、填滿、文字等等。</li>
+</ul>
+<p>接下來，我們開始一步一步地對 Python/PIL 的影像處理程式設計進行討論。</p>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id3" name="id3">2&nbsp;&nbsp;&nbsp;轉換圖檔格式</a></h1>
+<p>市面上有許多影像處理程式，一般人最常用它們來處理的工作大概就是圖檔格式轉換了；這是影像處理軟體最基本的功能，PIL 當然也要支援。</p>
+<p>假設我們有一個 JPG 檔案，名字叫作 <tt class="docutils literal"><span class="pre">sample01.jpg</span></tt>，那麼，以下的程式會把這個檔案載入 Python：</p>
+<pre class="literal-block">
+&gt;&gt;&gt; import Image
+&gt;&gt;&gt; im = Image.open( &quot;sample01.jpg&quot; )
+</pre>
+<p><tt class="docutils literal"><span class="pre">im</span></tt> 這個物件是由 <tt class="docutils literal"><span class="pre">Image.open()</span></tt> 方法所產生出來的 <tt class="docutils literal"><span class="pre">Image</span></tt> 物件。我們可以用 <tt class="docutils literal"><span class="pre">Image</span></tt> 物件內的屬性來查詢關於此檔案的資訊：</p>
+<pre class="literal-block">
+&gt;&gt;&gt; print im.format, im.size, im.mode
+JPEG (2288, 1712) RGB
+</pre>
+<p>格式字串放在 <tt class="docutils literal"><span class="pre">format</span></tt> 屬性裡，尺寸放在 <tt class="docutils literal"><span class="pre">size</span></tt> 屬性裡，而 (調色盤) 模式放在 <tt class="docutils literal"><span class="pre">mode</span></tt> 屬性裡。從以上的執行結果，可以看出來我們讀的確實是一個 JPEG 檔案，檔案的尺寸是 2288 像素寬、1712 像素高，調色盤是 RGB 全彩模式。</p>
+<p>既然我們已經把圖檔讀入了 Python，要處理它就簡單了。利用 Image 類別的 <tt class="docutils literal"><span class="pre">save()</span></tt> 方法，可以把檔案儲存成 PIL 支援的格式：</p>
+<pre class="literal-block">
+&gt;&gt;&gt; im.save( &quot;fileout.png&quot; )
+</pre>
+<p>如果圖檔很大，這會花上一點時間。<tt class="docutils literal"><span class="pre">Image.save()</span></tt> 方法會根據欲存檔的副檔名，自動判斷要存圖檔的格式 (剛剛我們用的 <tt class="docutils literal"><span class="pre">open()</span></tt> 函式也會這樣作)。</p>
+<p><tt class="docutils literal"><span class="pre">save()</span></tt> 可以指定存檔格式。在以下的例子裡，我們把存檔格式指定為 JPEG：</p>
+<pre class="literal-block">
+&gt;&gt;&gt; im.save( &quot;fileout.png&quot;, &quot;JPEG&quot; )
+</pre>
+<p>這時候副檔名是無所謂的。</p>
+<p>只處理一兩個檔案的時候，使用 Python 直譯器就相當合適。然而若要處理一大群檔案，譬如把一整個目錄的 JPEG 檔轉換為 PNG 檔，那麼寫成一個程式檔會比較方便，例如：</p>
+<pre class="literal-block">
+#!/usr/bin/env python
+
+from glob import glob
+from os.path import splitext
+import Image
+
+jpglist = glob( &quot;python_imaging_pix/*.[jJ][pP][gG]&quot; )
+
+for jpg in jpglist:
+    im = Image.open(jpg)
+    png = splitext(jpg)[0]+&quot;.png&quot;
+    im.save(png)
+    print png
+
+</pre>
+<p>只要在一個放了 <tt class="docutils literal"><span class="pre">*.jpg</span></tt> 或 <tt class="docutils literal"><span class="pre">*.JPG</span></tt> 檔案的目錄裡面執行這個指令稿，它就會把所有的 JPEG 檔轉成 PNG 檔案：</p>
+<pre class="literal-block">
+$ ./convertdir.py
+file0001.png
+file0002.png
+.
+.
+file9999.png
+</pre>
+<p>既然 PIL 會從檔名偵測常用的檔案格式，存檔時我們通常都不會指定存檔格式。</p>
+<p>然而，依據檔案格式的不同，<tt class="docutils literal"><span class="pre">save()</span></tt> 方法提供了不同的選項參數。以 JPEG 而言，它可以接受 <tt class="docutils literal"><span class="pre">quality</span></tt> (從 1 到 100 的整數，預設為 75)、<tt class="docutils literal"><span class="pre">optimize</span></tt> (真假值) 及 <tt class="docutils literal"><span class="pre">progression</span></tt> (真假值)。在以下的例子裡，我們以 100 的 <tt class="docutils literal"><span class="pre">quality</span></tt> 來儲存 JPEG 檔案：</p>
+<pre class="literal-block">
+&gt;&gt;&gt; im.save( &quot;quality100.jpg&quot;, quality=100 )
+</pre>
+<div class="tip">
+<p class="first admonition-title">要訣</p>
+<p class="last">PIL 也支援 EPS (Encapsulate PostScript) 格式的寫入。TeX 的使用者可以利用 PIL 來簡單地把圖檔轉成 EPS 以供 TeX compiler 使用。</p>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id4" name="id4">3&nbsp;&nbsp;&nbsp;改變影像與製作縮圖</a></h1>
+<p>在了解了基本的圖檔轉換之後，我們來看看如何對影像進行尺寸方面的修改。PIL 對 <tt class="docutils literal"><span class="pre">Image</span></tt> 物件提供了 <tt class="docutils literal"><span class="pre">resize</span></tt> 方法，以執行影像的縮放工作。用我們的 <tt class="docutils literal"><span class="pre">sample01.jpg</span></tt> 檔案來當例子：</p>
+<pre class="literal-block">
+&gt;&gt;&gt; im = Image.open( &quot;sample01.jpg&quot; )
+&gt;&gt;&gt; print im.size
+(2288, 1712)
+&gt;&gt;&gt; width = 400
+&gt;&gt;&gt; ratio = float(width)/im.size[0]
+&gt;&gt;&gt; height = int(im.size[1]*ratio)
+&gt;&gt;&gt; nim = im.resize( (width, height), Image.BILINEAR )
+&gt;&gt;&gt; print nim.size
+(400, 299)
+&gt;&gt;&gt; nim.save( &quot;resized.jpg&quot; )
+</pre>
+<p>然後我們就會得到比較小的 <tt class="docutils literal"><span class="pre">resized.jpg</span></tt>：</p>
+<div class="figure">
+<img alt="python_imaging_pix/resized.jpg" src="python_imaging_pix/resized.jpg" />
+</div>
+<p><tt class="docutils literal"><span class="pre">resize()</span></tt> 這個方法會傳回一個新的 Image 物件，所以舊的 Image 不會被更動。<tt class="docutils literal"><span class="pre">resize()</span></tt> 接受兩個參數，第一個用來指定變更後的大小，是一個雙元素 tuple，分別用以指定影像的寬與高；第二個參數可以省略，是用來指定變更時使用的內插法，預設是 <tt class="docutils literal"><span class="pre">Image.NEAREST</span></tt> (取最近點)，這裡我們指定為品質比較好的 <tt class="docutils literal"><span class="pre">Image.BILINEAR</span></tt>。</p>
+<p><tt class="docutils literal"><span class="pre">resize()</span></tt> 可以把影像放大縮小，在使用時一定要傳入寬與高。上面的程式會先限定新影像的寬，再根據舊影像的長寬比例來算出新影像的高應該是多少，最後把尺寸值傳入 <tt class="docutils literal"><span class="pre">resize()</span></tt> 去。由此可知，<tt class="docutils literal"><span class="pre">resize()</span></tt> 是允許我們不等比例縮放的：</p>
+<pre class="literal-block">
+&gt;&gt;&gt; width = 400
+&gt;&gt;&gt; height = 100
+&gt;&gt;&gt; nim2 = im.resize( (width, height), Image.BILINEAR )
+&gt;&gt;&gt; nim2.save( &quot;resize2wide.jpg&quot; )
+</pre>
+<p>會得到形狀奇怪的縮圖：</p>
+<div class="figure">
+<img alt="python_imaging_pix/resize2wide.jpg" src="python_imaging_pix/resize2wide.jpg" />
+</div>
+<p>我們可以任意改變新影像的尺寸值。</p>
+<p>另一個常用的操作是旋轉；<tt class="docutils literal"><span class="pre">rotate()</span></tt> 方法可以用來旋轉影像。它取兩個參數，第一個參數是一個逆時針的度數，第二個參數則也是影像處理時的內插法，可省略：</p>
+<pre class="literal-block">
+&gt;&gt;&gt; nim3 = nim.rotate( 45, Image.BILINEAR )
+&gt;&gt;&gt; nim3.save( &quot;rotated.jpg&quot; )
+</pre>
+<p><tt class="docutils literal"><span class="pre">rotate()</span></tt> 並不會改變影像的尺寸 (dimension)，所以你會看到：</p>
+<div class="figure">
+<img alt="python_imaging_pix/rotated.jpg" src="python_imaging_pix/rotated.jpg" />
+</div>
+<p>出現了黑邊。如果我們想要連影像尺寸一起變動，得要改用 <tt class="docutils literal"><span class="pre">transpose()</span></tt> 方法：</p>
+<pre class="literal-block">
+&gt;&gt;&gt; nim4 = nim.transpose( Image.ROTATE_90 )
+&gt;&gt;&gt; nim4.save( &quot;transposed90.jpg&quot; )
+</pre>
+<p>結果是：</p>
+<div class="figure">
+<img alt="python_imaging_pix/transposed90.jpg" src="python_imaging_pix/transposed90.jpg" />
+</div>
+<p><tt class="docutils literal"><span class="pre">transpose()</span></tt> 方法接受 <tt class="docutils literal"><span class="pre">Image.FLIP_LEFT_RIGHT</span></tt>, <tt class="docutils literal"><span class="pre">Image.FLIP_TOP_DOWN</span></tt>, <tt class="docutils literal"><span class="pre">ROTATE_90</span></tt>, <tt class="docutils literal"><span class="pre">ROTATE_180</span></tt>, <tt class="docutils literal"><span class="pre">ROTATE_270</span></tt> 等五種參數；其中後三種的旋轉均為逆時針。<tt class="docutils literal"><span class="pre">rotate()</span></tt> 方法會對像素資料進行內插；而 <tt class="docutils literal"><span class="pre">transpose()</span></tt> 則只是轉置像素資料，所以沒有內插參數可以設定，也不會影響影像的品質。</p>
+<p>縮放與旋轉是最常用的兩個操作，而在其中，縮圖的製作可能是特別常用的；PIL 對縮圖提供了一個方便的 <tt class="docutils literal"><span class="pre">thumbnail()</span></tt> 方法。<tt class="docutils literal"><span class="pre">thumbnail()</span></tt> 會直接修改 Image 物件本身，所以速度能比 <tt class="docutils literal"><span class="pre">resize()</span></tt> 更快，也消耗更少的記憶體。它不接受指定內插法的參數，而且只能縮小影像，不能放大影像；用法是：</p>
+<pre class="literal-block">
+&gt;&gt;&gt; im = Image.open( &quot;sample01.jpg&quot; )
+&gt;&gt;&gt; im.thumbnail( (400,100) )
+&gt;&gt;&gt; im.save( &quot;thumbnail.jpg&quot; )
+&gt;&gt;&gt; print im.size
+(133, 100)
+</pre>
+<p><tt class="docutils literal"><span class="pre">thumbnail()</span></tt> 在接受尺寸參數的時候，行為與 <tt class="docutils literal"><span class="pre">resize()</span></tt> 不同；<tt class="docutils literal"><span class="pre">resize()</span></tt> 允許我們不等比例進行縮放，但 <tt class="docutils literal"><span class="pre">thumbnail()</span></tt> 只能進行等比例縮小，並且是以長、寬中比較小的那一個值為基準。因此，上面的程式所作出的 <tt class="docutils literal"><span class="pre">thumbnail.jpg</span></tt> 變成了 133*100 的小圖片：</p>
+<div class="figure">
+<img alt="python_imaging_pix/thumbnail.jpg" src="python_imaging_pix/thumbnail.jpg" />
+</div>
+<p>有了這些操作，我們可以很輕易地執行影像管理的任務。</p>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id5" name="id5">4&nbsp;&nbsp;&nbsp;修改圖形內容</a></h1>
+<p>除了可以針對圖形的尺寸作變更之外，PIL 更提供我們變更影像內容的能力。這樣，我們就不只能對影像進行管理，而能更進一步地利用程式來把影像的內容改成我們想要的樣子。</p>
+<p>我們從「貼圖」開始：</p>
+<pre class="literal-block">
+&gt;&gt;&gt; baseim = Image.open( &quot;resized.jpg&quot; )
+&gt;&gt;&gt; floatim = Image.open( &quot;thumbnail.jpg&quot; )
+&gt;&gt;&gt; baseim.paste( floatim, (150, 50) )
+&gt;&gt;&gt; baseim.save( &quot;pasted.jpg&quot; )
+</pre>
+<p>利用 <tt class="docutils literal"><span class="pre">paste()</span></tt> 方法，把之前作的 <tt class="docutils literal"><span class="pre">thumbnail.jpg</span></tt> 貼到 <tt class="docutils literal"><span class="pre">resized.jpg</span></tt> 裡面去：</p>
+<div class="figure">
+<img alt="python_imaging_pix/pasted.jpg" src="python_imaging_pix/pasted.jpg" />
+</div>
+<p>此種用法的 <tt class="docutils literal"><span class="pre">paste()</span></tt> 方法要求兩個參數，第一是要貼上的 Image，第二是要貼上的位置。第二個參數有三種指定的方式：</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">None</span></tt>：不指定位置與尺寸，那麼 <tt class="docutils literal"><span class="pre">pasted()</span></tt> 會假設要貼上的 Image 與被貼上的 Image 的尺寸完全相同。</li>
+<li><tt class="docutils literal"><span class="pre">(left,</span> <span class="pre">upper)</span></tt>：雙元素 tuple。<tt class="docutils literal"><span class="pre">pasted()</span></tt> 會把要貼上的 Image 的左上角對齊在指定的位置。</li>
+<li><tt class="docutils literal"><span class="pre">(left,</span> <span class="pre">upper,</span> <span class="pre">right,</span> <span class="pre">lower)</span></tt>：四元素 tuple。<tt class="docutils literal"><span class="pre">paste()`</span></tt> 除了會把 Image 的左上角對齊外，也會對齊右下角。不過基本上這種寫法和上面那一種一樣，因為 <tt class="docutils literal"><span class="pre">paste()</span></tt> 要求要貼上的影像與這裡指定的尺寸一致，所以不可能出現不同的兩組 right, lower。</li>
+</ul>
+<p>除了「貼圖」之外，我們還可以對影像的內容進行裁切：</p>
+<pre class="literal-block">
+&gt;&gt;&gt; im = Image.open( &quot;sample01.jpg&quot; )
+&gt;&gt;&gt; nim = im.crop( (700, 300, 1500, 1300) )
+&gt;&gt;&gt; nim.thumbnail( (400,400) )
+&gt;&gt;&gt; nim.save( &quot;croped.jpg&quot; )
+</pre>
+<p>(因為裁切之後的圖形還是大了點，所以再縮圖一次) 得到的結果是：</p>
+<div class="figure">
+<img alt="python_imaging_pix/croped.jpg" src="python_imaging_pix/croped.jpg" />
+</div>
+<p><tt class="docutils literal"><span class="pre">crop()</span></tt> 接受的 <tt class="docutils literal"><span class="pre">box</span></tt> 參數指定要裁切的左、上、右、下四個邊界值，形成一個矩形。</p>
+<p>除了剪貼之外，PIL 還可以使用內建的濾鏡 (filter) 作一些特效處理。這些濾鏡都放在 <tt class="docutils literal"><span class="pre">ImageFilter</span></tt> 模組裡面，使用前要先匯入這個模組：</p>
+<pre class="literal-block">
+&gt;&gt;&gt; import ImageFilter
+</pre>
+<p>我們用個例子，對剛剛裁切的 &quot;No Riding&quot; 禁止牌作 20 次 blur (糊化)，來看看 PIL 濾鏡的效果：</p>
+<pre class="literal-block">
+&gt;&gt;&gt; im = Image.open( &quot;croped.jpg&quot; )
+&gt;&gt;&gt; nim = im
+&gt;&gt;&gt; for i in range(20): nim = nim.filter( ImageFilter.BLUR )
+...
+&gt;&gt;&gt; nim.save( &quot;blured.jpg&quot; )
+</pre>
+<p>你應該看不出來它是 &quot;No Riding&quot; 了吧：</p>
+<div class="figure">
+<img alt="python_imaging_pix/blured.jpg" src="python_imaging_pix/blured.jpg" />
+</div>
+<p>使用濾鏡的基本語法是：</p>
+<pre class="literal-block">
+newim = im.filter( ImageFilter.FILTERNAME )
+</pre>
+<p>其中 <tt class="docutils literal"><span class="pre">FILTERNAME</span></tt> 是 PIL 中支援的濾鏡名稱，目前有：BLUR, CONTOUR, DETAIL, EDGE_ENHANCE, EDGE_ENHANCE_MORE, EMBOSS, FIND_EDGES, SMOOTH, SMOOTH_MORE, SHARPEN，此處就不一一介紹了，但建議你可以自己來把每一個濾鏡都試試看。</p>
+<p>利用濾鏡，我們可以對同一類的影像進行相同的特效處理。當然，影像特效需要很精細的調整，在自動化作業中通常只能達到很粗略的效果；但 PIL 既然提供了，我們的自動程序就擁有更多的工具可以使用。</p>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id6" name="id6">5&nbsp;&nbsp;&nbsp;用 PIL 製作新影像</a></h1>
+<p>除了對已存在的影像進行編修之外，從零開始建立新影像也是很重要的工作。PIL 中的 <tt class="docutils literal"><span class="pre">ImageDraw</span></tt> 模組提供給我們繪製影像內容的能力。在使用 <tt class="docutils literal"><span class="pre">ImageDraw</span></tt> 之前，要先建立好空白的新影像：</p>
+<pre class="literal-block">
+&gt;&gt;&gt; import ImageDraw
+&gt;&gt;&gt; im = Image.new( &quot;RGB&quot;, (400,300) )
+&gt;&gt;&gt; draw = ImageDraw.Draw( im )
+</pre>
+<p>最後建出來的 <tt class="docutils literal"><span class="pre">draw</span></tt> 是一個 <tt class="docutils literal"><span class="pre">ImageDraw</span></tt> 物件會提供各種繪製影像的方法。針對幾何圖形，<tt class="docutils literal"><span class="pre">draw</span></tt> 物件提供 <tt class="docutils literal"><span class="pre">arc()</span></tt> (弧線)、<tt class="docutils literal"><span class="pre">chord()</span></tt> (弦)、<tt class="docutils literal"><span class="pre">line()</span></tt> (線段)、<tt class="docutils literal"><span class="pre">ellipse()</span></tt> (橢圓)、<tt class="docutils literal"><span class="pre">point()</span></tt> (點)、<tt class="docutils literal"><span class="pre">rectangle()</span></tt> (矩形) 與 <tt class="docutils literal"><span class="pre">polygon()</span></tt> (多邊形)。不過，我們不準備討論幾何圖形的繪製；相信這些方法的使用對一般人來說應該都很直覺才是。</p>
+<div class="tip">
+<p class="first admonition-title">要訣</p>
+<p class="last">你可以在指令行輸入 <tt class="docutils literal"><span class="pre">pydoc</span> <span class="pre">ImageDraw.ImageDraw.&lt;&lt;methodname&gt;&gt;</span></tt> 來查詢上述方法 (<tt class="docutils literal"><span class="pre">&lt;&lt;methodname&gt;&gt;</span></tt>) 的說明，譬如 <tt class="docutils literal"><span class="pre">pydoc</span> <span class="pre">ImageDraw.ImageDraw.line</span></tt>。</p>
+</div>
+<p>這裡要介紹的不是幾何圖形，而是文字的繪製。我們要再介紹一個模組：<tt class="docutils literal"><span class="pre">ImageFont</span></tt>，並且以實例來說明如何用 PIL 「寫字」：</p>
+<pre class="literal-block">
+&gt;&gt;&gt; import Image, ImageDraw, ImageFont
+&gt;&gt;&gt; font = ImageFont.truetype( \
+... &quot;/usr/share/fonts/truetype/freefont/FreeMono.ttf&quot;, 24 )
+&gt;&gt;&gt; im = Image.new( &quot;RGB&quot;, (400,300) )
+&gt;&gt;&gt; draw = ImageDraw.Draw( im )
+&gt;&gt;&gt; draw.text( (20,20), &quot;TEXT&quot;, font=font )
+&gt;&gt;&gt; im.save( &quot;text.jpg&quot; )
+</pre>
+<p>這樣就在一個黑色底圖上用白筆寫了 &quot;TEXT&quot; 四個大字：</p>
+<div class="figure">
+<img alt="python_imaging_pix/text.jpg" src="python_imaging_pix/text.jpg" />
+</div>
+<p>接著一一說明剛剛作的動作。首先我們用 <tt class="docutils literal"><span class="pre">ImageFont</span></tt> 的 <tt class="docutils literal"><span class="pre">truetype()</span></tt> 函式建立了一個 TrueType 字型，大小設定為 16 點。<tt class="docutils literal"><span class="pre">truetype()</span></tt> 函式的第一個參數必須是字型檔的搜尋路徑，第二個參數是字型的點數。然後依序建立影像物件與 <tt class="docutils literal"><span class="pre">draw</span></tt> 物件。寫字的動作用 <tt class="docutils literal"><span class="pre">draw</span></tt> 物件的 <tt class="docutils literal"><span class="pre">text()</span></tt> 方法來完成，它接受兩個參數，分別是文字的左上角點、字串，另外可以用 <tt class="docutils literal"><span class="pre">font</span></tt> 選項來指定所使用的字型 (若不指定，便使用預設字型)。</p>
+<p>在 1.1.4 版之前，PIL 是只能使用點陣字型的。現在 PIL 加入了 TrueType 向量字型的支援，對於要「寫字」的人來說實在是一大福音。對點陣字來說，想改變字型的大小得要更換字型才作得到，但 TrueType 就沒有這個限制。如果我們想要寫出兩串不同大小的文字，這樣作就可以了：</p>
+<pre class="literal-block">
+&gt;&gt;&gt; largefont = ImageFont.truetype( \
+... &quot;/usr/share/fonts/truetype/freefont/FreeMono.ttf&quot;, 48 )
+&gt;&gt;&gt; smallfont = ImageFont.truetype( \
+... &quot;/usr/share/fonts/truetype/freefont/FreeMono.ttf&quot;, 24 )
+&gt;&gt;&gt; im = Image.new( &quot;RBG&quot;, (400,300) )
+&gt;&gt;&gt; draw = ImageDraw.Draw( im )
+&gt;&gt;&gt; draw.text( (20,20), &quot;SmallTEXT&quot;, font=smallfont )
+&gt;&gt;&gt; draw.text( (20,120), &quot;LargeTEXT&quot;, font=largefont )
+&gt;&gt;&gt; im.save( &quot;multitext.jpg&quot; )
+</pre>
+<p>結果如：</p>
+<div class="figure">
+<img alt="python_imaging_pix/multitext.jpg" src="python_imaging_pix/multitext.jpg" />
+</div>
+<p>以上就是在 PIL 裡建立文字圖形的方法。</p>
+<p>最後，我們要說明如何改變繪製圖形 (文字) 時的顏色；繪圖時畫筆的顏色是透過 <tt class="docutils literal"><span class="pre">draw</span></tt> 物件的 <tt class="docutils literal"><span class="pre">ink</span></tt> 屬性來改變的：</p>
+<pre class="literal-block">
+&gt;&gt;&gt; draw.ink = 0 + 255*256 + 0*256*256
+</pre>
+<p>以上會把畫筆設成綠色。<tt class="docutils literal"><span class="pre">ink</span></tt> 值必須要是一個整數，其值由色彩的 RGB 值算出。舉幾個 <tt class="docutils literal"><span class="pre">ink</span></tt> 值的例子：</p>
+<ul class="simple">
+<li>紅色的 <tt class="docutils literal"><span class="pre">ink</span></tt> 值應設為 <tt class="docutils literal"><span class="pre">255(R)</span> <span class="pre">+</span> <span class="pre">0(G)*256</span> <span class="pre">+</span> <span class="pre">0(B)*256*256</span></tt>，</li>
+<li>藍色的 <tt class="docutils literal"><span class="pre">ink</span></tt> 值應設為 <tt class="docutils literal"><span class="pre">0(R)</span> <span class="pre">+</span> <span class="pre">0(G)*256</span> <span class="pre">+</span> <span class="pre">255(B)*256*256</span></tt>，</li>
+<li>靛色的 <tt class="docutils literal"><span class="pre">ink</span></tt> 值應設為 <tt class="docutils literal"><span class="pre">0(R)</span> <span class="pre">+</span> <span class="pre">255(G)*256</span> <span class="pre">+</span> <span class="pre">255(B)*256*256</span></tt></li>
+</ul>
+<p>所設定的 <tt class="docutils literal"><span class="pre">ink</span></tt> 會影響所有後續的繪圖動作。</p>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id7" name="id7">6&nbsp;&nbsp;&nbsp;結語</a></h1>
+<p>本文介紹了方便好用的 PIL 套件，可以讓我們用 Python 撰寫影像處理的程式。我們對圖檔的格式處理、尺寸處理以及內容的編修都作了討論，最後也說明如何從零開始創作一個影像。</p>
+<p>對網頁程式來說，動態產生簡單的影像是特別有用的功能，可以用來補足 HTML 與 CSS 的不足之處。利用 PIL 來執行批次影像處理的工作，更能省去我們許多的操作時間。相信讀者能從其中發現它所提供的生產力。</p>
+<p>在下一期的內容裡，我們要開始介紹 Python 的網頁程式設計。</p>
+<!-- vim: set ft=rst ai et nu: -->
+</div>
+</div>
+</body>
+</html>

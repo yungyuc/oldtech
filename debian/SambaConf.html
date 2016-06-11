@@ -1,0 +1,737 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh_tw" lang="zh_tw">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.4: http://docutils.sourceforge.net/" />
+<title>Samba：整合 Windows Network</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger
+:Contact: goodger@users.sourceforge.net
+:Date: $Date: 2005-06-06 15:09:07 +0200 (Mon, 06 Jun 2005) $
+:Version: $Revision: 3442 $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+*/
+
+/* "! important" is used here to override other ``margin-top`` and
+   ``margin-bottom`` styles that are later in the stylesheet or 
+   more specific.  See http://www.w3.org/TR/CSS1#the-cascade */
+
+body {
+  font-family: Calibri, Georgia, Times New Roman, Times,  Free Times;
+  background-color: #666666;
+}
+
+div.document {
+  background-color: white;
+  clear: both;
+  width: 50em;
+  margin: 0 auto 0 auto;
+  padding: 0.5em;
+  border: 2px ridge black;
+}
+
+.first {
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em;
+  border-top: 2px solid #888888;
+  border-bottom: 2px solid #888888;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin-left: 1em ;
+  border: medium outset ; 
+  padding: 1em ;
+  background-color: #ffffee ;
+  /* width: 40% ; */
+  /* float: right ; */
+ /*  clear: right */ }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+div.section h1, div.section h2, div.section h3, 
+div.section h4, div.section h5, div.section h6 {
+  padding-left: 0.3em;
+  padding-bottom: 0.3em;
+  border-left: 2px solid gray;
+  border-bottom: 2px solid gray;
+}
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em; }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left {
+  clear: left }
+
+img.align-right {
+  clear: right }
+
+img.borderless {
+  border: 0 }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font-family: serif ;
+  font-size: 100% }
+
+pre.line-block {
+  font-family: serif ;
+  font-size: 100% }
+
+pre.literal-block, pre.doctest-block {
+  white-space: pre-wrap;       /* css-3 */
+  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word;       /* Internet Explorer 5.5+ */
+  margin-left: 2em ;
+  margin-right: 2em ;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  padding-left: 1em;
+  padding-right: 1em;
+  border: 1px dotted black;
+}
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid thin gray }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  border-spacing: 0;
+  border: 1 solid black;
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-top: solid thin black;
+  border-left: solid thin black }
+
+table.footnote td.label a {
+  text-decoration: none;
+}
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  border: 0; 
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+tt.docutils {
+}
+
+tt.ltst {
+  font-weight: bold;
+}
+
+tt.ltem {
+  font-style: italic;
+}
+
+ul.auto-toc {
+  list-style-type: none }
+
+/* vim: set ai et nu sw=2 ts=2: */
+
+</style>
+</head>
+<body>
+<div class="document" id="samba-windows-network">
+<h1 class="title">Samba：整合 Windows Network</h1>
+<table class="docinfo" frame="void" rules="none">
+<col class="docinfo-name" />
+<col class="docinfo-content" />
+<tbody valign="top">
+<tr class="field"><th class="docinfo-name">author:</th><td class="field-body">Yung-Yu Chen (yungyuc) <a class="reference" href="http://blog.seety.org/everydaywork/">http://blog.seety.org/everydaywork/</a> &lt;<a class="reference" href="mailto:yyc&#64;seety.org">yyc&#64;seety.org</a>&gt;</td>
+</tr>
+<tr class="field"><th class="docinfo-name">copyright:</th><td class="field-body">© 2006, all rights reserved</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="id1" name="id1">目錄</a></p>
+<ul class="auto-toc simple">
+<li><a class="reference" href="#windows-network-samba" id="id11" name="id11">1&nbsp;&nbsp;&nbsp;Windows Network 與 Samba</a></li>
+<li><a class="reference" href="#debian-samba" id="id12" name="id12">2&nbsp;&nbsp;&nbsp;在 Debian 上安裝 Samba</a><ul class="auto-toc">
+<li><a class="reference" href="#id2" id="id13" name="id13">2.1&nbsp;&nbsp;&nbsp;基本設定</a></li>
+<li><a class="reference" href="#id3" id="id14" name="id14">2.2&nbsp;&nbsp;&nbsp;測試組態</a></li>
+<li><a class="reference" href="#id4" id="id15" name="id15">2.3&nbsp;&nbsp;&nbsp;其它重要的設定</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#id5" id="id16" name="id16">3&nbsp;&nbsp;&nbsp;目錄分享與存取設定</a></li>
+<li><a class="reference" href="#id6" id="id17" name="id17">4&nbsp;&nbsp;&nbsp;認證設定</a><ul class="auto-toc">
+<li><a class="reference" href="#id7" id="id18" name="id18">4.1&nbsp;&nbsp;&nbsp;密碼後端</a></li>
+<li><a class="reference" href="#pdbedit" id="id19" name="id19">4.2&nbsp;&nbsp;&nbsp;用 <tt class="docutils literal"><span class="pre">pdbedit</span></tt> 管理帳號資料</a></li>
+<li><a class="reference" href="#smbpasswd" id="id20" name="id20">4.3&nbsp;&nbsp;&nbsp;用 <tt class="docutils literal"><span class="pre">smbpasswd</span></tt> 管理密碼</a></li>
+<li><a class="reference" href="#debian" id="id21" name="id21">4.4&nbsp;&nbsp;&nbsp;與 Debian 主機密碼同步</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#id8" id="id22" name="id22">5&nbsp;&nbsp;&nbsp;檔案的權限設定</a><ul class="auto-toc">
+<li><a class="reference" href="#windows-samba" id="id23" name="id23">5.1&nbsp;&nbsp;&nbsp;從 Windows 端設定 Samba 端的權限</a></li>
+<li><a class="reference" href="#id9" id="id24" name="id24">5.2&nbsp;&nbsp;&nbsp;共用檔案的注意事項</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#id10" id="id25" name="id25">6&nbsp;&nbsp;&nbsp;結語</a></li>
+</ul>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="windows-network-samba" name="windows-network-samba">1&nbsp;&nbsp;&nbsp;Windows Network 與 Samba</a></h1>
+<p>Samba 是一套用來與 Windows Network 介面的軟體。它對 SMB/CIFS 通訊協定進行實作，讓非 MS Windows 的系統也可以和 Windows Network 通訊、交換資料。</p>
+<p>Samba 提供了檔案與列印的共享功能，最常被用來當作 MS Windows 工作站 (客戶端電腦) 的檔案或列印伺服器。對家庭或小型機構與組織來說，特別購買 MS Windows Server 來建置 Windows 檔案伺服器，軟體授權費用將會佔去相當大比例的成本；如果把 MS Windows Server 這部分改以 Linux/Samba 來代替，可以省下不少錢。</p>
+<p>用 Linux/Samba 取代 MS Windows Server 還有另一個好處：支援混合式網路架構。在 Windows 下雖然已經有了像是 Unix Services for Windows 這樣的工具，可以把 Windows 內部的資訊共享給泛 Unix 系統 (如 Linux, BSD)，也有像 HummingBird 這種廠商提供 NFS for Windows，讓我們可以取用 Unix 上常用的 NFS 檔案分享。不過這些工具的使用者相當少，相對也不太成熟、不太好用。直接使用 Linux/Samba 提供服務的話，對 NFS、FTP 等檔案共享機制的整合可以是一氣呵成的；如果組織內部需要同時使用這些技術，這麼作非常省事 -- 而且省錢。</p>
+<p>本章主要討論如何在 Debian 上把 Samba 組態成一台獨立的檔案伺服器，包括基本的安裝、Debian 上的組態檔配置、相關的自訂化設定以及必要的管理技術。</p>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="debian-samba" name="debian-samba">2&nbsp;&nbsp;&nbsp;在 Debian 上安裝 Samba</a></h1>
+<p>目前 Debian (Sarge) 為我們包好了 Samba3 的套件，可以用以下的 <tt class="docutils literal"><span class="pre">apt</span></tt> 進行安裝：</p>
+<pre class="literal-block">
+$ apt-get install samba
+</pre>
+<p>3.0 版的 Samba 與過往的 2.2 版有很大的不同，許多程式都經過重寫，支援 Active Directory (可以加入 AD Domain，但不能作為 AD 伺服器使用)、可以作為 NT4 Domain Controller (實作了部分功能)。不過最重要的是，Samba3 對 Unicode 的支援非常穩定，可以大為減少我們華文使用者的困難。</p>
+<p>安裝完畢之後，就可以用</p>
+<pre class="literal-block">
+$ /etc/init.d/samba start
+</pre>
+<p>啟動 Samba (安裝完畢之後應該會自動啟動，不必再作一次)；用</p>
+<pre class="literal-block">
+$ /etc/init.d/samba stop
+</pre>
+<p>結束 Samba。</p>
+<p>除了以上的 Samba 主程式之外，Samba3 還有非常豐富的文件，你可以用</p>
+<pre class="literal-block">
+$ apt-get install samba-doc
+</pre>
+<p>來安裝。這些文件會放在 <tt class="docutils literal"><span class="pre">/usr/share/doc/samba-doc/</span></tt> 之下，其中有一個 <tt class="docutils literal"><span class="pre">htmldocs</span></tt> 目錄，裡面有大量的 HTML 參考文件，可以直接用瀏覽器閱讀。</p>
+<p>另外，我們還可以用</p>
+<pre class="literal-block">
+$ apt-get install smbclient
+</pre>
+<p>來安裝 Linux 之下的 <tt class="docutils literal"><span class="pre">smbclient</span></tt> 客戶端軟體，一方面可以對本機伺服器作簡單的測試，也是以命令列存取其它 Windows 資源分享的便利工具。</p>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="id2" name="id2">2.1&nbsp;&nbsp;&nbsp;基本設定</a></h2>
+<p>Samba 的組態檔只有一個：<tt class="docutils literal"><span class="pre">/etc/samba/smb.conf</span></tt>，不過它是一個非常複雜的系統，可以調整的選項是又多又雜。因此，我們先介紹如何作最簡單的設定，讓你的 Samba 能夠執行基本的功能。</p>
+<p>先來看看 Debian 為我們準備好的 <tt class="docutils literal"><span class="pre">smb.conf</span></tt>；原檔當然有一些註解和空行，所以我重新整理了一遍，並且加上一些修改：</p>
+<pre class="literal-block">
+[global]
+   workgroup = hostname
+   server string = %h server (Samba %v)
+   dns proxy = no
+   log file = /var/log/samba/log.%m
+   max log size = 1000
+   syslog = 0
+   panic action = /usr/share/samba/panic-action %d
+   encrypt passwords = true
+   passdb backend = tdbsam guest
+   obey pam restrictions = yes
+   invalid users = root
+   passwd program = /usr/bin/passwd %u
+   passwd chat =
+    *Enter\snew\sUNIX\spassword:* %n\n *Retype\snew\sUNIX\spassword:* %n\n .
+   socket options = TCP_NODELAY
+[homes]
+   comment = Home Directories
+   browseable = no
+   writable = yes
+   create mask = 0600
+   directory mask = 0700
+[printers]
+   comment = All Printers
+   browseable = no
+   path = /tmp
+   printable = yes
+   public = no
+   writable = no
+   create mode = 0700
+[print$]
+   comment = Printer Drivers
+   path = /var/lib/samba/printers
+   browseable = yes
+   read only = yes
+   guest ok = no
+</pre>
+<p>這個最基本的 <tt class="docutils literal"><span class="pre">smb.conf</span></tt> 具有四個節區；如果我們不作列印分享，則後面那兩個是可以省略的。附帶一提，如果我們想自訂分享的目錄，可以新增節區，而新的分享目錄名稱 (資源名稱) 即為節區名稱。</p>
+<p>先來看第 1 到 16 行的 <tt class="docutils literal"><span class="pre">[global]</span></tt> 節區。這個部分的設定會影響 Samba 伺服器的整體行為，重要的有：</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">workgroup</span></tt>： 指定伺服器所在的「工作群組」或「網域」名稱。至於所指定的是哪一種名稱，要視 <tt class="docutils literal"><span class="pre">security</span></tt> 的設定來決定；這裡我們沒有並設定 <tt class="docutils literal"><span class="pre">security</span></tt>，所以會使用預設值 <tt class="docutils literal"><span class="pre">security=user</span></tt>，則 <tt class="docutils literal"><span class="pre">workgroup</span></tt> 所指定的就是工作群組。</li>
+<li><tt class="docutils literal"><span class="pre">server</span> <span class="pre">string</span></tt>： 這個字串設定會出現在 Windows Explorer 裡對此主機的描述 (comment) 欄位裡。``%h`` 會取代為主機名稱；<tt class="docutils literal"><span class="pre">%v</span></tt> 則會取代為 Samba 版本號碼。我們可以另外設定為比較有意義的字串。</li>
+</ul>
+<p>第 17 到 22 行的 <tt class="docutils literal"><span class="pre">[home]</span></tt> 節區指定的是對每一位使用者的家目錄進行檔案分享的方式。我們先討論一下其中的五個指令：</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">comment</span></tt>： 設定描述字串；這個指令可以設定在所有的分享目錄上。</li>
+<li><tt class="docutils literal"><span class="pre">browseable</span></tt>： 設定為 <tt class="docutils literal"><span class="pre">yes</span></tt>，此分享目錄就會出現在伺服器的分享列表上；設定為 <tt class="docutils literal"><span class="pre">no</span></tt>，此分享目錄就不會出現在伺服器的分享列表上。這個設定不影響使用者對分享目錄的存取能力 (亦即，設定為 <tt class="docutils literal"><span class="pre">no</span></tt> 並不能禁止使用者的存取，只是在列表上看不見)。</li>
+<li><tt class="docutils literal"><span class="pre">writable</span></tt>： 設定此分享目錄可否寫入，``yes`` 是可以；<tt class="docutils literal"><span class="pre">no</span></tt> 是不行。剛安裝好時的預設值是 <tt class="docutils literal"><span class="pre">no</span></tt>，請注意。</li>
+<li><tt class="docutils literal"><span class="pre">create</span> <span class="pre">mask</span></tt>： 透過 Samba 在這個分享目錄裡建立檔案的時候，檔案的權限設定footnote{注意，這個遮罩的涵義和 <tt class="docutils literal"><span class="pre">umask</span></tt> 不同。}。這裡的權限設定要用四個八位元數字來代表，詳細的設定值該如何設定，請參考 <tt class="docutils literal"><span class="pre">chmod</span> <span class="pre">(1)</span></tt>。</li>
+<li><tt class="docutils literal"><span class="pre">directory</span> <span class="pre">mask</span></tt>： 和 <tt class="docutils literal"><span class="pre">create</span> <span class="pre">mask</span></tt> 一樣是權限設定，不過指定的是新建立目錄時的權限。</li>
+</ul>
+<p><tt class="docutils literal"><span class="pre">writable</span></tt> 預設雖然為關，但我們架設 Samba 伺服器常常最主要的目的之一就是要方便存取使用者的家目錄，所以應該要打開。當使用者從 Windows 上用 Windows Explorer 檢視這台伺服器時，會看到有一個以其登入帳號為名的分享目錄；如果我們把 <tt class="docutils literal"><span class="pre">browseable</span></tt> 打開，則除了這個目錄之外，使用者還會看到另一個叫作 &quot;home&quot; 的分享目錄，兩者的內容是一模一樣的。</p>
+<p>至於既然已經有了 <tt class="docutils literal"><span class="pre">create</span> <span class="pre">mask</span></tt>，為什麼還要設定 <tt class="docutils literal"><span class="pre">directory</span> <span class="pre">mask</span></tt>？因為在 Unix 下，目錄的 <tt class="docutils literal"><span class="pre">x</span></tt> (執行) 權限決定了目錄是否可以被瀏覽，但檔案的 <tt class="docutils literal"><span class="pre">x</span></tt> 權限卻只表示它是否為可執行檔。絕大部分的目錄都會帶有 <tt class="docutils literal"><span class="pre">x</span></tt> 權限，以便使用者進入觀看內容，但如果為了這個原因把 <tt class="docutils literal"><span class="pre">create</span> <span class="pre">mask</span></tt> 設成 <tt class="docutils literal"><span class="pre">0700</span></tt>，那麼所有用 Samba 建立的檔案都會變成可執行檔了，這會讓檔案的權限設定變得很混亂，而且不安全。所以，最好不要讓檔案的權限帶上 <tt class="docutils literal"><span class="pre">x</span></tt>，為了達到這個目的，我們用 <tt class="docutils literal"><span class="pre">directory</span> <span class="pre">mask</span></tt> 另外指定目錄的建立權限。</p>
+<p>如果使用者會在這台伺服器上共享家目錄裡的檔案，那麼也可以把群組 (<tt class="docutils literal"><span class="pre">g</span></tt>) 或它人 (<tt class="docutils literal"><span class="pre">o</span></tt>) 的權限加進``create mask`` 和 <tt class="docutils literal"><span class="pre">directory</span> <span class="pre">mask</span></tt> 裡去。</p>
+<p>與列印分享有關的 <tt class="docutils literal"><span class="pre">[printers]</span></tt> 與 <tt class="docutils literal"><span class="pre">[print$]</span></tt> 節區在此不討論。事實上，只要我們不想作列印分享，把它們刪除掉也沒有關係。</p>
+<p>一旦我們修改過 <tt class="docutils literal"><span class="pre">smb.conf</span></tt> 之後，就要重新啟動 Samba 才能讓所作的改變生效：</p>
+<pre class="literal-block">
+$ /etc/init.d/samba restart
+</pre>
+<p>關於 <tt class="docutils literal"><span class="pre">smb.conf</span></tt> 內指令的詳細說明，請參考 <tt class="docutils literal"><span class="pre">smb.conf</span> <span class="pre">(5)</span></tt>。</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="id3" name="id3">2.2&nbsp;&nbsp;&nbsp;測試組態</a></h2>
+<p><tt class="docutils literal"><span class="pre">testparm</span></tt> 是附在 <tt class="docutils literal"><span class="pre">samba-common</span></tt> 套件內的組態檔測試工具。我們可以用這個工具來檢查 <tt class="docutils literal"><span class="pre">smb.conf</span></tt> 裡的設定：</p>
+<pre class="literal-block">
+$ testparm
+Load smb config files from /etc/samba/smb.conf
+Processing section &quot;[homes]&quot;
+Processing section &quot;[printers]&quot;
+Processing section &quot;[print$]&quot;
+Loaded services file OK.
+Server role: ROLE_STANDALONE
+Press enter to see a dump of your service definitions
+</pre>
+<p>按下 enter 之後，會把 <tt class="docutils literal"><span class="pre">smb.conf</span></tt> 的內容列出來 (和之前寫的一樣，故此僅示意)：</p>
+<pre class="literal-block">
+[global]
+...
+[home]
+...
+...
+</pre>
+<p>如果我們加上參數 <tt class="docutils literal"><span class="pre">-v</span></tt>，則 <tt class="docutils literal"><span class="pre">testparm</span></tt> 會把所有未設定的選項與其預設值也一起列出來；因為所有的選項非常多，所以真正寫進 <tt class="docutils literal"><span class="pre">smb.conf</span></tt> 的都只是必要的一小部分而已，能檢視所有的選項和預設值對組態與除錯會很有幫助。</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="id4" name="id4">2.3&nbsp;&nbsp;&nbsp;其它重要的設定</a></h2>
+<p>以下列出沒有寫在基本組態下的重要設定選項：</p>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">unix</span> <span class="pre">charset</span></tt>： 設定 Samba 所在主機上所使用的字元集 (charset)。預設值是 UTF-8，我也強烈建議在你的主機上使用 UTF-8。這不單因為 Big5 是個問題重重的編碼，更因為它可以大幅減少和 Windows 客戶端轉碼所造成的問題。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">dos</span> <span class="pre">charset</span></tt>： 設定 Dos/Windows 客戶端所使用的字元集，預設值是 CP850 (Latin I)。以上兩個選項使用預設值，在中英文版 Windows NT (2000/XP) 上都可以運作得很好。不過我相信把 <tt class="docutils literal"><span class="pre">dos</span> <span class="pre">charset</span></tt> 設成 <tt class="docutils literal"><span class="pre">UTF-8</span></tt> 會更好。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">hosts</span> <span class="pre">allow</span></tt>： 指定可存取的網路位址，預設是空的。一旦設定了位址，則沒有列進去的來源都不能存取所指定的資源。位址可以採用以下的格式：</p>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">150.203.</span> <span class="pre">EXCEPT</span> <span class="pre">150.203.6.66</span></tt></p>
+<p>除了 150.203.6.66 之外，所有以 150.203. 開頭的 IP 位址。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">150.203.15.0/255.255.255.0</span></tt></p>
+<p>子網域。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">hostname</span></tt></p>
+<p>主機名稱 (也可以使用 IP 位址)。</p>
+</li>
+</ul>
+<p>在 <tt class="docutils literal"><span class="pre">hosts</span> <span class="pre">allow</span></tt> 的等號之後可以用逗號分隔，以指定多個位址。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">hosts</span> <span class="pre">deny</span></tt>：指定<strong>不可</strong>存取的網路位址，預設是空的。``hosts allow`` 會覆蓋掉 <tt class="docutils literal"><span class="pre">deny</span></tt> 的設定。另外，在各分享目錄 (節區) 內也可以設定這兩個選項；目錄設定節區內的 <tt class="docutils literal"><span class="pre">allow</span></tt> 設定會蓋掉節區外 (<tt class="docutils literal"><span class="pre">[global]</span></tt>) 的 <tt class="docutils literal"><span class="pre">deny</span></tt> 設定。</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id5" name="id5">3&nbsp;&nbsp;&nbsp;目錄分享與存取設定</a></h1>
+<p>上一節稍微提到了目錄分享的設定，但本節才要詳細說明實際的作法。</p>
+<p>要新增目錄分享，請在 <tt class="docutils literal"><span class="pre">smb.conf</span></tt> 內新增節區。和之前說的一樣，節區的名稱 (<tt class="docutils literal"><span class="pre">[</span></tt> 與 <tt class="docutils literal"><span class="pre">]</span></tt> 內的字串) 就是分享目錄的名稱。</p>
+<p>舉例說明最快了：</p>
+<pre class="literal-block">
+[ftp]
+   comment = Public FTP Shared Data
+   browseable = yes
+   path = /var/local/share/ftp
+   guest ok = yes
+   writable = yes
+   create mode = 664
+   directory mode = 775
+</pre>
+<p>假設我們要把公開的 FTP 伺服器上的資料也讓 Samba 去分享，就可以像上面這樣寫；假設 <tt class="docutils literal"><span class="pre">/var/local/share/ftp</span></tt> 是 FTP 的根目錄。</p>
+<p>這個新的 <tt class="docutils literal"><span class="pre">[ftp]</span></tt> 節區和之前的 <tt class="docutils literal"><span class="pre">[home]</span></tt> 節區只多了兩個選項設定：</p>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">path</span></tt>：設定所要分享出去的路徑，要是一個目錄。``[home]`` 雖然也是個目錄分享，但因為它特別用來分享使用者家目錄footnote{可以說 <tt class="docutils literal"><span class="pre">home``是</span> <span class="pre">Samba</span> <span class="pre">的保留字；我們沒辦法把分享目錄取名作</span> <span class="pre">home，它一定會代表使用者的家目錄。}，所以不必設定</span> <span class="pre">``path</span></tt>。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">guest</span> <span class="pre">ok</span></tt>：允許 guest 存取。這個選項要配合 <tt class="docutils literal"><span class="pre">[global]</span></tt> 節區裡的 <tt class="docutils literal"><span class="pre">map</span> <span class="pre">to</span> <span class="pre">guest</span></tt> 設定才有效；如果沒有設定 <tt class="docutils literal"><span class="pre">map</span> <span class="pre">to</span> <span class="pre">guest</span></tt> (即採用預設值 <tt class="docutils literal"><span class="pre">never</span></tt>)，則在 <tt class="docutils literal"><span class="pre">security</span></tt> 沒有設為 <tt class="docutils literal"><span class="pre">share</span></tt> 的情況下 (例如我們所設的 <tt class="docutils literal"><span class="pre">user</span></tt>)，就會因為在伺服器上沒有 guest 身份的存在，而不允許 guest 存取。</p>
+<p>這個選項牽涉到 <tt class="docutils literal"><span class="pre">[global]</span></tt> 的設定，比較複雜，不過對可以公開存取的目錄分享卻很有用。</p>
+</li>
+</ul>
+<p>如果我們希望只讓伺服器上的使用者存取某個目錄，則應該把 <tt class="docutils literal"><span class="pre">guest</span> <span class="pre">ok</span> <span class="pre">=</span> <span class="pre">yes</span></tt> 去掉：</p>
+<pre class="literal-block">
+[share]
+   comment = Co-workers Shared Data
+   browseable = yes
+   path = /var/local/share
+   writable = yes
+   create mode = 664
+   directory mode = 775
+</pre>
+<p>我再列一次設定，是為了方便讀者你來抄寫。</p>
+<p>最後不要忘了 <tt class="docutils literal"><span class="pre">/etc/init.d/samba</span> <span class="pre">restart</span></tt>，否則設定不會生效。</p>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id6" name="id6">4&nbsp;&nbsp;&nbsp;認證設定</a></h1>
+<p>基本上，到目前為止雖然你一個個地跟著作了設定，仍然是沒辦法進入 Samba 系統的。這不是因為設定有誤或是有缺，而是因為我們沒有建立可以登入 Samba 的帳號。這個重點我們要注意到：為了使用 Samba 伺服器，使用者必需要具備 Samba 專用的帳號 (與密碼)。</p>
+<p>Samba 提供了兩個帳號管理的工具：<tt class="docutils literal"><span class="pre">smbpasswd</span></tt> 和 <tt class="docutils literal"><span class="pre">pdbedit</span></tt>。其中 <tt class="docutils literal"><span class="pre">smbpasswd</span></tt> 可以讓一般的使用者更改他們的 Samba 密碼，而 <tt class="docutils literal"><span class="pre">pdbedit</span></tt> 只能給 root 用來管理系統。</p>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="id7" name="id7">4.1&nbsp;&nbsp;&nbsp;密碼後端</a></h2>
+<p>所謂的密碼後端 (password backend)，簡單來說就是儲存密碼的方式。Samba 的密碼後端，其地位有點類似目前 Debian 所使用的 PAM (Pluggable Authentication Module)。在 <tt class="docutils literal"><span class="pre">smb.conf</span></tt> 中，是用 <tt class="docutils literal"><span class="pre">passwd</span> <span class="pre">backend</span></tt> 來設定密碼後端的。</p>
+<p>Samba3 新增了多種儲存密碼的方式，最主要的強化是能夠儲存 MS Windows SAM (Security Account Manager)；有了 SAM，才能讓新版 Windows (2000, XP) 客戶端對 Samba 作進階的控制。Debian 為我們預設的後端是 <tt class="docutils literal"><span class="pre">tdbsam</span></tt>footnote{沒有設定 <tt class="docutils literal"><span class="pre">passwd</span> <span class="pre">backend</span></tt> 的話，預設值是 <tt class="docutils literal"><span class="pre">smbpasswd</span></tt>。}，適合像上面所組態的這種獨立伺服器使用。tdbsam 這個名字也許看起來有點奇怪，其中的 tdb 代表的是 Trivial DataBase，而 sam 就是 MS Windows Security Account Manager。所以，它是一個以檔案為儲存媒體的後端。</p>
+<p>Samba3 另外新增了以下的後端：</p>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">ldapsam</span></tt>： 用自訂的 schema 把 SAM 資訊儲存在 OpenLDAP 伺服器裡面。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">mysql</span></tt>： 把 SAM 儲存在 MySQL 資料庫裡面。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">xmlsam</span></tt>： 把 SAM 用 XML 的格式儲存在檔案裡面；這是一個特別的後端。</p>
+<p>xmlsam 不能夠用來進行一般的認證 (authentication) 工作，只是 <tt class="docutils literal"><span class="pre">pdbedit</span></tt> 所支援的一種匯出格式。這個後端最主要的功能是用來當作密碼資料庫轉換時的中繼檔，因為 XML 檔案是可以手動編輯的。</p>
+</li>
+</ul>
+<p>為了保持向下相容性，Samba3 也支援一些舊的後端。不過，除非是使用了舊的 Samba 或 Windows，一定要用這些舊的認證後端，否則都應該換成上述的新式後端。這些相容的舊後端有三個：</p>
+<ul>
+<li><p class="first">純文字： 我們當然不能把後端設成這三個中文字囉，基本上它並不是一個真正的後端，而是經過設定，讓 Samba 可以接受從網路上傳來的純文字 (未加密) 密碼，然後直接和系統的密碼檔進行比對。</p>
+<p>只有舊的 Windows 使用這種認證方式，新的 Windows (NT4, 2000, XP) 都只會傳遞加密過的密碼了。如果你想使用這種「textbf{不被建議}」的方式，要把 <tt class="docutils literal"><span class="pre">encrypt</span> <span class="pre">password</span></tt> 設為 <tt class="docutils literal"><span class="pre">no</span></tt>。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">smbpasswd</span></tt>： 使用 Unix passwd-like 的傳統 <tt class="docutils literal"><span class="pre">smbpasswd</span></tt> 檔進行密碼儲存，因此不支援 SAM。如果是從舊版的 Samba (2.2) 昇級上來，原本的密碼檔就是這種格式，但我們可以使用之後會討論的 <tt class="docutils literal"><span class="pre">pdbedit</span></tt> 來作密碼轉檔，不必留用這種舊的後端。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">ldapsam_compat</span></tt>： 與舊版 Samba (2.2) 的 LDAP 相容的後端。</p>
+</li>
+</ul>
+<p><tt class="docutils literal"><span class="pre">smb.conf</span></tt> 中 <tt class="docutils literal"><span class="pre">passdb</span> <span class="pre">backend</span></tt> 所設定的後端可以不只一個，而且也可以設定多個帶有不同參數的相同後端。關於這方面的設定，請參考官方的 HOWTO 及 <tt class="docutils literal"><span class="pre">smb.conf</span> <span class="pre">(5)</span></tt>。</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="pdbedit" name="pdbedit">4.2&nbsp;&nbsp;&nbsp;用 <tt class="docutils literal"><span class="pre">pdbedit</span></tt> 管理帳號資料</a></h2>
+<p><tt class="docutils literal"><span class="pre">pdbedit</span></tt> 只能給 root 用，它可以新增、移除與修改使用者帳號，當然也可以檢視密碼檔的內容；``pdbedit`` 也可以用來處理密碼後端的內容，執行匯入、匯出與轉檔動作。``pdbedit`` 應該要以執行密碼後端資料庫本身的管理作業為主；日常的系統管理比較適合交給 <tt class="docutils literal"><span class="pre">smbpasswd</span></tt> 來進行。</p>
+<p>我們先用幾個常見的動作來討論 <tt class="docutils literal"><span class="pre">pdbedit</span></tt> 的密碼資料處理：</p>
+<ul>
+<li><p class="first">新增使用者：我們可以用</p>
+<pre class="literal-block">
+$ pdbedit -au username
+</pre>
+<p>來建立一個名為 <tt class="docutils literal"><span class="pre">username</span></tt> 的帳號。在新建帳號的時候，<tt class="docutils literal"><span class="pre">pdbedit</span></tt> 會詢問要設定的密碼。</p>
+<p><tt class="docutils literal"><span class="pre">pdbedit</span></tt> 只會處理與密碼後端有關的作業。之後我們會提到如何讓 Debian 系統的密碼和 Samba 同步，但如果我們用 <tt class="docutils literal"><span class="pre">pdbedit</span></tt> 來設定密碼的話，同步設定是textbf{不會}起作用的。</p>
+</li>
+<li><p class="first">刪除使用者：以下的指令會從密碼後端裡刪除使用者：</p>
+<pre class="literal-block">
+$ pdbedit -xu username
+</pre>
+</li>
+<li><p class="first">列出使用者：如果我們用</p>
+<pre class="literal-block">
+$ pdbedit -L
+</pre>
+<p>就會列出密碼後端所儲存的使用者。``pdbedit`` 支援好幾種表列模式，我們可以用最詳細的方式來檢視使用者資訊：</p>
+<pre class="literal-block">
+$ pdbedit -L -v
+</pre>
+<p><tt class="docutils literal"><span class="pre">-L</span> <span class="pre">-v</span></tt> 也可以連在一起寫成 <tt class="docutils literal"><span class="pre">-Lv</span></tt>。如果我們只想要檢視個別使用者的資訊，加上 <tt class="docutils literal"><span class="pre">-u</span></tt> 參數：</p>
+<pre class="literal-block">
+$ pdbedit -Lvu username
+Unix username:        username
+NT username:
+Account Flags:        [U          ]
+User SID:             S-1-5-21-3474209633-123551325-2309818598-1020
+Primary Group SID:    S-1-5-21-3474209633-123551325-2309818598-1021
+Full Name:            Tutha de Danann,,,
+Home Directory:       \\hostname\username
+HomeDir Drive:
+Logon Script:
+Profile Path:         \\hostname\username\profile
+Domain:               HOSTNAME
+Account desc:
+Workstations:
+Munged dial:
+Logon time:           0
+Logoff time:          Sat, 14 Dec 1901 04:45:51 GMT
+Kickoff time:         Sat, 14 Dec 1901 04:45:51 GMT
+Password last set:    Thu, 07 Apr 2005 14:24:26 GMT
+Password can change:  Thu, 07 Apr 2005 14:24:26 GMT
+Password must change: Sat, 14 Dec 1901 04:45:51 GMT
+Last bad password   : 0
+Bad password count  : 0
+Logon hours         : FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+</pre>
+<p>覺得 <tt class="docutils literal"><span class="pre">-v</span></tt> 給的結果太長了嗎？``-w`` 參數允許我們指定使用舊的 <tt class="docutils literal"><span class="pre">smbpasswd</span></tt> 格式：</p>
+<pre class="literal-block">
+$ pdbedit -Lwu username
+username:0:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX:
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX:[DU         ]:LCT-00000000:
+</pre>
+<p>列出的兩行結果應該是一行，因為太長了，我把它拆成兩行給你看。如果 username 沒有設定密碼，就會出現像上面的叉叉；有設定密碼的話，那些叉叉應該要顯示為加密過的密碼。</p>
+</li>
+</ul>
+<p>如果要管理密碼後端資料庫本身的話，可以利用</p>
+<pre class="literal-block">
+$ pdbedit -e backend:/path
+</pre>
+<p>來匯出目前使用中的資料，而以</p>
+<pre class="literal-block">
+$ pdbedit -i backend:/path
+</pre>
+<p>來進行匯入。``backend`` 部分可以是任何有效的後端；``/path`` 部分則用來指定後端檔案存放的位置。如果使用 LDAP 或 MySQL 作為後端，則要另外加上相關的參數 (請參考 <tt class="docutils literal"><span class="pre">pdbedit</span> <span class="pre">(5)</span></tt> 與官方的 HOWTOcite{bib:samba.official.howto})。</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="smbpasswd" name="smbpasswd">4.3&nbsp;&nbsp;&nbsp;用 <tt class="docutils literal"><span class="pre">smbpasswd</span></tt> 管理密碼</a></h2>
+<p><tt class="docutils literal"><span class="pre">smbpasswd</span></tt> 這個工具的作用方式以及用途和 <tt class="docutils literal"><span class="pre">pdbedit</span></tt> 是不一樣的。``pdbedit`` 直接和密碼後端溝通，而 <tt class="docutils literal"><span class="pre">smbpasswd</span></tt> 則會和 Samba 伺服器通訊。所以，如果要使用 <tt class="docutils literal"><span class="pre">smbpasswd</span></tt> 來管理帳號與密碼的話，本地的 Samba 伺服器一定要執行起來。通常我們會用 <tt class="docutils literal"><span class="pre">smbpasswd</span></tt> 來進行日常的帳號密碼管理工作，也讓一般使用者更改他們的密碼。</p>
+<p>如果是 root，可以用 <tt class="docutils literal"><span class="pre">smbpasswd</span></tt> 來新增與移除帳號，或是修改使用者的密碼：</p>
+<ul>
+<li><p class="first">新增帳號：使用以下指令：</p>
+<pre class="literal-block">
+$ smbpasswd -a username
+</pre>
+<p>然後會提示輸入新使用者的密碼。</p>
+</li>
+<li><p class="first">刪除帳號：使用 <tt class="docutils literal"><span class="pre">-x</span></tt> 參數：</p>
+<pre class="literal-block">
+$ smbpasswd -x username
+</pre>
+</li>
+<li><p class="first">變更密碼：如果我們想要更改 username 這個帳號的密碼，直接用</p>
+<pre class="literal-block">
+$ smbpasswd username
+</pre>
+<p>即可。</p>
+</li>
+</ul>
+<p>非 root 的一般使用者不能夠使用 <tt class="docutils literal"><span class="pre">smbpasswd</span></tt> 的管理功能 (如 <tt class="docutils literal"><span class="pre">-a</span></tt> 與 <tt class="docutils literal"><span class="pre">-x</span></tt> 參數)，但可以用來更改自己的密碼；只要在命令列下輸入</p>
+<pre class="literal-block">
+$ smbpasswd
+</pre>
+<p>即可。用法和 <tt class="docutils literal"><span class="pre">passwd</span></tt> 是一樣的。</p>
+<p><tt class="docutils literal"><span class="pre">smbpasswd</span></tt> 還有其它的功能，請參考 <tt class="docutils literal"><span class="pre">smbpasswd</span> <span class="pre">(8)</span></tt>。</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="debian" name="debian">4.4&nbsp;&nbsp;&nbsp;與 Debian 主機密碼同步</a></h2>
+<p>利用 <tt class="docutils literal"><span class="pre">pam_smbpass.so</span></tt> 這個 PAM 模組，我們可以讓 Samba 的密碼與 Debian 主機的密碼 (即系統的密碼，存在 <tt class="docutils literal"><span class="pre">/etc/passwd</span></tt> 等相關檔案內) 同步。我們要安裝 <tt class="docutils literal"><span class="pre">libpam-smbpass</span></tt> 這個套件：</p>
+<pre class="literal-block">
+$ apt-get install libpam-smbpass
+</pre>
+<p>想要讓使用者在以 <tt class="docutils literal"><span class="pre">passwd</span></tt> 修改 Debian 系統密碼的時候同時更改 Samba 的密碼，我們需要</p>
+<pre class="literal-block">
+password   required     pam_smbpass.so nullok use_authtok try_first_pass
+</pre>
+<p>這樣的 PAM 組態。因為 Debian 把許多子系統的 PAM 設定分散在 <tt class="docutils literal"><span class="pre">/etc/pam.d</span></tt> 裡的不同檔案，如果我們希望不管用哪一個子系統更改密碼的話，應該要把上面的設定寫到 <tt class="docutils literal"><span class="pre">/etc/pam.d</span></tt> 之下的 <tt class="docutils literal"><span class="pre">common-password</span></tt> 裡面；這個檔案是標準的密碼更新設定，會被大部分程式個別的 PAM 設定檔引入。</p>
+<p>只作了上面這一項設定的話，那麼必須要在使用者更新系統密碼的時候，才會對 Samba 的密碼進行同步。我們可以把</p>
+<pre class="literal-block">
+auth       optional    pam_smbpass.so migrate
+</pre>
+<p>寫到 <tt class="docutils literal"><span class="pre">/etc/pam.d</span></tt> 裡的 <tt class="docutils literal"><span class="pre">common-auth</span></tt> 裡，如此一來只要登入成功，就會用該行程的資料來更新 Samba 的密碼。然而，如果我們不希望所有服務footnote{或是說所有會引入 <tt class="docutils literal"><span class="pre">common-auth</span></tt> 的服務。}的登入都會更新 Samba 密碼，也可以把設定個別寫到要用來更新 Samba 密碼的那些服務的 PAM 設定檔裡面；譬如 <tt class="docutils literal"><span class="pre">ssh</span></tt> 就很合適。</p>
+<p>使用 <tt class="docutils literal"><span class="pre">pam_smbpass.so</span></tt> 進行密碼同步化的時候要注意一點：它只能同步與 Debian 系統同名的 Samba 帳號；如果兩者的帳號名稱不同，就必須手動設定密碼。幸好這種狀況並不多見，一般並不會遇到。</p>
+<p>能不能把 Samba 的帳號用在 Debian 系統上呢？這種應用需要組態 NT Domain (網域)，不在本章要討論的範圍之內。不過，如果我們把 Samba 組態成網域伺服器，那麼的確是可以這麼作的；雖然可能沒有這樣組態的必要。</p>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id8" name="id8">5&nbsp;&nbsp;&nbsp;檔案的權限設定</a></h1>
+<p>Samba 最主要的用途就是分享檔案，尤其是與他人分享檔案。不過，當系統不只一人使用時，在檔案的權限管理上就得要多加注意。一方面不能過於鬆散，造成資料的失竊或損壞；另一方面卻也不能過於嚴格，讓資料存取不便。</p>
+<p>本節會討論關於 Windows 端存取 Samba 端檔案時權限設定的一些現象，但不會探討這些現象背後的機制。至於要如何保障資料的安全性，以及如何讓檔案伺服器好用，那就是 SA 要深入研究的問題了。</p>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="windows-samba" name="windows-samba">5.1&nbsp;&nbsp;&nbsp;從 Windows 端設定 Samba 端的權限</a></h2>
+<p>因為 Debian 是一套 Linux，自然沒辦法支援所有 Windows 複雜的 ACL (Access Control List)。就算裝了 Samba 也一樣。如果我們從 Windows 裡去檢視一個權限設定是最常見的 0755 的檔案或目錄，會發現它全都被顯示為 &quot;Special Permissions&quot;。不過，我們還是可以從 Windows 裡設定 Samba 裡分享檔案的權限。</p>
+<p>Debian 的檔案權限只分成使用者、群組、其它等三類，所以我們大概也只會在 Windows 的 Security 分頁裡看到三個項目，分別是擁有者本身、檔案所屬的群組以及 Everyone。又因為 Debian 的檔案權限只有 <tt class="docutils literal"><span class="pre">r</span></tt> (讀取)、<tt class="docutils literal"><span class="pre">w</span></tt> (寫入) 和 <tt class="docutils literal"><span class="pre">x</span></tt> (執行) 等三個，所以能在 Windows 裡面有效的也只剩 Read、Read &amp; Execute 與 Write 這三個權限。</p>
+<p>以上就是可以在 Windows Explorer 對 Samba 作的權限設定，和 Windows 所具備的 ACL 比起來實在是太簡單了 (實在很難說這算是缺點還是優點)。不過我們在用 Windows 來設定權限的時候要注意一下，在設定完畢之後，Security 分頁裡的設定常常會變回 &quot;Special Permissions&quot;。這並不是設定失敗；如果進入 Advanced 畫面，就會看到正確的設定了。</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="id9" name="id9">5.2&nbsp;&nbsp;&nbsp;共用檔案的注意事項</a></h2>
+<p>當我們使用 Samba 來與他人分享檔案時，最好在共享的 Samba 目錄上設定 setgid 權限cite{bib:debian.ref}，讓這個目錄裡面所有新建檔案 (或子目錄) 的所屬群組，都會被設為該目錄的所屬群組；如此一來比較不會發生使用者 A 沒辦法存取使用者 B 所建檔案的情況。</p>
+<p>另外，新建檔案與目錄的權限是在 <tt class="docutils literal"><span class="pre">smb.conf</span></tt> 裡的 <tt class="docutils literal"><span class="pre">create</span> <span class="pre">mask</span></tt> 和 <tt class="docutils literal"><span class="pre">directory</span> <span class="pre">mask</span></tt> 決定的，針對不同性質的分享目錄，應該要有合適的設定。</p>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id10" name="id10">6&nbsp;&nbsp;&nbsp;結語</a></h1>
+<p>本章我們討論了以 Samba 作為一台 Windows Network 獨立伺服器應有的安裝與設定。當然 Samba 還具有與 Windows NT Domain 整合的能力，不過我們把主題集中在 Samba 的基本組態上面；對許多 Linux-Windows 整合應用來說，這種組態是最適當的。</p>
+<p>關於本章的 Samba 基本組態，最重要的就是目錄的分享和使用者認證的設定；掌握了這兩個方面，就可以輕鬆愉快地使用 Samba 了。</p>
+</div>
+</div>
+</body>
+</html>

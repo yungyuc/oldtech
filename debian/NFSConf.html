@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh_tw" lang="zh_tw">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.4: http://docutils.sourceforge.net/" />
+<title>NFS 檔案分享</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger
+:Contact: goodger@users.sourceforge.net
+:Date: $Date: 2005-06-06 15:09:07 +0200 (Mon, 06 Jun 2005) $
+:Version: $Revision: 3442 $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+*/
+
+/* "! important" is used here to override other ``margin-top`` and
+   ``margin-bottom`` styles that are later in the stylesheet or 
+   more specific.  See http://www.w3.org/TR/CSS1#the-cascade */
+
+body {
+  font-family: Calibri, Georgia, Times New Roman, Times,  Free Times;
+  background-color: #666666;
+}
+
+div.document {
+  background-color: white;
+  clear: both;
+  width: 50em;
+  margin: 0 auto 0 auto;
+  padding: 0.5em;
+  border: 2px ridge black;
+}
+
+.first {
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em;
+  border-top: 2px solid #888888;
+  border-bottom: 2px solid #888888;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin-left: 1em ;
+  border: medium outset ; 
+  padding: 1em ;
+  background-color: #ffffee ;
+  /* width: 40% ; */
+  /* float: right ; */
+ /*  clear: right */ }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+div.section h1, div.section h2, div.section h3, 
+div.section h4, div.section h5, div.section h6 {
+  padding-left: 0.3em;
+  padding-bottom: 0.3em;
+  border-left: 2px solid gray;
+  border-bottom: 2px solid gray;
+}
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em; }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left {
+  clear: left }
+
+img.align-right {
+  clear: right }
+
+img.borderless {
+  border: 0 }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font-family: serif ;
+  font-size: 100% }
+
+pre.line-block {
+  font-family: serif ;
+  font-size: 100% }
+
+pre.literal-block, pre.doctest-block {
+  white-space: pre-wrap;       /* css-3 */
+  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word;       /* Internet Explorer 5.5+ */
+  margin-left: 2em ;
+  margin-right: 2em ;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  padding-left: 1em;
+  padding-right: 1em;
+  border: 1px dotted black;
+}
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid thin gray }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  border-spacing: 0;
+  border: 1 solid black;
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-top: solid thin black;
+  border-left: solid thin black }
+
+table.footnote td.label a {
+  text-decoration: none;
+}
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  border: 0; 
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+tt.docutils {
+}
+
+tt.ltst {
+  font-weight: bold;
+}
+
+tt.ltem {
+  font-style: italic;
+}
+
+ul.auto-toc {
+  list-style-type: none }
+
+/* vim: set ai et nu sw=2 ts=2: */
+
+</style>
+</head>
+<body>
+<div class="document" id="nfs">
+<h1 class="title">NFS 檔案分享</h1>
+<table class="docinfo" frame="void" rules="none">
+<col class="docinfo-name" />
+<col class="docinfo-content" />
+<tbody valign="top">
+<tr class="field"><th class="docinfo-name">author:</th><td class="field-body">Yung-Yu Chen (yungyuc) <a class="reference" href="http://blog.seety.org/everydaywork/">http://blog.seety.org/everydaywork/</a> &lt;<a class="reference" href="mailto:yyc&#64;seety.org">yyc&#64;seety.org</a>&gt;</td>
+</tr>
+<tr class="field"><th class="docinfo-name">copyright:</th><td class="field-body">© 2006, all rights reserved</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="id1" name="id1">目錄</a></p>
+<ul class="auto-toc simple">
+<li><a class="reference" href="#id2" id="id10" name="id10">1&nbsp;&nbsp;&nbsp;NFS 的用途</a></li>
+<li><a class="reference" href="#id3" id="id11" name="id11">2&nbsp;&nbsp;&nbsp;掛載 NFS</a></li>
+<li><a class="reference" href="#id4" id="id12" name="id12">3&nbsp;&nbsp;&nbsp;伺服端設定</a></li>
+<li><a class="reference" href="#id7" id="id13" name="id13">4&nbsp;&nbsp;&nbsp;客戶端設定</a></li>
+<li><a class="reference" href="#id8" id="id14" name="id14">5&nbsp;&nbsp;&nbsp;關於檔案權限的注意事項</a></li>
+<li><a class="reference" href="#id9" id="id15" name="id15">6&nbsp;&nbsp;&nbsp;結語</a></li>
+</ul>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id2" name="id2">1&nbsp;&nbsp;&nbsp;NFS 的用途</a></h1>
+<p>NFS 是 Network File System (網路檔案系統) 的縮寫。在 2.6 版的 Linux 核心裡已經包含了 NFS 掛載使用與伺服的功能；Debian 預設的核心版本 (kernel-image) 也是開啟的 (compiled-in)。</p>
+<p>NFS 為網路系統管理人員提供了網路檔案共享的方便機制。透過 NFS，主機可以「匯出」本地的磁碟為共享的網路磁碟，而其它被接受的客戶端則能夠使用這些共享磁碟上的檔案資源；NFS 客戶端可以和像一般磁碟一樣掛載這些網路磁碟，對其中的檔案執行輸出入、改變權限等等各種操作。NFS 網路檔案系統所提供的輸出入功能與本地磁碟仍有差異，譬如沒有辦法建立 memory-mapped 檔案，但基本上在大部分的使用狀況下都可以被視為與本地檔案系統同等的存在。NFS 網路磁碟系統最極端的應用就是無磁碟工作站；這種無磁碟工作站主機可以不需要任何本地的儲存裝置，完全透過 NFS 來存放執行所需的檔案資料。</p>
+<p>除了無磁碟工作站這種極端 (但很有用！) 的案例不談，NFS 廣泛使用在以下的環境裡：</p>
+<ul>
+<li><p class="first">Linux 叢集的工作資料共享。叢集是一組目的相同或類似的主機結合而成的群體單位。因為各主機的作用或目的相同，所以通常都需要分享 (處理) 共同的資料，此時就會在某一台主機上架設 NFS 來提供檔案服務，供其它節點主機使用。</p>
+<p>這樣作除了可以有資料一致性的好處之外，因為資料集中在一台或有限的主機上，我們可以利用比較先進與穩定的硬體來增加資料存取的效率與可靠度。通常具備 NFS 檔案伺服功能的主機都會配備 RAID 磁碟陣列，而視效能與可靠度的要求來進行不同的組態。</p>
+</li>
+<li><p class="first">網路版程式。有許多特別用途的套裝軟體會被我們安裝在 NFS 上面，統一管理。這是因為這些套裝軟體多半很貴，而且安裝需要特殊的知識，所以由管理者在主機上安裝完畢，再用 NFS 分享出來，讓客戶端共享使用。</p>
+<p>這些程式多半用於科學與工程計算分析，或是多媒體處理上。</p>
+</li>
+<li><p class="first">檔案資源庫。組織內部或辦公室如果有很多台 Debian 的話，我們常常會在本地建立一個 apt 資料庫的映像，方便使用；這種 apt 映像就可以用 NFS 分享出來。其它譬如美工圖庫、影像、影片資料等資料，在多人團隊裡也可以用 NFS 進行資源分享。</p>
+<p>因為我們現在常見的辦公室軟體多半都在 Windows 下執行，所以辦公室或多媒體檔案資料或許是用 Samba 來分享比較合適；但一般的 Linux 主機間就可以用 NFS 來共用同一份資料。</p>
+</li>
+</ul>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id3" name="id3">2&nbsp;&nbsp;&nbsp;掛載 NFS</a></h1>
+<p>經過長時間的演進與修改，Linux 已經把 NFS 的伺服與客戶端程式整合到核心裡面了。如果我們想要使用其它 NFS 伺服器提供的匯出共享，直接使用標準的基本 <tt class="docutils literal"><span class="pre">mount</span></tt> 工具程式進行掛載的動作即可：</p>
+<pre class="literal-block">
+$ mount hostname:/export/path /mount/point
+</pre>
+<p>掛載的語法是：</p>
+<pre class="literal-block">
+mount &lt;file system&gt; &lt;mount point&gt;
+</pre>
+<p>如果更仔細一點的話，我們應該加上指定掛載型態 (為 NFS) 的參數：</p>
+<pre class="literal-block">
+$ mount -t nfs hostname:/export/path /mount/point
+</pre>
+<p>只不過因為我們的 <tt class="docutils literal"><span class="pre">&lt;file</span> <span class="pre">system&gt;</span></tt> 用了 NFS 的語法，``mount`` 程式夠聰明，知道要用 <tt class="docutils literal"><span class="pre">nfs</span></tt> 型態來掛載，就可以省略 <tt class="docutils literal"><span class="pre">-t</span> <span class="pre">nfs</span></tt>。</p>
+<p>指令行的寫法如上，如果要把掛載動作寫進 <tt class="docutils literal"><span class="pre">fstab</span></tt> 裡的話，語法如下：</p>
+<pre class="literal-block">
+&lt;file system&gt; &lt;mount point&gt; &lt;type&gt; &lt;options&gt; &lt;dump&gt; &lt;pass&gt;
+</pre>
+<p>一樣，<tt class="docutils literal"><span class="pre">&lt;file</span> <span class="pre">system&gt;</span></tt> 是要被掛載的網路分享；``&lt;mount point&gt;`` 是本地的掛載點。這裡的 <tt class="docutils literal"><span class="pre">&lt;type&gt;</span></tt> 不能省略，一定要寫成 <tt class="docutils literal"><span class="pre">nfs</span></tt>，而 <tt class="docutils literal"><span class="pre">&lt;options&gt;</span></tt> 寫成 <tt class="docutils literal"><span class="pre">defaults</span></tt> 就可以留為預設值 (如同直接用 <tt class="docutils literal"><span class="pre">mount</span></tt> 不加 <tt class="docutils literal"><span class="pre">-o</span></tt> 指定參數)。NFS 掛載的 <tt class="docutils literal"><span class="pre">&lt;dump&gt;</span></tt> 一般設為 0，不必傾印；因為我們不會對 NFS 作 <tt class="docutils literal"><span class="pre">fsck</span></tt> (磁碟檢查)，所以設定檢查順序的 <tt class="docutils literal"><span class="pre">&lt;pass&gt;</span></tt> 參數並不重要，設 0 即可。</p>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id4" name="id4">3&nbsp;&nbsp;&nbsp;伺服端設定</a></h1>
+<p>在 Debian 下有兩種 NFS 伺服程式：<tt class="docutils literal"><span class="pre">nfs-kernel-server</span></tt> 與 <tt class="docutils literal"><span class="pre">nfs-user-server</span></tt>。一般我們會安裝 kernel server；user server 功能雖然比較多，但速度慢、穩定性比較差。除非有特別的需要，否則應該用 kernel server。</p>
+<p>套件安裝好了以後，可以用</p>
+<pre class="literal-block">
+$ /etc/init.d/nfs-kernel-server start
+</pre>
+<p>來啟動伺服器；通常套件在安裝完畢之後自己就會啟動。我們可以用 <tt class="docutils literal"><span class="pre">exportfs</span></tt> 工具來檢視本機所分享出來的 NFS，在剛裝好 NFS 伺服器的現在，應該不會印出任何訊息；也就是沒有分享。</p>
+<p>NFS 的分享設定檔寫在 <tt class="docutils literal"><span class="pre">/etc/exports</span></tt>，裡面的每一行代表一個分享，語法如下：</p>
+<pre class="literal-block">
+&lt;export/share point&gt; &lt;client list&gt;
+</pre>
+<p>前面是本機要分享出去的目錄；後面是允許連線的客戶端位址。兩者間以空白分隔，而 <tt class="docutils literal"><span class="pre">&lt;client</span> <span class="pre">list&gt;</span></tt> 可以列出一組以上的客戶端位址，也以空白分隔。以 <tt class="docutils literal"><span class="pre">#</span></tt> 開頭的文字代表註解，並不生效。</p>
+<p>NFS 伺服器的 <tt class="docutils literal"><span class="pre">&lt;export</span> <span class="pre">point&gt;</span></tt> 會把本機檔案系統分享出去；譬如我們要分享 <tt class="docutils literal"><span class="pre">/var/local/data</span></tt> 目錄，其它的客戶端就會看到這個目錄。這textbf{和 Windows 的資源分享不一樣}，不能指定分享出去的名稱。來舉個例子看看：</p>
+<pre class="literal-block">
+/usr    node*(rw,sync,no_root_squash)
+/home   node*(rw,sync,no_root_squash)
+</pre>
+<p>這三行設定指定分享 <tt class="docutils literal"><span class="pre">/usr</span></tt> 與 <tt class="docutils literal"><span class="pre">/home</span></tt> 目錄給所有以 <tt class="docutils literal"><span class="pre">node</span></tt> 開頭的主機，並且設定 <tt class="docutils literal"><span class="pre">rw,sync,no_root_squash</span></tt> 選項。客戶端列表可以使用萬用字元，而有多組客戶端並以空白分隔時，每組均需在括號中寫明 NFS 選項 (不寫表示使用預設值)。</p>
+<p>在表列客戶端的時候可以用 IP 或是主機名稱；主機名稱的來源可以是 <tt class="docutils literal"><span class="pre">hosts</span></tt> 檔案或 DNS 反查 (如果使用 DNS 反查，就要確定反查的來源是可靠的)。``192.168.101.*`` 或 <tt class="docutils literal"><span class="pre">*.myhost.com</span></tt>, <tt class="docutils literal"><span class="pre">cluster*</span></tt> 等都是有效的客戶端名稱。然而，在用主機名稱進行指定的時候，萬用字元寫作前飾詞比寫作後飾詞要來得安全，比較可以避免讓未經授權的主機透過外部 DNS 反查而意外獲得權限的機會。用 IP 指定的話比較不會有這個狀況發生。</p>
+<p>一般我們常用的 NFS 選項有：</p>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">ro</span></tt>, <tt class="docutils literal"><span class="pre">rw</span></tt>：指定此分享可否寫入。``ro`` 表示唯讀，客戶端不能寫入；<tt class="docutils literal"><span class="pre">rw</span></tt> 表示客戶端可以寫入。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">sync</span></tt>, <tt class="docutils literal"><span class="pre">async</span></tt>：同步 (sync) 與非同步 (async) 模式，擇一使用。在同步模式，存取 NFS 的程式須等到實際讀寫動作完成後才返回執行；非同步模式則沒有這個要求，程式送出存取要求之後就可以繼續執行，加快系統運作的效率。基本上非同步模式雖然效率高，但會增加系統不穩定的因素，當系統當機 (無論是伺服或客戶端) 的時候，很容易造成磁碟上的資料錯誤，所以 Debian 預設是同步模式。</p>
+<p>除非特別有需要，否則不建議使用非同步模式。如果沒有指定 <tt class="docutils literal"><span class="pre">sync</span></tt> 或 <tt class="docutils literal"><span class="pre">async</span></tt>，NFS 伺服器在啟動的時候會印出警告訊息，所以我們應該在所有的 export point 上指定 <tt class="docutils literal"><span class="pre">sync</span></tt> 選項。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">root_squash</span></tt>, <tt class="docutils literal"><span class="pre">no_root_squash</span></tt>：NFS 在預設的狀況下會把超級使用者帳號 root 的 UID/GID (0/0) 對應到 <tt class="docutils literal"><span class="pre">nobody</span></tt> 去，這就是 <tt class="docutils literal"><span class="pre">root_squash</span></tt>。我們可以用 <tt class="docutils literal"><span class="pre">no_root_squash</span></tt> 關掉這個功能。</p>
+<p>通常是無磁碟工作站才需要 <tt class="docutils literal"><span class="pre">no_root_squash</span></tt>。</p>
+</li>
+</ul>
+<p>設定好了以後，我們執行</p>
+<pre class="literal-block">
+$ /etc/init.d/nfs-kernel-server restart
+</pre>
+<p>重新啟動 NFS 伺服器，或是用</p>
+<pre class="literal-block">
+$ exportfs -rv
+</pre>
+<p>指示 NFS 伺服器重新讀取 <tt class="docutils literal"><span class="pre">/etc/exports</span></tt> 進行分享<a class="footnote-reference" href="#id6" id="id5" name="id5"><sup>1</sup></a>。</p>
+<table class="docutils footnote" frame="void" id="id6" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id5" name="id6">[1]</a></td><td><tt class="docutils literal"><span class="pre">nfs-kernel-server</span> <span class="pre">reload</span></tt> 也會呼叫 <tt class="docutils literal"><span class="pre">exportfs</span> <span class="pre">-r</span></tt> 進行重新分享。</td></tr>
+</tbody>
+</table>
+<p>用 <tt class="docutils literal"><span class="pre">showmount</span> <span class="pre">-e</span></tt> 可以檢視任何一台主機的 NFS 分享：</p>
+<pre class="literal-block">
+$ showmount myhost -e
+Export list for myhost:
+/home myhost.*(rw,wdelay,root_squash)
+</pre>
+<p>它會實際與 NFS 伺服器連線，所以可以用來檢查我們的組態是否正確。如果一切都如我們的預期，基本的 NFS 伺服器組態就算是完成了。關於更進一步的資訊，請參考 <tt class="docutils literal"><span class="pre">exports</span> <span class="pre">(5)</span></tt>, <tt class="docutils literal"><span class="pre">exportfs</span> <span class="pre">(8)</span></tt> 與 <tt class="docutils literal"><span class="pre">showmount</span> <span class="pre">(8)</span></tt>。</p>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id7" name="id7">4&nbsp;&nbsp;&nbsp;客戶端設定</a></h1>
+<p>使用 NFS 的客戶端直接照一般的方式掛載檔案系統即可，以下列出常用的 NFS 掛載選項：</p>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">wsize</span></tt>, <tt class="docutils literal"><span class="pre">rsize</span></tt>：指定 NFS 讀寫的區塊大小，預設都是 1024 位元組。指定為 8192 位元組的話一般可以提高存取的效率，譬如這樣設定：</p>
+<pre class="literal-block">
+/usr    node*(rw,sync,no_root_squash,wsize=8192,rsize=8192)
+</pre>
+<p>不過實際上的最佳值要視底層磁碟檔案系統的參數決定；因為通常 Ext2/3, ReiserFS 的區塊大小都是 4096 位元組，所以這裡才會指定為 8192。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">soft</span></tt>, <tt class="docutils literal"><span class="pre">hard</span></tt>：指定 NFS 連線逾時的處置方式。在設為 <tt class="docutils literal"><span class="pre">soft</span></tt> 的情況下，一旦 NFS 逾時，系統會送 I/O 錯誤出來給呼叫 NFS 功能的程式，然後停止動作；在設為 <tt class="docutils literal"><span class="pre">hard</span></tt> 的情況下，NFS 會一直嘗試連線存取，直到系統恢後功能為止。</p>
+<p>一般重要的資料我們會掛成 <tt class="docutils literal"><span class="pre">hard</span></tt>，譬如 <tt class="docutils literal"><span class="pre">/</span></tt>, <tt class="docutils literal"><span class="pre">/lib</span></tt> 或 <tt class="docutils literal"><span class="pre">/usr</span></tt>；其它的目錄可以掛成 <tt class="docutils literal"><span class="pre">soft</span></tt>，以免伺服器失效影響到客戶端。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">timeo</span></tt>：以十分之一秒為單位，指定第一個 RPC 逾時長度。預設是十分之七秒。在第一次逾時之後會加倍時間間隔繼續嘗試，直到 60 秒為止。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">intr</span></tt>：指定了這個選項之後，如果 NFS 動作逾時，而且是掛載為 <tt class="docutils literal"><span class="pre">hard</span></tt>，那麼允許送訊號來中止動作，讓系統傳回 <tt class="docutils literal"><span class="pre">EINTR</span></tt> 給程式。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">tcp</span></tt>, <tt class="docutils literal"><span class="pre">udp</span></tt>：預設 NFS 是用 UDP 進行掛載的，UDP 的速度比較快，不過因為是無狀態封包，傳輸比較不穩定。指定 <tt class="docutils literal"><span class="pre">tcp</span></tt> 則可以用 TCP 掛載，資料傳輸會比較可靠，但會使用較多資源，影響效能。</p>
+<p>如果是重要的系統資料掛載，一般會用 <tt class="docutils literal"><span class="pre">tcp</span></tt> 來保證穩定性。</p>
+</li>
+</ul>
+<p>詳細的設定選項請參考 <tt class="docutils literal"><span class="pre">nfs</span> <span class="pre">(5)</span></tt> 及 <tt class="docutils literal"><span class="pre">mount</span> <span class="pre">(8)</span></tt>。</p>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id8" name="id8">5&nbsp;&nbsp;&nbsp;關於檔案權限的注意事項</a></h1>
+<p>NFS 伺服器在分享目錄出來的時候，一般來說會把檔案系統的權限結構一起分享出來。也就是說，在 NFS 伺服器上屬於 UID 1003 的檔案，也同時屬於客戶端電腦上 UID 1003 的使用者。如果我們要分享的是伺服器上的 <tt class="docutils literal"><span class="pre">/home</span></tt>，那麼這正是我們想要的結果；但若我們想要分享的是一些資料，譬如 <tt class="docutils literal"><span class="pre">/var/local/gallery</span></tt> 裡的圖檔，提供給美工人員使用，那可能就不希望它們屬於任何一個使用者。</p>
+<p>為了避免預期之外的效果，通常我們會把 NFS 用在帳號組態均勻的環境裡面 footnote{通常是一群用 NIS 或 LDAP 等服務作過帳號整合的主機。}，這樣的環境包括 Linux 叢集、工作群組等。不過，如果一定要在帳號組態完全不同的環境下使用 NFS 的話，該怎麼辦呢？</p>
+<p>NFS 伺服器提供了 &quot;squash&quot; 的功能，用來解決 UID 對應的問題。我們在前面組態伺服器的地方看到了 <tt class="docutils literal"><span class="pre">root_squash</span></tt> 這個選項，它的功能是把客戶端超級使用者的 UID/GID 對應成匿名使用者，這樣客戶端的超級使用者就改不了伺服端的資料了。同樣地，NFS 伺服器還有一個 <tt class="docutils literal"><span class="pre">all_squash</span></tt> 選項，會把textbf{所有}使用者的 UID/GID 對應到匿名使用者；通常，我們還會用 <tt class="docutils literal"><span class="pre">anonuid=</span></tt> 和 <tt class="docutils literal"><span class="pre">anongid=</span></tt> 這兩個選項來指定匿名使用者的 UID/GID。</p>
+<p>&quot;all squash&quot; 過之後，客戶端在存取 NFS 伺服器資料的時候就不再是用自己的身份，而是用 &quot;squash&quot; 過的匿名使用者身份來存取資料。一般不限定客戶端身份或是公開的 NFS 分享，一定會用這種或類似的模式進行設定 footnote{近來已經比較少有人提供公開的 NFS 服務了，多半都改用 FTP 或 HTTP；也有一些單位改提供公開的 smb 分享 (利用 Samba)。}。</p>
+<p>如果我們希望用更具彈性、可由使用者操控的方式來進行網路檔案分享，應該要考慮改用 Samba。NFS 的權限架構在本質上是給主機管理員使用的，適合在系統層級提供檔案共享服務。</p>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id9" name="id9">6&nbsp;&nbsp;&nbsp;結語</a></h1>
+<p>如果我們要管理的是一整群主機，就會發現用 NFS 來共享主機上的資料可以帶來非常大的方便性。光只是把主要主機的 <tt class="docutils literal"><span class="pre">/home</span></tt> 分享給次要主機使用，就可以省下許多資料同步的困擾。</p>
+<p>然而，NFS 是設計在系統管理員層級的服務，一般使用者用起來並不方便。我們還有 SMBFS 這種利用 SMB/CIFS 協定來通訊的網路檔案系統可以利用，請參考 Debian <tt class="docutils literal"><span class="pre">smbfs</span></tt> 套件的說明及相關 manpage 以獲得更多資訊。</p>
+</div>
+</div>
+</body>
+</html>

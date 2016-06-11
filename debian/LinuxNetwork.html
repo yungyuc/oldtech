@@ -1,0 +1,752 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh_tw" lang="zh_tw">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.4: http://docutils.sourceforge.net/" />
+<title>Linux 網路管理</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger
+:Contact: goodger@users.sourceforge.net
+:Date: $Date: 2005-06-06 15:09:07 +0200 (Mon, 06 Jun 2005) $
+:Version: $Revision: 3442 $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+*/
+
+/* "! important" is used here to override other ``margin-top`` and
+   ``margin-bottom`` styles that are later in the stylesheet or 
+   more specific.  See http://www.w3.org/TR/CSS1#the-cascade */
+
+body {
+  font-family: Calibri, Georgia, Times New Roman, Times,  Free Times;
+  background-color: #666666;
+}
+
+div.document {
+  background-color: white;
+  clear: both;
+  width: 50em;
+  margin: 0 auto 0 auto;
+  padding: 0.5em;
+  border: 2px ridge black;
+}
+
+.first {
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em;
+  border-top: 2px solid #888888;
+  border-bottom: 2px solid #888888;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin-left: 1em ;
+  border: medium outset ; 
+  padding: 1em ;
+  background-color: #ffffee ;
+  /* width: 40% ; */
+  /* float: right ; */
+ /*  clear: right */ }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+div.section h1, div.section h2, div.section h3, 
+div.section h4, div.section h5, div.section h6 {
+  padding-left: 0.3em;
+  padding-bottom: 0.3em;
+  border-left: 2px solid gray;
+  border-bottom: 2px solid gray;
+}
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em; }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left {
+  clear: left }
+
+img.align-right {
+  clear: right }
+
+img.borderless {
+  border: 0 }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font-family: serif ;
+  font-size: 100% }
+
+pre.line-block {
+  font-family: serif ;
+  font-size: 100% }
+
+pre.literal-block, pre.doctest-block {
+  white-space: pre-wrap;       /* css-3 */
+  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word;       /* Internet Explorer 5.5+ */
+  margin-left: 2em ;
+  margin-right: 2em ;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  padding-left: 1em;
+  padding-right: 1em;
+  border: 1px dotted black;
+}
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid thin gray }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  border-spacing: 0;
+  border: 1 solid black;
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-top: solid thin black;
+  border-left: solid thin black }
+
+table.footnote td.label a {
+  text-decoration: none;
+}
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  border: 0; 
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+tt.docutils {
+}
+
+tt.ltst {
+  font-weight: bold;
+}
+
+tt.ltem {
+  font-style: italic;
+}
+
+ul.auto-toc {
+  list-style-type: none }
+
+/* vim: set ai et nu sw=2 ts=2: */
+
+</style>
+</head>
+<body>
+<div class="document" id="linux">
+<h1 class="title">Linux 網路管理</h1>
+<table class="docinfo" frame="void" rules="none">
+<col class="docinfo-name" />
+<col class="docinfo-content" />
+<tbody valign="top">
+<tr class="field"><th class="docinfo-name">author:</th><td class="field-body">Yung-Yu Chen (yungyuc) <a class="reference" href="http://blog.seety.org/everydaywork/">http://blog.seety.org/everydaywork/</a> &lt;<a class="reference" href="mailto:yyc&#64;seety.org">yyc&#64;seety.org</a>&gt;</td>
+</tr>
+<tr class="field"><th class="docinfo-name">copyright:</th><td class="field-body">© 2006, all rights reserved</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="id1" name="id1">目錄</a></p>
+<ul class="auto-toc simple">
+<li><a class="reference" href="#id2" id="id7" name="id7">1&nbsp;&nbsp;&nbsp;區域網路</a></li>
+<li><a class="reference" href="#id3" id="id8" name="id8">2&nbsp;&nbsp;&nbsp;基本網路設定</a><ul class="auto-toc">
+<li><a class="reference" href="#hosts" id="id9" name="id9">2.1&nbsp;&nbsp;&nbsp;hosts</a></li>
+<li><a class="reference" href="#hosts-allow-hosts-deny" id="id10" name="id10">2.2&nbsp;&nbsp;&nbsp;hosts.allow/hosts.deny</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#inetd" id="id11" name="id11">3&nbsp;&nbsp;&nbsp;inetd 超級伺服器</a></li>
+<li><a class="reference" href="#id5" id="id12" name="id12">4&nbsp;&nbsp;&nbsp;基本工具的使用</a><ul class="auto-toc">
+<li><a class="reference" href="#ping" id="id13" name="id13">4.1&nbsp;&nbsp;&nbsp;ping</a></li>
+<li><a class="reference" href="#traceroute" id="id14" name="id14">4.2&nbsp;&nbsp;&nbsp;traceroute</a></li>
+<li><a class="reference" href="#arp" id="id15" name="id15">4.3&nbsp;&nbsp;&nbsp;arp</a></li>
+<li><a class="reference" href="#netstat" id="id16" name="id16">4.4&nbsp;&nbsp;&nbsp;netstat</a></li>
+<li><a class="reference" href="#nmap" id="id17" name="id17">4.5&nbsp;&nbsp;&nbsp;nmap</a></li>
+<li><a class="reference" href="#telnet" id="id18" name="id18">4.6&nbsp;&nbsp;&nbsp;測試技巧：以 telnet 直接連線</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#nat" id="id19" name="id19">5&nbsp;&nbsp;&nbsp;組態 NAT</a></li>
+<li><a class="reference" href="#dhcp" id="id20" name="id20">6&nbsp;&nbsp;&nbsp;組態 DHCP 伺服器</a></li>
+<li><a class="reference" href="#id6" id="id21" name="id21">7&nbsp;&nbsp;&nbsp;結語</a></li>
+</ul>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id2" name="id2">1&nbsp;&nbsp;&nbsp;區域網路</a></h1>
+<p>本章將討論 Linux (特別是 Debian) 的網路管理能力。</p>
+<p>現在我們所使用的區域網路 (Local Area Network, LAN) 技術多半是乙太網路 (Ethernet)，這是一個年輕的網路技術，不過非常方便好用，以致於今天絕大部分的地方都使用這種技術；我們在 PC 上大多也只會接觸到這種區域網路技術。</p>
+<p>在網際網路時代，其實所有的網路服務幾乎都已經網際網路化了，區域網路技術只是作為網際網路底層的載體。本節所指涉的「區域網路」，也應該要理解成「區域性的網際網路」才對。</p>
+<p>本章討論的重點在於說明如何進行與系統的網際網路相關的組態及管理，以及一些與系統及網路管理相關的服務設定。至於乙太網路硬體的設定與驅動，應該是與編譯核心與操作核心模組相關的問題。</p>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id3" name="id3">2&nbsp;&nbsp;&nbsp;基本網路設定</a></h1>
+<p>關於網際網路的 IP 相關設定，我們在安裝基本系統的時候已經作過了基本的介紹；知道重點在於 <tt class="docutils literal"><span class="pre">/etc/network/interfaces</span></tt> 這個設定檔。當我們在 <tt class="docutils literal"><span class="pre">interfaces</span></tt> 檔裡變更了設定之後，不要忘記重新啟動網路介面 (假設是 <tt class="docutils literal"><span class="pre">eth0</span></tt>)：</p>
+<pre class="literal-block">
+$ ifdown eth0
+$ ifup eth0
+</pre>
+<p>請注意，如果你是使用 ssh 連線到遠端主機進行管理的話，當你把上述的第一個指令執行完畢後，可能沒有機會執行第二次來啟動網路。因此，在這種情況下，請把以上的兩個指令下在一行裡面：</p>
+<pre class="literal-block">
+$ ifdown eth0; ifup eth0
+</pre>
+<p>其實這還是有點危險；如果你的組態檔沒有寫好，那麼 <tt class="docutils literal"><span class="pre">eth0</span></tt> 沒有辦法再啟動。
+如果要對區域網路介面進行調整，我建議還是在主機前面進行為宜。</p>
+<p>除了設定 IP 的 <tt class="docutils literal"><span class="pre">interfaces</span></tt> 檔之外，當然還有許多與網路組態相關的設定檔，本節將介紹其中重要的幾個。</p>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="hosts" name="hosts">2.1&nbsp;&nbsp;&nbsp;hosts</a></h2>
+<p><tt class="docutils literal"><span class="pre">/etc/hosts</span></tt> 這個檔案的作用是提供名稱解析 (name resolution)。當我們安裝好 Debian 系統時，這個檔案一定會有以下的內容：</p>
+<pre class="literal-block">
+127.0.0.1       localhost.localdomain localhost
+
+# The following lines are desirable for IPv6 capable hosts
+# (added automatically by netbase upgrade)
+
+::1     ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+ff02::3 ip6-allhosts
+</pre>
+<p>這些內容只設定了對本機的名稱解析；第 1 行是針對 IPv4 的設定，而第 6 到 11 行則是給 IPv6 看的設定。</p>
+<p>何謂名稱解析？簡單來說，在網際網路上的名稱解析，就是將網域名稱與 IP 位址進行對應；這個對應工作是由作業系統的網際網路層程式自動進行的，廣義來講屬於 IP 網路規格的一部分。照以上 <tt class="docutils literal"><span class="pre">hosts</span></tt> 檔的內容來看，
+<tt class="docutils literal"><span class="pre">127.0.0.1</span></tt> 會對應到 <tt class="docutils literal"><span class="pre">localhost.localdomain</span></tt> 與 <tt class="docutils literal"><span class="pre">localhost</span></tt> 這兩個名稱；反之 <tt class="docutils literal"><span class="pre">localhost.localdomain</span></tt> 與 <tt class="docutils literal"><span class="pre">localhost</span></tt> 這兩個名稱則會反向對應到 <tt class="docutils literal"><span class="pre">127.0.0.1</span></tt> 這個 IP 位址。</p>
+<p>我們可以用 <tt class="docutils literal"><span class="pre">ping</span></tt> 這個程式測試一下效果：</p>
+<pre class="literal-block">
+$ ping localhost
+PING localhost (127.0.0.1): 56 data bytes
+64 bytes from 127.0.0.1: icmp_seq=0 ttl=64 time=0.2 ms
+</pre>
+<p>但如果我們 <tt class="docutils literal"><span class="pre">ping</span></tt> <tt class="docutils literal"><span class="pre">notlocalhost</span></tt>，則會找不到這台主機。</p>
+<p>我們可以在 <tt class="docutils literal"><span class="pre">hosts</span></tt> 檔裡面加上自訂的 IP 與名稱對應，一般我們用不到 IPv6，所以照 IPv4 的格式 (如第 1 行) 撰寫即可。</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="hosts-allow-hosts-deny" name="hosts-allow-hosts-deny">2.2&nbsp;&nbsp;&nbsp;hosts.allow/hosts.deny</a></h2>
+<p>這一組檔案可以控制服務程式的連線，主要用於 inetd 超級伺服器裡的服務；不過，事實上它們是 TCP wrapper (<tt class="docutils literal"><span class="pre">tcpd</span></tt>) 這套工具的設定檔，只要是支援 TCP wrapper 的網路程式，就可以在這組檔案裡作控管。</p>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="inetd" name="inetd">3&nbsp;&nbsp;&nbsp;inetd 超級伺服器</a></h1>
+<p>inetd 是一種執行網際網路 (IP) 程式的架構，許多如 remote shell (rsh, rlogin) 和傳統的網路程式 (fingerd, echo) 等，也都是透過 inetd 來執行的。</p>
+<p>inetd 的設定檔位置在 <tt class="docutils literal"><span class="pre">/etc/inetd.conf``[#]_\</span> <span class="pre">；裡面是一行一行的設定，而</span> <span class="pre">``#</span></tt> 符號代表註解。<tt class="docutils literal"><span class="pre">inetd.conf</span></tt> 裡的設定格式是：</p>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a name="id4">[1]</a></td><td>RedHat 和 Fedora Core 已經沒有這個組態檔了。因為 RedHat/FC 把 inetd 換成 xinetd，所以原本的 inetd.conf 組態檔變成了一個目錄：``/etc/xinetd``。有 RedHat/FC 經驗的使用者或許會有點不習慣。</td></tr>
+</tbody>
+</table>
+<pre class="literal-block">
+&lt;服務名稱&gt; &lt;socket 型態&gt; &lt;協定&gt; &lt;旗標&gt; &lt;使用者&gt; &lt;伺服程式路徑&gt; &lt;引數&gt;
+</pre>
+<p>我們一個個地來解釋設定行的各個元素：</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">&lt;服務名稱&gt;</span></tt>：這個名稱要出現在 <tt class="docutils literal"><span class="pre">/etc/services</span></tt> 檔裡面。</li>
+<li><tt class="docutils literal"><span class="pre">&lt;socket</span> <span class="pre">型態&gt;</span></tt>：<tt class="docutils literal"><span class="pre">stream</span></tt>, <tt class="docutils literal"><span class="pre">dgram</span></tt>, <tt class="docutils literal"><span class="pre">raw</span></tt>, <tt class="docutils literal"><span class="pre">rdm</span></tt> 或 <tt class="docutils literal"><span class="pre">seqpacket</span></tt> 其中之一。通常是 <tt class="docutils literal"><span class="pre">stream</span></tt> 或 <tt class="docutils literal"><span class="pre">dgram</span></tt>。</li>
+<li><tt class="docutils literal"><span class="pre">&lt;協定&gt;</span></tt>：<tt class="docutils literal"><span class="pre">/etc/protocals</span></tt> 所列出的協定之一，通常是 <tt class="docutils literal"><span class="pre">tcp</span></tt> 或 <tt class="docutils literal"><span class="pre">udp</span></tt>。</li>
+<li><tt class="docutils literal"><span class="pre">&lt;旗標&gt;</span></tt>：<tt class="docutils literal"><span class="pre">wait</span></tt> 或 <tt class="docutils literal"><span class="pre">nowait</span></tt>，只對 datagram <tt class="docutils literal"><span class="pre">dgram</span></tt> 服務有用。</li>
+<li><tt class="docutils literal"><span class="pre">&lt;使用者&gt;</span></tt>：這個伺服程式執行時所用的使用者；你可以用 <tt class="docutils literal"><span class="pre">user.group</span></tt> 同時指定群組。</li>
+<li><tt class="docutils literal"><span class="pre">&lt;伺服程式路徑&gt;</span></tt>：指定伺服程式檔，要提供完整的路徑；如果這個伺服程式是由 inetd 本身所提供的，則寫為 <tt class="docutils literal"><span class="pre">internal</span></tt>。</li>
+<li><tt class="docutils literal"><span class="pre">&lt;引數&gt;</span></tt>：伺服程式的引數；伺服程式執行檔本身要寫為第一個引數 (即 <tt class="docutils literal"><span class="pre">argv[0]</span></tt>)。</li>
+</ul>
+<p>在 Debian 裡有一支叫作 <tt class="docutils literal"><span class="pre">update-inetd</span></tt> 的工具程式，可以用來管理 <tt class="docutils literal"><span class="pre">inetd.conf</span></tt>；詳細的使用方式請見 <tt class="docutils literal"><span class="pre">update-inetd(8)</span></tt>。</p>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id5" name="id5">4&nbsp;&nbsp;&nbsp;基本工具的使用</a></h1>
+<p>在這一節裡，我們要對一些基本的網路工具進行討論；這些工具可以幫助你了解你的網路。</p>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="ping" name="ping">4.1&nbsp;&nbsp;&nbsp;ping</a></h2>
+<p><tt class="docutils literal"><span class="pre">ping</span></tt> 程式會送出 ICMP 封包，對遠端主機進行檢測：</p>
+<pre class="literal-block">
+$ ping localhost
+PING localhost (127.0.0.1): 56 data bytes
+64 bytes from 127.0.0.1: icmp_seq=0 ttl=64 time=0.2 ms
+64 bytes from 127.0.0.1: icmp_seq=1 ttl=64 time=0.1 ms
+64 bytes from 127.0.0.1: icmp_seq=2 ttl=64 time=0.1 ms
+
+--- localhost ping statistics ---
+3 packets transmitted, 3 packets received, 0% packet loss
+round-trip min/avg/max = 0.1/0.1/0.2 ms
+</pre>
+<p>在 <tt class="docutils literal"><span class="pre">ping</span></tt> 後接主機名稱即可。它和 Windows 上的 <tt class="docutils literal"><span class="pre">ping</span></tt> 不同，如果不按下 Ctrl+C，會一直不斷地 ping 下去；Windows 的 <tt class="docutils literal"><span class="pre">ping</span></tt> 如果不加參數，則只會傳四個 ICMP 封包。</p>
+<p>我們常常用 <tt class="docutils literal"><span class="pre">ping</span></tt> 來檢查網路通是不通；假設我們所處的子網路預設閘道器是 192.168.10.254：</p>
+<pre class="literal-block">
+$ ping 192.168.10.254
+PING 192.168.10.254 (192.168.10.254): 56 data bytes
+
+--- 192.168.10.254 ping statistics ---
+2 packets transmitted, 0 packets received, 100% packet loss
+</pre>
+<p>如果像上面一樣過了一會兒都沒有回應，就表示本機到閘道器不通了；通常我們會選閘道器當作測試目標，因為它應該要是最穩定的機器。得到了這樣子失敗的測試結果，我們就知道網路一定是哪裡出了問題，需要進一步的檢測。</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="traceroute" name="traceroute">4.2&nbsp;&nbsp;&nbsp;traceroute</a></h2>
+<p><tt class="docutils literal"><span class="pre">traceroute</span></tt> 這個工具預設不見得會安裝，因為不是像 <tt class="docutils literal"><span class="pre">ping</span></tt> 那麼常用；它可以送出 ICMP 封包，檢查本機到遠端間的網路狀況。你可以像這樣進行測試：</p>
+<pre class="literal-block">
+$ traceroute www.yahoo.com
+</pre>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="arp" name="arp">4.3&nbsp;&nbsp;&nbsp;arp</a></h2>
+<p><tt class="docutils literal"><span class="pre">arp</span></tt> 工具的用途是維護系統內的 ARP 快取；可以找出本機有直接區域網路連線的 MAC address 與 IP 對應，如：</p>
+<pre class="literal-block">
+$ arp
+Address                  HWtype  HWaddress           Flags Mask            Iface
+192.168.23.1             ether   00:09:12:4C:DE:82   C                     eth0
+192.168.23.23            ether   00:00:E2:32:A0:B7   C                     eth0
+192.168.23.254           ether   00:00:E2:76:C1:DD   C                     eth0
+</pre>
+<p>我們可以由此查出某一 IP 的實體網路卡號。不過要注意，這是提供{bf區域網路}使用的工具，你不可能查得到 www.microsoft.com 的網路卡號。</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="netstat" name="netstat">4.4&nbsp;&nbsp;&nbsp;netstat</a></h2>
+<p><tt class="docutils literal"><span class="pre">netstat</span></tt> 是一個用來顯示目前系統的網路連線狀況、routing table 等以及其它許多資訊的工具。以一般使用者的身份執行：</p>
+<pre class="literal-block">
+$ netstat
+</pre>
+<p>就會看到它列出系統上的 TCP 及 Unix socket 連線狀況。如果加上 <tt class="docutils literal"><span class="pre">-n</span></tt> 參數的話，<tt class="docutils literal"><span class="pre">netstat</span></tt> 就不會嘗試作連線主機的名稱反解，可以加快列表的速度。</p>
+<p>超級使用者可以用 <tt class="docutils literal"><span class="pre">-p</span></tt> 參數呼叫 <tt class="docutils literal"><span class="pre">netstat</span></tt> 來得知本機通訊埠是由哪個程式使用的。關於 <tt class="docutils literal"><span class="pre">netstat</span></tt> 的詳細用法，請參閱 <tt class="docutils literal"><span class="pre">netstat(8)</span></tt>。</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="nmap" name="nmap">4.5&nbsp;&nbsp;&nbsp;nmap</a></h2>
+<p><tt class="docutils literal"><span class="pre">nmap</span></tt> 這個工具可以對網路上的任何主機進行掃瞄。一般來說，我們會用它來掃瞄自己的主機，查看通訊埠是否正確開啟，或是有沒有不正常的通訊埠被開啟。</p>
+<p>對非由自己管轄的主機用 <tt class="docutils literal"><span class="pre">nmap</span></tt> 或其它類似的工具進行掃瞄，通常會被認定為具有攻擊性的行為；如果沒有正當的理由，請儘量避免這樣作。</p>
+<p><tt class="docutils literal"><span class="pre">nmap</span></tt> 需要另外用 <tt class="docutils literal"><span class="pre">apt</span></tt> 安裝：</p>
+<pre class="literal-block">
+$ apt-get install nmap
+</pre>
+<p>最簡單的用法就是：</p>
+<pre class="literal-block">
+$ nmap localhost
+
+Starting nmap 3.81 ( http://www.insecure.org/nmap/ ) at 2005-06-22 16:33 CST
+Interesting ports on localhost (127.0.0.1):
+(The 1652 ports scanned but not shown below are in state: closed)
+PORT    STATE SERVICE
+21/tcp  open  ftp
+22/tcp  open  ssh
+25/tcp  open  smtp
+80/tcp  open  http
+111/tcp open  rpcbind
+139/tcp open  netbios-ssn
+445/tcp open  microsoft-ds
+515/tcp open  printer
+631/tcp open  ipp
+752/tcp open  qrh
+902/tcp open  iss-realsecure-sensor
+</pre>
+<p>可以看到本機上開啟的常用埠。</p>
+<p>預設 <tt class="docutils literal"><span class="pre">nmap</span></tt> 只會掃瞄它預先定義好的一組常用通訊埠；如果我們想讓它掃瞄一段範圍的通訊埠，可以用：</p>
+<pre class="literal-block">
+$ nmap localhost -p 0-100
+
+Starting nmap 3.81 ( http://www.insecure.org/nmap/ ) at 2005-06-22 16:36 CST
+Interesting ports on localhost (127.0.0.1):
+(The 97 ports scanned but not shown below are in state: closed)
+PORT   STATE SERVICE
+21/tcp open  ftp
+22/tcp open  ssh
+25/tcp open  smtp
+80/tcp open  http
+
+Nmap finished: 1 IP address (1 host up) scanned in 0.170 seconds
+</pre>
+<p><tt class="docutils literal"><span class="pre">nmap</span></tt> 預設只用 TCP <tt class="docutils literal"><span class="pre">connect()</span></tt> 模式進行掃瞄，如果我們希望讓它掃瞄 UDP 埠的話，要加上 <tt class="docutils literal"><span class="pre">-sU</span></tt>，不過只有超級使用者可以這樣作：</p>
+<pre class="literal-block">
+$ sudo nmap localhost -sU -p 0-100
+
+Starting nmap 3.81 ( http://www.insecure.org/nmap/ ) at 2005-06-22 16:38 CST
+All 101 scanned ports on localhost (127.0.0.1) are: closed
+
+Nmap finished: 1 IP address (1 host up) scanned in 0.279 seconds
+</pre>
+<p>此時在本機上的第 0 到第 100 號通訊埠上，沒有 UDP 程式。</p>
+<p><tt class="docutils literal"><span class="pre">nmap</span></tt> 還有許多參數可以調整，是一個非常強大的掃瞄工具。詳見 <tt class="docutils literal"><span class="pre">nmap(1)</span></tt>，另外單獨下 <tt class="docutils literal"><span class="pre">nmap</span></tt> 指令不接參數，也會印出一段常用參數的使用說明。</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="telnet" name="telnet">4.6&nbsp;&nbsp;&nbsp;測試技巧：以 telnet 直接連線</a></h2>
+<p>telnet 是一種通訊協定，它主要的用途是進行遠端登入。不過，我們之前在談遠端登入的時候，討論的是 ssh，而不是這個 telnet，為什麼呢？最早期在遠距離的 Un*x 主機之間都是用 telnet 進行遠端登入的，不過，telnet 這種通訊協定是使用未加密過的明碼進行資料傳輸，所以在網路網路兩點間的任何人都可以對連線資料進行竊聽。這造成了很大的安全性問題；尤其是系統管理員的帳號和密碼，等於是不設防地在網路上公開。</p>
+<p>因為 telnet 的不安全，慢慢地大家就不用它來作遠端登入，而改用 ssh；Debian 預設也不會開啟 telnet。</p>
+<p>不過，telnet 還是有它的用處。許多的網路通訊協定 (主要是 TCP) 可以直接用 telnet 進行連接，譬如我們連到本端的 SMTP 伺服器：</p>
+<pre class="literal-block">
+$ telnet localhost 25
+Trying 127.0.0.1...
+Connected to localhost.
+Escape character is '^]'.
+220 my.host.name ESMTP Postfix (Debian/GNU)
+ehlo my
+250-my.host.name
+250-PIPELINING
+250-SIZE 10240000
+250-VRFY
+250-ETRN
+250 8BITMIME
+^]
+telnet&gt; quit
+Connection closed.
+</pre>
+<p><tt class="docutils literal"><span class="pre">telnet</span></tt> 後接欲連接的主機名稱，如果不想用預設的 telnet 通訊埠 23，則可以再接想連接的埠號，這裡是 25，也就是標準的 SMTP 通訊埠。我們可以用 telnet 來直接與伺服程式連線，傳送資料並檢視回饋的訊息。</p>
+<p>當我們在對伺服程式進行設定或除錯的時候，可以試著使用這個技巧；詳細的使用方法則視伺服程式不同而定。</p>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="nat" name="nat">5&nbsp;&nbsp;&nbsp;組態 NAT</a></h1>
+<p>NAT 意指網路位址轉譯 (Network Address Translation)，是一種將 IP/通訊埠進行對應的技術。Linux 下的 NAT 常應用在簡易防火牆、多電腦共用 IP 或提供內部網路對外連線的單一接口；但無論是何種應用，都只是把來自於 NAT 內的連線轉由 NAT 主機發出。</p>
+<p>在 Linux 下要啟動 NAT，先決條件是核心有編入相關的模組；如果我們使用的是 Debian 預編好的 <tt class="docutils literal"><span class="pre">kernel-image</span></tt>，那就沒有問題。在確定了核心的支援以後，你還要開啟 IPv4 forwarding 的功能。我們先檢視一下目前的設定：</p>
+<pre class="literal-block">
+$ cat /proc/sys/net/ipv4/ip_forward
+0
+</pre>
+<p>這樣的結果表示 IPv4 forwarding 是關掉的footnote{<tt class="docutils literal"><span class="pre">/proc</span></tt> 是一個虛擬的檔案系統，用來表示目前系統裡的行程資訊；你可以在 <tt class="docutils literal"><span class="pre">proc(5)</span></tt> 裡找到詳細的說明。}；我們來把它打開：</p>
+<pre class="literal-block">
+$ echo &quot;1&quot; &gt; /proc/sys/net/ipv4/ip_forward
+</pre>
+<p>你可以再 <tt class="docutils literal"><span class="pre">cat</span></tt> 一下來確定。</p>
+<p>然後，我們必須安裝 <tt class="docutils literal"><span class="pre">iptables</span></tt> 這個套件：</p>
+<pre class="literal-block">
+$ apt-get install iptables
+</pre>
+<p>iptables 是對 Linux 2.4 以上核心的封包過濾與 NAT 功能所提供的設定程式，地位有點像 <tt class="docutils literal"><span class="pre">modutils</span></tt>。</p>
+<p>安裝完畢之後，我們可以先檢視一下目前系統裡的 iptables (應該都是空的)，注意，必須使用超級使用者執行 iptables 工具：</p>
+<pre class="literal-block">
+$ iptables -t nat -L
+Chain PREROUTING (policy ACCEPT)
+target     prot opt source               destination
+
+Chain POSTROUTING (policy ACCEPT)
+target     prot opt source               destination
+
+Chain OUTPUT (policy ACCEPT)
+target     prot opt source               destination
+</pre>
+<p>Linux 有三種 iptable：<tt class="docutils literal"><span class="pre">filter</span></tt>, <tt class="docutils literal"><span class="pre">nat</span></tt> 與 <tt class="docutils literal"><span class="pre">mangle</span></tt>；很明顯，<tt class="docutils literal"><span class="pre">nat</span></tt> 就是我們要使用的 iptable，而你也看到了在這個 iptable 裡有三個預設的 chain：</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">PREROUTING</span></tt>：在封包進入主機時馬上進行變更，</li>
+<li><tt class="docutils literal"><span class="pre">OUTPUT</span></tt>：在本機產出的封包開始繞行 (routing) 前進行變更，</li>
+<li><tt class="docutils literal"><span class="pre">POSTROUTING</span></tt>：在封包要傳出主機時進行變更。</li>
+</ul>
+<p>其它兩種 iptable 也各有內建的 chain，但此處就不贅述了。</p>
+<p>接著要把適當的設定用 iptables 加入核心；假設我們有一個內部區域網路，要透過這台主機的 NAT 來連接外部的網路，但不讓外部網路連進內部網路。因此所需要 iptable 是 <tt class="docutils literal"><span class="pre">nat</span></tt>、chain 是 <tt class="docutils literal"><span class="pre">POSTROUTING</span></tt>；我們可以如下設定：</p>
+<pre class="literal-block">
+$ iptables -t nat -A POSTROUTING -p all -s src_ip/mask \
+ -o through_interface -j SNAT --to outer_ip
+</pre>
+<p>指定了 iptable <tt class="docutils literal"><span class="pre">nat</span></tt> 與 chain <tt class="docutils literal"><span class="pre">POSTROUTING</span></tt> 之後，還有不少參數需要設定：</p>
+<ol class="arabic">
+<li><p class="first"><tt class="docutils literal"><span class="pre">-p</span></tt>：指定允許的通訊協定；<tt class="docutils literal"><span class="pre">all</span></tt> 代表所有的通訊協定。可以用 <tt class="docutils literal"><span class="pre">tcp</span></tt>, <tt class="docutils literal"><span class="pre">udp</span></tt>, <tt class="docutils literal"><span class="pre">icmp</span></tt> 等關鍵字、通訊埠數字號碼，或是 <tt class="docutils literal"><span class="pre">/etc/protocols</span></tt> 裡有列出的字串來進行指定。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">-s</span></tt>：指定這個規則 (rule) 的來源位址，格式是</p>
+<pre class="literal-block">
+位址/[網路遮罩]
+</pre>
+<p>我們可以指定單一 IP，或是一整個子網路。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">-o</span></tt>：指定封包要傳出所用的網路介面。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">-j</span></tt>：指定這條規則的目的地；我們這裡使用預先定義好的 <tt class="docutils literal"><span class="pre">SNAT</span></tt>，表示對封包的來源位址進行轉譯 (這適合於進行 IP 分享的應用)。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">--to</span></tt>：指定內部網路作 NAT 所對應到的外部 IP。</p>
+</li>
+</ol>
+<p>所以，我們所寫的設定指令可以這樣解釋：把 <tt class="docutils literal"><span class="pre">src_ip/mask</span></tt> 這個子網路送出的封包，用 <tt class="docutils literal"><span class="pre">SNAT</span></tt> 的方式轉譯成來自 <tt class="docutils literal"><span class="pre">outer_ip</span></tt>，交由 <tt class="docutils literal"><span class="pre">through_interface</span></tt> 傳到外部網路去。</p>
+<p>iptables 是一個強大而複雜的工具，請參考 <tt class="docutils literal"><span class="pre">iptables</span> <span class="pre">(8)</span></tt> 以取得詳細的說明。</p>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="dhcp" name="dhcp">6&nbsp;&nbsp;&nbsp;組態 DHCP 伺服器</a></h1>
+<p>DHCP 是指動態主機組態協定 (Dynamic Host Configuration Protocol)；我們可以架設 DHCP 伺服器，透過區域網路來把設定資料提供給 DHCP 客戶端，從而達成組態自動化。DHCP 可以提供的組態設定相當地多樣化，不過它最主要的用途還是在於配發 IP 資訊。</p>
+<p>DHCP 主要有兩種用法：建立一個 IP 位址庫 (pool)，供區域網路任意的電腦自由使用；或者藉由各連線電腦的乙太網路路卡號來指定 IP 位址。</p>
+<p>在 Debian 下用 <tt class="docutils literal"><span class="pre">apt</span></tt> 來安裝 DHCP 伺服器：</p>
+<pre class="literal-block">
+$ apt-get install dhcp3-server
+</pre>
+<p>dpkg 會詢問 dhcpd 要聽在哪一個網路介面上面；請適當地選擇。假設我要用來服務的子網路 192.168.3.0/24 是用 eth1 進行連線的話，那麼就應該聽在 eth1 上面。</p>
+<p><tt class="docutils literal"><span class="pre">dhcp3-server</span></tt> 的組態檔在 <tt class="docutils literal"><span class="pre">/etc/dhcp3/dhcpd.conf</span></tt>，預設的選項如下：</p>
+<pre class="literal-block">
+ddns-update-style none;
+option domain-name &quot;example.org&quot;;
+option domain-name-servers ns1.example.org, ns2.example.org;
+default-lease-time 600;
+max-lease-time 7200;
+log-facility local7;
+</pre>
+<p>不過，當我們安裝完畢，dpkg 嘗試啟動 <tt class="docutils literal"><span class="pre">dhcpd</span></tt> 的時候會出現錯誤：</p>
+<pre class="literal-block">
+Starting DHCP server: dhcpd3 failed to start - check syslog for diagnostics.
+</pre>
+<p>查看一下 <tt class="docutils literal"><span class="pre">/var/log/syslog</span></tt>，你會發現這是因為我們還沒有組態好的關係。</p>
+<p>在 <tt class="docutils literal"><span class="pre">dhcpd.conf</span></tt> 的預設值裡沒有任何的 <tt class="docutils literal"><span class="pre">subnet</span></tt> 設定項，因此 DHCP 伺服器沒辦法送出組態設定 -- 在 DHCP 裡稱為租期 (lease)。以下我們舉一個用乙太網路卡號 (MAC address) 來指定網路設定的組態來當作範例：</p>
+<pre class="literal-block">
+subnet 192.168.3.0 netmask 255.255.255.0 {
+  option domain-name-servers 192.168.3.254;
+  option domain-name &quot;example.org&quot;;
+  option routers 192.168.3.254;
+  option subnet-mask 255.255.255.0;
+  option broadcast-address 192.168.3.255;
+  default-lease-time 600;
+  max-lease-time 7200;
+
+  group {
+    host hand01 {
+      hardware ethernet 00:00:E2:76:C1:DF;
+      fixed-address hand01.example.org;
+      option host-name &quot;leg01&quot;;
+    }
+    host hand02 {
+      hardware ethernet 00:00:E2:76:C1:DA;
+      fixed-address hand02.example.org;
+      option host-name &quot;leg02&quot;;
+    }
+    host hand03 {
+      hardware ethernet 00:00:E2:76:C1:D5;
+      fixed-address hand03.example.org;
+      option host-name &quot;leg03&quot;;
+    }
+  }
+}
+</pre>
+<p>假設我們的子網路裡有三台主機會取用 DHCP 的設定：<tt class="docutils literal"><span class="pre">hand01</span></tt>, <tt class="docutils literal"><span class="pre">hand02</span></tt> 與 <tt class="docutils literal"><span class="pre">hand03</span></tt>，只要知道這三台主機的 MAC address，就可以像上面這樣用 DHCP 伺服器來指定他們的網路設定。我們來解釋一下這些設定項所代表的意義：</p>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">subnet</span></tt>：指定一個區塊；此區塊的設定是專屬於此行所指定的子網路。如上例第 1 行即指定 192.168.3.0/24 這個子網路。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">group</span></tt>：用來把一組設定總括起來，這個群組共同相同的設定，不干涉群組之外。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">host</span></tt>：這個區塊裡面的設定專門針對一台主機；``host`` 裡面通常會有 <tt class="docutils literal"><span class="pre">hardware</span></tt> 設定項。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">options</span></tt>：這一種設定項指定 DHCP 客戶端所能從 DHCP 伺服器取得的設定值：</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">domain-name-server</span></tt>：提供網域名稱伺服器的設定，可以超過一台，其間以逗號分隔。</li>
+<li><tt class="docutils literal"><span class="pre">domain-name</span></tt>：提供客戶端所屬的網域名稱。</li>
+<li><tt class="docutils literal"><span class="pre">routers</span></tt>：提供客戶端所在網路的 router，或稱閘道器 (gateway)；可以設定多個，以逗號分隔，優先度依照列出先後。</li>
+<li><tt class="docutils literal"><span class="pre">subnet-mask</span></tt>：提供子網路遮罩。</li>
+<li><tt class="docutils literal"><span class="pre">broadcast-address</span></tt>：提供廣播位址。</li>
+<li><tt class="docutils literal"><span class="pre">host-name</span></tt>：提供客戶端的主機名稱。</li>
+</ul>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">default-lease-time</span></tt>：指定租期的預設秒數；如果客戶端沒有要求租期長度的話，就以此為過期時間。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">max-lease-time</span></tt>：最長的租期秒數。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">hardware</span></tt>：這個設定項的寫法是</p>
+<pre class="literal-block">
+hardware &lt;硬體型態&gt; &lt;硬體位址&gt;;
+</pre>
+<p>因為我們使用的是乙太網路，所以硬體型態是 <tt class="docutils literal"><span class="pre">ethernet</span></tt>，而位址就是它的 MAC adderess。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">fixed-address</span></tt>：在 <tt class="docutils literal"><span class="pre">host</span></tt> 區塊裡使用，指定該主機的 IP 位址。</p>
+</li>
+</ul>
+<p>以上的範例設定會把 <tt class="docutils literal"><span class="pre">hand01</span></tt>, <tt class="docutils literal"><span class="pre">hand02</span></tt> 與 <tt class="docutils literal"><span class="pre">hand03</span></tt> 的 IP 位址分別設成了三個網域名稱；我們必須要有一台組態正確的網域伺服器 (DNS)，其中包含了這三個名稱的 IP 才行。如果我們沒有架設 DNS，那麼 <tt class="docutils literal"><span class="pre">fixed-address</span></tt> 就應該要寫成用數字表示的 IP。</p>
+<p>假設我們在為主機設定固定 IP 之餘，也需要一些不固定的 IP 可以提供給其它的電腦，只要在 <tt class="docutils literal"><span class="pre">subnet</span></tt> 區塊裡加上 <tt class="docutils literal"><span class="pre">range</span></tt> 設定項即可；``range`` 設定項的格式為：</p>
+<pre class="literal-block">
+range &lt;起始 IP&gt; &lt;結尾 IP&gt;;
+</pre>
+<p><tt class="docutils literal"><span class="pre">dhcpd</span></tt> 的功能也是非常強大，設定項非常地多。我建議在設定之前先參考一下 <tt class="docutils literal"><span class="pre">dhcpd.conf</span> <span class="pre">(5)</span></tt> 和 <tt class="docutils literal"><span class="pre">dhcp-options</span> <span class="pre">(5)</span></tt>，你會發現非常多的花樣。</p>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id6" name="id6">7&nbsp;&nbsp;&nbsp;結語</a></h1>
+<p>本章我們對 Debian GNU/Linux 的基本網路組態方式，以及比較底層的網路服務作了一些簡單的介紹；接續之前章節對驅動網路介面的討論，這裡我們從最簡單的名稱解析設定檔開始，對 inetd 超級伺服器、基本的網路工具以及 NAT、DHCP 都作了說明。</p>
+<p>這些過於簡單的介紹對於理解整個網路的構成來說，實在是不夠充分；不過它可以作為一個研究的起點，並且也會成為我們討論其它網路服務的基礎。</p>
+</div>
+</div>
+</body>
+</html>

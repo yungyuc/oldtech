@@ -1,0 +1,1181 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh_tw" lang="zh_tw">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.4: http://docutils.sourceforge.net/" />
+<title>兩小時叢集電腦</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger
+:Contact: goodger@users.sourceforge.net
+:Date: $Date: 2005-06-06 15:09:07 +0200 (Mon, 06 Jun 2005) $
+:Version: $Revision: 3442 $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+*/
+
+/* "! important" is used here to override other ``margin-top`` and
+   ``margin-bottom`` styles that are later in the stylesheet or 
+   more specific.  See http://www.w3.org/TR/CSS1#the-cascade */
+
+body {
+  font-family: Calibri, Georgia, Times New Roman, Times,  Free Times;
+  background-color: #666666;
+}
+
+div.document {
+  background-color: white;
+  clear: both;
+  width: 50em;
+  margin: 0 auto 0 auto;
+  padding: 0.5em;
+  border: 2px ridge black;
+}
+
+.first {
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em;
+  border-top: 2px solid #888888;
+  border-bottom: 2px solid #888888;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin-left: 1em ;
+  border: medium outset ; 
+  padding: 1em ;
+  background-color: #ffffee ;
+  /* width: 40% ; */
+  /* float: right ; */
+ /*  clear: right */ }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+div.section h1, div.section h2, div.section h3, 
+div.section h4, div.section h5, div.section h6 {
+  padding-left: 0.3em;
+  padding-bottom: 0.3em;
+  border-left: 2px solid gray;
+  border-bottom: 2px solid gray;
+}
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em; }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left {
+  clear: left }
+
+img.align-right {
+  clear: right }
+
+img.borderless {
+  border: 0 }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font-family: serif ;
+  font-size: 100% }
+
+pre.line-block {
+  font-family: serif ;
+  font-size: 100% }
+
+pre.literal-block, pre.doctest-block {
+  white-space: pre-wrap;       /* css-3 */
+  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word;       /* Internet Explorer 5.5+ */
+  margin-left: 2em ;
+  margin-right: 2em ;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  padding-left: 1em;
+  padding-right: 1em;
+  border: 1px dotted black;
+}
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid thin gray }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  border-spacing: 0;
+  border: 1 solid black;
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-top: solid thin black;
+  border-left: solid thin black }
+
+table.footnote td.label a {
+  text-decoration: none;
+}
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  border: 0; 
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+tt.docutils {
+}
+
+tt.ltst {
+  font-weight: bold;
+}
+
+tt.ltem {
+  font-style: italic;
+}
+
+ul.auto-toc {
+  list-style-type: none }
+
+/* vim: set ai et nu sw=2 ts=2: */
+
+</style>
+</head>
+<body>
+<div class="document" id="id1">
+<h1 class="title">兩小時叢集電腦</h1>
+<table class="docinfo" frame="void" rules="none">
+<col class="docinfo-name" />
+<col class="docinfo-content" />
+<tbody valign="top">
+<tr class="field"><th class="docinfo-name">author:</th><td class="field-body">Yung-Yu Chen (yungyuc) &lt;<a class="reference" href="mailto:yyc&#64;seety.org">yyc&#64;seety.org</a>&gt;</td>
+</tr>
+<tr class="field"><th class="docinfo-name">copyright:</th><td class="field-body">© 2006, all rights reserved.</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="id2" name="id2">目錄</a></p>
+<ul class="simple">
+<li><a class="reference" href="#id3" id="id25" name="id25">無磁碟叢集的結構</a><ul>
+<li><a class="reference" href="#id4" id="id26" name="id26">小型叢集的分析</a></li>
+<li><a class="reference" href="#id5" id="id27" name="id27">無磁碟技術的定位</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#id6" id="id28" name="id28">無磁碟叢集的實作概要</a></li>
+<li><a class="reference" href="#id7" id="id29" name="id29">設定主機</a><ul>
+<li><a class="reference" href="#debian-sarge" id="id30" name="id30">安裝 Debian sarge</a></li>
+<li><a class="reference" href="#id8" id="id31" name="id31">基本組態</a><ul>
+<li><a class="reference" href="#id9" id="id32" name="id32">網路介面</a></li>
+<li><a class="reference" href="#id10" id="id33" name="id33">遠端管理</a></li>
+<li><a class="reference" href="#id11" id="id34" name="id34">額外的工具與系統</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#id12" id="id35" name="id35">組態無碟遠端開機資料</a><ul>
+<li><a class="reference" href="#dhcp" id="id36" name="id36">DHCP</a></li>
+<li><a class="reference" href="#atftp-pxelinux" id="id37" name="id37">atftp/pxelinux</a></li>
+<li><a class="reference" href="#nfs" id="id38" name="id38">NFS</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#id13" id="id39" name="id39">叢集所需網路服務</a><ul>
+<li><a class="reference" href="#dns" id="id40" name="id40">DNS</a></li>
+<li><a class="reference" href="#apt-proxy" id="id41" name="id41">apt-proxy</a></li>
+<li><a class="reference" href="#ntp" id="id42" name="id42">NTP</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#id14" id="id43" name="id43">叢集內帳號共享</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#id15" id="id44" name="id44">編譯核心</a></li>
+<li><a class="reference" href="#id16" id="id45" name="id45">製作節點模板</a><ul>
+<li><a class="reference" href="#debootstrap" id="id46" name="id46">debootstrap 模板</a></li>
+<li><a class="reference" href="#id17" id="id47" name="id47">模板的訂製資料</a><ul>
+<li><a class="reference" href="#id18" id="id48" name="id48">主機名稱</a></li>
+<li><a class="reference" href="#loopback" id="id49" name="id49">loopback 網路裝置</a></li>
+<li><a class="reference" href="#fstab" id="id50" name="id50">fstab</a></li>
+<li><a class="reference" href="#apt-sources-list" id="id51" name="id51">APT sources.list</a></li>
+<li><a class="reference" href="#init" id="id52" name="id52">自訂 init</a></li>
+<li><a class="reference" href="#id19" id="id53" name="id53">安裝核心</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#id20" id="id54" name="id54">組態節點模板</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#id21" id="id55" name="id55">複製並自訂其餘節點</a></li>
+<li><a class="reference" href="#id22" id="id56" name="id56">更新主機的核心</a></li>
+<li><a class="reference" href="#id23" id="id57" name="id57">管理系統使用者</a></li>
+<li><a class="reference" href="#id24" id="id58" name="id58">完成基礎建設</a></li>
+</ul>
+</div>
+<p>隨著 PC 架構硬體的低價化與高速化，數年前視為先趨的 PC 叢集技術現已成為許多研究單位必得建置的要項設備。在以運算模擬為主業的科研單位中，絕大部分的 PC 叢集會採用 GNU/Linux 系統，以 MPI-based 平行化的程式，讓叢集內的諸 PC 分工合作，對運算工作進行加速。因為 PC 單機的運算能力實在不足需要，而 PC 叢集又是最便宜的解決方案，使此技術在近十年間慢慢地成熟與傳播。五年前人們或許會覺得架設 PC 叢集是件了不起的工程，但今日它卻已經不再新鮮；或許在讀者工作的研究室裡就有這麼一組轟隆作響的發熱大玩具。</p>
+<p>如果要談到 PC 叢集的管理，學問就多起來了，但無論如何，架設 PC 叢集在今日並不是一件難事。只要具備基本的 Linux 知識，懂得如何安裝作業系統、修改網路資訊、組態必要的網路服務，給任何人時間，他都能夠架設 PC 叢集，早晚而已。很多人心裡都有這種看法，其中有些人願意投入時間，但也有一些人即使明知多花點時間就搞得起來，還是覺得太辛苦。那麼，如果有方法可以在兩個小時之內完成叢集電腦的架設，會不會是一件吸引人的事？此外，這種方法還順便可以節省一點硬體費用 (以及少耗一點電)，又順便可以降低一點系統失效的機率，更順便可以讓管理工作輕鬆一點。</p>
+<p>它不止吸引人，其實已經好得不像真的了。</p>
+<p>只要大概估算一下就知道，假設我們安裝 (附帶基本的組態) 一台電腦的速度很快，十分鐘可以弄好，那麼兩個小時最多也只能弄好一台主機加十一台節點，不包含叢集的組態。在這種普通的狀況下，叢集的架設是被個別節點的安裝時間所限制的。因此，快速安裝叢集便要在這個部分大作文章，要訣是讓節點的安裝自動化。</p>
+<div class="note">
+<p class="first admonition-title">註記</p>
+<p class="last">叢集所屬的電腦一般都稱作「節點」 (node)。負責控制所有節點的電腦，通常稱作主機。雖然主機也算是節點，不過「節點」一詞通常特指除了主機或特殊功能節點之外的其餘節點，它們專責運算工作。</p>
+</div>
+<p>要利用 disk copy 工具 (例如 Ghost, TrueImage 等程式) 來複製已安裝的作業系統嗎？不是，雖然它確實可以節省一點時間，不過計入拆裝硬碟和重新組態作業系統 (總不能每台的設定值都相同吧) 之後，每台電腦總也要弄個五分鐘左右。事實上不夠自動化，所以時間省不了多少，而且拆裝硬碟、修改組態都是相當耗力的精細辛苦工，非常容易出錯。節省一點點時間卻增加很多出錯的機會，並不是我們的好方法。</p>
+<div class="admonition- admonition">
+<p class="first admonition-title">不可作弊</p>
+<p class="last">一個人拆裝 15 台電腦的硬碟很辛苦，但找五個人來作不但沒那麼辛苦，而且速度也會很快。這是作弊的行為！我們說要在一小時之內安裝叢集電腦，當然是一個人來作，不能烙人來幫忙。</p>
+</div>
+<p>如何在一個小時之內架好一組有八台、十五台甚至二十三台節點的叢集呢？答案是無磁碟 (diskless) 節點。利用網路開機的技巧，叢集內的節點不需要磁碟機，可以利用叢集主機上的資料開機作業，因此稱這種節點為無磁碟節點。為了便利後續的討論，姑且把採用這種技巧的叢集稱作無碟叢集。對大部分的小型叢集 (筆者個人的定義，低於二十三台節點的叢集) 來說，節點缺少磁碟對使用性與效能上可說是沒有影響，但在安裝、組態以及後續的管理上，卻能大大地增加方便性，減少工作量。</p>
+<p>除了無磁碟之外，快速安裝叢集的另外一個要點便是採用優秀的 Debian GNU/Linux 作業系統。Debian 的基礎安裝不但只需要十分鐘，它還把叢集所需的軟體整理得很好，讓我們可以用最簡潔的方法進行設定。</p>
+<div class="note">
+<p class="first admonition-title">註記</p>
+<p class="last">Debian 固然是很優秀的 Linux 發行套件，但不是非它不可，讀者選用自己熟練的發行套件進行實作，可以達到差不多的速度。然而，Debian 是最適合這種應用以及最節省架設時間的發行套件之一。</p>
+</div>
+<p>簡單就是美。小巧精美的無碟叢集代表了效率，在架設上與運作中皆是如此。</p>
+<div class="section">
+<h1><a class="toc-backref" href="#id2" id="id3" name="id3">無磁碟叢集的結構</a></h1>
+<p>我們將一套 PC 叢集視作一台平行化的電腦。</p>
+<p>雖然在實作中，PC 叢集恰如其名地是一群 PC 的集合，但我們希望給使用者一個感覺：我在使用一台有許多運算節點的電腦。要作到這一點，我們必須把架構叢集系統內部的邏輯隱藏在設計好的介面裡面，讓使用者在叢集上只需要考慮如何指定所需的運算資源。</p>
+<p>因此，設計這樣的「一台」PC 叢集，我們要考慮的重點有二：</p>
+<ol class="arabic simple">
+<li>如何把一群 PC 組織成整體，不依靠外界資訊，可獨立運作。將節點化為叢集中的零件。</li>
+<li>如何設計介面，隱藏節點與主機的關係，讓叢集用起來像個整體。</li>
+</ol>
+<div class="section">
+<h2><a class="toc-backref" href="#id2" id="id4" name="id4">小型叢集的分析</a></h2>
+<p>一套小型的 PC 叢集系統可以簡單化約成三個部分：</p>
+<ol class="arabic simple">
+<li>叢集區域網路。</li>
+<li>叢集節點。</li>
+<li>叢集主機。</li>
+</ol>
+<p>叢集中的網路可說是叢集的神經系統；現代叢集得以發展，除了 PC 硬體的低價化之外，便宜、快速、可靠的區域網路技術是另外一個支柱。PC 叢集平行運算本質上是一種分散式運算；亦即相對於傳統共享記憶體式的平行運算電腦而言，PC 叢集在運算時各節點的記憶體沒有連結關係，運算所需的資料必須「分散」到各節點上才能處理。這個分散的動作沒有網路則不能成事，就好比在人體裡，腦部對手腳的動作指令，一定要透過神經系統的幫助才能正確傳達。</p>
+<p>在實務上，我們無法直接透過區域網路傳遞資料 (程序過於繁複，而且會破壞程式的可攜性)，因此，網際網路協定 (IP) 也廣泛地應用在叢集的網路架構中。當電腦要交換資料時，所有資料都會先進入 IP 堆疊，再轉到實際的區域網路進行傳遞。</p>
+<div class="note">
+<p class="first admonition-title">註記</p>
+<p class="last">當今慣用的區域網路技術為以太網路 (ethernet)。過去還有許多其它種類的區域網路技術，但今日市場幾已被以太網路全盤佔據，差別只在於速度與細部規格上的不同。</p>
+</div>
+<p>叢集節點是負責運算的要角。所有的節點都應該儘量單純化，拿掉所有對運算沒有幫助的部分，變得好像是叢集裡的零件一樣，可以隨時替換增減。我們常會把叢集的區域網路獨立在叢集的內部；除了叢集主機 (與節點) 之外的電腦，都無法直接存取節點。外部既無法直接存取節點，我們就可以獨立進行節點的增減與組態，不必考慮對外界的依賴。此外，這也可以保護節點遭受惡意的網路攻擊或未經授權的使用。</p>
+<p>叢集節點透過叢集內的網路彼此互連在一起，共享叢集主機所提供的服務；也就是說，由叢集主機進行管理。叢集主機是讓節點得以順利進行運算工作的靈魂，它需要提供哪些服務呢？包括：</p>
+<ol class="arabic simple">
+<li>名稱服務。</li>
+<li>使用者認證。</li>
+<li>檔案伺服。</li>
+<li>對時服務。</li>
+<li>派工系統。</li>
+</ol>
+<p>在這些基礎服務中，最重要的是名稱服務。名稱服務負責將電腦的名稱轉換為實際的 IP 位址，為電腦的定位提供必要的彈性。有些人在實作叢集的時候把各電腦 (主機、節點) 的 IP 位址全部寫死在系統裡面，造成未來系統變遷時很大的限制。</p>
+<p>Linux 的名稱系統可以透過三種方法進行實作：hosts 檔、NIS hosts 資訊與 DNS。過去許多人會選擇把叢集所需的 (電腦) 名稱寫在各節點的 hosts 檔裡，因為基本上這不需要組態任何伺服程式；不過當節點的名稱資訊有變更需要的時候，每一台節點上的資料都得同步修改，既麻煩又容易出錯。又有許多人採用 NIS 提供的 hosts 資訊，因為在組態叢集的時候 NIS 幾乎是不會缺少的重要服務。不過 NIS 需要手動更新其資料庫，不盡方便。</p>
+<p>為了解決這些問題，我們直接以 DNS 實作叢集內的名稱服務。在叢集主機上建立 DNS 伺服器，把電腦名稱建入主機的 DNS 資料庫裡去，可以一舉解決名稱同步與自動化的問題。主機上的 DNS 也可以對節點提供外部的名稱服務；如果節點需要查詢叢集外界的電腦名稱，便不必另外進行組態。</p>
+<p>使用者認證、檔案伺服與對時等系統，也是叢集組織中重要的元件，為節點提供統一的相關資訊。我們還可以為節點提供其它的資訊，但使用者認證資訊、資料檔案以及時間等，則是為了讓節點與叢集系統緊密結合必不可少的三種資訊。在小型叢集裡，用 NIS 來實作統一的使用者認證資訊是最簡單的方式；NFS 是最常用的檔案伺服系統；統一的時間資訊則會交給 NTP 來負責。</p>
+<p>最後的派工系統是讓叢集看起來「像一台電腦」的重要元件。派工系統為使用者提供了叢集的使用介面；使用者利用派工系統來命令叢集節點執行運算、管理正在執行的運算工作，以及調整運算的工作方式。因為叢集掌握了非常多的運算資源 (相較於單機電腦)，所以派工系統也要允許管理員設定叢集的使用政策，讓叢集的運算能力可以用在適當的工作上。</p>
+<p>在設計小型叢集的時候，因為電腦的數量不多，為了發揮所有電腦的運算能力，常常會讓叢集主機也扮演節點的角色進行運算。如果叢集進行的工作對主機有較多的要求，譬如說有大量的磁碟資料輸出入 (節點需透過網路存取主機的磁碟)，主機也加入運算可能會讓工作不穩定，必須妥為評估。</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id2" id="id5" name="id5">無磁碟技術的定位</a></h2>
+<p>任何一台電腦，如果拿掉磁碟之後，運作的效能和穩定性可以保持不墜，那可以得到：</p>
+<ol class="arabic">
+<li><p class="first">不容易壞；少了一個容易損壞的硬體。</p>
+<p>任何會轉的東西都比不會轉的容易壞，而愈便宜的電腦硬體愈容易壞；在 PC 上最容易壞的大概是散熱風扇，它們一般來說在會轉的零件裡是最便宜的，壞了我們會換一個，直接把壞的去掉。其次容易壞的是光碟機，因為比較貴一點，所以還會修一修。硬碟是第三容易壞的東西。要預知硬體的損壞是相當困難的事情；若想維持系統的運作順利，定期更換硬體是比較有效的作法。散熱風扇比較便宜，定期更換並不算太貴；硬碟的價格則在兩個數量級以上，定期更換不但在金錢上不划算，也非常費時。</p>
+<p>如果電腦的數量只有兩三台，大概不容易遇到硬碟的損壞，但若有十幾二十台電腦在運作，那可機會大增。</p>
+</li>
+<li><p class="first">組態簡單。電腦的「所有資料」都集中在遠端主機上。原本必須要連線過去才能編輯的組態檔案，如今只要在提供檔案伺服的主機上就可以修改。</p>
+</li>
+</ol>
+<p>這些好處。叢集系統的節點正好就是無磁碟化以後效能和穩定性不會降低的應用。利用無磁碟技術，對節點的單純化與零件化也有很大的幫助。小型叢集系統的架構裡面的主機又正好同時可以當作節點的開機主機。</p>
+<p>在這些條件齊備的情況下，在叢集節點上應用無磁碟技術，有百利而幾無害。然而相對地，也不會把無磁碟技術用在叢集主機上。我們可以這麼說，所謂的無磁碟叢集，便是在節點上應用無磁碟技術的叢集系統。</p>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id2" id="id6" name="id6">無磁碟叢集的實作概要</a></h1>
+<p>必須承認，「無磁碟技術」一詞是一種很籠統的說法。只要能讓一台電腦不靠硬碟，直接從網路上啟動、載入作業系統並且運作正常，我們就可以當它作一種無磁碟技術。對不同的作業系統來說，實作無磁碟電腦的方法肯定不同，我們也不能一概而論。因此，我們要討論的無磁碟技術必需作些限制。</p>
+<p>目前一般 PC 有幾種開機的方式：</p>
+<ol class="arabic simple">
+<li>軟碟機。</li>
+<li>光碟機。</li>
+<li>硬碟機。</li>
+<li>USB 儲存裝置。</li>
+<li>以太網路卡 boot ROM。</li>
+</ol>
+<p>以上 1, 2, 3, 4 等方法都需要把儲存裝置接上電腦，才能進行開機作業，唯有使用網路卡的 boot ROM，可以不透過外接的儲存裝置進行開機 (boot ROM 一般是固定在網路卡上的)。</p>
+<p>過去 boot ROM 有許多的種類，但今日絕大部分提供網路開機的網路卡都採用 PXE boot ROM。PXE (Pre-Execution Environment) 是 Intel 制訂的一種規格，允許電腦從區域網路上取得資訊，進行開機。PXE 的實作細節牽到非常低階的系統程式設計，我們不必理會。不過，PXE 一定要配合 DHCP/BOOTP 等網路自動組態服務，才能順利運作；此則不可不知。</p>
+<p>我們要討論的無磁碟技術，使用 PXE 進行網路開機。</p>
+<p>另外，雖然所有的 Linux distribution 都支援以 PXE 網路開機實作無磁碟系統，但我們在討論的時候，把平台限定在 Debian GNU/Linux。其它 Linux 平台都可以處理對等的動作；但 Debian 內建就有我們需要的套件，不假外求，在系統層面上可以最大程度地簡單化我們的工作。此外，Debian 每個發行版本也足夠穩定，更新不會過於頻繁，並且非常注重安全更新；對一個需要長時間運作不停機的運算叢集來說，是比較理想的系統。</p>
+<div class="note">
+<p class="first admonition-title">註記</p>
+<p class="last">支援 Linux 套裝軟體的支援列表常常只會列出 &quot;Redhat&quot;，有些則會加上 &quot;SuSe&quot;，很少有直接列出 Debian 為支援系統的。然而能在 Redhat 上執行的程式，Debian 上也都可以執行。各 distribution 之間的差別主要是系統的結構，包含組態檔案的位置、使用程式庫的版本等。</p>
+</div>
+<p>在建造叢集的時候，我們會把工作分成三個部分：</p>
+<ol class="arabic simple">
+<li>組裝電腦、安裝硬體、配置週邊設備。</li>
+<li>安裝作業系統與相關支援系統。</li>
+<li>安裝與組態叢集派工 (管理) 系統。</li>
+</ol>
+<p>無磁碟化工作是在第二個部分進行處理的。當我們取得叢集所需的硬體後，首先要作的就是把所有電腦組裝起來，然後安裝、組態作業系統，讓這群電腦運作成一個整體。最後，在叢集起來的這組電腦裡安裝負責派工與管理運算工作的系統，為所有節點提供統一的操作介面。</p>
+<p>無磁碟化的重點在於如何讓節點利用 PXE 遠端進行啟動。實作的方法若有不同，遠端啟動的流程也會略有差異。我們所希望的流程是：</p>
+<ol class="arabic simple">
+<li>節點上的 BIOS 選用網路卡上的 PXE boot ROM 執行開機作業。</li>
+<li>節點的 PXE boot ROM 下載可用的 DHCP 訊息。</li>
+<li>從 DHCP 中取得網路設定：自身 IP、TFTP 伺服器位址。</li>
+<li>PXE boot ROM 從 DHCP 指定的 TFTP 伺服器位址下載 pxelinux 程式，繼續下一階段。</li>
+<li>pxelinux 程式從 DHCP 中取得網路設定：自身 IP、TFTP 伺服器位址。</li>
+<li>pxelinux 從指定的 TFTP 伺服器取得屬於自己的組態檔，再從組態檔指定的目錄下載 Linux 核心檔案，把核心載入記憶體執行。pxelinux 須指定核心使用 DHCP 取得網路設定，並以 NFS 作 root 檔案系統。</li>
+<li>Linux 核心從 DHCP 中取得詳細的網路設定，並把指定的 NFS 目錄掛載為根目錄。</li>
+<li>核心初始化完畢，執行 init (process 1)。我們要把預設的 init 程式置換為自訂的 shell script，根據自身從 DHCP 取得的電腦名稱 (hostname)，掛載相關系統目錄。</li>
+<li>自訂的 init script 完成所有掛載工作後，在最後的部分呼叫原預設的 init 程式 (應更名為 init.orig)。至此完成與無磁碟開機相關的動作，往後的動作與一般系統無異 (即原 init 程式所進行的工作)。</li>
+</ol>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id2" id="id7" name="id7">設定主機</a></h1>
+<p>我們把叢集主機取名為 digger。另外，假設有三台節點，取名為 spade01, spade02, spade03。</p>
+<div class="section">
+<h2><a class="toc-backref" href="#id2" id="debian-sarge" name="debian-sarge">安裝 Debian sarge</a></h2>
+<p>我們使用 Debian 的穩定版本，Debian GNU/Linux 3.1 codename &quot;sarge&quot; 進行實作；所安裝的 sarge 要是一個完全乾淨的基本系統 (base system)。Debian 發行時並沒有細分版本 (與 Redhat 等商業版的 distribution 不同)，而是在安裝後的最後階段，根據使用者想要執行的作業，安裝相關的套件。這個步驟稱作 tasksel (task selection)。所謂的 base system 即為不選擇任何 task 的系統，只會安裝基本的網路服務、系統工具，程式庫與程式工具。</p>
+<div class="note">
+<p class="first admonition-title">註記</p>
+<p class="last">我們選用 lilo 為 boot loader；當然讀者也可以用 grub，不過後文都是用 lilo 進行討論的。</p>
+</div>
+<p>base system 允許我們對系統作最簡潔的設定。之後，我們再利用 Debian 內建的套件與 apt 系統安裝必要的套件，建立不大不小剛剛好的叢集。</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id2" id="id8" name="id8">基本組態</a></h2>
+<div class="section">
+<h3><a class="toc-backref" href="#id2" id="id9" name="id9">網路介面</a></h3>
+<p>叢集主機負責管理內部的節點，又要提供外界使用者登入進行作業。我們可以在叢集主機上安裝兩個網路介面 (網路卡)，把叢集內部網路和外部從實體上分隔開來。如果我們只有一個網路介面的話，則要用別名的方式建立兩組 IP 連線資訊。使用別名的 /etc/network/interfaces 可以寫成：</p>
+<pre class="literal-block">
+auto lo
+iface lo inet loopback
+
+auto eth0
+iface eth0 inet static
+        address 192.168.143.254
+        netmask 255.255.255.0
+        network 192.168.143.0
+        broadcast 192.168.143.255
+
+auto eth0:1
+iface eth0:1 inet static
+        address 10.10.10.123
+        netmask 255.255.255.0
+        network 10.10.10.0
+        broadcast 10.10.10.255
+        gateway 10.10.10.254
+        dns-nameservers 10.10.10.111
+        dns-search dlessc
+</pre>
+<p>如果我們在安裝的時候使用了外界網路的話，那麼 /etc/hosts 檔裡面的資訊 (IP 與名稱對應) 也要改一下。</p>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id2" id="id10" name="id10">遠端管理</a></h3>
+<p>叢集主機對外界網路與內部節點的登入服務，都使用 secure shell (ssh)。為了讓叢集內各電腦彼此登入的時候不必輸入認證資訊，除了需要為每個使用者設定 public key based 的認證資訊之外，也要指定 ssh 客戶程式不去檢查叢集內電腦的 host key。主機和節點裡的 /etc/ssh/ssh_config 應如此設定：</p>
+<pre class="literal-block">
+Host spade?? digger
+    StrictHostKeyChecking no
+</pre>
+<p>這裡我們只能先設定主機的 ssh_config 檔，節點的以後再設。</p>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id2" id="id11" name="id11">額外的工具與系統</a></h3>
+<p>以上是主機必要的組態，在這些組態之外，我們還要安裝一些幫助工作的服務與工具。sarge 在安裝 base system 時預設使用 exim 作郵件系統，讓我們改成比較容易組態的 postfix：</p>
+<pre class="literal-block">
+$ apt-get install postfix
+</pre>
+<p>另外，再安裝一些好用的工具套件：</p>
+<pre class="literal-block">
+$ apt-get install sudo less vim screen
+</pre>
+<p>ssh 提供了 X11 forwarding 的功能，允許使用者不必設定環境變數 (DISPLAY)，就可以使用遠端的 X server。也就是說使用者可以從遠端 (有 X server 的電腦) 連線到叢集主機，在主機上執行 X 程式，把畫面導回使者電腦上的 X server。這部分要在 ssh 伺服器的 /etc/ssh/sshd_config 設定檔裡設定，在其中寫入 (預設為 no)：</p>
+<pre class="literal-block">
+X11Forwarding yes
+</pre>
+<p>並重新啟動 ssh (/etc/init.d/ssh restart)。要使用遠端的 X server，叢集主機上也要有相關的 X client 工具程式與程式庫，所以得安裝：</p>
+<pre class="literal-block">
+$ apt-get install xbase-clients
+</pre>
+<p>如此一來，其它的 X (client) 程式，便可以在連線使用者電腦上的 X server 顯示畫面，取得輸出入資訊。</p>
+</div>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id2" id="id12" name="id12">組態無碟遠端開機資料</a></h2>
+<p>安裝供無碟節點遠端開機之必備套件：</p>
+<pre class="literal-block">
+$ apt-get install dhcp3-server syslinux atftpd nfs-kernel-server
+</pre>
+<p>dhcp3-server 是 Debian 包裝的 ISC version 3 DHCP 伺服器，較 2 版提供更多功能。syslinux 套件內的 pxelinux 程式是利用 PXE 執行網路開機必備的工具，由 PXE boot ROM 透過 TFTP 下載後載入。TFTP 的全名是 Trivial File Transfer Protocol，不像 FTP 提供完整的檔案存取與權限控制功能，我們用來在節點與主機間進行簡單的網路資料傳輸；由 atftpd 套件提供。Debian 所使用的 Linux 核心有編入 NFS client，且 base system 也預設安裝其工具套件；但主機要負責的 NFS 伺服功能，則要另外安裝 nfs-kernel-server 來提供。</p>
+<div class="section">
+<h3><a class="toc-backref" href="#id2" id="dhcp" name="dhcp">DHCP</a></h3>
+<p>DHCP 是 Dynamic Host Configuration Protocol 的縮寫。雖然我們一般是應用 DHCP 替區域網路上的電腦進行自動網際網路組態，但許多其它的電腦組態，DHCP 也可以透過網路提供給電腦。</p>
+<p>在安裝了 DHCP 伺服器後，我們要在其設定檔 /etc/dhcp3/dhcpd.conf 內進行組態。組態的重點在讓節點的 PXE boot ROM, pxelinux 及 Linux 核心透過 DHCP 提供的資訊，得知自已的網路設定與相關檔案位置：</p>
+<pre class="literal-block">
+ddns-update-style none;
+
+option domain-name &quot;dlessc&quot;;
+option domain-name-servers 192.168.143.254;
+
+default-lease-time 600;
+max-lease-time 7200;
+
+log-facility local7;
+
+shared-network dlessc {
+  allow booting;
+  allow bootp;
+
+  option domain-name &quot;dlessc&quot;;
+
+  subnet 192.168.143.0 netmask 255.255.255.0 {
+    option subnet-mask 255.255.255.0;
+    option broadcast-address 192.168.143.255;
+    option domain-name-servers 192.168.143.254;
+    option routers 192.168.143.254;
+  }
+
+  next-server 192.168.143.254;
+  filename &quot;pxelinux.0&quot;;
+
+  host spade01 {
+    option host-name &quot;spade01&quot;;
+    hardware ethernet 00:17:31:1E:31:CF;
+    fixed-address 192.168.143.1;
+  }
+
+  host spade02 {
+    option host-name &quot;spade02&quot;;
+    hardware ethernet 00:17:31:1E:31:EB;
+    fixed-address 192.168.143.2;
+  }
+
+  host spade03 {
+    option host-name &quot;spade03&quot;;
+    hardware ethernet 00:17:31:1E:31:5D;
+    fixed-address 192.168.143.3;
+  }
+
+}
+</pre>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id2" id="atftp-pxelinux" name="atftp-pxelinux">atftp/pxelinux</a></h3>
+<p>在網路開機的過程中，各個相關的程式都會用到 TFTP 來向主機索取相關的資料。PXE boot ROM 會用 TFTP 下載 pxelinux 程式；pxelinux 程式會用 TFTP 下載組態檔與 Linux 核心。TFTP 與 DHCP 雖然都是用來對節點提供資料，但主要有兩點不同：</p>
+<ol class="arabic simple">
+<li>TFTP 是基於網際網路的通訊協定，客戶端需具備正確的網路組態，方能連線至 TFTP 伺服器，取得資料；DHCP 直接使用區域網路傳遞資料，未使用網際網路協定，因此可以用來組態網際網路。</li>
+<li>TFTP 傳遞的資料以檔案為單位，可以用目錄進行組織，也可以傳遞比較大量的資料。DHCP 只能傳遞協定中定義好的資訊，這些資訊都相當簡短，不能用來傳遞大量資料。</li>
+</ol>
+<p>因此，雖然 DHCP 是一種很便利的系統，但我們還是需要 TFTP 伺服器的配合，才能順利地讓節點取得開機所需的程式資料。</p>
+<p>Debian 內附的 atftpd (advanced TFTP daemon) 是一個很適合用來網路開機的 TFTP 伺服程式；一開始它就是為了在 Debian 下配合 PXE 進行網路開機而設計的，所以支援很完整的相關規格。安裝時，我們可以指定用 standalone daemon 的方式執行伺服程式；其它的組態選項使用預設值即可。</p>
+<p>開機過程中的另一個重要元件是 pxelinux。pxelinux 是 syslinux 套件的一部分。syslinux 這套工具，可以幫助我們在非 Linux 執行環境下啟動 Linux 核心及相關系統程式，而 pxelinux，便是使用 PXE 進行開機的工具。</p>
+<p>我們在先前的 dhcpd.conf 裡已經對 pxelinux 程式的位置進行了一些設定，所以在此要把程式檔案與設定檔放到已經指定好的位置來。atftpd 預設的根目錄是 /tftpboot，而我們在 dhcpd.conf 已經設定讓 PXE boot ROM 下載 TFTP 伺服器下的 pxelinux.0 檔案，作為執行下一個開機步驟的程式。於是，我們要在主機上進行以下的動作：</p>
+<pre class="literal-block">
+$ mkdir -p /tftpboot/pxelinux.cfg
+$ ln -s /usr/lib/syslinux/pxelinux.0 /tftpboot/pxelinux.0
+</pre>
+<p>syslinux 套件所提供的 pxelinux 工具程式 (即 PXE boot ROM 要下載的開機程式)，檔案位於 /usr/lib/syslinux/pxelinux.0。pxelinux 在節點上被執行了以後，會從 TFTP 伺服器裡的 pxelinux.cfg 目錄再下載它的設定檔；pxelinux 的設定檔所寫入的設定便是啟動 Linux 核心的方法。</p>
+<p>pxelinux 會依照節點的 IP 位址，依序嚐試從 pxelinux.cfg 目錄下載設定檔。假設節點的 IP 是 192.168.132.1，那麼順序為：</p>
+<ol class="arabic simple">
+<li>C0A88401</li>
+<li>C0A8840</li>
+<li>C0A884</li>
+<li>C0A88</li>
+<li>C0A8</li>
+<li>C0A</li>
+<li>C0</li>
+<li>C</li>
+<li>default</li>
+</ol>
+<p>也就是說，會把節點的 IP 位址轉換成大寫的十六進位碼當作檔名，從比較完整的 IP 開始進行下載，失敗的話就換比較短的名字。如果 1 到 8 的檔名都不存在，就會下載名為 default 的設定檔。</p>
+<p>我們假設所有的節點都使用相同的設定，便不必理會它們的 IP 不同，直接把設定寫在 /tftpboot/pxelinux.cfg/default：</p>
+<pre class="literal-block">
+default 2.6.8-pxe
+label 2.6.8-pxe
+  kernel vmlinuz-2.6.8-pxe
+  append root=/dev/nfs ip=both nfsroot=/tftpboot/archs/ASD672
+</pre>
+<p>pxelinux 設定檔的寫法和 syslinux 是一模一樣的，也和 lilo 十分類似。設定檔裡可以寫入很多不同 label 的核心設定，並用 default 指定預設的 label。在我們要用來開機的核心設定中，用 kernel 指定核心的檔名 (當然，也要放在 /tftpboot 目錄下，可以是符號連結)，並用 append 指定傳入核心的參數。我們必須告訴核心，系統的根目錄會在 NFS 上 (root=/dev/nfs)，取得 IP 的方法是 dhcp 與 bootp 並用 (ip=both)，以及用作根目錄的 NFS 分享位置 (nfsroot=/tftpboot/archs/ASD672)。</p>
+<p>此時，我們已經指定好了節點資料所要存放的位置：/tftpboot/archs。我們要用這個目錄存放節點的模板，也就是節點共用的程式與相關資料。至於每個節點不同的設定檔案，則另外放在 /tftpboot/nodes 目錄裡：</p>
+<pre class="literal-block">
+$ mkdir /tftpboot/archs
+$ mkdir /tftpboot/nodes
+</pre>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id2" id="nfs" name="nfs">NFS</a></h3>
+<p>Linux 上的 NFS 在安裝時通常是不需要特別設定的，因為 NFS 的功能已經整合進 Linux 核心裡面了，我們所安裝的 nfs-kernel-server 套件只是用來管理核心 NFS 伺服器的工具程式組。</p>
+<p>安裝好了 nfs-kernel-server，NFS 伺服器才可以使用。目錄分享的組態要寫在 /etc/exports 檔裡：</p>
+<pre class="literal-block">
+/tftpboot       *.dlessc(rw,no_root_squash,sync)
+/root           *.dlessc(rw,no_root_squash,sync)
+/home           *.dlessc(rw,no_root_squash,sync)
+/cluster        *.dlessc(rw,no_root_squash,sync)
+</pre>
+<p>我們把叢集主機的 /tftpboot 分享出來，提供節點存取其程式與設定資料。/root 分享出來則是為了方便管理。/home 存放使用者的運算工作資料，每台節點一定要都能存取，使用者的資料來源才能統一。我們另外建立一個 /cluster 目錄，獨立存放叢集所需要的工具與軟體系統。</p>
+<p>作好設定以後，執行 /etc/init.d/nfs-kernel-server restart 重新啟動 NFS 伺服器，使設定生效。</p>
+</div>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id2" id="id13" name="id13">叢集所需網路服務</a></h2>
+<p>要讓叢集主機與節點得以運作順暢，我們要在叢集主機上安裝一些服務：DNS 伺服器、apt 套件來源代理伺服器、NTP 伺服器。</p>
+<pre class="literal-block">
+$ apt-get install bind apt-proxy ntp-server
+</pre>
+<p>另外還需要安裝 NIS 伺服器，不過安裝的動作要在以上的服務之後。</p>
+<div class="section">
+<h3><a class="toc-backref" href="#id2" id="dns" name="dns">DNS</a></h3>
+<p>我們為叢集建立的 DNS 伺服器，主要的用途是取代各電腦上的 hosts 檔案與 NIS 的 hosts 資訊，讓各電腦直接從統一的來源取得名稱。所使用的 DNS 伺服器是 bind (version 9)。</p>
+<p>若以我們假設的主機與節點名稱為例，正向與反向查詢的資料庫分別為正查的 db.dlessc (所有檔案都要存放在 /etc/bind 下)：</p>
+<pre class="literal-block">
+;
+; BIND data file for local loopback interface
+;
+$TTL    604800
+&#64;       IN      SOA     dlessc. root.dlessc. (
+                        2006071901      ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+&#64;       IN      NS      dlessc.
+&#64;       IN      A       10.10.10.123
+; Diskless cluster machines.
+digger  IN      A       192.168.143.254
+spade01 IN      A       192.168.143.1
+spade02 IN      A       192.168.143.2
+spade03 IN      A       192.168.143.3
+</pre>
+<p>反查的 db.192.168.143：</p>
+<pre class="literal-block">
+;
+; BIND reverse data file for local loopback interface
+;
+$TTL    604800
+&#64;       IN      SOA     dlessc. root.dlessc. (
+                        2006071901      ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+&#64;       IN      NS      localhost.
+254     IN      PTR     digger.dlessc.
+1       IN      PTR     spade01.dlessc.
+2       IN      PTR     spade02.dlessc.
+3       IN      PTR     spade03.dlessc.
+</pre>
+<p>然後在 named.conf.local 裡加入以上兩個 DNS 資料庫設定:</p>
+<pre class="literal-block">
+//
+// Add local zone definitions here.
+
+zone &quot;dlessc&quot; {
+        type master;
+        file &quot;/etc/bind/db.dlessc&quot;;
+};
+
+zone &quot;143.168.192.in-addr.arpa&quot; {
+        type master;
+        file &quot;/etc/bind/db.192.168.143&quot;;
+};
+</pre>
+<p>最後我們打開 named.conf.options 裡的 forwarders，指定為上一層的 DNS 伺服器，這樣叢集的 DNS 遇到非以上設定區段的名稱 (或 IP) 時，便會向上一層伺服器查詢。設好完畢以後，執行 /etc/init.d/bind restart，重新啟動 bind 更新設定。</p>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id2" id="apt-proxy" name="apt-proxy">apt-proxy</a></h3>
+<p>Debian 系統使用 APT 進行軟體套件管理。叢集節點事實上不需要安裝太多套件，但為了軟體管理的方便性，我們還是希望能存取到 APT 資料庫。然而，叢集節點一般會封在叢集的內部網路，不能直接存取外部網路。為了解決這個問題，我們在叢集主機上組態 apt-proxy 伺服器，作為節點與外界 APT 資料庫的存取介面。</p>
+<p>在 /etc/apt-proxy/apt-proxy-v2.conf 的 [DEFAULT] 區段裡加入</p>
+<pre class="literal-block">
+address = 192.168.143.254
+</pre>
+<p>repo 的部分 apt-proxy 已經幫我們設好了，不必管。</p>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id2" id="ntp" name="ntp">NTP</a></h3>
+<p>叢集中各節點時間的同步很重要；假設節點 1 比節點 2 快了一分鐘，當兩者在存取檔案的時候，就可能會發生不一致的狀況。使用者在檢視平行程式輸出的時候，也容易誤判資料的先後順序。為了避免這種稱作時間扭曲的問題，我們要在叢集主機上安裝 NTP (Network Time Protocol) 伺服器，讓叢集節點可以與主機的時間同步：</p>
+<pre class="literal-block">
+$ apt-get install ntp-server
+</pre>
+<p>組態檔在 /etc/ntp.conf，預設的 NTP 伺服器設為：</p>
+<pre class="literal-block">
+server pool.ntp.org
+</pre>
+<p>如果你的單位也有建立公用的 NTP 伺服器，可以把 server 改成離你比較近的，時間會準上幾個毫秒。</p>
+</div>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id2" id="id14" name="id14">叢集內帳號共享</a></h2>
+<p>在叢集系統裡，每一個節點都需要共享所有的使用者認證與權限資料。在我們的設計中，是利用 NIS (yp) 系統來達成這個功能：</p>
+<pre class="literal-block">
+$ apt-get install nis
+</pre>
+<p>因為 nis 套件比較特別，設定上比較複雜點，因此放在主機組態的最後階段來處理。在安裝 nis 套件的時候，組態工具會詢問 nis domain 要取什麼名字。這個名字可以任選，但要注意不能和目前區域網路裡其它的 nis domain 衝突。此處我們先取為 dlessc。整個安裝過程的最後會執行 ypbind 客戶端常駐程式，這個程式一定會執行失敗，連帶地讓 nis 套件無法完成安裝；因為 nis 資料庫 (yp key) 還沒有建立，nis 伺服程式也無法執行。為了解決這個問題，我們需先把 yp key 建好：</p>
+<pre class="literal-block">
+$ make -C /var/yp
+</pre>
+<p>再修改 /etc/default/nis 檔裡的 NISSERVER 選項，從 false 改成 true。然後重新啟動 nis 系統：</p>
+<pre class="literal-block">
+/etc/init.d/nis restart
+</pre>
+<p>不過，這樣的處理有時候仍不足夠，那便需要重新開機，才能清空舊資料，正確套件新設定。</p>
+<p>當 ypbind 執行成功後，請執行：</p>
+<pre class="literal-block">
+dpkg --configure -a
+</pre>
+<p>重新組態 nis 套件，完成套件的安裝程序。</p>
+<div class="note">
+<p class="first admonition-title">註記</p>
+<p class="last">如果沒有完成安裝程序，未來將無法安裝其它的套件。</p>
+</div>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id2" id="id15" name="id15">編譯核心</a></h1>
+<p>為了直接用 PXE 進行網路開機，我們必須修改一些 Linux 核心組態的方式。</p>
+<p>Linux 利用 PXE 網路開機有兩個先決條件：可從 DHCP 抓取資料、可將 NFS 掛載為根檔案系統。當 PXE boot ROM 從 TFTP 伺服器取回 Linux 核心，並把工作交給 Linux 核心後，Linux 核心必須要具備上述兩項能力，才能完成開機作業。然而，一般預先編好的核心都把以上相關的功能編為模組 (即外部的 .ko 檔)，並不存在於 PXE boot ROM 所下載得到的核心 image 裡；在這種情況下，核心需取得這些功能才能掛載根檔案系統，但沒有這些功能卻無法掛載根檔案系統，這便形成了一個死結，讓核心開機失敗。</p>
+<p>因為 Debian 預編的核心不能直接用來網路開機，我們就要改變一下核心的組態，重新編譯適用的版本。編譯核心原始碼所需要的套件，包括原始碼本身與相關程式庫，安裝如下：</p>
+<pre class="literal-block">
+$ apt-get install kernel-source-2.6.8 libncurses5-dev
+</pre>
+<p>同時，為了便於安裝與封存編譯好的核心，我們也需要安裝在 Debian 下建立核心套件的工具套件：</p>
+<pre class="literal-block">
+$ apt-get install kernel-package fakeroot
+</pre>
+<p>相關的套件都安裝好了以後，就可以準備編譯核心。我們要編譯兩個版本的核心，一個使用 initrd (initial ram disk) 進行開機，這是給叢集主機使用的；另一個不包括 initrd：</p>
+<pre class="literal-block">
+$ cd /usr/src
+$ tar xfj kernel-source-2.6.8.tar.bz2
+$ mv kernel-source-2.6.8 2.6.8-initrdpxe
+$ tar xfj kernel-source-2.6.8.tar.bz2
+$ mv kernel-source-2.6.8 2.6.8-pxe
+</pre>
+<p>因為節點要能先由網路啟動，故未使用 initrd 的版本應先行編譯。編譯前的組態請執行：</p>
+<pre class="literal-block">
+$ make menuconfig
+</pre>
+<p>我們要在組態中進行幾項修改：</p>
+<ol class="arabic">
+<li><p class="first">將網路卡的驅動程式編入核心 (非模組)；一般預設都是編為核心模組，須修改。</p>
+</li>
+<li><p class="first">編入網路自動組態的功能 (Device Drivers -&gt; Networking support -&gt; Networking options)：</p>
+<pre class="literal-block">
+CONFIG_IP_PNP
+CONFIG_IP_PNP_DHCP
+</pre>
+</li>
+<li><p class="first">編入 NFS 功能 (File systems -&gt; Networking File Systems)：</p>
+<pre class="literal-block">
+CONFIG_NFS_FS
+CONFIG_ROOT_NFS
+</pre>
+</li>
+</ol>
+<p>組態完成以後，將組態檔儲存起來；使用 initrd 版本的核心不需要重新組態，直接將已儲存的 .config 檔複製過去使用即可。然後，我們依照順序編譯核心，並建立核心套件：</p>
+<pre class="literal-block">
+$ cd 2.6.8-pxe
+$ make-kpkg --rootcmd=fakeroot kernel_image \
+  --append-to-version=-pxe --revision=2.6.8-1
+$ cd 2.6.8-initrdpxe
+$ make-kpkg --rootcmd=fakeroot kernel_image \
+  --initrd \
+  --append-to-version=-initrdpxe --revision=2.6.8-1
+</pre>
+<p>make-kpkg 是由 kernel-package 套件提供的工具程式，它會把編譯核心與建立心核套件的工作自動化，我們只需要在參數上加以設定即可。相關的參數說明，請參見 make-kpkg (1) man page。</p>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id2" id="id16" name="id16">製作節點模板</a></h1>
+<p>主機已經組態得差不多了之後，節點的組態就要開始進行。無磁碟叢集的主要優勢就在於，叢集內組態均近似的節點電腦，在組態一次之後，稍作修改便可套用為所有的節點。因此，組態節點的第一個步驟，便是製作出所有節點所共用的模板系統出來。</p>
+<p>製作節點的模板，可以再細分為三個步驟。第一是建立相關的基本套件與檔案，第二是基本資料的設定與啟動，第三便是額外套件的安裝與系統組態。</p>
+<div class="section">
+<h2><a class="toc-backref" href="#id2" id="debootstrap" name="debootstrap">debootstrap 模板</a></h2>
+<p>在 Debian 裡製作節點的模板，可以使用相當自動化的工具來進行。事實上，節點模板的製作，本質上是標準系統安裝過程序中的一項子程序，Debian 已經把這部分的工作獨立出來，交由 debootstrap 工具程式來負責。我們先把這個工具安裝起來：</p>
+<pre class="literal-block">
+$ apt-get install debootstrap
+</pre>
+<div class="note">
+<p class="first admonition-title">註記</p>
+<p class="last">debootstrap 會使用 fakeroot。</p>
+</div>
+<p>debootstrap 會負責把所有與系統的基本運作有關的程式與檔案複製到指定的位置去。如此一來，我們便不必為了建立節點的模板還特地安裝一個完整的 Debian，或是從主機複製所有必需的檔案。以下是 debootstrap 的使用範例：</p>
+<pre class="literal-block">
+$ debootstrap --include=module-init-tools sarge archs/ASD672 http://ftp.tw.debian.org/debian
+</pre>
+<p>這裡要注意一點：為了方便之後安裝 2.6 版的核心，我們在執行 debootstrap 時加入 <tt class="docutils literal"><span class="pre">--include=module-init-tools</span></tt> 參數，指定把 module-init-tools 套件也放進去。</p>
+<p>當 debootstrap 執行完畢後，就會在 archs/ASD672 目錄內準備好節點開機運作所必要的檔案。</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id2" id="id17" name="id17">模板的訂製資料</a></h2>
+<p>為了讓節點模板可以開機運作，還有一些設定工作必須要完成。這些設定工作都要對模板下的檔案進行修改，故下面的內容所指涉的檔案，都相對於模板的根目錄。</p>
+<div class="section">
+<h3><a class="toc-backref" href="#id2" id="id18" name="id18">主機名稱</a></h3>
+<p>首先是主機名稱的設定，etc/hostname 檔：</p>
+<pre class="literal-block">
+spade01
+</pre>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id2" id="loopback" name="loopback">loopback 網路裝置</a></h3>
+<p>其次要改一下 etc/network/interfaces，指定 loopback device：</p>
+<pre class="literal-block">
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+</pre>
+<p>主要的網路卡倒不必設定，因為從 PXE/DHCP 開機時就會自動啟用了。而對無磁碟節點來說，在運作中修改網路卡參數也是毫無意義的。</p>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id2" id="fstab" name="fstab">fstab</a></h3>
+<p>當然，檔案系統掛載表 (etc/fstab) 也要進行設定：</p>
+<pre class="literal-block">
+# /etc/fstab: static file system information.
+#
+# &lt;file system&gt; &lt;mount point&gt;   &lt;type&gt;  &lt;options&gt;       &lt;dump&gt;  &lt;pass&gt;
+proc            /proc           proc    defaults        0       0
+192.168.143.254:/tftpboot/archs/ASD672                 /               nfs     rw,rsize=8192,wsize=8192,nolock 0       0
+192.168.143.254:/home           /home           nfs     rw,rsize=8192,wsize=8192,nolock 0       0
+192.168.143.254:/root           /root           nfs     rw,rsize=8192,wsize=8192,nolock 0       0
+192.168.143.254:/cluster        /cluster        nfs     rw,rsize=8192,wsize=8192,nolock 0       0
+</pre>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id2" id="apt-sources-list" name="apt-sources-list">APT sources.list</a></h3>
+<p>我們幫模板先寫好 sources.list：</p>
+<pre class="literal-block">
+$ echo &quot;deb http://digger:9999/debian sarge main contrib non-free&quot; &gt; etc/apt/sources.list
+</pre>
+<p>把 APT 來源資料庫指定為叢集主機上的 apt-proxy。</p>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id2" id="init" name="init">自訂 init</a></h3>
+<p>而為了讓節點在開機時會自動根據自己的主機名稱，動態掛載相關的設定目錄，我們要在系統的啟動程序裡動一點手腳。在 Linux 系統中，當核心完成了基本程式的載入後，就會把電腦的控制權交給 init 程式；init 程式一般是位處於 sbin/init 這個位置。本來 init 是一個二進位的可執行檔，但我們可以把它取代為我們自己撰寫的 shell script，執行完畢之後，再把控制權交給原本的 init 程式。</p>
+<p>首先，我們把原本的 init 改個名字：</p>
+<pre class="literal-block">
+$ mv sbin/init sbin/init.orig
+</pre>
+<p>然後新建一個 sbin/init 檔：</p>
+<pre class="literal-block">
+#!/bin/sh
+
+# Don't do anything special if computer is already booted
+if [ $$ -ne 1 ]
+then
+	exec /sbin/init.orig $*
+	echo &quot;FATAL ERROR: exec /sbin/init.orig failed&quot; &gt;&amp;2
+	exit 1
+fi
+
+# Don't do anything special if /exit.init is already exist 
+if [ -f /exit.init ]
+then
+	exec /sbin/init.orig $*
+	exit 1
+fi
+
+# Don't do anything special if root is rw (ie master system).
+if touch /test-rw
+then
+	rm /test-rw
+	echo &quot;WARNING: master system installed&quot; &gt;&amp;2
+	exec /sbin/init.orig $*
+	echo &quot;FATAL ERROR: exec /sbin/init.orig failed&quot; &gt;&amp;2
+	exit 1
+fi
+
+# Boot from cluster host.
+echo &quot;Boot from digger.dlessc ...&quot;
+# Mount client's /etc directory, need to mount /proc first
+echo -n &quot;Mount NFS directories ...&quot;
+mount -n none /proc -t proc
+mount -n 192.168.143.254:/tftpboot/nodes/`hostname`/etc /etc -orw,nolock
+# Update entries in /etc/mtab
+rm -f /etc/mtab~ /etc/nologin
+: &gt; /etc/mtab
+mount -o remount /
+mount -o remount /etc
+mount -o remount /proc
+# Report success
+echo &quot;Done.&quot;
+# Only should get here if something went wrong
+exec /sbin/init.orig $*
+echo &quot;FATAL ERROR: exec /sbin/init.orig failed&quot; &gt;&amp;2
+exit 1
+
+</pre>
+<p>當然要記得打開這個 script 的執行權限。</p>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id2" id="id19" name="id19">安裝核心</a></h3>
+<p>核心編好了嗎？編好的話，把它灌到模板裡去：</p>
+<pre class="literal-block">
+$ dpkg --root=/tftpboot/archs/ASD672 \
+  -i /usr/src/kernel-image-2.6.8-pxe_2.6.8-1_i386.deb
+</pre>
+<p>主機上也要安裝一份：</p>
+<pre class="literal-block">
+$ dpkg -i /usr/src/kernel-image-2.6.8-pxe_2.6.8-1_i386.deb
+</pre>
+<p>然後把核心 image 複製一份到 TFTP 伺服器的目錄下面去，讓節點上的 PXE boot ROM 下載：</p>
+<pre class="literal-block">
+$ cp /tftpboot/archs/ASD672/boot/vmlinuz-2.6.8-pxe /tftpboot
+</pre>
+</div>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id2" id="id20" name="id20">組態節點模板</a></h2>
+<p>完成了基本的設定之後，便可以啟動節點模板，進行最後的設定。因為我們調整過的 init 會去掛載 /tftpboot/nodes/<cite>hostname</cite> 下面的 etc 目錄，所以我們要製作相關的符號連結：</p>
+<pre class="literal-block">
+$ cd /tftpboot/nodes; ln -s ../archs/ASD672 spade01
+</pre>
+<p>也就是說，把模板的資料指定給 spade01 這台節點；在 spade01 進行的所有設定，都會改到模板本身。</p>
+<p>此時打開 spade01 節點的電源，把 BIOS 裡的網路開機選項打開並調至最優先，應可順利地網路開機。開機後，以 root 登入 (不需密碼)，馬上執行：</p>
+<pre class="literal-block">
+$ base-config
+</pre>
+<p>這就是普通光碟安裝 (sarge) 第一次重開機所跑的程式。它包含了許多選項，照著一步步設定，便能把基本系統 (base system，這是 Debian 中的一個專有名詞) 建好。</p>
+<p>當 base-config 執行完成後，我們就可以安裝節點所需用的系統程式。事實上，所需安裝的程式與套件與主機所常用的並沒有太大的差別。</p>
+<p>我們用 postfix 取代 exim：</p>
+<pre class="literal-block">
+$ apt-get install postfix
+</pre>
+<p>也安裝類似的工具套件組：</p>
+<pre class="literal-block">
+$ apt-get install sudo less vim screen
+</pre>
+<p>不要忘記設定 sudoers 檔了。</p>
+<p>base-config 會幫我們安裝 ssh，此時我們也要對 /etc/ssh/ssh_config 作些編輯設定 (和主機一樣)：</p>
+<pre class="literal-block">
+Host spade?? digger
+    StrictHostKeyChecking no
+</pre>
+<p>然後再安裝 NTP 客戶端程式，讓節點的時間與主機同步：</p>
+<pre class="literal-block">
+$ apt-get install ntp-server
+</pre>
+<p>組態檔在 /etc/ntp.conf，把 server 改成我們的主機 digger。NTP 伺服器同時扮演伺服器與客戶端程式的角色，因此我們安裝 ntp-server 這個套件。</p>
+<p>最後我們把 NIS 裝起來：</p>
+<pre class="literal-block">
+$ apt-get install nis
+</pre>
+<p>在安裝時的組態畫面，要正確設定 nis domain，例如 dlessc。另外，所有的 NIS 客戶端電腦都有一些設定檔要修改，所以我們要把節點模板的幾個地方作些設定：</p>
+<ol class="arabic">
+<li><p class="first">/etc/passwd 的最後一行加上：</p>
+<pre class="literal-block">
++::::::
+</pre>
+</li>
+<li><p class="first">/etc/group 的最後一行加上：</p>
+<pre class="literal-block">
++:::
+</pre>
+</li>
+<li><p class="first">/etc/shadow 的最後一行加上：</p>
+<pre class="literal-block">
++::::::::
+</pre>
+</li>
+</ol>
+<p>以上會讓客戶端往 NIS 主機去查詢認證資訊。此外，也要修改 /etc/nsswitch.conf，把 NIS 加入必要的服務資訊查詢順序裡，例如 services：</p>
+<pre class="literal-block">
+services: db files nis
+</pre>
+<div class="note">
+<p class="first admonition-title">註記</p>
+<p class="last">nsswitch.conf 裡的 passwd, group 與 shadow 可以使用預設的 compat 值，自動可引用 NIS 的資訊。</p>
+</div>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id2" id="id21" name="id21">複製並自訂其餘節點</a></h1>
+<p>完成了節點模板所有的安裝與組態之後，我們就可以從模板製作出其它節點的資料。每個節點不同於模板的資料只有 etc/ 與 var/ 兩個目錄，首先我們建立節點組態的目錄：</p>
+<pre class="literal-block">
+$ cd /tftpboot
+$ mkdir nodes
+</pre>
+<p>然後建立 spade02 節點所需的資料：</p>
+<pre class="literal-block">
+$ mkdir nodes/spade02
+$ cp archs/ASD672/etc nodes/spade02 -a
+$ cp archs/ASD672/var nodes/spade02 -a
+</pre>
+<p>若要建立其它節點，仿照 spade02 的例子進行即可。</p>
+<p>每一個節點所需自訂的檔案有 (相對於節點的根目錄)：</p>
+<pre class="literal-block">
+etc/fstab
+etc/hostname
+etc/ssh/ssh_host_dsa_key*
+etc/ssh/ssh_host_rsa_key*
+</pre>
+<p>etc/hostname 應設為節點的主機名稱。而 etc/fstab 應改為：</p>
+<pre class="literal-block">
+# /etc/fstab: static file system information.
+#
+# &lt;file system&gt; &lt;mount point&gt;   &lt;type&gt;  &lt;options&gt;       &lt;dump&gt;  &lt;pass&gt;
+proc            /proc           proc    defaults        0       0
+192.168.143.254:/tftpboot/archs/ASD672                 /               nfs     rw,rsize=8192,wsize=8192,nolock 0       0
+192.168.143.254:/tftpboot/nodes/spade02/etc             /etc            nfs     rw,rsize=8192,wsize=8192,nolock 0       0
+192.168.143.254:/tftpboot/nodes/spade02/var             /var            nfs     rw,rsize=8192,wsize=8192,nolock 0       0
+192.168.143.254:/tftpboot/archs/ASD672/var/lib/dpkg    /var/lib/dpkg   nfs     ro,rsize=8192,wsize=8192,nolock 0       0
+192.168.143.254:/home           /home           nfs     rw,rsize=8192,wsize=8192,nolock 0       0
+192.168.143.254:/root           /root           nfs     rw,rsize=8192,wsize=8192,nolock 0       0
+192.168.143.254:/cluster        /cluster        nfs     rw,rsize=8192,wsize=8192,nolock 0       0
+</pre>
+<p>關於 ssh host key 的檔案，我們用 ssh-keygen 來產生：</p>
+<pre class="literal-block">
+$ ssh-keygen -t rsa -b 1024 -N &quot;&quot; -f etc/ssh/ssh_host_rsa_key
+$ ssh-keygen -t dsa -b 1024 -N &quot;&quot; -f etc/ssh/ssh_host_dsa_key
+</pre>
+<p>完成！如果叢集主機的 DHCP 伺服器設定正確，此時自訂完畢的叢集節點應可正常開機。</p>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id2" id="id22" name="id22">更新主機的核心</a></h1>
+<p>為了讓叢集節點與主機都使用相同的核心，我們先前建立了兩個版本的核心套件。此時，我們要安裝帶有 initrd 的版本：</p>
+<pre class="literal-block">
+$ dpkg -i /usr/src/kernel-image-2.6.8-initrdpxe_2.6.8-1_i386.deb
+</pre>
+<p>我們使用 lilo 來當 boot loader，故 lilo.conf 要這樣改：</p>
+<pre class="literal-block">
+default=2.6.8-initrdpxe
+
+image=/boot/vmlinuz-2.6.8-initrdpxe
+        label=2.6.8-initrdpxe
+        read-only
+        initrd=/boot/initrd.img-2.6.8-initrdpxe
+
+image=/boot/vmlinuz-2.6.8-2-386
+        label=install_def
+        read-only
+        initrd=/boot/initrd.img-2.6.8-2-386
+</pre>
+<p>然後更新 lilo 的安裝：</p>
+<pre class="literal-block">
+$ lilo
+</pre>
+<p>一切都完成之後，重新開機即可使用新的核心。如果節點正在運作中，記得先關閉節點後，再關閉主機。</p>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id2" id="id23" name="id23">管理系統使用者</a></h1>
+<p>無磁碟叢集建好之後，無論我們要處理哪些工作，第一個遇到的問題便是使用者的新增。</p>
+<p>叢集的使用者管理與其它系統並沒有太大的差異。叢集裡的主機和節點要能存取到完全相同的認證資訊，所以我們使用了 nis 系統。在新建與移除使用、群組的時候，要多一道更新 nis 資料庫的手續。舉例如下：</p>
+<pre class="literal-block">
+$ adduser testuser
+...
+$ make -C /var/yp
+</pre>
+<p>以上的指令在主機上執行。第三行的 make -C /var/yp 會更新位於 /var/yp 目錄裡的 nis 資料庫，讓節點能取到更新後的認證資料。同理，往後使用者若要改變自己的密碼，須執行：</p>
+<pre class="literal-block">
+$ yppasswd
+</pre>
+<p>才能同步更新整個叢集的密碼，若誤用 passwd 工具，則提供給節點的 nis 認證資訊便不會更新。</p>
+<p>另外，許多分散式運算程式庫會使用 rsh 機制來啟動不同電腦 (節點) 上的運算程式。我們並沒有安裝 rsh，因為 ssh 可以完全取代 rsh 的功能，並且更容易組態，也更安全。為了讓系統透過 ssh 呼叫其它節點執行程式時，不必另行輸入密碼，每個使用者都要組態公開金鑰式的認證資訊。以下的指令要由使用者自行輸入：</p>
+<pre class="literal-block">
+$ cd
+$ ssh-keygen -t rsa -b 1024 -N &quot;&quot; -f .ssh/id_rsa
+$ cat .ssh/id_rsa.pub &gt; .ssh/authorized_keys
+$ chmod 600 .ssh/authorized_keys
+</pre>
+<p>配合之前在主機與節點的 /etc/ssh/ssh_config 裡的設定，節點與節點間彼此呼叫對方執行程式時，便可以完全自動化，不必指定密碼。</p>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id2" id="id24" name="id24">完成基礎建設</a></h1>
+<p>在最後一次重新啟動叢集主機與節點後，無磁碟叢集的基本架構便算是建設完成了。當然，這樣的系統還不能負擔運算任務，但算是一個框架，提供統合認證、資料與管理的單一平台。</p>
+<p>為了讓這組叢集可以真正用來執行運算任務，還有以下的工作需要進行：</p>
+<ol class="arabic simple">
+<li>安裝與組態派工系統。</li>
+<li>安裝資料輸出入的次系統，如 samba (Windows network) 與 FTP。</li>
+<li>建構平行運算所需的開發環境與程式庫。</li>
+</ol>
+<p>然而，如果我們想用叢集進行其它的任務，也可以進行不同的組態。本文所描述的基礎叢集，可以作為更高階應用的基本框架。</p>
+<!-- vim: set et nu: -->
+</div>
+</div>
+</body>
+</html>

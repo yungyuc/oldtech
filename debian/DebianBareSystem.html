@@ -1,0 +1,1353 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh_tw" lang="zh_tw">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.4: http://docutils.sourceforge.net/" />
+<title>基本系統的建構 (Woody to Sarge)</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger
+:Contact: goodger@users.sourceforge.net
+:Date: $Date: 2005-06-06 15:09:07 +0200 (Mon, 06 Jun 2005) $
+:Version: $Revision: 3442 $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+*/
+
+/* "! important" is used here to override other ``margin-top`` and
+   ``margin-bottom`` styles that are later in the stylesheet or 
+   more specific.  See http://www.w3.org/TR/CSS1#the-cascade */
+
+body {
+  font-family: Calibri, Georgia, Times New Roman, Times,  Free Times;
+  background-color: #666666;
+}
+
+div.document {
+  background-color: white;
+  clear: both;
+  width: 50em;
+  margin: 0 auto 0 auto;
+  padding: 0.5em;
+  border: 2px ridge black;
+}
+
+.first {
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em;
+  border-top: 2px solid #888888;
+  border-bottom: 2px solid #888888;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin-left: 1em ;
+  border: medium outset ; 
+  padding: 1em ;
+  background-color: #ffffee ;
+  /* width: 40% ; */
+  /* float: right ; */
+ /*  clear: right */ }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+div.section h1, div.section h2, div.section h3, 
+div.section h4, div.section h5, div.section h6 {
+  padding-left: 0.3em;
+  padding-bottom: 0.3em;
+  border-left: 2px solid gray;
+  border-bottom: 2px solid gray;
+}
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em; }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left {
+  clear: left }
+
+img.align-right {
+  clear: right }
+
+img.borderless {
+  border: 0 }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font-family: serif ;
+  font-size: 100% }
+
+pre.line-block {
+  font-family: serif ;
+  font-size: 100% }
+
+pre.literal-block, pre.doctest-block {
+  white-space: pre-wrap;       /* css-3 */
+  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word;       /* Internet Explorer 5.5+ */
+  margin-left: 2em ;
+  margin-right: 2em ;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  padding-left: 1em;
+  padding-right: 1em;
+  border: 1px dotted black;
+}
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid thin gray }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  border-spacing: 0;
+  border: 1 solid black;
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-top: solid thin black;
+  border-left: solid thin black }
+
+table.footnote td.label a {
+  text-decoration: none;
+}
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  border: 0; 
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+tt.docutils {
+}
+
+tt.ltst {
+  font-weight: bold;
+}
+
+tt.ltem {
+  font-style: italic;
+}
+
+ul.auto-toc {
+  list-style-type: none }
+
+/* vim: set ai et nu sw=2 ts=2: */
+
+</style>
+</head>
+<body>
+<div class="document" id="woody-to-sarge">
+<h1 class="title">基本系統的建構 (Woody to Sarge)</h1>
+<table class="docinfo" frame="void" rules="none">
+<col class="docinfo-name" />
+<col class="docinfo-content" />
+<tbody valign="top">
+<tr class="field"><th class="docinfo-name">author:</th><td class="field-body">Yung-Yu Chen (yungyuc) <a class="reference" href="http://blog.seety.org/everydaywork/">http://blog.seety.org/everydaywork/</a> &lt;<a class="reference" href="mailto:yyc&#64;seety.org">yyc&#64;seety.org</a>&gt;</td>
+</tr>
+<tr class="field"><th class="docinfo-name">copyright:</th><td class="field-body">© 2006, all rights reserved</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="id1" name="id1">目錄</a></p>
+<ul class="auto-toc simple">
+<li><a class="reference" href="#id2" id="id61" name="id61">1&nbsp;&nbsp;&nbsp;緒論</a></li>
+<li><a class="reference" href="#id3" id="id62" name="id62">2&nbsp;&nbsp;&nbsp;從基本系統開始安裝</a><ul class="auto-toc">
+<li><a class="reference" href="#id8" id="id63" name="id63">2.1&nbsp;&nbsp;&nbsp;安裝基本系統</a><ul class="auto-toc">
+<li><a class="reference" href="#id9" id="id64" name="id64">2.1.1&nbsp;&nbsp;&nbsp;啟動安裝光碟 (並設定安裝語言)</a></li>
+<li><a class="reference" href="#id12" id="id65" name="id65">2.1.2&nbsp;&nbsp;&nbsp;組態鍵盤</a></li>
+<li><a class="reference" href="#id13" id="id66" name="id66">2.1.3&nbsp;&nbsp;&nbsp;磁碟分割</a></li>
+<li><a class="reference" href="#id16" id="id67" name="id67">2.1.4&nbsp;&nbsp;&nbsp;磁碟掛載</a></li>
+<li><a class="reference" href="#id20" id="id68" name="id68">2.1.5&nbsp;&nbsp;&nbsp;安裝核心與驅動程式 (核心模組)</a></li>
+<li><a class="reference" href="#tcp-ip" id="id69" name="id69">2.1.6&nbsp;&nbsp;&nbsp;組態 TCP/IP</a></li>
+<li><a class="reference" href="#id21" id="id70" name="id70">2.1.7&nbsp;&nbsp;&nbsp;安裝基本系統檔案</a></li>
+<li><a class="reference" href="#boot-loader" id="id71" name="id71">2.1.8&nbsp;&nbsp;&nbsp;安裝 Boot Loader 並準備重新啟動</a></li>
+<li><a class="reference" href="#id24" id="id72" name="id72">2.1.9&nbsp;&nbsp;&nbsp;設定時區</a></li>
+<li><a class="reference" href="#id25" id="id73" name="id73">2.1.10&nbsp;&nbsp;&nbsp;組態系統安全設定</a></li>
+<li><a class="reference" href="#id26" id="id74" name="id74">2.1.11&nbsp;&nbsp;&nbsp;組態套件</a></li>
+<li><a class="reference" href="#id27" id="id75" name="id75">2.1.12&nbsp;&nbsp;&nbsp;完成基本系統安裝</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#ip" id="id76" name="id76">2.2&nbsp;&nbsp;&nbsp;IP 設定</a></li>
+<li><a class="reference" href="#advanced-package-tool" id="id77" name="id77">2.3&nbsp;&nbsp;&nbsp;Advanced Package Tool</a><ul class="auto-toc">
+<li><a class="reference" href="#sources-list" id="id78" name="id78">2.3.1&nbsp;&nbsp;&nbsp;sources.list</a></li>
+<li><a class="reference" href="#sarge" id="id79" name="id79">2.3.2&nbsp;&nbsp;&nbsp;更新到 sarge</a></li>
+<li><a class="reference" href="#id37" id="id80" name="id80">2.3.3&nbsp;&nbsp;&nbsp;套件管理工具的摘要說明</a></li>
+<li><a class="reference" href="#id38" id="id81" name="id81">2.3.4&nbsp;&nbsp;&nbsp;套件的安裝與移除</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#ssh" id="id82" name="id82">2.4&nbsp;&nbsp;&nbsp;ssh 公開金鑰登入驗證</a><ul class="auto-toc">
+<li><a class="reference" href="#id44" id="id83" name="id83">2.4.1&nbsp;&nbsp;&nbsp;公開金鑰的登入驗證過程</a></li>
+<li><a class="reference" href="#id45" id="id84" name="id84">2.4.2&nbsp;&nbsp;&nbsp;實作 ssh 公開金鑰登入驗證組態</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#putty-windows" id="id85" name="id85">2.5&nbsp;&nbsp;&nbsp;以 PuTTY 從 Windows 登入</a><ul class="auto-toc">
+<li><a class="reference" href="#putty" id="id86" name="id86">2.5.1&nbsp;&nbsp;&nbsp;取得 PuTTY</a></li>
+<li><a class="reference" href="#id48" id="id87" name="id87">2.5.2&nbsp;&nbsp;&nbsp;連線與組態</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference" href="#bash" id="id88" name="id88">3&nbsp;&nbsp;&nbsp;整備操作環境 (bash)</a><ul class="auto-toc">
+<li><a class="reference" href="#id49" id="id89" name="id89">3.1&nbsp;&nbsp;&nbsp;bash 常用操作</a><ul class="auto-toc">
+<li><a class="reference" href="#id50" id="id90" name="id90">3.1.1&nbsp;&nbsp;&nbsp;目錄巡遊</a></li>
+<li><a class="reference" href="#id51" id="id91" name="id91">3.1.2&nbsp;&nbsp;&nbsp;檔案與目錄處理</a></li>
+<li><a class="reference" href="#id52" id="id92" name="id92">3.1.3&nbsp;&nbsp;&nbsp;檔案系統資訊</a></li>
+<li><a class="reference" href="#aliasing" id="id93" name="id93">3.1.4&nbsp;&nbsp;&nbsp;Aliasing</a></li>
+<li><a class="reference" href="#id53" id="id94" name="id94">3.1.5&nbsp;&nbsp;&nbsp;環境變數</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#id56" id="id95" name="id95">3.2&nbsp;&nbsp;&nbsp;bash 全域/使用者設定檔</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#id59" id="id96" name="id96">4&nbsp;&nbsp;&nbsp;結語與展望</a></li>
+</ul>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id2" name="id2">1&nbsp;&nbsp;&nbsp;緒論</a></h1>
+<p>Debian 是一個自訂性很高的作業系統，透過著名的 Advanced Package Tool (APT)，使用者或管理員可以從最基礎的環境開始，自行選擇適合的元件來組合成符合任務需求的系統。</p>
+<p>本文所謂的「Debian 準系統 (Bare System)」，意指僅包含 Debian Base System、基本的遠端連線能力，以及在最基本的使用環境組態之下的 Debian 安裝；這樣的系統可以進行各種基本操作 (雖然沒有安裝任何應用軟體，並不具實用性)，作為繼續訂製 Debian 的基礎。希望能透過建置這樣的「準系統」，對 from-the-scratch Debian 建置開始作個系統化的介紹，為想要體驗 Debian 方便性的朋友們，提供一個良好的使用模式參考。</p>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id3" name="id3">2&nbsp;&nbsp;&nbsp;從基本系統開始安裝</a></h1>
+<p>目前 Debian 的 stable distribution 仍然是 woody，所以最為穩當的作法，還是用 woody 來開始整個系統的安裝工作<a class="footnote-reference" href="#id5" id="id4" name="id4"><sup>1</sup></a>。我們可以利用 woody 的安裝光碟片，直接從光碟機開機進行單機安裝，標準的 woody non-US (release 1, 2, 3) 或 miniwoody 光碟片都可以符合我們的需求。在安裝完 woody 並作好必要的設定之後，我們會把系統更新到 sarge，所以安裝時所用的版本是新是舊，其實是不太重要的。</p>
+<table class="docutils footnote" frame="void" id="id5" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id4" name="id5">[1]</a></td><td>在本文寫作的同時，sarge 的發行已經進入了緊鑼密鼓的階段，不過 sarge 引入了新的系統安裝程式 -- debian-installer，現在還未臻完善 (事實上，還在測試中)。直接用 sarge 安裝系統，可能會遇到不少問題。}</td></tr>
+</tbody>
+</table>
+<p>woody 的安裝很簡單，只需要按照安裝程式，一步一步地完成安裝過程，基本上不會遇到什麼問題。比較需要注意的地方有四個：</p>
+<ol class="arabic simple">
+<li>硬碟的分割方式</li>
+<li>網路卡的驅動程式</li>
+<li>不要用 task-select 或 dselect 安裝任何套件</li>
+<li>選擇移除 PCMCIA 支援</li>
+</ol>
+<p>我們要作最簡單的 woody 安裝，也就是把系統安裝成「基本系統 (Base System)」<a class="footnote-reference" href="#id7" id="id6" name="id6"><sup>2</sup></a>，然後再從這個基本系統開始，慢慢加上合適的軟體，構建一個乾淨的作業系統平台。</p>
+<table class="docutils footnote" frame="void" id="id7" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id6" name="id7">[2]</a></td><td>Base System 是 Debian Policy Manual 中所描述，可讓系統正常運作的最小安裝。這樣的系統確實可以運作，但基本上所安裝的套件太少，不在可「使用 (Usable)」的狀態。</td></tr>
+</tbody>
+</table>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="id8" name="id8">2.1&nbsp;&nbsp;&nbsp;安裝基本系統</a></h2>
+<p>在整個安裝過程中，計算機系統需要重新啟動一次。</p>
+<div class="section">
+<h3><a class="toc-backref" href="#id1" id="id9" name="id9">2.1.1&nbsp;&nbsp;&nbsp;啟動安裝光碟 (並設定安裝語言)</a></h3>
+<p>安裝基本系統，只需要 woody 的第一片安裝光碟 (或者是 miniwoody)，以這片光碟開機，你就會看到如下的畫面：</p>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0000-Welcome.png" src="DebianBareSystem_pix/0000-Welcome.png" />
+</div>
+<p>在畫面最下方的 <tt class="docutils literal"><span class="pre">boot:</span></tt> 字樣之後本來應該是空白的，但畫面上卻有字，我們要解釋一下。woody 發行時 Linux 2.4 核心雖然已經發展到了 2.4.18，但 woody 基於穩定性的理由，預設將採用舊的 Linux 2.2 核心。使用者如果想要以 2.4 核心安裝，就要在 <tt class="docutils literal"><span class="pre">boot</span></tt> 後輸入 <tt class="docutils literal"><span class="pre">bf24</span></tt> 指令<a class="footnote-reference" href="#id11" id="id10" name="id10"><sup>3</sup></a>。Debian 確實是相當保守，事實上用 2.4 核心是沒有問題的，用 2.2 核心就太落伍了，會缺少許多功能。</p>
+<table class="docutils footnote" frame="void" id="id11" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id10" name="id11">[3]</a></td><td>在這個畫面中，隨時都可以按下 <tt class="docutils literal"><span class="pre">F1</span></tt> 以取得包括 <tt class="docutils literal"><span class="pre">bf24</span></tt> 等各種指令的說明。</td></tr>
+</tbody>
+</table>
+<p>輸入指令之後開始啟動安裝環境，這時候就會先啟動一個 Linux 2.4 核心，你會看到畫面不停地在捲動，然後出現如下左圖的文字模式語言選擇視窗：</p>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0020-Choose.Language.png" src="DebianBareSystem_pix/0020-Choose.Language.png" />
+</div>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0021-Choose.Language-US.png" src="DebianBareSystem_pix/0021-Choose.Language-US.png" />
+</div>
+<p>利用鍵盤的方向鍵，就可以上下移動光棒。列表裡有許多語言，雖然我們會看到繁體中文的選項，不過應該要用英文進行安裝；選了 <tt class="docutils literal"><span class="pre">en</span></tt> 之後會跳出如上右圖的畫面，再選擇 <tt class="docutils literal"><span class="pre">United</span> <span class="pre">State</span></tt>。</p>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id1" id="id12" name="id12">2.1.2&nbsp;&nbsp;&nbsp;組態鍵盤</a></h3>
+<p>選定英文進行安裝，檢視完 SPI Debian Release Note 之後，安裝程式會提示組態鍵盤的視窗：</p>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0040-Configure.Keyboard.png" src="DebianBareSystem_pix/0040-Configure.Keyboard.png" />
+</div>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0041-Configure.Keyboard-Qwenty.png" src="DebianBareSystem_pix/0041-Configure.Keyboard-Qwenty.png" />
+</div>
+<p>應如上圖所示，選擇 U.S. English Qwerty。一般標準鍵盤都是 Qwerty Layout，如果你使用的是特別的鍵盤 (Dvorak、東歐語系等)，請選擇適合的 Layout。</p>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id1" id="id13" name="id13">2.1.3&nbsp;&nbsp;&nbsp;磁碟分割</a></h3>
+<p>首先我們先來介紹一下何謂磁碟分割 (Disk Partitioning)，以及為什麼要作磁碟分割。</p>
+<p>現代的大容量磁碟機在使用時，常會被分割成不同的分區 (Partition)，每一個分區都是一個獨立的檔案系統 (File System)，儲存這些分割區的資訊，稱為分割表 (Partition Table)。在獨立的檔案系統內，會維護其專有的目錄結構，並且不與其它檔案系統相依；檔案系統可以被動態的掛載 (Mount) 到另一個檔案系統之下，也可以動態的被卸載 (Unmount)。</p>
+<p>如果某一個檔案系統管理的空間過大，它就必須維護大量的目錄結構資訊，這會對系統的資料存取動作增加額外的耗用。並且，在這個大檔案系統中，如果有任何一個區域發生資料的損壞，整個檔案系統都必須卸載下來，才能執行修復的動作，讓系統的不穩定性增加。</p>
+<p>使用 Debian 配合目前 PC 的硬碟，以及數十到數百 Gigabytes 的磁碟機，可能還感覺不到上述第一個問題所造成的效能影響。不過，遇到了現在這些超級容易壞的磁碟機，卻非常必需進行適當的磁碟分割，避免整個系統受到磁碟損壞的影響。</p>
+<p>磁碟分割是 woody 安裝時的重頭戲。因為磁碟一旦分割完畢，裝好了作業系統，開始執行之後，就不能夠從這個作業系統裡直接修改磁碟分割的設定。如果非要改變磁碟分割設定，只能從外部系統開機 (救援磁片、光碟，或是掛到其它作業系統之下) 之後以特別的工具來處理 (Partition Magic, SPFDisk 等)。</p>
+<p>鍵盤組態完畢之後，接下來就會出現磁碟分割的提示視窗，然後就選擇準備要分割的磁碟：</p>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0050-Partition.Disk.png" src="DebianBareSystem_pix/0050-Partition.Disk.png" />
+</div>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0051-Select.Disk.png" src="DebianBareSystem_pix/0051-Select.Disk.png" />
+</div>
+<p>如上右圖，該系統上只有一顆 SCSI 磁碟機，所以只顯示了 <tt class="docutils literal"><span class="pre">/dev/sda</span></tt> 供選擇。如果系統上有 ATA (IDE) 磁碟機的話，該磁碟機的表示字樣是 <tt class="docutils literal"><span class="pre">/dev/hda</span></tt>。在 <tt class="docutils literal"><span class="pre">sd</span></tt> 或 <tt class="docutils literal"><span class="pre">hd`</span> <span class="pre">之後的</span> <span class="pre">``a</span></tt>，代表其為 SCSI 或 ATA 匯流排上的第一個裝置，故系統上如果有第二個磁碟機，其名將是 <tt class="docutils literal"><span class="pre">/dev/sdb</span></tt> 或 <tt class="docutils literal"><span class="pre">/dev/hdb</span></tt> 等，以此類推。</p>
+<p>選定磁碟機之後，安裝程式會提示關於 LILO 的資訊，大意是 LILO 不能啟動位於第 1023 個磁柱 (Cylinder) 之後的 Linux 核心等等。基本上我們會把核心安裝到磁碟的最前面，所以不用擔心這類的問題。在 LILO 的資訊之後，安裝程式還會提示關於 ReiserFS 的資訊，是關於日誌 (Journal) 資訊所需要的額外空間 (32MB)，因為所需空間不大 (相對於目前的大容量磁碟而言)，所以也不用太擔心。</p>
+<p>如果我們要分割的是一顆全新的磁碟，那麼就會出現如下左圖的確認畫面，必須回答 <tt class="docutils literal"><span class="pre">y</span></tt>；如果磁碟內已經有了舊的資料 (分割區)，則會直接進入磁碟分割工具 cfdisk (如下右圖)，但分割表大概不會是空的：</p>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0060-Partition.Tool.png" src="DebianBareSystem_pix/0060-Partition.Tool.png" />
+</div>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0061-Partition.Tool-Empty.png" src="DebianBareSystem_pix/0061-Partition.Tool-Empty.png" />
+</div>
+<p>目前這顆磁碟擁有 4 Gigabytes 的空間，當然對現在一般的 PC 來說都算是太少了 (這是一台用作測試的系統)，但我們還是應該要對空間作分割。我們會把空間分成三個部分：1GB 給 <tt class="docutils literal"><span class="pre">/</span></tt> 檔案系統，存放核心與系統檔案；500MB 給 swap，用作虛擬記憶體的置換空間；剩下的所有空間給 <tt class="docutils literal"><span class="pre">/home</span></tt>，存放使用者的資料。PC 的分割區有兩種：主要 (Primary) 與延伸 (Extended) 分割區。一個實體磁碟只能有一個延伸分割區，而連同延伸分割區，只能有最多四個主要分割區<a class="footnote-reference" href="#id15" id="id14" name="id14"><sup>4</sup></a>。不過，延伸分割區裡面可以再分出最多 32 個邏輯磁碟 (Logical Disk)，所以實際上分割區的上限並不會缺乏。</p>
+<table class="docutils footnote" frame="void" id="id15" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id14" name="id15">[4]</a></td><td>這是歷史包袱，PC 在 DOS 時代並沒有考慮那麼多。</td></tr>
+</tbody>
+</table>
+<p>首先我們分 1GB 給一個主要分割區，用鍵盤的方向鍵左右移動到 <tt class="docutils literal"><span class="pre">[New]</span></tt>，或者按鍵盤上的 <tt class="docutils literal"><span class="pre">n</span></tt> 鍵，然後選擇 <tt class="docutils literal"><span class="pre">[Primary]</span></tt> (如下圖)：</p>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0062-Partition.Tool-Primary.png" src="DebianBareSystem_pix/0062-Partition.Tool-Primary.png" />
+</div>
+<p>結果如下圖，建立了一個 1GB 大小的主要分割區。</p>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0063-Partition.Tool-Root.png" src="DebianBareSystem_pix/0063-Partition.Tool-Root.png" />
+</div>
+<p>然後再分第二個 500GB 的主要分割區，不過要先把光棒下移到 <tt class="docutils literal"><span class="pre">Free</span> <span class="pre">Space</span></tt> 處 (如下圖)：</p>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0064-Partition.Tool-New.Another.png" src="DebianBareSystem_pix/0064-Partition.Tool-New.Another.png" />
+</div>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0065-Partition.Tool-Logical.png" src="DebianBareSystem_pix/0065-Partition.Tool-Logical.png" />
+</div>
+<p>最後我們把剩下的空間都分給唯一的邏輯分割區。</p>
+<p>分區完畢，接下來要再對分割表作一點修改。首先，第一個主要分割區 (1GB) 是系統要使用的分割區，會執行核心啟動的動作，所以要用 <tt class="docutils literal"><span class="pre">[Bootable]</span></tt> 標記它是啟動分割區。其次，第二個主要分割區 (500MB) 要用作置換，所以我們要用 <tt class="docutils literal"><span class="pre">[Type]</span></tt> 來修改它的分割區型態：</p>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0068-Partition.Tool-Type-Select-1.png" src="DebianBareSystem_pix/0068-Partition.Tool-Type-Select-1.png" />
+</div>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0068-Partition.Tool-Type-Select-2.png" src="DebianBareSystem_pix/0068-Partition.Tool-Type-Select-2.png" />
+</div>
+<p>在進入 <tt class="docutils literal"><span class="pre">[Type]</span></tt> 之後，會出現如上左圖的表，按任意鍵翻到下一頁之後，如上右圖的下方會讓我們選擇這個分割區的型態識別碼，Linux 置換磁區的識別碼是 82，同時也是預設值，直接按 Enter 確定。</p>
+<p>以上即設定完成這個磁碟的分割區，最後，一定要用 <tt class="docutils literal"><span class="pre">[Write]</span></tt> 來把分割表寫回磁碟 (如下圖)，否則所有的設定都不會生效。</p>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0069-Partition.Tool-Write.png" src="DebianBareSystem_pix/0069-Partition.Tool-Write.png" />
+</div>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id1" id="id16" name="id16">2.1.4&nbsp;&nbsp;&nbsp;磁碟掛載</a></h3>
+<p>Debian (Linux) 的檔案系統要能被使用，一定要掛載到系統上。所以安裝程式在分割完磁碟之後，就會提示磁碟的初始化 (Initialize)<a class="footnote-reference" href="#id18" id="id17" name="id17"><sup>5</sup></a> 與掛載，首先會先初始化置換磁區 (分割區)：</p>
+<table class="docutils footnote" frame="void" id="id18" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id17" name="id18">[5]</a></td><td>其動作是指我們常說的格式化 (Format)。</td></tr>
+</tbody>
+</table>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0070-Activate.Swap.png" src="DebianBareSystem_pix/0070-Activate.Swap.png" />
+</div>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0071-Activate.Swap-No.Bad.Check.png" src="DebianBareSystem_pix/0071-Activate.Swap-No.Bad.Check.png" />
+</div>
+<p>安裝程式在初始化磁區時，會詢問是否要檢查損壞的區塊 (Bad Block)，當然是檢查過會比較安全。不過以現今的磁碟容量而言，全部都檢查的話是非常耗時的，而且，並不是檢查過就確定將來不會損壞 (有些損壞甚至檢查不出來)，所以一般都會跳過這個檢查不作。</p>
+<p>置換磁區初始化完成後，就可以繼續初始化並掛載一般的磁區，我們採用 ReiserFS 這個 Journal File System 作為所有磁區的檔案系統：</p>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0080-Initialize.Partition.png" src="DebianBareSystem_pix/0080-Initialize.Partition.png" />
+</div>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0081-Initialize.Partition-ReiserFS.png" src="DebianBareSystem_pix/0081-Initialize.Partition-ReiserFS.png" />
+</div>
+<p>還記得我們在分割磁碟時，1GB 的磁區 (<tt class="docutils literal"><span class="pre">/dev/sda1</span></tt>) 是要給 <tt class="docutils literal"><span class="pre">/</span></tt> 用的；剩下的空間所分成的 <tt class="docutils literal"><span class="pre">/dev/sda5</span></tt> 是要給 <tt class="docutils literal"><span class="pre">/home</span></tt> 用的。在掛載的時候就要作相對的選擇。先初始化並掛載 <tt class="docutils literal"><span class="pre">/</span></tt>：</p>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0082-Initialize.Partition-Root.png" src="DebianBareSystem_pix/0082-Initialize.Partition-Root.png" />
+</div>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0083-Initialize.Partition-ReiserFS.Progress.png" src="DebianBareSystem_pix/0083-Initialize.Partition-ReiserFS.Progress.png" />
+</div>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0084-Initialize.Partition-Root-Mount.png" src="DebianBareSystem_pix/0084-Initialize.Partition-Root-Mount.png" />
+</div>
+<p>其次初始化並掛載 <tt class="docutils literal"><span class="pre">/home</span></tt>：</p>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0085-Initialize.Partition-Home.png" src="DebianBareSystem_pix/0085-Initialize.Partition-Home.png" />
+</div>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0085-Initialize.Partition-Home-Mount.png" src="DebianBareSystem_pix/0085-Initialize.Partition-Home-Mount.png" />
+</div>
+<p>這樣，三個分割區都初始化並掛載完成之後，就可以進行接下去的安裝。</p>
+<div class="sidebar">
+<p class="first sidebar-title">分割區的容量設定建議</p>
+<p>我們是用一台只配有 4GB 磁碟機的系統作安裝說明，但目前市面上任何一台 PC 所配備的磁碟容量都不會少於 40GB，所以上面所描述的這些分割區大小配置當然不能直接套用在大磁碟上。以下會根據經驗，對分割區的配置方式作一些建議。</p>
+<p>Debian 遵守 FHS 2.1 <a class="citation-reference" href="#fhs" id="id19" name="id19">[FHS]</a>，``/`` 下的各檔案系統都有其主要的功能定義：</p>
+<ul class="simple">
+<li>置換分割區：約是記憶體的兩倍。</li>
+<li><tt class="docutils literal"><span class="pre">/</span></tt>：根 (Root) 檔案系統，存放系統的必要工具、程式與程式庫，以及設定檔。</li>
+<li><tt class="docutils literal"><span class="pre">/boot</span></tt>：存放系統的啟動資料，包括核心、initrd。</li>
+<li><tt class="docutils literal"><span class="pre">/usr</span></tt>：存放工具、應用程式、程式庫，以及程式所需的靜態資料。</li>
+<li><tt class="docutils literal"><span class="pre">/var</span></tt>：存放系統內的動態資料，包括紀錄檔和執行時期資訊。</li>
+<li><tt class="docutils literal"><span class="pre">/home</span></tt>：使用者的家目錄。</li>
+</ul>
+<p>一般來說，<tt class="docutils literal"><span class="pre">/boot</span></tt> 可以不必分割，直接放在 <tt class="docutils literal"><span class="pre">/</span></tt> 下即可。</p>
+<p>在 20GB 左右的系統上，建議給 <tt class="docutils literal"><span class="pre">/</span></tt> 1GB、<tt class="docutils literal"><span class="pre">/usr</span></tt> 4GB、<tt class="docutils literal"><span class="pre">/var</span></tt> 4GB，<tt class="docutils literal"><span class="pre">/home</span></tt> 使用剩下的空間。</p>
+<p>在 40GB 左右的系統上，建議給 <tt class="docutils literal"><span class="pre">/</span></tt> 1GB、<tt class="docutils literal"><span class="pre">/usr</span></tt> 8GB、<tt class="docutils literal"><span class="pre">/var</span></tt> 8GB，<tt class="docutils literal"><span class="pre">/home</span></tt> 使用剩下的空間。</p>
+<p class="last">在 80GB 以上的系統上，建議給 <tt class="docutils literal"><span class="pre">/</span></tt> 1GB、<tt class="docutils literal"><span class="pre">/usr</span></tt> 16GB、<tt class="docutils literal"><span class="pre">/var</span></tt> 16GB，<tt class="docutils literal"><span class="pre">/home</span></tt> 使用剩下的空間。</p>
+</div>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id1" id="id20" name="id20">2.1.5&nbsp;&nbsp;&nbsp;安裝核心與驅動程式 (核心模組)</a></h3>
+<p>磁碟的分割和掛載完成之後，安裝程式就可以進行核心與模組的安裝，首先要指定 CD 為檔案的來源：</p>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0090-Kernel.Driver.png" src="DebianBareSystem_pix/0090-Kernel.Driver.png" />
+</div>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0091-Kernel.Driver-Use.CD.png" src="DebianBareSystem_pix/0091-Kernel.Driver-Use.CD.png" />
+</div>
+<p>然後選擇要安裝的驅動程式 (核心模組)，通常最重要，而要在安裝時期就啟用的驅動程式只有網路卡，請在如下右圖中的畫面中，以光棒選擇適合的驅動程式：</p>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0092-Kernel.Driver-Conf.Driver.png" src="DebianBareSystem_pix/0092-Kernel.Driver-Conf.Driver.png" />
+</div>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0093-Kernel.Driver-Conf.Driver-Net.png" src="DebianBareSystem_pix/0093-Kernel.Driver-Conf.Driver-Net.png" />
+</div>
+<p>如果期望的驅動程式不在列表中，則不是核心直接支援，就是核心尚未支援，那麼只能等到安裝完畢之後再想辦法解決。</p>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id1" id="tcp-ip" name="tcp-ip">2.1.6&nbsp;&nbsp;&nbsp;組態 TCP/IP</a></h3>
+<p>如果安裝程式已經找到了系統的網路卡，就會進行 TCP/IP 的網路設定。此時，除非我們很確定本地網路有 DHCP/BOOTP 的支援，否則不要使用自動組態，儘可能手動輸入 TCP/IP 的設定。</p>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id1" id="id21" name="id21">2.1.7&nbsp;&nbsp;&nbsp;安裝基本系統檔案</a></h3>
+<p>視系統的光碟速度，安裝檔案的時間可長可短，但最多不會超過幾分鐘：</p>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0110-Install.Base.System.png" src="DebianBareSystem_pix/0110-Install.Base.System.png" />
+</div>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0111-Install.Base.System-Progress.png" src="DebianBareSystem_pix/0111-Install.Base.System-Progress.png" />
+</div>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id1" id="boot-loader" name="boot-loader">2.1.8&nbsp;&nbsp;&nbsp;安裝 Boot Loader 並準備重新啟動</a></h3>
+<p>檔案安裝完畢後，系統會提示 Boot Loader (woody 使用 LILO) 的安裝視窗，一般來說，我們會安裝在 MBR 上：</p>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0120-Make.Bootable.png" src="DebianBareSystem_pix/0120-Make.Bootable.png" />
+</div>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0121-Make.Bootable-MBR.png" src="DebianBareSystem_pix/0121-Make.Bootable-MBR.png" />
+</div>
+<p>然後，把光碟片從光碟機裡拿出來，準備重新啟動系統，我們不作開機磁片 (Boot Floppy)，如果有需要的話，以後可以再作<a class="footnote-reference" href="#id23" id="id22" name="id22"><sup>6</sup></a>：</p>
+<table class="docutils footnote" frame="void" id="id23" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id22" name="id23">[6]</a></td><td>通常需要開機磁片的情況是系統的 Boot Loader 毀損，而需要用磁片開機救援。但救援的功能，用 woody 的安裝開機光碟也能作到，所以開機磁片事實上可作可不作。</td></tr>
+</tbody>
+</table>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0130-First.Reboot.png" src="DebianBareSystem_pix/0130-First.Reboot.png" />
+</div>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0131-First.Reboot-On.Boot.png" src="DebianBareSystem_pix/0131-First.Reboot-On.Boot.png" />
+</div>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id1" id="id24" name="id24">2.1.9&nbsp;&nbsp;&nbsp;設定時區</a></h3>
+<p>重新開機成功之後，我們首先要繼續的設定是系統的時區。中華民國的國民，一般會設定成 Asia, Taipei，並且，因為 BIOS 內的時間通常是設定為中原標準時間 (GMT+0800)，所以不要設定成 GMT：</p>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0140-Time.Zone-Asia.png" src="DebianBareSystem_pix/0140-Time.Zone-Asia.png" />
+</div>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0141-Time.Zone-No.GMT.png" src="DebianBareSystem_pix/0141-Time.Zone-No.GMT.png" />
+</div>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0142-Time.Zone-Taipei.png" src="DebianBareSystem_pix/0142-Time.Zone-Taipei.png" />
+</div>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id1" id="id25" name="id25">2.1.10&nbsp;&nbsp;&nbsp;組態系統安全設定</a></h3>
+<p>系統安全設定的內容包括密碼與使用者。我們會使用 MD5 作密碼的加密方式，並且加上 shadow 功能：</p>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0150-MD5.png" src="DebianBareSystem_pix/0150-MD5.png" />
+</div>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0151-shadow.png" src="DebianBareSystem_pix/0151-shadow.png" />
+</div>
+<p>然後設定 root 的密碼：</p>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0160-Root.Password.png" src="DebianBareSystem_pix/0160-Root.Password.png" />
+</div>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0161-Root.Password-Retype.png" src="DebianBareSystem_pix/0161-Root.Password-Retype.png" />
+</div>
+<p>此時，我們先不要新增一般的使用者 (因為即使是完成了基本系統的安裝之後，也還有許多的設定工作要作，才能讓一般使用者進入使用)。</p>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0162-No.Normal.User.png" src="DebianBareSystem_pix/0162-No.Normal.User.png" />
+</div>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id1" id="id26" name="id26">2.1.11&nbsp;&nbsp;&nbsp;組態套件</a></h3>
+<p>安裝程式一開始會把 PCMCIA 相關的套件安裝到系統裡面，組態到這裡時，會再詢問是否要移除這些套件。因為我們想要一個乾淨的基本系統，所以應該要移除 PCMCIA，之後有需要，再自行安裝回來：</p>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0170-No.PCMCIA.png" src="DebianBareSystem_pix/0170-No.PCMCIA.png" />
+</div>
+<p>至於 PPP 也是一樣的情況：</p>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0180-No.PPP.png" src="DebianBareSystem_pix/0180-No.PPP.png" />
+</div>
+<p>因為是安裝基本系統，其餘的 woody CD-ROM 或 APT 來源也暫時先不設定：</p>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0190-No.Other.APT.png" src="DebianBareSystem_pix/0190-No.Other.APT.png" />
+</div>
+<p>當然也不執行 tasksel 和 dselect 這兩個選擇套件的工具：</p>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0191-No.Other.APT-No.tasksel.png" src="DebianBareSystem_pix/0191-No.Other.APT-No.tasksel.png" />
+</div>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0192-No.Other.APT-No.dselect.png" src="DebianBareSystem_pix/0192-No.Other.APT-No.dselect.png" />
+</div>
+<p>以上設定完了之後，安裝程式會用 apt-get 來套用所設定的改變，以我們的情況而言，它會移除 pcmcia-* 套件：</p>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0200-APT.png" src="DebianBareSystem_pix/0200-APT.png" />
+</div>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0201-APT-Confirm.Removal.png" src="DebianBareSystem_pix/0201-APT-Confirm.Removal.png" />
+</div>
+<p>再對 exim (郵件傳送系統) 作設定。因為我們不需要使用 exim，所以直接選 5 <tt class="docutils literal"><span class="pre">No</span> <span class="pre">Configuration</span></tt> 作為回應 (一般會使用 Postfix 或 Sendmail 作為郵件傳送系統)：</p>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0202-APT-Exim.Select.5.png" src="DebianBareSystem_pix/0202-APT-Exim.Select.5.png" />
+</div>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id1" id="id27" name="id27">2.1.12&nbsp;&nbsp;&nbsp;完成基本系統安裝</a></h3>
+<p>套件設定完了之後，基本系統也就安裝完成，可以開始操作了：</p>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0210-Have.Fun.png" src="DebianBareSystem_pix/0210-Have.Fun.png" />
+</div>
+<div class="figure">
+<img alt="DebianBareSystem_pix/0211-Have.Fun-Login.png" src="DebianBareSystem_pix/0211-Have.Fun-Login.png" />
+</div>
+</div>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="ip" name="ip">2.2&nbsp;&nbsp;&nbsp;IP 設定</a></h2>
+<p>現在是系統安裝完成之後，我們第一次看到登入的提示字樣：</p>
+<pre class="literal-block">
+Debian GNU/Linux 3.0 danann tty1
+
+closet login:
+</pre>
+<p>在 <tt class="docutils literal"><span class="pre">login:</span></tt> 之後，輸入 <tt class="docutils literal"><span class="pre">root</span></tt> 作為登入名稱，並在隨之出現的 <tt class="docutils literal"><span class="pre">Password:</span></tt> 後輸入我們在安裝時所設定的 <tt class="docutils literal"><span class="pre">root</span></tt> 密碼，登入系統。接著，我們就可以在 bash 的提示符號</p>
+<pre class="literal-block">
+closet:~#
+</pre>
+<p>之下，開始操作系統。</p>
+<p>進行 IP 設定之前，我們要先確認 Linux 有正確驅動網路卡<a class="footnote-reference" href="#id29" id="id28" name="id28"><sup>7</sup></a>。執行 texttt{ifconfig}，列出系統目前處於上線狀態的網路介面 (Interface)，如果網路卡有正確驅動的話，結果如下所示：</p>
+<table class="docutils footnote" frame="void" id="id29" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id28" name="id29">[7]</a></td><td>網路卡 (網路硬體) 的驅動尚不在本小節的討論之內，Linux 下的硬體驅動程式事實是 Linux 核心的一部分，通常以核心模組的形式使用。所以關於網路卡的驅動，將留給討論核心的部分去作說明。</td></tr>
+</tbody>
+</table>
+<pre class="literal-block">
+# ifconfig
+eth0      Link encap:Ethernet  HWaddr 00:01:02:03:04:05
+          inet addr:192.168.10.159  Bcast:192.168.10.255  Mask:255.255.255.0
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:25586389 errors:1 dropped:1 overruns:0 frame:0
+          TX packets:28427402 errors:52 dropped:0 overruns:1 carrier:51
+          collisions:7269801 txqueuelen:100
+          RX bytes:1525657725 (1.4 GiB)  TX bytes:3686747975 (3.4 GiB)
+          Interrupt:20 Base address:0x5800
+
+lo        Link encap:Local Loopback
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          UP LOOPBACK RUNNING  MTU:16436  Metric:1
+          RX packets:283329 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:283329 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0
+          RX bytes:19685646 (18.7 MiB)  TX bytes:19685646 (18.7 MiB)
+</pre>
+<p>會出現一項 <tt class="docutils literal"><span class="pre">eth0</span></tt> 和一項 <tt class="docutils literal"><span class="pre">lo</span></tt>。<tt class="docutils literal"><span class="pre">eth0</span></tt> 就是我們的網路卡所提供的介面，如果我們之前在安裝程式中就有設定好相關的 IP 資訊的話，那麼本小節的工作就算是完成了，可以跳過去。<tt class="docutils literal"><span class="pre">lo</span></tt> 是系統的 Loop Back 網路卡，也就是「自己」，它有一組固定的 IP/Netmask 設定，使系統不論有沒有實體網路卡的組態，都可以透過 <tt class="docutils literal"><span class="pre">lo</span></tt> 對自己本身作 IP 連線。</p>
+<p>確認網路卡已經驅動之後，我們可以開始作 TCP/IP 的組態，Debian 把與網路介面有關的設定都放在 <tt class="docutils literal"><span class="pre">/etc/network/interfaces</span></tt> 這個檔案裡面。texttt{interfaces} 檔內有幾種重要的指令：</p>
+<ul>
+<li><p class="first">iface；語法：<tt class="docutils literal"><span class="pre">iface</span> <span class="pre">&lt;ifname&gt;</span> <span class="pre">&lt;addrfamily&gt;</span> <span class="pre">&lt;method&gt;</span></tt></p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">&lt;ifname&gt;</span></tt> 是我們為這個介面設定的名稱 (通常我們會設成 <tt class="docutils literal"><span class="pre">eth0</span></tt>, <tt class="docutils literal"><span class="pre">eth1</span></tt> 等等)。</li>
+<li><tt class="docutils literal"><span class="pre">&lt;addrfamily&gt;</span></tt> 是這個介面所使用的位址族系 (Address Family)，一般來說都是使用 inet。</li>
+<li><tt class="docutils literal"><span class="pre">&lt;method&gt;</span></tt> 是用來取得位址的方法。對一台用作伺服功能的 Debian 來說，通常會設成 static，以便直接在 <tt class="docutils literal"><span class="pre">interfaces</span></tt> 檔裡面設定 IP 資訊，其後包括幾項重要的設定：<ol class="arabic">
+<li>IP 位址，語法與格式為 <tt class="docutils literal"><span class="pre">address</span> <span class="pre">n.n.n.n</span></tt></li>
+<li>子網路遮罩，語法與格式為 <tt class="docutils literal"><span class="pre">netmask</span> <span class="pre">n.n.n.n</span></tt></li>
+<li>網路，語法與格式為 <tt class="docutils literal"><span class="pre">network</span> <span class="pre">n.n.n.n</span></tt></li>
+<li>廣播位址，語法與格式為 <tt class="docutils literal"><span class="pre">broadcast</span> <span class="pre">n.n.n.n</span></tt></li>
+<li>預設閘道器，語法與格式為 <tt class="docutils literal"><span class="pre">gateway</span> <span class="pre">n.n.n.n</span></tt></li>
+</ol>
+</li>
+</ul>
+<p><tt class="docutils literal"><span class="pre">lo</span></tt> 介面則需要以 <tt class="docutils literal"><span class="pre">loopback</span></tt> 作為 <tt class="docutils literal"><span class="pre">&lt;method&gt;</span></tt>。</p>
+</li>
+<li><p class="first">auto；指定系統在開機時要啟動的介面。</p>
+</li>
+</ul>
+<p>假設系統上唯有一張網路卡，而我們想要把它設到閘道器為 192.168.30.254 的 192.168.30.0/24 這個子網路，並給它 192.168.30.73 的 IP，<tt class="docutils literal"><span class="pre">interfaces</span></tt> 設定檔應寫為：</p>
+<pre class="literal-block">
+auto lo
+iface lo inet loopback
+auto eth0
+iface eth0 inet static
+        address 192.168.30.73
+        netmask 255.255.255.0
+        network 192.168.30.0
+        broadcast 192.168.30.255
+        gateway 192.168.30.254
+</pre>
+<p>再假設我們想要把這張網路卡設到閘道器為 192.168.65.126 的 192.168.65.0/25 這個子網路，並給它 192.168.65.3 的 IP，那麼 <tt class="docutils literal"><span class="pre">interfaces</span></tt> 應寫成：</p>
+<pre class="literal-block">
+auto lo
+iface lo inet loopback
+auto eth0
+iface eth0 inet static
+        address 192.168.65.3
+        netmask 255.255.255.128
+        network 192.168.65.0
+        broadcast 192.168.65.127
+        gateway 192.168.65.126
+</pre>
+<p>以這兩個例子，我們應該可以充份了解怎麼設定 Debian 的 IP 網路。不過 <tt class="docutils literal"><span class="pre">interfaces</span></tt> 檔裡面還有許多其它的設定，請另外參考 <tt class="docutils literal"><span class="pre">interfaces(5)</span></tt> 的 manpage。</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="advanced-package-tool" name="advanced-package-tool">2.3&nbsp;&nbsp;&nbsp;Advanced Package Tool</a></h2>
+<div class="section">
+<h3><a class="toc-backref" href="#id1" id="sources-list" name="sources-list">2.3.1&nbsp;&nbsp;&nbsp;sources.list</a></h3>
+<p>APT (Advanced Package Tool) 是 Debian 的套件管理系統。基本上 Debian 的套件 (不論原始碼或二進位格式) 都是以 dpkg 工具 (即 Debian PacKaGe) 包裝起來的 .deb 檔案，我們可以直接用 <tt class="docutils literal"><span class="pre">dpkg</span> <span class="pre">-i</span></tt> 來安裝這些套件。不過，整個 Debian 系統含有成千上萬個套件，套件與套件間又有很複雜的相依關係，從網路或者 CD-ROM/DVD-ROM 上取得 .deb 檔，再以 dpkg 手動安裝這些套件，想必是一件相當辛苦的工作，更別說還有套件移除、組態以及其它許多相關的問題。APT 就是為了解決這類套件管理問題所開發出來的系統，Debian 也以這套 APT 著稱於世。</p>
+<p>在 Debian 下，我們可以完全用 APT 所提供的工具來對套件進行基本的管理動作，而不需要接觸底層的 dpkg (當然，如果要進行比較複雜的操作，還是得了解 dpkg 相關工具的使用。)。</p>
+<p>實際使用 APT 之前，我們要先設定 APT 的套件資料庫位置，APT 把這部分的設定放在 <tt class="docutils literal"><span class="pre">/etc/apt/sources.list</span></tt> 檔內，習慣上，我們常常就直接以 sources.list 代稱為系統的 APT 套件資料庫來源設定。sources.list 檔如其名，其中所存的是一條一條描述套件來源的字串，而每一條來源字串間並沒有上下關係，也就是說排列在上的來源並不會蓋掉排列在下的來源，所有來源字串內所設定的套件資料都會經過整理，由 APT 照設定的邏輯統合使用。</p>
+<p>sources.list 來源字串的格式如下：</p>
+<pre class="literal-block">
+deb uri distribution [component1] [component2] [...]
+</pre>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">deb</span></tt>       部分指定套件來源的格式，一般都是 <tt class="docutils literal"><span class="pre">deb</span></tt>，如果該來源內容為原始碼套件，則應寫為 <tt class="docutils literal"><span class="pre">deb-src</span></tt>。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">uri</span></tt>       來源的 Universal Resource Identifier，用來指示該來源所處的位置。URI 和 URL 具有類似的語法 (URI 是 URL 的超集合)，通常會寫成</p>
+<pre class="literal-block">
+&lt;type&gt;://&lt;location&gt;
+</pre>
+<p>這樣的格式。常用的 URI 型態 (Type) 有：</p>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">http</span></tt> 指定用 http 方式取得資料。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">ftp</span></tt> 指定用匿名 ftp 方式取得資料。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">cdrom</span></tt> 從 CD-ROM/DVD-ROM 取得資料。</p>
+<p>通常我們不會手動建立 cdrom 型態的來源字串，而會另外呼叫 <tt class="docutils literal"><span class="pre">apt-cdrom(8)</span></tt> 工具。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">file</span></tt> 從本地檔案系統 (包含以 NFS 掛載的網路磁碟) 取得資料。</p>
+</li>
+</ul>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">distribution</span></tt> 指定 Debian distribution 的種類。可以用 stable, testing 或 unstable，也可以直接用 codename 如 woody, sarge, sid 或甚至以前的 potato (Debian 2.2，不過可能很難找到還在維護中的 potato APT 資料庫了)。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">component</span></tt> Debian 標準的元件 (Component) 有 main, contrib 和 non-free，通常標準的來源字串都會把這三個元件列上去 (以空白分隔)。有些非正式的來源會有自訂的元件<a class="footnote-reference" href="#id31" id="id30" name="id30"><sup>8</sup></a>。</p>
+</li>
+</ul>
+<table class="docutils footnote" frame="void" id="id31" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id30" name="id31">[8]</a></td><td>通常非正式 (並非由 Debian 所維護) 的來源，連 distribution 都是自訂的。</td></tr>
+</tbody>
+</table>
+<p>如果直接取用美國的 Debian http Mirror，sources.list 會是：</p>
+<pre class="literal-block">
+deb http://http.us.debian.org/debian stable main contrib non-free
+</pre>
+<p>如果使用 ftp，會是：</p>
+<pre class="literal-block">
+deb ftp://ftp.us.debian.org/debian stable main contrib non-free
+</pre>
+<p>假設我們把 Debian DVD 的內容抓到本機磁碟裡使用的話，sources.list 可以寫成：</p>
+<pre class="literal-block">
+deb file:/var/local/debian/sarge/dvd1 sarge        main contrib non-free
+deb file:/var/local/debian/sarge/dvd1 sarge/non-US main contrib non-free
+deb file:/var/local/debian/sarge/dvd2 sarge        main contrib non-free
+deb file:/var/local/debian/sarge/dvd2 sarge/non-US main contrib non-free
+</pre>
+<p>看得出來嗎？我們是把 sarge 的兩片 DVD<a class="footnote-reference" href="#id34" id="id32" name="id32"><sup>9</sup></a> 的內容放到 /var/local/debian/sarge 這個目錄裡來使用<a class="footnote-reference" href="#id36" id="id33" name="id33"><sup>10</sup></a>。</p>
+<table class="docutils footnote" frame="void" id="id34" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id32" name="id34">[9]</a></td><td>sarge 現在當然還沒有 release，所以我用的 sarge DVD 是由 FSN <a class="citation-reference" href="#fsn" id="id35" name="id35">[FSN]</a> 所製作的非正式光碟。FSN 會定期 (約一週左右) 製作 testing 和 unstable 的非正式光碟映像檔，我們可以到網站上下載。</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id36" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id33" name="id36">[10]</a></td><td>利用核心提供的 loopback 裝置，我們可以將 ISO-9660 格式的光碟映像檔直接掛載到檔案系統上來使用 (就不必真的把映像檔或光碟的內容複製到檔案系統裡面了)。因為 Debian Mirror 裡有非常多的檔案，用掛映像檔的方式，可以大大地節省檔案系統的 inode。</td></tr>
+</tbody>
+</table>
+<p>為了節省網路頻寬，並且擁有穩定的套件檔案來源，我會建議下載相關 distribution 的光碟映像檔 (woody 或 sarge，甚至 sid)，掛到本機磁碟上當作 APT 來源。</p>
+<p>寫好了 sources.list 之後，我們要用 <tt class="docutils literal"><span class="pre">apt-get</span> <span class="pre">update</span></tt> 來更新本機的 apt 資料庫 (存放已知套件及其位置的資訊，置於系統的 <tt class="docutils literal"><span class="pre">/var/lib/apt</span></tt>。不可與套件資料庫混為一談。)。如果我們有本機的 APT 套件資料庫，那麼執行的結果會是：</p>
+<pre class="literal-block">
+# apt-get update
+Reading Package Lists... Done
+</pre>
+<p>不會執行任何下載動作 (因為檔案都已經在本機了)。但若 sources.list 裡有 http 或是 ftp 型態的 URI，則會出現許多</p>
+<pre class="literal-block">
+...
+Hit http://some.where.out.there distribution/component Packages
+Hit http://some.where.out.there distribution/component Release
+...
+</pre>
+<p>的字樣。如果 URI 有哪個地方打錯了，都會出現：</p>
+<pre class="literal-block">
+...
+Failed to fetch http://some.domain.name/some/dir/Packages.gz  404 Not Found
+...
+</pre>
+<p>依照錯誤訊息把 sources.list 中相對的字串更正即可。</p>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id1" id="sarge" name="sarge">2.3.2&nbsp;&nbsp;&nbsp;更新到 sarge</a></h3>
+<p>假設我們利用 sarge DVD 建立了本機的套件資料庫 (或是設定了 http/ftp 套件來源)，並且 <tt class="docutils literal"><span class="pre">apt-get</span> <span class="pre">update</span></tt> 完畢，那麼我們就可以利用 <tt class="docutils literal"><span class="pre">apt-get</span> <span class="pre">dist-upgrade</span></tt> 來把 woody 昇級到 sarge。</p>
+<p>在昇級的過程中，apt-get 會問許多設定問題，全部都使用預設值即可。</p>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id1" id="id37" name="id37">2.3.3&nbsp;&nbsp;&nbsp;套件管理工具的摘要說明</a></h3>
+<p>在管理 Debian 系統時，與套件相關的 APT 工具有 <tt class="docutils literal"><span class="pre">apt-get</span></tt> 與 <tt class="docutils literal"><span class="pre">apt-cache</span></tt> 這兩個，以下作一點基本的說明：</p>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">apt-get</span></tt> 是用來管理 Debian 套件最主要的工具箱，其中常用的工具有：</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">apt-get</span> <span class="pre">update</span></tt> 更新 apt 資料庫。</li>
+<li><tt class="docutils literal"><span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">&lt;name&gt;</span></tt> 安裝以 <tt class="docutils literal"><span class="pre">&lt;name&gt;</span></tt> 為名的套件，其所相依的套件也會一併安裝。</li>
+<li><tt class="docutils literal"><span class="pre">apt-get</span> <span class="pre">remove</span> <span class="pre">&lt;name&gt;</span></tt> 移除以 <tt class="docutils literal"><span class="pre">&lt;name&gt;</span></tt> 為名的套件，相依於它的套件也會一併移除。如果在 <tt class="docutils literal"><span class="pre">remove</span></tt> 後加上 <tt class="docutils literal"><span class="pre">--purge</span></tt> 選項，則套件的設定檔也會一起移除。</li>
+<li><tt class="docutils literal"><span class="pre">apt-get</span> <span class="pre">upgrade</span></tt> 對系統已安裝的套件進行昇級。注意，如果我們要從某個 Debian distribution 昇到另一個，應改用 <tt class="docutils literal"><span class="pre">apt-get</span> <span class="pre">dist-upgrade</span></tt>。</li>
+<li><tt class="docutils literal"><span class="pre">apt-get</span> <span class="pre">dist-upgrade</span></tt> 跨 distribution 昇級系統套件。</li>
+</ul>
+<p>詳細的用法，請參考 <tt class="docutils literal"><span class="pre">apt-get(8)</span></tt>。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">apt-cache</span></tt> 是用來管理與檢視 apt 資料庫與快取的工具箱，常用的有：</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">apt-cache</span> <span class="pre">search</span> <span class="pre">&lt;keyword1&gt;</span> <span class="pre">[keyword2]</span> <span class="pre">...</span></tt> 以關鍵字搜尋相關的套件。</li>
+<li><tt class="docutils literal"><span class="pre">apt-cache</span> <span class="pre">show</span> <span class="pre">&lt;name&gt;</span></tt> 以套件的名稱來查詢包括版本、相依性 ... 等基本資訊以及維護者對套件的描述。</li>
+</ul>
+<p>詳細的用法，請參考 <tt class="docutils literal"><span class="pre">apt-cache(8)</span></tt>。</p>
+</li>
+</ul>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id1" id="id38" name="id38">2.3.4&nbsp;&nbsp;&nbsp;套件的安裝與移除</a></h3>
+<p>假設我們已經知道會提供某個軟體的套件名稱，那麼軟體的安裝指令就只是</p>
+<pre class="literal-block">
+# apt-get install &lt;packagename&gt;
+</pre>
+<p>這麼簡單而已。APT 會自己去檢查套件的相依性等等的問題，如果這個套件相依了其它尚未安裝 (或需要昇級) 的套件，APT 將提示使用者是否要安裝這些額外的套件。如果不安裝額外的套件，當然原本想安裝的套件就會因為相依性不符合而無法安裝。</p>
+<p>相對地，移除套件也只需要一行</p>
+<pre class="literal-block">
+# apt-get remove &lt;packagename&gt;
+</pre>
+<p>指令。</p>
+<p>在一般的情況下，我們常常不知道想要用的軟體是存在於哪一個套件裡面，此時就要利用 apt-cache search 工具搜尋已知的關鍵字，來幫我們定出套件的名稱。這需要一些經驗，並且配合 Debian 網頁上的套件搜尋功能<a class="citation-reference" href="#pdo" id="id39" name="id39">[PDO]</a>和 google，只要是存在的套件，大概都可以被我們找出來安裝。</p>
+<p>section{部署遠端登入}</p>
+<p>傳統 Un*x 系列的作業系統是利用 telnet 或 rlogin 這些工具進行遠端登入的操作。不過如今在 Internet 超級發達的情況下，整個網路上充斥著各種各樣的未知節點與連線，如果仍然使用未加密的 telnet 或 rlogin，不但連線資料難保其秘密性與完整性，而幾乎是確定會被有心人士竊取，主機很快就會多出不少使用者了<a class="footnote-reference" href="#id41" id="id40" name="id40"><sup>11</sup></a>。</p>
+<table class="docutils footnote" frame="void" id="id41" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id40" name="id41">[11]</a></td><td>一旦被他人獲取了主機的帳號與密碼，他幾乎可以使用該主機上的一切資源。而且原使用者常常不易發現這些入侵者的存在。</td></tr>
+</tbody>
+</table>
+<p>然而遠端登入的能力又是 Debian 所不可或缺的，也是使用 Linux 時最方便的工具。在不考慮傳統的 telnet 與 rlogin 的情況下，一般我們會採用 Secure Shell (ssh) 作為遠端登入系統。Secure Shell 是一個以公開金鑰配合私密金鑰加密系統所實作的一種安全連線方式，可以保證 (密碼學上的) 連線資料的安全性與完整性，已經是目前公認最佳的一般性遠端連線系統。</p>
+<p>subsection{安裝與使用 Secure Shell}</p>
+<p>在 sarge 下的 Secure Shell 包裝在 ssh 這個套件內，同時包含 Secure Shell (以下稱 ssh) 伺服器、客戶端及相關工具。安裝時的組態會詢問三個問題，使用預設值即可：第一為是否「只」使用 ssh v2 協定，預設值是 <tt class="docutils literal"><span class="pre">&lt;Yes&gt;</span></tt>，因為 ssh v1 有一些安全性的問題；第二為是否要把 ssh-keygen 這個 ssh 私密金鑰產生器設為 setuid，預設為 <tt class="docutils literal"><span class="pre">&lt;Yes&gt;</span></tt>；第三為是否要啟動 sshd，也就是 ssh 伺服器，預設為 <tt class="docutils literal"><span class="pre">&lt;Yes&gt;</span></tt>。</p>
+<p>如此安裝完畢之後，你應該可以用 ssh 登入系統了，先登入自己試試看：</p>
+<pre class="literal-block">
+# ssh localhost
+The authenticity of host 'localhost (127.0.0.1)' can't be established.
+RSA key fingerprint is d9:e9:1d:c6:57:17:aa:76:19:49:10:02:23:18:00:94.
+Are you sure you want to continue connecting (yes/no)? yes
+</pre>
+<p>因為 ssh 以 PKI (Public Key Infrastructure, 公開金鑰系統) 來識別主機的完整性，所以第一次連到任何一台主機時，都會先詢問使用者是否要接受這台主機的指紋 (Fingerprint)<a class="footnote-reference" href="#id43" id="id42" name="id42"><sup>12</sup></a> 以後再連線時萬一指紋不合，我們就知道這中間出問題了，可能有人假冒這台主機的身份，於是 ssh 客戶端將會禁止連線 (所以通常主機系統重新安裝時，舊的私密金鑰必須備份後移到新系統上，否則所有要連線到新系統上的客戶端都必須更新指紋值。)。接著在客戶端把主機的指紋加到 <tt class="docutils literal"><span class="pre">~/.ssh/known_hosts</span></tt> 之後，ssh 伺服器會問我們密碼：</p>
+<table class="docutils footnote" frame="void" id="id43" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id42" name="id43">[12]</a></td><td>主機的指紋就是該主機的 ssh 伺服器根據其所擁有的私密金鑰所產生出來的單向函數值。如果缺乏該私密金鑰的資訊，將無法產生相同的單向函數值，而從單向函數值也無法反推回私密金鑰。其它的相關資訊，請參閱一般的密碼學教科書。</td></tr>
+</tbody>
+</table>
+<pre class="literal-block">
+Warning: Permanently added 'localhost' (RSA) to the list of known hosts.
+Password:
+</pre>
+<p>正確輸入後，進入系統：</p>
+<pre class="literal-block">
+Last login: Mon Oct  4 10:06:21 2004 from some.where.out.there
+host:~#
+</pre>
+<p>以 <tt class="docutils literal"><span class="pre">ssh</span> <span class="pre">hostname</span></tt> 的語法登入 <tt class="docutils literal"><span class="pre">hostname</span></tt> 主機，會以與目前相同的使用者名稱進行連線。常常我們會需要使用不同於目前的使用者名稱來登入，那麼要以</p>
+<pre class="literal-block">
+# ssh username&#64;hostname
+</pre>
+<p>這樣的語法進行，<tt class="docutils literal"><span class="pre">username</span></tt> 是我們想要使用的使用者名稱。</p>
+</div>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="ssh" name="ssh">2.4&nbsp;&nbsp;&nbsp;ssh 公開金鑰登入驗證</a></h2>
+<p>ssh 具備使用者帳號/密碼、Host-Based 以及公開金鑰登入驗證。第一種使用者帳號/密碼就是一般的登入方式：你輸入使用者名稱，然後輸入密碼，對了就讓你登入；錯了就再試一次。ssh 預設只讓同一組使用者名稱/密碼錯誤三次，如果三次都輸入錯誤，連線會暫停一段時間然後中斷，避免惡意的第三方以程式化的方法猜密碼以求進入系統，或意圖造成阻斷服務攻擊 (DOS Attack; Deniel of Service Attack)。另外也是基於安全上的考量，在輸入了第一組帳號/密碼錯誤之後，不像一般控制台 (Console) 前的登入還可以換一個帳號名稱，ssh 不允許同一個登入連線更換帳號名稱的；如果第一次打錯了帳號，那就必須結束目前的登入連線，重起一個新的。</p>
+<p>若僅能使用者帳號/密碼的方式登入，ssh 的應用性將會十分受限，所以我們要討論如何使用公開金鑰的方式執行登入驗證 (Host-Based 登入方式的應用幾乎可以被公開金鑰方式所取代，並且某種程度上不如公開金鑰方式安全，故此不予討論)。</p>
+<div class="section">
+<h3><a class="toc-backref" href="#id1" id="id44" name="id44">2.4.1&nbsp;&nbsp;&nbsp;公開金鑰的登入驗證過程</a></h3>
+<p>ssh 的公開金鑰登入驗證系統與 SSL (Secure Socket Layer) 的連線交握 (Connection Handshake) 過程很類似：</p>
+<ol class="arabic simple">
+<li>整個登入驗證過程由客戶端向伺服端送出一個伴隨著公鑰模數 (Public Key Modulus) 的 <tt class="docutils literal"><span class="pre">SSH_CMSG_AUTH_RSA</span></tt> 訊息開始。如果伺服端不允許這個公鑰登入，那就直接送回 <tt class="docutils literal"><span class="pre">SSH_SMSG_FAILURE</span></tt> 給客戶端；反之若允許，則產生一個盤查訊息 (Challenge)，利用該公鑰 (存在伺服端的完整版本) 加密之後，隨著 <tt class="docutils literal"><span class="pre">SSH_SMSG_AUTH_RSA_CHALLENGE</span></tt> 訊息送回客戶端。</li>
+<li>客戶端接到加密過的盤查訊息之後，用自己的私鑰解開它，然後在尾巴加上行程 ID，最後用 MD5 算出這整個值的 checksum。接著，客戶端把這個 checksum 用 <tt class="docutils literal"><span class="pre">SSH_CMSG_AUTH_RSA_RESPONSE</span></tt> 送回伺服端。</li>
+<li>因為伺服端也具備相同的資訊，一旦算出的 checksum 與客戶端相同，表示驗證成功，就會把 <tt class="docutils literal"><span class="pre">SSH_SMSG_SUCCESS</span></tt> 訊息送給客戶端，建立安全連線；否則還是送回 <tt class="docutils literal"><span class="pre">SSH_SMSG_FAILURE</span></tt>，拒絕連線。</li>
+</ol>
+<p>公開金鑰登入驗證完全依據私鑰的正確性，與遠端主機的任何資訊並其間的網路連線均無關，只要有正確的私鑰即可登入系統，反之則絕對無法登入。</p>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id1" id="id45" name="id45">2.4.2&nbsp;&nbsp;&nbsp;實作 ssh 公開金鑰登入驗證組態</a></h3>
+<p>要使用公開金鑰登入驗證，sshd 組態檔 (<tt class="docutils literal"><span class="pre">/etc/ssh/sshd_config</span></tt>) 內必須有</p>
+<pre class="literal-block">
+RSAAuthentication yes
+PubkeyAuthentication yes
+</pre>
+<p>這兩行 (sarge 預設會有)，如果之後不能正常運作的話，請至此確認。</p>
+<p>其次，要產生客戶端 (即欲連線的本人) 的私密金鑰：</p>
+<pre class="literal-block">
+closet:~# ssh-keygen -t rsa -b 1024
+Generating public/private rsa key pair.
+Enter file in which to save the key (/root/.ssh/id_rsa):
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /root/.ssh/id_rsa.
+Your public key has been saved in /root/.ssh/id_rsa.pub.
+The key fingerprint is:
+eb:3f:0d:fa:22:9f:5f:49:64:1a:6e:09:b9:84:86:37 root&#64;closet
+</pre>
+<p>我們在 closet 主機上為 root Super User 產生了他的私密金鑰。<tt class="docutils literal"><span class="pre">ssh-keygen</span></tt> 預設會把產生的私密金鑰儲存到 <tt class="docutils literal"><span class="pre">~/.ssh/id_rsa</span></tt> 這個檔案裡面 (它就是 ssh 客戶端連線時預設的私密金鑰來源檔)，而另外會把與私鑰成對的公鑰 (公開金鑰) 存到 <tt class="docutils literal"><span class="pre">~/.ssh/id_rsa.pub</span></tt>。</p>
+<p>被連線的主機必須在 <tt class="docutils literal"><span class="pre">~/.ssh/authorized_keys</span></tt> 裡加入允許登入的 RSA 公鑰 (我們以本機作範例，所以剛好就是自己，直接 cat 即可)：</p>
+<pre class="literal-block">
+# cat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys
+# chmod 600 ~/.ssh/authorized_keys
+</pre>
+<p>要注意 <tt class="docutils literal"><span class="pre">~/.ssh/authorized_keys</span></tt> 檔案的權限不可以超過 600。然後我們來測試連線：</p>
+<pre class="literal-block">
+closet:~# ssh localhost
+Last login: Mon Oct  4 10:56:41 2004 from some.where.out.there
+closet:~#
+</pre>
+<p>成功了！伺服器沒有問我們的密碼，直接就用我們所提供的公私鑰對 (Public/Private Key Pair) 進行登入認證。</p>
+<p>最後要注意一點。在實作公鑰登入驗證時，使用者的 Home 目錄下有一些檔案與目錄權限設定必須要遵守，見<a class="reference" href="#id46">表 1</a>。</p>
+<p id="id46">表 1: 實作 ssh RSA 公鑰登入驗證時的檔案系統權限設定要求</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="51%" />
+<col width="30%" />
+</colgroup>
+<tbody valign="top">
+<tr><td>客戶端方面</td>
+<td><tt class="docutils literal"><span class="pre">~/.ssh/id_rsa</span></tt></td>
+<td>權限不可大於 600</td>
+</tr>
+<tr><td>伺服端方面</td>
+<td><tt class="docutils literal"><span class="pre">~/</span></tt>
+<tt class="docutils literal"><span class="pre">~/.ssh</span></tt>
+<tt class="docutils literal"><span class="pre">~/.ssh/authorized_keys</span></tt></td>
+<td>權限不可大於 755
+權限不可大於 700
+權限不可大於 600</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="putty-windows" name="putty-windows">2.5&nbsp;&nbsp;&nbsp;以 PuTTY 從 Windows 登入</a></h2>
+<p>PuTTY <a class="citation-reference" href="#id60" id="id47" name="id47">[PUTTY]</a> 是 Windows 下一個開放原始碼的 ssh 客戶端程式。Windows 下另外還有 VanDyke 發行的 SecureCRT 這個程式可以用作 ssh 客戶端，不過它是商用軟體 (VanDyke 這家公司的產品幾乎都與 Secure Shell 有關，有興趣的讀者可以參考一下該公司的網站。)。</p>
+<div class="section">
+<h3><a class="toc-backref" href="#id1" id="putty" name="putty">2.5.1&nbsp;&nbsp;&nbsp;取得 PuTTY</a></h3>
+<p>我們可以在 PuTTY 的正式網站下載已編譯好的版本，也可以下載原始碼，再自行編譯。</p>
+<p>從網站上可以下載包裝好所有 PuTTY 相關工具程式的 zip 檔，其中有：</p>
+<ul class="simple">
+<li>putty.exe：PuTTY 連線程式。</li>
+<li>pscp.exe：PuTTY scp 工具程式。</li>
+<li>psftp.exe：PuTTY sftp 客戶端程式。</li>
+<li>puttygen.exe：PuTTY ssh 金鑰對 (Key Pair) 產生程式。</li>
+<li>plink.exe：PuTTY ssh Port Forwarding 工具程式。</li>
+<li>pageant.exe：PuTTY Key Agent 工具程式。</li>
+</ul>
+<p>我們把其中的所有檔案都解包放至 <tt class="docutils literal"><span class="pre">%SYSTEMROOT%</span></tt> 目錄下，之後就可以直接從開始功能表的「執行」來使用 PuTTY 所提供的工具。</p>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id1" id="id48" name="id48">2.5.2&nbsp;&nbsp;&nbsp;連線與組態</a></h3>
+<p>在開始功能表的「執行」對話盒裡輸入 putty 後按下「確定」，執行 PuTTY 連線程式。</p>
+<div class="figure">
+<img alt="DebianBareSystem_pix/PuTTY-run.png" src="DebianBareSystem_pix/PuTTY-run.png" />
+</div>
+<p>然後可以看到如下的視窗：</p>
+<div class="figure">
+<img alt="DebianBareSystem_pix/PuTTY-main.png" src="DebianBareSystem_pix/PuTTY-main.png" />
+</div>
+<p>除了 ssh (SSH) 之外，PuTTY 同時也支援 telnet 及 rlogin 協定，只要在連線視窗選擇即可使用。另外，我們也應該在「Connection :: SSH :: Preferred SSH protocol version:」下面選擇使用 &quot;2&quot; (或甚至 &quot;2 only&quot;)：</p>
+<div class="figure">
+<img alt="DebianBareSystem_pix/PuTTY-ssh.prefer.proto.png" src="DebianBareSystem_pix/PuTTY-ssh.prefer.proto.png" />
+</div>
+<p>這是因為 ssh v1 有一些安全性上的問題，可以的話，我們儘量不要使用。</p>
+<p>在 PuTTY 主視窗的 Host Name 欄可以照 <tt class="docutils literal"><span class="pre">username&#64;hostname</span></tt> 的格式，輸入欲連線的主機與使用者名稱，當然還要選定正確的協定 (SSH)，確認無誤後，按下右下角的 Open 按鈕開始連線。putty.exe 同時也支援命令列參數，我們可以在「執行」對話盒裡輸入</p>
+<pre class="literal-block">
+putty username&#64;hostname
+</pre>
+<p>來指定主機與使用者名稱，直接以 SSH 協定進行連線。</p>
+<p>PuTTY 還有許多設定項目，是一個非常完善的 ssh 客戶端兼終端機模擬程式。它也支援使用 RSA 公開金鑰進行登入驗證，而如何進行這些相關的設定，請參考 PuTTY 網站上所提供的 Help 檔。</p>
+</div>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="bash" name="bash">3&nbsp;&nbsp;&nbsp;整備操作環境 (bash)</a></h1>
+<p>當我們在操作 Debian 的時候，事實上我們交談的對象是作業系統的 shell (殼層)，這個元件把作業系統包裝起來，所有使用者所下達的指令都通過 shell 轉譯之後，再送到作業系統執行。所以雖然實際列出檔案系統目前內容的指令，應該是一串 0101000101101001001... 的機械碼，但我們可以用簡單的 <tt class="docutils literal"><span class="pre">ls</span></tt> 完成。這全是 shell 的功勞。</p>
+<p>在 Un*x 的世界裡有許多 shell：sh, csh, ksh 以至於今日的 bash, tcsh 等。其它的作業系統也有 shell，但不見得是以 CLI (Command Line Interface, 命令列介面) 的形式存在，例如 Windows 作業系統的 shell 就是 Explorer.exe (檔案總管)。</p>
+<p>在 Debian 裡預設的 shell 是 bash (Bourne-Again SHell)，以下我們要來了解如何組態、設定一個方便的 bash 環境，幫助我們操作整個系統。</p>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="id49" name="id49">3.1&nbsp;&nbsp;&nbsp;bash 常用操作</a></h2>
+<div class="section">
+<h3><a class="toc-backref" href="#id1" id="id50" name="id50">3.1.1&nbsp;&nbsp;&nbsp;目錄巡遊</a></h3>
+<p>我們在 shell 下最常使用的指令應該就是 <tt class="docutils literal"><span class="pre">ls</span></tt> 了，它是用來 LiSt 檔案系統內容的指令，並且是一個外部程式，不屬於 bash 的一部分。在 <tt class="docutils literal"><span class="pre">ls</span></tt> 後不接任何引數，就會列出目前目錄下的檔案系統內容：</p>
+<pre class="literal-block">
+closet:~# ls
+dead.letter
+</pre>
+<p>上面的 <tt class="docutils literal"><span class="pre">closet:~#</span></tt> 稱作 shell 提示符號 (Prompt)，所有的指令都要下在提示符號之後。</p>
+<p>Un*x/Debian 是 File-Based 的作業系統，所有的設備都以檔案的形式存在於系統之中。所以在檔案系統裡巡遊 (Traverse) 是最常作的動作。切換不同的所在目錄要使用 cd (Change Directory) 這個 shell 指令，譬如要切到根目錄：</p>
+<pre class="literal-block">
+closet:~# cd /
+closet:/#
+</pre>
+<p>切過去的同時，shell 提示符號也會改變。然後再切回 root 的家目錄：</p>
+<pre class="literal-block">
+closet:/# cd ~
+closet:~#
+</pre>
+<p>我們可以用 <tt class="docutils literal"><span class="pre">pwd</span></tt> 檢查目前所在的目錄：</p>
+<pre class="literal-block">
+closet:~# pwd
+/root
+</pre>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id1" id="id51" name="id51">3.1.2&nbsp;&nbsp;&nbsp;檔案與目錄處理</a></h3>
+<p><tt class="docutils literal"><span class="pre">cp</span></tt>, <tt class="docutils literal"><span class="pre">rm</span></tt> 與 <tt class="docutils literal"><span class="pre">mv</span></tt> 分別是用來複製、刪除與搬移檔案的工具。在 Un*x/Debian 下是沒有 rename 這種指令的，為檔案改名的動作要用搬移來完成，我們用一組範例來說明這三個工具的基本使用：</p>
+<pre class="literal-block">
+closet:~# ls
+dead.letter
+closet:~# mkdir test ; ls
+dead.letter  test
+closet:~# cd test ; ls
+closet:~/test# touch file1 ; ls
+file1
+closet:~/test# cp file1 file2 ; ls
+file1  file2
+closet:~/test# mv file2 file3 ; ls
+file1  file3
+closet:~/test# rm file3 ; ls
+file1
+closet:~/test# cd .. ; ls
+dead.letter  test
+closet:~# rm test
+rm: cannot remove `test': Is a directory
+closet:~# rm -rf test ; ls
+dead.letter
+</pre>
+<p>首先我們在 root 的家目錄裡建立一個 test 目錄，並且切進去，確認裡面沒有任何檔案 (第 1 到 5 行)。<tt class="docutils literal"><span class="pre">mkdir</span></tt> 這個工具可以建立新的目錄。然後我們用 <tt class="docutils literal"><span class="pre">touch</span></tt> 建立一個空的檔案 file1，接著把 file1 複製成 file2；把 file2 搬移 (更名) 成 file3；把 file3 移除 (第 6 到 13 行)。最後回到上一層目錄 (root 的家目錄)，試圖用 <tt class="docutils literal"><span class="pre">rm</span></tt> 刪除一開始建的 test 目錄失敗，再接著用 <tt class="docutils literal"><span class="pre">rm</span> <span class="pre">-rf</span></tt> 進行刪除，成功。</p>
+<p><tt class="docutils literal"><span class="pre">cp</span></tt>, <tt class="docutils literal"><span class="pre">rm</span></tt> 都有 <tt class="docutils literal"><span class="pre">-r</span></tt> 與 <tt class="docutils literal"><span class="pre">-f</span></tt> 選項，分別代表遞迴 (Recursive) 與強制 (Force)。<tt class="docutils literal"><span class="pre">rm</span></tt> 預設不能刪除目錄，但加上 <tt class="docutils literal"><span class="pre">-r</span></tt> 之後就可以遞迴刪除目錄，再加上 <tt class="docutils literal"><span class="pre">-f</span></tt> 是避免例外狀況發生而使刪除失敗。<tt class="docutils literal"><span class="pre">cp</span> <span class="pre">-rf</span></tt> 可以一次複製一整個目錄，而若我們想要連原目錄結構下的使用者權限設定一起保留，可以用 <tt class="docutils literal"><span class="pre">cp</span> <span class="pre">-dpr</span> <span class="pre">&lt;src&gt;</span> <span class="pre">&lt;dst&gt;</span></tt>，或用 <tt class="docutils literal"><span class="pre">cp</span> <span class="pre">-a</span> <span class="pre">&lt;src&gt;</span> <span class="pre">&lt;dst&gt;</span></tt> (<tt class="docutils literal"><span class="pre">cp</span></tt> 的 <tt class="docutils literal"><span class="pre">-a</span></tt> 就等於 <tt class="docutils literal"><span class="pre">-dpr</span></tt>)。</p>
+<p><tt class="docutils literal"><span class="pre">ln</span></tt> 也是常用的檔案與目錄處理工具，它的功能與語法比較複雜：</p>
+<pre class="literal-block">
+ln [options] TARGET [LINKNAME]
+</pre>
+<p>我們比較常用的是 <tt class="docutils literal"><span class="pre">ln</span></tt> 加上 <tt class="docutils literal"><span class="pre">-s</span></tt> (<tt class="docutils literal"><span class="pre">--symbolic</span></tt>) 參數，來為檔案與目錄建立符號連結 (symbolic link)。舉例來說：</p>
+<pre class="literal-block">
+$ mkdir testdir
+$ touch testdir/file1 testdir/file2 testdir/file3
+$ ln -s testdir testsl
+$ ls -al testdir
+total 8
+drwxrwsr-x  2 yungyuc yungyuc 4096 Nov 20 22:00 ./
+drwxrwsr-x  3 yungyuc yungyuc 4096 Nov 20 22:00 ../
+-rw-rw-r--  1 yungyuc yungyuc    0 Nov 20 22:00 file1
+-rw-rw-r--  1 yungyuc yungyuc    0 Nov 20 22:00 file2
+-rw-rw-r--  1 yungyuc yungyuc    0 Nov 20 22:00 file3
+season[yungyuc]~/tmp/symbolic
+$ ls -al testsl
+lrwxrwxrwx  1 yungyuc yungyuc 7 Nov 20 22:00 testsl -&gt; testdir/
+season[yungyuc]~/tmp/symbolic
+$ ls -al testsl/
+total 8
+drwxrwsr-x  2 yungyuc yungyuc 4096 Nov 20 22:00 ./
+drwxrwsr-x  3 yungyuc yungyuc 4096 Nov 20 22:00 ../
+-rw-rw-r--  1 yungyuc yungyuc    0 Nov 20 22:00 file1
+-rw-rw-r--  1 yungyuc yungyuc    0 Nov 20 22:00 file2
+-rw-rw-r--  1 yungyuc yungyuc    0 Nov 20 22:00 file3
+</pre>
+<p>我們在 <tt class="docutils literal"><span class="pre">testdir</span></tt> 裡面建立三個檔案，然後再建立一個名為 <tt class="docutils literal"><span class="pre">testsl</span></tt> 的符號連結連到 <tt class="docutils literal"><span class="pre">testdir</span></tt> 目錄去。<tt class="docutils literal"><span class="pre">testsl</span></tt> 的內容與 <tt class="docutils literal"><span class="pre">testdir</span></tt> 完全一樣，這就是「符號連結」的意義：不實際建立檔案或目錄，僅僅是一個連到另一個檔案或目錄的符號。</p>
+<p>利用符號連結，我們可以建立檔案或目錄的「別名」。這是 Linux 很好用的一項功能，管理系統的時候會時常用到。</p>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id1" id="id52" name="id52">3.1.3&nbsp;&nbsp;&nbsp;檔案系統資訊</a></h3>
+<p>我們常用 <tt class="docutils literal"><span class="pre">df</span></tt> 程式來檢視目前系統上的檔案系統狀況：</p>
+<pre class="literal-block">
+$ df
+Filesystem           1K-blocks      Used Available Use% Mounted on
+/dev/hda1              1003992    127972    876020  13% /
+tmpfs                   516928         0    516928   0% /dev/shm
+/dev/hda5             15903824    105828  15797996   1% /usr
+/dev/hda6             15903824    102852  15800972   1% /var
+/dev/hda7             43333976     32840  43301136   1% /home
+$ df -h
+Filesystem            Size  Used Avail Use% Mounted on
+/dev/hda1             981M  125M  856M  13% /
+tmpfs                 505M     0  505M   0% /dev/shm
+/dev/hda5              16G  104M   16G   1% /usr
+/dev/hda6              16G  101M   16G   1% /var
+/dev/hda7              42G   33M   42G   1% /home
+</pre>
+<p>加上參數 <tt class="docutils literal"><span class="pre">-h</span></tt> 可以改用 M 表示 1024K、G 表示 1024M 等容量符號，否則將以 kiloByte 來表示各檔案系統的容量。另外，不加參數執行 verb+mount+ 則可以顯示各檔案系統的掛載狀況：</p>
+<pre class="literal-block">
+closet:~# mount
+/dev/hda1 on / type reiserfs (rw)
+proc on /proc type proc (rw)
+devpts on /dev/pts type devpts (rw,gid=5,mode=620)
+tmpfs on /dev/shm type tmpfs (rw)
+/dev/hda5 on /usr type reiserfs (rw)
+/dev/hda6 on /var type reiserfs (rw)
+/dev/hda7 on /home type reiserfs (rw)
+</pre>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id1" id="aliasing" name="aliasing">3.1.4&nbsp;&nbsp;&nbsp;Aliasing</a></h3>
+<p>利用 <tt class="docutils literal"><span class="pre">alias</span></tt> 這個 bash 指令，我們可以代換指令名稱 (為某一組命令取 alias -- 別名)。</p>
+<p>舉 <tt class="docutils literal"><span class="pre">ls</span></tt> 為例，<tt class="docutils literal"><span class="pre">-a</span></tt> 會列出隱藏檔 (檔名以 <tt class="docutils literal"><span class="pre">.</span></tt> 開頭的檔案)；<tt class="docutils literal"><span class="pre">-l</span></tt> 會以長格式列出檔案。為了方便使用，我們常會建立幾個相關的 alias，放在 bash 的設定檔 (例如 <tt class="docutils literal"><span class="pre">~/.bashrc</span></tt>) 裡面，只要登入系統就可以使用：</p>
+<pre class="literal-block">
+alias la='ls -a'
+alias ll='ls -l'
+alias lla='ls -al'
+</pre>
+<p>設好以後試試看：</p>
+<pre class="literal-block">
+closet:~# ls
+dead.letter
+closet:~# la
+.  ..  .bash_history  .bashrc  .profile  .ssh  dead.letter
+closet:~# ll
+total 4
+-rw-------    1 root     root          509 Oct  4 10:02 dead.letter
+closet:~# lla
+total 18
+drwxr-xr-x    3 root     root          184 Oct  4 15:41 .
+drwxr-xr-x   21 root     root          600 Sep 29 16:28 ..
+-rw-------    1 root     root          177 Oct  4 14:47 .bash_history
+-rw-r--r--    1 root     root          410 Sep  6  1998 .bashrc
+-rw-r--r--    1 root     root          202 Dec 21  1999 .profile
+drwx------    2 root     root          168 Oct  4 11:05 .ssh
+-rw-------    1 root     root          509 Oct  4 10:02 dead.letter
+</pre>
+<p>我們也常常會直接把 <tt class="docutils literal"><span class="pre">--color=auto</span></tt> 和 <tt class="docutils literal"><span class="pre">-F</span></tt> 參數加給 <tt class="docutils literal"><span class="pre">ls</span></tt>：</p>
+<pre class="literal-block">
+alias ls='ls --color=auto -F'
+</pre>
+<p>分別會為不同類型 (symbolic link、目錄、一般檔案、socket 等等) 的檔案加上顏色與符號。</p>
+<p>如果我們輸入 <tt class="docutils literal"><span class="pre">alias</span></tt> 指令而不加參數，就會印出目前 shell 裡已設定的 alias：</p>
+<pre class="literal-block">
+closet:~# alias
+alias la='ls -a'
+alias ll='ls -l'
+alias lla='ls -al'
+alias ls='ls --color=auto -F'
+</pre>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id1" id="id53" name="id53">3.1.5&nbsp;&nbsp;&nbsp;環境變數</a></h3>
+<p>在 bash 中有兩種變數，一種稱作 shell 變數，一種稱作環境變數。shell 變數只有 bash 自己可以存取，而被 shell 所呼叫出來的程式 (也就是我們希望執行的程式) 只能存取環境變數。bash 可以用 <tt class="docutils literal"><span class="pre">set</span></tt> 與 <tt class="docutils literal"><span class="pre">unset</span></tt> 來設定 shell 變數，再用 <tt class="docutils literal"><span class="pre">export</span></tt> 把 shell 變數匯出成環境變數；或者直接用 <tt class="docutils literal"><span class="pre">export</span></tt> 匯出環境變數，也是可以的。</p>
+<p>環境變數對 Un*x/Debian 是很重要的，它是這個平台下的程式，最主要的訊息傳遞管道之一。通常我們如果要讓一般的程式正常運作，除了撰寫正確的設定檔內容之外，也需要設定正確的環境變數值。</p>
+<p>直接輸入 <tt class="docutils literal"><span class="pre">export</span></tt> 指令，它會印出目前已設定的環境變數：</p>
+<pre class="literal-block">
+closet:~# export
+declare -x HOME=&quot;/root&quot;
+declare -x LOGNAME=&quot;root&quot;
+declare -x MAIL=&quot;/var/mail/root&quot;
+declare -x OLDPWD=&quot;/root/test&quot;
+declare -x PATH=&quot;/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:
+/bin:/usr/bin/X11&quot;
+declare -x PS1=&quot;\\h:\\w\\\$ &quot;
+declare -x PWD=&quot;/root&quot;
+declare -x SHELL=&quot;/bin/bash&quot;
+declare -x SHLVL=&quot;1&quot;
+declare -x SSH_CLIENT=&quot;10.52.195.160 3561 22&quot;
+declare -x SSH_CONNECTION=&quot;10.52.195.160 3561 10.52.195.200 22&quot;
+declare -x SSH_TTY=&quot;/dev/pts/0&quot;
+declare -x TERM=&quot;xterm&quot;
+declare -x USER=&quot;root&quot;
+</pre>
+<p>(其中 <tt class="docutils literal"><span class="pre">$PATH</span></tt><a class="footnote-reference" href="#id55" id="id54" name="id54"><sup>13</sup></a> 太長了，我把它切成兩段，請注意它們本來是在同一行的)。以 <tt class="docutils literal"><span class="pre">export</span> <span class="pre">name=value</span></tt> 的語法即可設定環境變數的值；<tt class="docutils literal"><span class="pre">unset</span></tt> 不但可以刪除 shell 變數，也可以用來刪除環境變數。</p>
+<table class="docutils footnote" frame="void" id="id55" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id54" name="id55">[13]</a></td><td>在環境變數 (或 shell 變數) 的名稱前加上 <tt class="docutils literal"><span class="pre">$</span></tt>，代表其值。只要是稍微複雜一點的 shell script 都會存取變數值，所以我們會常常看到這種用法，請加以注意。</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="id56" name="id56">3.2&nbsp;&nbsp;&nbsp;bash 全域/使用者設定檔</a></h2>
+<p>bash 有兩種 invocation (啟動；引喚) 模式：</p>
+<ul class="simple">
+<li>login shell：登入系統時所啟動的 shell (<tt class="docutils literal"><span class="pre">argv[0]</span></tt> 的第一個字元為 <tt class="docutils literal"><span class="pre">-</span></tt>)，或是以 <tt class="docutils literal"><span class="pre">--login</span></tt> 選項所啟動的 shell。</li>
+<li>interactive shell：沒有以非選項引數 (Argument) 或 <tt class="docutils literal"><span class="pre">-c</span></tt> 所啟動的 shell，並且其標準輸出入皆關聯於終端機上 (可以互動式操作)。</li>
+</ul>
+<p>login shell 一定是 interactive shell (進行登入時，shell 一定會與使用者互動)，但 interactive shell 不一定是 login shell (使用者要取得和 shell 互動能力，並非只有直接登入這一種途徑)。</p>
+<p>在 bash 的 invocation 過程中，基本上它會先讀取全域 (套用至所有使用者) 設定檔，再讀取使用者設定檔的內容。我們可以將環境變數或 alias 等設定寫到這些設定檔內。具有全域性質的寫入全域設定檔，而使用者可以把自己用的設定寫到使用者設定檔內。</p>
+<p>如果 invoke 一個 login interactive shell，則 bash 會依次讀取 (執行) 以下檔案中的設定：</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">/etc/profile</span></tt> (全域)</li>
+<li><tt class="docutils literal"><span class="pre">~/.bash_profile</span></tt> (使用者)</li>
+<li><tt class="docutils literal"><span class="pre">~/.bash_login</span></tt> (使用者)</li>
+<li><tt class="docutils literal"><span class="pre">~/.profile</span></tt> (使用者)</li>
+</ul>
+<p>使用者登出系統時，bash 會執行 <tt class="docutils literal"><span class="pre">~/.bash_logout</span></tt> 。</p>
+<p>如果 invoke 一個 non-login interactive shell，則設定檔案的讀取順序變為：</p>
+<ol class="arabic simple">
+<li><tt class="docutils literal"><span class="pre">/etc/bash.bashrc</span></tt> (全域)</li>
+<li><tt class="docutils literal"><span class="pre">~/.bashrc</span></tt> (使用者)</li>
+</ol>
+<p>我們把以上 login interactive shell 的設定檔稱為 bash 的 profile；non-login interactive shell 的設定檔稱為 bash 的 rcfile。Debian 預設的 bash profile 和 rcfile 設定內容並不一致，但我們在使用時，會希望不管是用一般的登入，或是以 su/sudo<a class="footnote-reference" href="#id58" id="id57" name="id57"><sup>14</sup></a> 變成另一個使用者時，都擁有同樣的環境。我們可以在 profile 裡加上</p>
+<pre class="literal-block">
+. /path/to/rcfile
+</pre>
+<p><tt class="docutils literal"><span class="pre">.</span></tt> 這個 shell 指令是用來匯入檔案內的 shell 指令。如此一來，我們可以把全域或使用者層級的設定全寫到 rcfile 裡，讓 profile 來匯入，則不論是 login 或 non-login interactive shell，兩邊的設定自然就一致了。</p>
+<table class="docutils footnote" frame="void" id="id58" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id57" name="id58">[14]</a></td><td>su 是「變身」成另一個使用者的工具；sudo 則是以另一個使用者的身份直接執行程式的工具。兩者皆常用來讓一般使用者取得 root 超級使用者的權限。</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id59" name="id59">4&nbsp;&nbsp;&nbsp;結語與展望</a></h1>
+<p>本文先從 Debian 的介紹開始，說明如何從 woody 光碟片開機，一步一步地安裝 Debian Base System；如何設定 Debian 的 Internet 及如何利用 APT 進行套件管理，並在最乾淨的情況下昇級到 sarge。</p>
+<p>在基本系統之上，我們繼續說明 Debian 的 Secure Shell (ssh) 組態，及如何從 Debian 和 Windows (以 PuTTY 工具程式) 進行 ssh 連線。最後我們對 Debian 的預設 shell 作一個簡單的介紹。</p>
+<p>要熟練地使用 Debian 完成工作，特別是進行伺服作業，我們還有許多工具需要了解。關於各種不同方面的問題與應用，我們都會繼續進行討論。</p>
+<table class="docutils citation" frame="void" id="fhs" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id19" name="fhs">[FHS]</a></td><td>Filesystem Hierarchy Standard 2.1, edited by Daniel Quinlan, Apr. 12, 2000.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="fsn" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id35" name="fsn">[FSN]</a></td><td><a class="reference" href="http://www.fsn.hu/">http://www.fsn.hu/</a></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="pdo" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id39" name="pdo">[PDO]</a></td><td><a class="reference" href="http://packages.debian.org/">http://packages.debian.org/</a></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="id60" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id47" name="id60">[PUTTY]</a></td><td><a class="reference" href="http://www.chiark.greenend.org.uk/~sgtatham/putty/">http://www.chiark.greenend.org.uk/~sgtatham/putty/</a></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</body>
+</html>

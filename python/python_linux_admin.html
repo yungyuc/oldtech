@@ -1,0 +1,684 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh_tw" lang="zh_tw">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.4: http://docutils.sourceforge.net/" />
+<title>Linux 下以 Python scripting 輔助系統管理的技巧</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger
+:Contact: goodger@users.sourceforge.net
+:Date: $Date: 2005-06-06 15:09:07 +0200 (Mon, 06 Jun 2005) $
+:Version: $Revision: 3442 $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+*/
+
+/* "! important" is used here to override other ``margin-top`` and
+   ``margin-bottom`` styles that are later in the stylesheet or 
+   more specific.  See http://www.w3.org/TR/CSS1#the-cascade */
+
+body {
+  font-family: Calibri, Georgia, Times New Roman, Times,  Free Times;
+  background-color: #666666;
+}
+
+div.document {
+  background-color: white;
+  clear: both;
+  width: 50em;
+  margin: 0 auto 0 auto;
+  padding: 0.5em;
+  border: 2px ridge black;
+}
+
+.first {
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em;
+  border-top: 2px solid #888888;
+  border-bottom: 2px solid #888888;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin-left: 1em ;
+  border: medium outset ; 
+  padding: 1em ;
+  background-color: #ffffee ;
+  /* width: 40% ; */
+  /* float: right ; */
+ /*  clear: right */ }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+div.section h1, div.section h2, div.section h3, 
+div.section h4, div.section h5, div.section h6 {
+  padding-left: 0.3em;
+  padding-bottom: 0.3em;
+  border-left: 2px solid gray;
+  border-bottom: 2px solid gray;
+}
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em; }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left {
+  clear: left }
+
+img.align-right {
+  clear: right }
+
+img.borderless {
+  border: 0 }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font-family: serif ;
+  font-size: 100% }
+
+pre.line-block {
+  font-family: serif ;
+  font-size: 100% }
+
+pre.literal-block, pre.doctest-block {
+  white-space: pre-wrap;       /* css-3 */
+  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word;       /* Internet Explorer 5.5+ */
+  margin-left: 2em ;
+  margin-right: 2em ;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  padding-left: 1em;
+  padding-right: 1em;
+  border: 1px dotted black;
+}
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid thin gray }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  border-spacing: 0;
+  border: 1 solid black;
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-top: solid thin black;
+  border-left: solid thin black }
+
+table.footnote td.label a {
+  text-decoration: none;
+}
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  border: 0; 
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+tt.docutils {
+}
+
+tt.ltst {
+  font-weight: bold;
+}
+
+tt.ltem {
+  font-style: italic;
+}
+
+ul.auto-toc {
+  list-style-type: none }
+
+/* vim: set ai et nu sw=2 ts=2: */
+
+</style>
+</head>
+<body>
+<div class="document" id="linux-python-scripting">
+<h1 class="title">Linux 下以 Python scripting 輔助系統管理的技巧</h1>
+<table class="docinfo" frame="void" rules="none">
+<col class="docinfo-name" />
+<col class="docinfo-content" />
+<tbody valign="top">
+<tr class="field"><th class="docinfo-name">author:</th><td class="field-body">Yung-Yu Chen (yungyuc) <a class="reference" href="http://blog.seety.org/everydaywork/">http://blog.seety.org/everydaywork/</a> &lt;<a class="reference" href="mailto:yyc&#64;seety.org">yyc&#64;seety.org</a>&gt;</td>
+</tr>
+<tr class="field"><th class="docinfo-name">copyright:</th><td class="field-body">© 2006, all rights reserved</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="id1" name="id1">目錄</a></p>
+<ul class="auto-toc simple">
+<li><a class="reference" href="#linux-python" id="id11" name="id11">1&nbsp;&nbsp;&nbsp;Linux、指令稿與 Python</a></li>
+<li><a class="reference" href="#python" id="id12" name="id12">2&nbsp;&nbsp;&nbsp;Python 指令稿的格式</a></li>
+<li><a class="reference" href="#id2" id="id13" name="id13">3&nbsp;&nbsp;&nbsp;字串處理</a><ul class="auto-toc">
+<li><a class="reference" href="#id3" id="id14" name="id14">3.1&nbsp;&nbsp;&nbsp;轉換字元編碼</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#id4" id="id15" name="id15">4&nbsp;&nbsp;&nbsp;檔案系統與目錄</a><ul class="auto-toc">
+<li><a class="reference" href="#id5" id="id16" name="id16">4.1&nbsp;&nbsp;&nbsp;檔案系統操作</a></li>
+<li><a class="reference" href="#id6" id="id17" name="id17">4.2&nbsp;&nbsp;&nbsp;路徑的處理</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#id7" id="id18" name="id18">5&nbsp;&nbsp;&nbsp;外部程式呼叫</a><ul class="auto-toc">
+<li><a class="reference" href="#id8" id="id19" name="id19">5.1&nbsp;&nbsp;&nbsp;管線</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#id9" id="id20" name="id20">6&nbsp;&nbsp;&nbsp;網際網路通訊</a></li>
+<li><a class="reference" href="#id10" id="id21" name="id21">7&nbsp;&nbsp;&nbsp;結語</a></li>
+</ul>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="linux-python" name="linux-python">1&nbsp;&nbsp;&nbsp;Linux、指令稿與 Python</a></h1>
+<p>對 Linux 來說，指令稿 (script) 是至為重要的部分。在主要的 Linux distribution 中間，從系統的啟動到運作，都離不開 shell 指令稿撰寫。在我的主機上面執行一下：</p>
+<pre class="literal-block">
+$ ls /usr/bin/* /bin/* | wc -l
+2585
+$ file /usr/bin/* /bin/* | grep &quot;shell script&quot; | wc -l
+267
+</pre>
+<p>看，可以找到 267 個 shell 指令稿程式，超過 <tt class="docutils literal"><span class="pre">/usr/bin</span></tt> 和 <tt class="docutils literal"><span class="pre">/usr</span></tt> 目錄下所有 (程式) 檔案的十分之一。這還只是 shell 指令稿的部分而已。</p>
+<p>在一個像 Linux 這樣以檔案為操作導向的作業系統上面，script 的活躍是理所當然的事情。絕大部分的系統設定都以字串的形式寫在組態檔裡面，而作業系統的執行期資訊也存在檔案系統之中 (<tt class="docutils literal"><span class="pre">/proc</span></tt>)；直接處理這些字串就能管理系統，用指令稿語言來進行自動化是非常合適的。</p>
+<p>像 Python 這種指令稿語言因為開發快速的關係，能夠很快地製作出我們想要的系統管理功能出來。除了開發快速之外，Python 也具有容易維護的特性。相比之下，Perl 程式雖然可以寫得更短，但也更不容易看懂；shell 指令稿則不是完整的開發環境。Python 是撰寫系統管理指令稿的理想工具。</p>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="python" name="python">2&nbsp;&nbsp;&nbsp;Python 指令稿的格式</a></h1>
+<p>Python 指令稿與其它語言的指令稿的基本格式完全一樣，本身都是純文字檔，而在檔頭要以 <tt class="docutils literal"><span class="pre">#!</span></tt> 指定直譯程式的位置：</p>
+<pre class="literal-block">
+#!/usr/bin/python
+print &quot;Hello, world!&quot;
+</pre>
+<p>這是我們上一期寫過的 <tt class="docutils literal"><span class="pre">hello.py</span></tt> 程式，不要忘記 <tt class="docutils literal"><span class="pre">chmod</span> <span class="pre">a+x</span> <span class="pre">hello.py</span></tt>，如此便可以在指令行下執行這個指令稿：</p>
+<pre class="literal-block">
+$ ./hello.py
+Hello, world
+</pre>
+<p>我們習慣上會給 Python 程式取個副檔名 <tt class="docutils literal"><span class="pre">.py</span></tt>，但 Linux 的指令稿並不需要綴上副檔名；把 <tt class="docutils literal"><span class="pre">hello.py</span></tt> 改成 <tt class="docutils literal"><span class="pre">hello</span></tt>，程式一樣會正常執行。<tt class="docutils literal"><span class="pre">.py</span></tt> 副檔名對 Python 仍有特別的意義，但只在撰寫 Python 模組的時候才有用處。</p>
+<p>對於指定 Python 直譯器標頭，我們一般有兩種作法。像以上的 <tt class="docutils literal"><span class="pre">hello.py</span></tt> 這種寫為絕對路徑的方式其實並非必要，我們可以改用相對路徑的方式來指定：</p>
+<pre class="literal-block">
+#!/usr/bin/env python
+</pre>
+<p>於是會以 <tt class="docutils literal"><span class="pre">/usr/bin/env</span></tt> 程式來叫用 <tt class="docutils literal"><span class="pre">python</span></tt> 直譯器，處理 Python 程式檔案。這麼作的好處是當系統中安裝有許多個不同的 Python 直譯器時，會採用路徑在最前面的那一個。如此一來，若使用者另外安裝了一版 Python (例如裝在自己的家目錄)，又把自己的 Python 放到路徑設定 (<tt class="docutils literal"><span class="pre">PATH</span></tt> 環境變數) 的最前面，即會採用使用者自己安裝的 Python。</p>
+<p>每一版 Python 除了有 <tt class="docutils literal"><span class="pre">python</span></tt> 這個執行檔之外，還會附有內容完全相同的 <tt class="docutils literal"><span class="pre">pythonX.Y</span></tt> 這個執行檔，<tt class="docutils literal"><span class="pre">X.Y</span></tt> 是該版 Python 的 major version 和 minor version。譬如 Python 2.3 就會有 <tt class="docutils literal"><span class="pre">python</span></tt> 和 <tt class="docutils literal"><span class="pre">python2.3</span></tt> 這兩個直譯器，用起來是完全一樣的。如果我們寫的指令稿程式必須要使用某一個版本的 Python，可以偷偷在指令稿標頭上動手腳來進行限制；以 Python 2.3 為例，就把標頭寫成：</p>
+<pre class="literal-block">
+#!/usr/bin/env python2.3
+</pre>
+<div class="note">
+<p class="first admonition-title">註記</p>
+<p class="last">Python 提供了一套正統的方法來檢查所使用 Python 及所有相關環境的資訊。在指令稿標頭上動手腳雖然方便，但不是保險的正統作法；只是，若程式本身就沒多長 (譬如說二三十行)，的確不必浪費時間去寫一串檢查程式。</p>
+</div>
+<p>當指令稿只使用了主流版號的標準程式庫時 (這是一般的狀況)，通常就不必指定 Python 的版本。</p>
+<p>若寫成 <tt class="docutils literal"><span class="pre">hello.py</span></tt> 裡那種絕對路徑的標頭，就會限定使用安裝在某一個位置的 Python。通常我們都會指定在 <tt class="docutils literal"><span class="pre">/usr/bin/python</span></tt> 或 <tt class="docutils literal"><span class="pre">/usr/bin/pythonX.Y</span></tt> (看要指定哪一版)，即系統所安裝的 Python；寫成這樣的話，使用者就不好改用自己安裝的版本了。</p>
+<p>Python 直譯器還會讀取另一組格式為 <tt class="docutils literal"><span class="pre">#</span> <span class="pre">-*-</span> <span class="pre">setting</span> <span class="pre">-*-</span></tt> 的標頭 (通常接在第一行以後)，其中常用的是：</p>
+<pre class="literal-block">
+# -*- coding: UTF-8 -*-
+</pre>
+<p>用途是指定「指令稿檔案內純文字的字元編碼 (為 UTF-8)」。如果你想要寫中文註解，這就非常重要；Python 自己有一套字元編碼轉換的機制，實作在 <tt class="docutils literal"><span class="pre">codecs</span></tt> 模組裡面，但直到 Python 2.4 之前，繁體中文常用的 Big5 編碼並未進入標準的 <tt class="docutils literal"><span class="pre">codecs</span></tt> 模組。如果指令稿檔案使用了 Python 看不懂的字元編碼 (就是指華文世界用的 Big5 和 GB)，程式雖然仍可執行，但 Python 直譯器會送出警告。如果想用中文撰寫註解，最好把指令稿檔案轉為 UTF-8 Unicode，並如上指定編碼。</p>
+<p>上一期已經提過了，Python 也是以 <tt class="docutils literal"><span class="pre">#</span></tt> 當作單行註解符號的 (和 shell script 一樣)；所有在這個符號之後的文字都是註解。順帶一提，如果你習慣以 VIM 編輯 Python 指令稿，可以在檔尾加上 VIM 的設定字串：</p>
+<pre class="literal-block">
+# vim:set nu et ts=4 sw=4 cino=&gt;4:
+</pre>
+<p>設定顯示行號 (<tt class="docutils literal"><span class="pre">nu</span></tt>)、展開跳格鍵 (<tt class="docutils literal"><span class="pre">et</span></tt>，對 Python 程式來說，跳格鍵 Tab 是最要不得的東西)，指定跳格字元為 4 (<tt class="docutils literal"><span class="pre">ts=4</span></tt>)、偏移字元寬為 4 (<tt class="docutils literal"><span class="pre">sw=4</span></tt>)、C 式縮排為 <tt class="docutils literal"><span class="pre">&gt;4</span></tt> (<tt class="docutils literal"><span class="pre">cino=&gt;4</span></tt>)；然後再打開語法標示 (syntax highlighting，這個在 .vimrc 裡設定比較合適)。使用這樣的編輯環境，對撰寫 Python 程式來說會很方便。</p>
+<p>Python 直譯器會依出現順序來執行程式碼檔案裡的指令。如果我們想撰寫比較具組織性的指令稿，可以把平舖直述的：</p>
+<pre class="literal-block">
+print &quot;some operations&quot;
+</pre>
+<p>改成這樣的程式碼結構：</p>
+<pre class="literal-block">
+def main():
+    print &quot;some operations&quot;
+
+if __name__ == '__main__':
+    main()
+</pre>
+<p>亦即自行製作一個「進入點」 <tt class="docutils literal"><span class="pre">main()</span></tt> 函式。當指令稿比較長 (超過一百行以上)，以及將來在擴充指令稿的時候，就會比較方便。</p>
+<p>總結來說，一個 Python 指令稿的常見格式應為：</p>
+<pre class="literal-block">
+#!/usr/bin/env python
+# -*- coding: UTF-8 -*-
+
+def main():
+    print &quot;Hello, world&quot;
+
+if __name__ == '__main__':
+    main()
+
+# vim:set nu et ts=4 sw=4 cino=&gt;4:
+</pre>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id2" name="id2">3&nbsp;&nbsp;&nbsp;字串處理</a></h1>
+<p>在管理 Linux 系統時，(純文字) 設定檔案以及其中的字串處理是至為核心的部分；讓我們來看看 Python 如何進行這些工作。因為我們在上一期已經用 Python 處理過字串和檔案了，所以在這裡，我們應該對字串處理作深入一點的介紹。</p>
+<p>首先我們要知道的是，字串在 Python 裡面是一種物件。打開 Python 互動式環境 (到 shell 去執行 <tt class="docutils literal"><span class="pre">python</span></tt> 即可進入)，執行以下動作：</p>
+<pre class="literal-block">
+&gt;&gt;&gt; print type( &quot;&quot; )
+&lt;type 'str'&gt;
+&gt;&gt;&gt; if type( &quot;I am a string&quot; ) is str: print True
+...
+True
+&gt;&gt;&gt; if type( &quot;Another string&quot; ) is str(): print True
+...
+</pre>
+<p><tt class="docutils literal"><span class="pre">type()</span></tt> 是 Python 的內建函式，用來取得變數的型態。我們可以從這三個指令看出來，字串 <tt class="docutils literal"><span class="pre">&quot;&quot;</span></tt>, <tt class="docutils literal"><span class="pre">&quot;I</span> <span class="pre">am</span> <span class="pre">a</span> <span class="pre">string&quot;</span></tt> 都是 <tt class="docutils literal"><span class="pre">str</span></tt> 類別的物件。查看 Python 的線上文件，會發現有兩組關於字串處理的程式庫；一組是 <tt class="docutils literal"><span class="pre">string</span></tt> 模組裡的函式，另一組則是字串物件專用的方法 (String Methods)。兩者雖有一些差別，但功能的重覆性相當高；我們討論的重點在字串方法。</p>
+<p>我們常常會需要分析檔案中的字串：把字串拆解開來，依照給定的邏輯來判斷字串資料的意義。因此，最常用的字串方法就是我們上一期有用到的 <tt class="docutils literal"><span class="pre">split()</span></tt>。split() 傳回的是列表 (list)，可以用索引值 (以 0 起始) 來存取列表中的各個項目。再來示範一下：</p>
+<pre class="literal-block">
+&gt;&gt;&gt; tokens = &quot;This is a sample string used to demo split()&quot;.split()
+&gt;&gt;&gt; len(tokens)
+9
+&gt;&gt;&gt; print tokens
+['This', 'is', 'a', 'sample', 'string', 'used', 'to', 'demo', 'split()']
+&gt;&gt;&gt; print tokens[0], tokens[2]
+This a
+&gt;&gt;&gt; print tokens[-1], tokens[-2]
+split() demo
+&gt;&gt;&gt; print tokens[2:5]
+['a', 'sample', 'string']
+</pre>
+<p>第一個指令把我們的字串切成了 9 個字串，存在 <tt class="docutils literal"><span class="pre">tokens</span></tt> 這個列表裡。len() 是個內建函式，用來量測像列表這種可以存放其它東西的物件的長度 (傳回所包含的項目個數)。列表只要是整數就可以了，但最大不能到項目個數；可以給入負值，表示從列表尾端開始計算。索引值 <tt class="docutils literal"><span class="pre">-1</span></tt> 即為列表的最後一個項目。</p>
+<p>有辦法切開字串進行判斷了之後，我們常常還需要把分析結果給輸出出來，那麼就得接合字串；以字串的格式化操作 (string format operations) 就能完成這件工作。我們可以寫出以下的表示式：</p>
+<pre class="literal-block">
+&gt;&gt;&gt; &quot;%d %f %s&quot; % (1, 1.2, &quot;string&quot;)
+'1 1.200000 string'
+</pre>
+<p>這就是字串格式化操作。以帶有特別轉換字元 (conversion character) 的格式化字串，後接 <tt class="docutils literal"><span class="pre">%</span></tt> 運算子，再接一個 tuple 作為參數，就能把 tuple 裡的資料填進格式化字串裡去。常用的 <tt class="docutils literal"><span class="pre">%d</span></tt> 代表有號整數、<tt class="docutils literal"><span class="pre">%f</span></tt> 代表浮點數、<tt class="docutils literal"><span class="pre">%s</span></tt> 代表字串，完整的轉換字元表請參考 Python 的線上文件。</p>
+<div class="note">
+<p class="first admonition-title">註記</p>
+<p class="last">Python 的 tuple 也是一種可以包含其它物件的資料結構，以整數索引存取其中的物件，但其行為與列表不盡相同。在語法上，tuple 用 (1, 2, 3) 來宣告，而列表用 [1, 2, 3] 來宣告。如果 tuple 中只有一個物件，則要寫成 (1,)，不要忘記右括號前的逗號。在字串格式化操作時，若轉換字元只有一個，<tt class="docutils literal"><span class="pre">%</span></tt> 運算元後的 tuple 也可以用單一變數來代替。</p>
+</div>
+<p>字串物件另有一個叫作 <tt class="docutils literal"><span class="pre">join()</span></tt> 的方法可以用來結合字串，用法如下：</p>
+<pre class="literal-block">
+&gt;&gt;&gt; &quot;&quot;.join([ &quot;a&quot;, &quot;b&quot;, &quot;c&quot; ])
+'abc'
+&gt;&gt;&gt; &quot;-&quot;.join([ &quot;a&quot;, &quot;b&quot;, &quot;c&quot; ])
+'a-b-c'
+</pre>
+<p>在處理字串時，最後要注意的是，Python 的字串不可變。也就是說，想變更字串中的某一個字元，不能直接設：</p>
+<pre class="literal-block">
+&gt;&gt;&gt; a = &quot;write&quot;
+&gt;&gt;&gt; a[2] = &quot;o&quot;
+Traceback (most recent call last):
+  File &quot;&lt;stdin&gt;&quot;, line 1, in ?
+TypeError: object doesn't support item assignment
+</pre>
+<p>那是不合法的。那該怎麼辦呢？可以這樣作：</p>
+<pre class="literal-block">
+&gt;&gt;&gt; print a[:2]+&quot;o&quot;+a[3:]
+wrote
+</pre>
+<p>字串的內容雖然不能變更，但字串本身可以加起來 (串接)。<tt class="docutils literal"><span class="pre">a[:2]</span></tt> 表示取出 <tt class="docutils literal"><span class="pre">a</span></tt> 字串到索引 2 為止的部分；<tt class="docutils literal"><span class="pre">a[3:]</span></tt> 表示取出 <tt class="docutils literal"><span class="pre">a</span></tt> 字串從索引 3 開始到結尾的部分；然後在中間接入 <tt class="docutils literal"><span class="pre">&quot;o&quot;</span></tt>。最後我們還是可以得到 <tt class="docutils literal"><span class="pre">wrote</span></tt> 字串。這種操作索引的技巧，也可以用在一般的列表上。</p>
+<p>Python 同樣具有常規表示式 (regular expression) 的操作能力，實作在 <tt class="docutils literal"><span class="pre">re</span></tt> 模組裡面。用來執行字串取代是非常方便的。</p>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="id3" name="id3">3.1&nbsp;&nbsp;&nbsp;轉換字元編碼</a></h2>
+<p>Python 有一套處理字元編碼的 <tt class="docutils literal"><span class="pre">codecs</span></tt> 模組；我們以之即可自由地將字元轉換為各種不同的編碼，這是我們在處理多國語言資料時常需處理的問題。然而，字串物件本身就提供有 <tt class="docutils literal"><span class="pre">encode()</span></tt> 與 <tt class="docutils literal"><span class="pre">decode()</span></tt> 方法，我們不必匯入 <tt class="docutils literal"><span class="pre">codecs</span></tt> 模組就可以使用這兩個方法為我們提供的 <tt class="docutils literal"><span class="pre">codecs</span></tt> 能力。</p>
+<p>此處我們得要注意一個事實，那就是 Python 擁有兩種字串物件。其一是我們剛剛一直在處理的 <tt class="docutils literal"><span class="pre">str</span></tt> 字串，而另一種呢，就是對多國語言處理非常重要的 <tt class="docutils literal"><span class="pre">unicode</span></tt> 字串。一般我們用引號或雙引號表示的都是普通的字串 (<tt class="docutils literal"><span class="pre">str</span></tt>)，而用 <tt class="docutils literal"><span class="pre">u&quot;string&quot;</span></tt> 表示的呢，就是 <tt class="docutils literal"><span class="pre">unicode</span></tt> 字串。<tt class="docutils literal"><span class="pre">decode()</span></tt> 能把普通字串解碼成 <tt class="docutils literal"><span class="pre">unicode</span></tt> 物件，而 <tt class="docutils literal"><span class="pre">encode()</span></tt> 則能把 <tt class="docutils literal"><span class="pre">unicode</span></tt> 物件編碼成各種支援的字元集。</p>
+<p>在處理中文編碼之前，我們要為 Python 2.3 安裝相關的外加套件：cjkcodecs 與 iconvcodecs；前者是中日韓專用的 <tt class="docutils literal"><span class="pre">codecs</span></tt> 物件，而後者允許 Python 直接使用 GNU iconv 工具所提供的編碼，作為 <tt class="docutils literal"><span class="pre">codecs</span></tt> 物件。假設我們得把原本是 <tt class="docutils literal"><span class="pre">Big5</span></tt> 的編碼重編為 <tt class="docutils literal"><span class="pre">UTF-8</span></tt>，那麼可以這樣作：</p>
+<pre class="literal-block">
+&gt;&gt;&gt; f = open( &quot;file.big5&quot; )
+&gt;&gt;&gt; s = f.read()
+&gt;&gt;&gt; f.close()
+&gt;&gt;&gt; sp = s.decode('Big5').encode('UTF-8')
+</pre>
+<p>你可以在電腦上找一個內容是 Big5 編碼的檔案，把 locale 改成 UTF-8，然後在 Python 互動式環境下執行以上的指令 (該改的地方請改一下)。最後再用 <tt class="docutils literal"><span class="pre">print</span> <span class="pre">s,</span> <span class="pre">sp</span></tt> 比較一下轉換前後的字串。</p>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id4" name="id4">4&nbsp;&nbsp;&nbsp;檔案系統與目錄</a></h1>
+<p>在 Linux 系統中複製、搬移、刪除檔案與目錄也是管理時常見的動作。Python 提供的 <tt class="docutils literal"><span class="pre">os</span></tt> 模組能處理作業系統所支援的大部分檔案系統操作，另外還有 <tt class="docutils literal"><span class="pre">shutil</span></tt> 模組，提供更高階的操作。</p>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="id5" name="id5">4.1&nbsp;&nbsp;&nbsp;檔案系統操作</a></h2>
+<p>檔案系統與檔案內容是不一樣的議題。我們在進行檔案系統操作時，處理的是搬移 (更名)、複製與刪除，比較沒有機會直接新增檔案。這些動作在 <tt class="docutils literal"><span class="pre">os</span></tt> 與 <tt class="docutils literal"><span class="pre">shutil</span></tt> 模組裡幾乎都有提供；我們應該先匯入這兩個模組。</p>
+<p>若要複製檔案，我們可以這樣作：</p>
+<pre class="literal-block">
+&gt;&gt;&gt; shutil.copy('data.txt', 'data.new.txt')
+</pre>
+<p>刪除檔案則用 <tt class="docutils literal"><span class="pre">os.unlink()</span></tt>：</p>
+<pre class="literal-block">
+&gt;&gt;&gt; os.unlink('data.new.txt')
+</pre>
+<p>搬移 (更名) 有兩種方法：</p>
+<pre class="literal-block">
+&gt;&gt;&gt; os.rename('data.txt', 'data.alter.txt')
+&gt;&gt;&gt; shutil.move('data.alter.txt', 'data.txt')
+</pre>
+<p>第一種方法，若來源檔 (第一個參數) 與目的檔不在同一個檔案系統內 (分割區)，此動作可能會失效 (不同的 Unix 有不同的處理方法)。第二種方法比較高階，無論來源檔與目的檔是否在相同的檔案系統內，都可以使用。</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="id6" name="id6">4.2&nbsp;&nbsp;&nbsp;路徑的處理</a></h2>
+<p>管理系統的時候多半不會只處理當前目錄內的檔案，所以常要對路徑字串進行處理。<tt class="docutils literal"><span class="pre">os.path</span></tt> 模組提供了處理路徑的函式，常用的有：</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">abspath()</span></tt>：接受一個路徑字串，傳回該路徑所代表的絕對路徑。</li>
+<li><tt class="docutils literal"><span class="pre">realpath()</span></tt>：接受一個路徑字串，計算該路徑中包含的符號連結 (symbolic link)，傳回所代表的真正路徑。</li>
+<li><tt class="docutils literal"><span class="pre">split()</span></tt>, <tt class="docutils literal"><span class="pre">dirname()</span></tt>, <tt class="docutils literal"><span class="pre">basename()</span></tt>：<tt class="docutils literal"><span class="pre">split()</span></tt> 接受一個路徑字串，從最後一個路徑項目前切開，分成包含該項目的目錄與該項目名本身，以 tuple 傳回。<tt class="docutils literal"><span class="pre">dirname()</span></tt> 是 <tt class="docutils literal"><span class="pre">split()</span></tt> 傳回值的第一個元素；<tt class="docutils literal"><span class="pre">basename()</span></tt> 是第二個元素。</li>
+<li><tt class="docutils literal"><span class="pre">join()</span></tt>：接受一個路徑列表，把該列表中的每個元素接成一個完整路徑字串後傳回。</li>
+<li><tt class="docutils literal"><span class="pre">splitext()</span></tt>：接受一個路徑字串，分開其副檔名，將主檔名與副檔名用一個 tuple 傳回。</li>
+<li><tt class="docutils literal"><span class="pre">exists()</span></tt>：測試傳入的路徑字串是否存在，傳回布林值。</li>
+<li><tt class="docutils literal"><span class="pre">isfile()</span></tt>, <tt class="docutils literal"><span class="pre">isdir()</span></tt>, <tt class="docutils literal"><span class="pre">islink()</span></tt>, <tt class="docutils literal"><span class="pre">isabs()</span></tt>：分別用來測試所傳入的路徑字串是否為檔案、目錄、符號連結或絕對路徑；傳回布林值。</li>
+</ul>
+<p>實際要使用的時候，大概會像是這樣子：</p>
+<pre class="literal-block">
+&gt;&gt;&gt; os.path.split( &quot;a/b/c&quot; )
+('a/b', 'c')
+&gt;&gt;&gt; os.path.join( &quot;a&quot;, &quot;b&quot;, &quot;c&quot; )
+'a/b/c'
+&gt;&gt;&gt; os.path.splitext( &quot;dir/file.ext&quot; )
+('dir/file', '.ext')
+</pre>
+<p>你可以在你的目錄結構裡，用真正的路徑來試試看！</p>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id7" name="id7">5&nbsp;&nbsp;&nbsp;外部程式呼叫</a></h1>
+<p>許多在 shell 指令稿中要靠呼叫外部程式才能完成的作業，都能用 Python 的內建模組來完成，例如上面提到的字串處理、檔案處理、目錄處理等等。而若遇到 Python 不足的地方，或是有非常特別的操作，當然也可以呼叫外部的程式。</p>
+<p><tt class="docutils literal"><span class="pre">os</span></tt> 模組有一個 <tt class="docutils literal"><span class="pre">system()</span></tt> 函式可以用來呼叫外部程式：</p>
+<pre class="literal-block">
+&gt;&gt;&gt; os.system( 'ls' )
+weekly20051204.doc
+weekly20051211.doc
+0
+&gt;&gt;&gt;
+</pre>
+<p>最後顯示出來的 <tt class="docutils literal"><span class="pre">0</span></tt> 不是 <tt class="docutils literal"><span class="pre">ls</span></tt> 程式的輸出，而是其傳回值。</p>
+<p><tt class="docutils literal"><span class="pre">os.system()</span></tt> 函式能進行最簡單的外部程式呼叫，不能對該程式的輸出入資料進一步處理；如果我們只想簡單執行程式，<tt class="docutils literal"><span class="pre">os.system()</span></tt> 函式將是最佳的選擇。</p>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="id8" name="id8">5.1&nbsp;&nbsp;&nbsp;管線</a></h2>
+<p>當我們也需要對外部程式的輸出入資料進行處理的時候，<tt class="docutils literal"><span class="pre">os.system()</span></tt> 就不夠用了。Python 另外有 <tt class="docutils literal"><span class="pre">popen2</span></tt> 模組，可以讓我們管理外部程式子行程的輸出入管線 (pipe)。在 <tt class="docutils literal"><span class="pre">popen2</span></tt> 模組裡有 <tt class="docutils literal"><span class="pre">popen2()</span></tt>, <tt class="docutils literal"><span class="pre">popen3()</span></tt> 和 <tt class="docutils literal"><span class="pre">popen4()</span></tt> 三個工具函式，分別會重導向子行程的標準輸出入、標準輸出入及錯誤輸出、標準輸出合併錯誤輸出及標準輸入。</p>
+<p>簡單用範例來說明最常用的 <tt class="docutils literal"><span class="pre">popen2()</span></tt> (別忘了先 <tt class="docutils literal"><span class="pre">import</span> <span class="pre">popen2</span></tt> 喔)：</p>
+<pre class="literal-block">
+&gt;&gt;&gt; stdout, stdin = popen2.popen2(&quot;ls&quot;)
+&gt;&gt;&gt; ostr = stdout.read()
+&gt;&gt;&gt; print ostr
+weekly20051204.doc
+weekly20051211.doc
+
+&gt;&gt;&gt;
+</pre>
+<p><tt class="docutils literal"><span class="pre">popen2.popen2()</span></tt> 會傳回連結到 <tt class="docutils literal"><span class="pre">ls</span></tt> 程式輸出入的兩個檔案物件，我們取名為 <tt class="docutils literal"><span class="pre">stdout</span></tt> 與 <tt class="docutils literal"><span class="pre">stdin</span></tt>。呼叫了 <tt class="docutils literal"><span class="pre">popen2.popen2()</span></tt> 之後，外部程式馬上就會執行，然後我們就能從 <tt class="docutils literal"><span class="pre">stdout</span></tt> 檔案物件裡讀出該外部程式的標準輸出資料了。如此一來，該程式的執行結果就不會直接顯示在終端機上，我們可以在 Python 裡面先處理過以後，再決定該怎麼辦。</p>
+<p>如果我們想呼叫的程式也會進行錯誤輸出 (stderr)，而我們想要處理的話，就改用 <tt class="docutils literal"><span class="pre">popen3()</span></tt> 或 <tt class="docutils literal"><span class="pre">popen4()</span></tt> 函式。<tt class="docutils literal"><span class="pre">popen3()</span></tt> 的錯誤輸出會連接至一個獨立的檔案物件，而 <tt class="docutils literal"><span class="pre">popen4()</span></tt> 則會把錯誤輸出一起放到標準輸出所連結的檔案物件裡；你可以視需要使用。</p>
+<div class="note">
+<p class="first admonition-title">註記</p>
+<p class="last">在 Python 2.4 裡有一個新的 <tt class="docutils literal"><span class="pre">subprocess</span></tt> 模組，可以執行所有的外部程式呼叫功能。所以在 Python 2.4 裡不再需要 <tt class="docutils literal"><span class="pre">os</span></tt> 與 <tt class="docutils literal"><span class="pre">popen2</span></tt> 模組裡的相關函式了；當然，舊模組不會消失，所以在 Python 2.4 裡還是可以用 <tt class="docutils literal"><span class="pre">popen2</span></tt>，我們的舊程式不會出問題。</p>
+</div>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id9" name="id9">6&nbsp;&nbsp;&nbsp;網際網路通訊</a></h1>
+<p>Python 內建的程式庫裡就具備相當方便的網際網路通訊功能，不必呼叫外部程式。</p>
+<p>網際網路通訊是個大範圍，其中最常用到的大概數全球資訊網了；我們舉 Zope 應用程式伺服器來作例子。Zope 使用 ZODB 物件資料庫來儲存資料，這個系統會把存取動作紀錄下來，當使用者刪除其中的資料時，資料不會實際刪除，要等到手動壓縮 (pack) 資料庫的時候，才會真正把資料刪除。這個壓縮功能的動作選項是放在 web-based 的 ZMI 裡面，沒有指令行介面；如果我們不想手動連進 ZMI 來執行壓縮，就得寫一個能進行 HTTP 操作的指令稿。</p>
+<p>我們要寫的程式應該具有以下的命令列介面：</p>
+<pre class="literal-block">
+packzope.py -u&lt;URL of Zope server&gt; -d&lt;day&gt; -U&lt;username&gt; -P&lt;password&gt;
+</pre>
+<p>這個 <tt class="docutils literal"><span class="pre">packzope.py</span></tt> 程式要負責用 HTTP 和伺服器溝通，把從命令列取得的使用者名稱和密碼提供給 Zope 伺服器，並且用 GET 方法把要壓縮的天數 (捨棄指定天數前的資料) 告訴 Zope 伺服器。以下是寫好的程式：</p>
+<pre class="literal-block">
+#!/usr/bin/env python
+
+import sys
+import urllib
+
+class parameters:
+  def __init__(self):
+    from optparse import OptionParser, OptionGroup
+    op = OptionParser(
+        usage = &quot;usage: %prog -u URL -d DAYS -U USERNAME -P PASSWORD&quot;,
+        version = &quot;%prog, &quot; + &quot;%s&quot; % __revision__
+        )
+    op.add_option(&quot;-u&quot;, action=&quot;store&quot;, type=&quot;string&quot;, \
+        dest=&quot;url&quot;, \
+        help=&quot;URL of site to open&quot;
+        )
+    op.add_option(&quot;-d&quot;, action=&quot;store&quot;, type=&quot;int&quot;, \
+        dest=&quot;days&quot;, default=1, \
+        help=&quot;erase days before&quot;
+        )
+    op.add_option(&quot;-U&quot;, action=&quot;store&quot;, type=&quot;string&quot;, \
+        dest=&quot;username&quot;, \
+        help=&quot;username&quot;
+        )
+    op.add_option(&quot;-P&quot;, action=&quot;store&quot;, type=&quot;string&quot;, \
+        dest=&quot;password&quot;, \
+        help=&quot;password&quot;
+        )
+    self.op = op
+    (self.options, self.args) = self.op.parse_args()
+params = parameters()
+
+if not params.options.url or \
+   not params.options.username or \
+   not params.options.password :
+  params.op.print_help()
+  sys.exit(1)
+
+url = &quot;%s/Control_Panel/Database/manage_pack?days:float=%d&quot; % \
+     (params.options.url, params.options.days)
+
+class MyOpener(urllib.FancyURLopener):
+  def get_user_passwd(self, host, realm, clear_cache = 0):
+    return params.options.username, params.options.password
+
+def main():
+  try:
+    f = MyOpener().open(url).read()
+    print &quot;Successfully packed ZODB on host %s&quot; % params.options.url
+  except:
+    print &quot;Cannot open URL %s, aborted&quot; % url
+    raise
+
+if __name__ == '__main__':
+  main()
+</pre>
+<p>程式前半段在處理命令行參數 (<tt class="docutils literal"><span class="pre">class</span> <span class="pre">parameters</span></tt>)，而在 <tt class="docutils literal"><span class="pre">main()</span></tt> 函式裡實際進行連線動作。<tt class="docutils literal"><span class="pre">packzope.py</span></tt> 利用 <tt class="docutils literal"><span class="pre">urllib</span></tt> 模組來連結 Zope 伺服器，並利用 subclassing <tt class="docutils literal"><span class="pre">urllib.FancyURLopener</span></tt> 類別來自訂使用者名稱與密碼的輸入。壓縮完畢之後，程式會輸出以下的字樣：</p>
+<pre class="literal-block">
+Successfully packed ZODB on host http://someplace:port
+</pre>
+<p>我們可以把 <tt class="docutils literal"><span class="pre">packzope.py</span></tt> 放到 crontab 裡定期執行。這就是一種自動化網路操作。</p>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id10" name="id10">7&nbsp;&nbsp;&nbsp;結語</a></h1>
+<p>本文藉由討論以 Python 進行 Linux 操作自動化的技巧，對 Python 的應用作了進一步的介紹。當然，在進行任何種類的 Python 程式開發時，都可以參考 Python 的線上說明文件。Dive into Python 是一本容易上手的自由 Python 書籍，你也可以在網路上找到中文譯本。</p>
+<p>在下一期的內容裡，我們要介紹如何用 Pygtk 來撰寫簡單的 GUI 程式。</p>
+</div>
+</div>
+</body>
+</html>

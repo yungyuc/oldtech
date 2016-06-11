@@ -1,0 +1,608 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh_tw" lang="zh_tw">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.4: http://docutils.sourceforge.net/" />
+<title>MERCURIALIZE</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger
+:Contact: goodger@users.sourceforge.net
+:Date: $Date: 2005-06-06 15:09:07 +0200 (Mon, 06 Jun 2005) $
+:Version: $Revision: 3442 $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+*/
+
+/* "! important" is used here to override other ``margin-top`` and
+   ``margin-bottom`` styles that are later in the stylesheet or 
+   more specific.  See http://www.w3.org/TR/CSS1#the-cascade */
+
+body {
+  font-family: Calibri, Georgia, Times New Roman, Times,  Free Times;
+  background-color: #666666;
+}
+
+div.document {
+  background-color: white;
+  clear: both;
+  width: 50em;
+  margin: 0 auto 0 auto;
+  padding: 0.5em;
+  border: 2px ridge black;
+}
+
+.first {
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em;
+  border-top: 2px solid #888888;
+  border-bottom: 2px solid #888888;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin-left: 1em ;
+  border: medium outset ; 
+  padding: 1em ;
+  background-color: #ffffee ;
+  /* width: 40% ; */
+  /* float: right ; */
+ /*  clear: right */ }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+div.section h1, div.section h2, div.section h3, 
+div.section h4, div.section h5, div.section h6 {
+  padding-left: 0.3em;
+  padding-bottom: 0.3em;
+  border-left: 2px solid gray;
+  border-bottom: 2px solid gray;
+}
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em; }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left {
+  clear: left }
+
+img.align-right {
+  clear: right }
+
+img.borderless {
+  border: 0 }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font-family: serif ;
+  font-size: 100% }
+
+pre.line-block {
+  font-family: serif ;
+  font-size: 100% }
+
+pre.literal-block, pre.doctest-block {
+  white-space: pre-wrap;       /* css-3 */
+  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word;       /* Internet Explorer 5.5+ */
+  margin-left: 2em ;
+  margin-right: 2em ;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  padding-left: 1em;
+  padding-right: 1em;
+  border: 1px dotted black;
+}
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid thin gray }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  border-spacing: 0;
+  border: 1 solid black;
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-top: solid thin black;
+  border-left: solid thin black }
+
+table.footnote td.label a {
+  text-decoration: none;
+}
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  border: 0; 
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+tt.docutils {
+}
+
+tt.ltst {
+  font-weight: bold;
+}
+
+tt.ltem {
+  font-style: italic;
+}
+
+ul.auto-toc {
+  list-style-type: none }
+
+/* vim: set ai et nu sw=2 ts=2: */
+
+</style>
+</head>
+<body>
+<div class="document" id="mercurialize">
+<h1 class="title">MERCURIALIZE</h1>
+<table class="docinfo" frame="void" rules="none">
+<col class="docinfo-name" />
+<col class="docinfo-content" />
+<tbody valign="top">
+<tr class="field"><th class="docinfo-name">author:</th><td class="field-body">Yung-Yu Chen (yungyuc) <a class="reference" href="http://blog.seety.org/everydaywork/">http://blog.seety.org/everydaywork/</a> &lt;<a class="reference" href="mailto:yyc&#64;seety.org">yyc&#64;seety.org</a>&gt;</td>
+</tr>
+<tr class="field"><th class="docinfo-name">copyright:</th><td class="field-body">© 2007, Creative Common licensed.</td>
+</tr>
+</tbody>
+</table>
+<div class="section">
+<h1><a id="id1" name="id1">預設立場</a></h1>
+<ul class="simple">
+<li>RCS or CVS or SVN</li>
+<li>了解歷史的重要性</li>
+<li>明白合作的價值</li>
+</ul>
+</div>
+<div class="section">
+<h1><a id="phases" name="phases">2 phases</a></h1>
+<ul class="simple">
+<li>唬爛</li>
+<li>(台上不 demo，台下來玩耍)</li>
+</ul>
+</div>
+<div class="section">
+<h1><a id="rcscvssvn" name="rcscvssvn">RCSCVSSVN</a></h1>
+<ul class="simple">
+<li>File based.</li>
+<li>File set based.</li>
+<li>Directory based.</li>
+</ul>
+<p>通通都是 centralized。</p>
+</div>
+<div class="section">
+<h1><a id="id2" name="id2">管理重點</a></h1>
+<p>努力 coding 的時候：</p>
+<ul class="simple">
+<li>commit</li>
+<li>diff</li>
+<li>log</li>
+</ul>
+<p>努力 debug 的時候：</p>
+<ul class="simple">
+<li>branch</li>
+<li>tag</li>
+<li>revision</li>
+</ul>
+</div>
+<div class="section">
+<h1><a id="bad-points-of-centrialized-scm" name="bad-points-of-centrialized-scm">Bad Points of Centrialized SCM</a></h1>
+<ul class="simple">
+<li>大家都要抓得到貯庫。<ul>
+<li>沒有網路便無法管理。</li>
+<li>貯庫是輸出入瓶頸。</li>
+</ul>
+</li>
+<li>只是壞處，不是<strong>絕對的壞處</strong>。<ul>
+<li>不討論 workaround。</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section">
+<h1><a id="decentralized-scm" name="decentralized-scm">Decentralized SCM</a></h1>
+<p><a class="reference" href="http://www.selenic.com/mercurial/wiki/index.cgi/Mercurial">http://www.selenic.com/mercurial/wiki/index.cgi/Mercurial</a></p>
+<ul class="simple">
+<li>由 changeset 組成的檔案系統。<ul>
+<li>每個 changeset 都有一個 hash 過的 uid。不會打架。</li>
+</ul>
+</li>
+<li>所有貯庫均獨立運作。</li>
+<li>各貯庫間用 pull push 溝通。<ul>
+<li>注意：每個 changeset 都具有獨立性。</li>
+</ul>
+</li>
+<li>CSCM 提供 working copy，DSCM 也提供，</li>
+<li><strong>DSCM 多提供了貯庫</strong>。</li>
+</ul>
+</div>
+<div class="section">
+<h1><a id="id3" name="id3">MERCURIALIZE</a></h1>
+<ul class="simple">
+<li><a class="reference" href="http://www.selenic.com/mercurial/wiki/index.cgi/RepositoryConversion">貯庫轉換</a> OK for SVN, CVS, BZR, GIT, DARCS (by tailor)。</li>
+<li>TortoiseHg (pre-alpha)。</li>
+<li>也有像 svk 一樣的 <a class="reference" href="http://cheeseshop.python.org/pypi/hgsvn/">hgsvn</a> (alpha)。</li>
+</ul>
+</div>
+<div class="section">
+<h1><a id="id5" name="id5">灌水銀</a></h1>
+<ul class="simple">
+<li><a class="reference" href="http://peak.telecommunity.com/DevCenter/EasyInstall#installation-instructions">安裝</a> <a class="reference" href="http://peak.telecommunity.com/DevCenter/setuptools">setuptools</a>。</li>
+<li><tt class="docutils literal"><span class="pre">easy_install</span> <span class="pre">mercurial</span></tt></li>
+<li>如果在 windows 下，可安裝 <a class="reference" href="http://sourceforge.net/projects/pywin32/">PyWin32</a>，這樣 <tt class="docutils literal"><span class="pre">hg</span> <span class="pre">clone</span></tt> 就會用 NTFS 的 hardlink。<ul>
+<li>還要<a class="reference" href="http://www.selenic.com/mercurial/wiki/index.cgi/MergeProgram">找個 merge 程式</a>來用。</li>
+<li>可以偷用 TortoiseMerge。</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section">
+<h1><a id="svn" name="svn">和 SVN 只差在貯庫放哪裡</a></h1>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">hg</span> <span class="pre">init</span> <span class="pre">repo</span></tt></p>
+<ul class="simple">
+<li>會建個叫作 <tt class="docutils literal"><span class="pre">repo</span></tt> 的目錄</li>
+<li>裡面有個 <tt class="docutils literal"><span class="pre">.hg</span></tt> 目錄。它就是貯庫。</li>
+<li>不像 SVN 還要另外建。</li>
+</ul>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">echo</span> <span class="pre">'print</span> <span class="pre">&quot;Hello,</span> <span class="pre">world.&quot;'</span> <span class="pre">&gt;</span> <span class="pre">test.py</span></tt></p>
+<pre class="literal-block">
+C:\worktmp\testrepo&gt;hg add
+adding test.py
+</pre>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">hg</span> <span class="pre">ci</span> <span class="pre">-m</span> <span class="pre">&quot;Add</span> <span class="pre">a</span> <span class="pre">file&quot;</span></tt></p>
+</li>
+</ul>
+</div>
+<div class="section">
+<h1><a id="id8" name="id8">取用他人貯庫</a></h1>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">hg</span> <span class="pre">clone</span> <span class="pre">blahblah</span></tt></p>
+<pre class="literal-block">
+C:\worktmp&gt;hg clone http://hg.seety.org/software/bambook
+destination directory: bambook
+requesting all changes
+adding changesets
+adding manifests
+adding file changes
+added 51 changesets with 185 changes to 76 files
+59 files updated, 0 files merged, 0 files removed, 0 files unresolved
+</pre>
+</li>
+</ul>
+</div>
+<div class="section">
+<h1><a id="id9" name="id9">貯庫間溝通</a></h1>
+<ul class="simple">
+<li>先 clone：把別的貯庫拉回來。</li>
+<li>再 pull：從來源貯庫拉回新資訊。</li>
+<li>工作之後再 push：把本地貯庫的變更推給來源貯庫。</li>
+</ul>
+</div>
+<div class="section">
+<h1><a id="id10" name="id10">變更本地貯庫</a></h1>
+<ul class="simple">
+<li>ci：把 working copy 變更記入本地貯庫。</li>
+<li>up：把貯庫的變更套進 working copy。</li>
+<li>merge：合併 changeset。</li>
+</ul>
+</div>
+<div class="section">
+<h1><a id="commit" name="commit">commit</a></h1>
+<p>太難了，跳過。</p>
+</div>
+<div class="section">
+<h1><a id="merge" name="merge">merge</a></h1>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">hg</span> <span class="pre">merge;</span> <span class="pre">hg</span> <span class="pre">commit</span> <span class="pre">-m</span> <span class="pre">&quot;Merged</span> <span class="pre">blahblah.&quot;</span></tt></li>
+<li>噗的一聲就好了。<ul>
+<li>為了避免麻煩，沒必要的話我們不會在兩處同時修改同一個原始碼檔案。</li>
+</ul>
+</li>
+<li>貯庫裡出現兩個 head 時就要 merge。(除非....</li>
+</ul>
+</div>
+<div class="section">
+<h1><a id="branches-and-tags" name="branches-and-tags">branches and tags</a></h1>
+<p>和 SVN 不一樣！</p>
+<ul class="simple">
+<li>不是目錄，而是 meta information。</li>
+<li>各 branches 間不主動 merge。<ul>
+<li>貯庫允許 branch 有自己的 head，不必和別人 merge。</li>
+<li>不過單個 branch 裡若出現了兩個 head，還是得要 merge 才能繼續長。</li>
+</ul>
+</li>
+<li>貯庫本身也可視為 branch。<ul>
+<li>branch 出去的貯庫和 mainline branch 獨立作業。</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section">
+<h1><a id="id11" name="id11">推回去</a></h1>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">hg</span> <span class="pre">push</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">hg</span> <span class="pre">push</span> <span class="pre">http://the.host/of/the/repository/</span></tt></li>
+<li>都可以。</li>
+<li>所以不是一定要推回「原來那個貯庫」。</li>
+</ul>
+</div>
+<div class="section">
+<h1><a id="pull-based-operation" name="pull-based-operation">pull-based operation</a></h1>
+<ul class="simple">
+<li>專案管理員建立公開的共用貯庫，只讓管理員 push。</li>
+<li>所有開發人員的貯庫都 read-only。</li>
+<li>大家改好程式 checkin、push 到自己的貯庫。</li>
+<li>專案管理員決定把誰的哪些變更 pull 到公開的共用貯庫。</li>
+<li>專案管理員進行發佈工作。</li>
+</ul>
+</div>
+<div class="section">
+<h1><a id="hg-view-hgk" name="hg-view-hgk">hg view (hgk)</a></h1>
+<p>有圖就是比較棒。</p>
+<ul class="simple">
+<li>畫出貯庫的歷史演進。</li>
+<li>hgk 工具是要角。<ul>
+<li>以 TCL/TK script 撰寫。</li>
+<li>在 Windows 下請安裝 ActiveTcl。<ul>
+<li>記得改設定。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>如果用 wx 改寫一個一定很酷。</li>
+</ul>
+</div>
+<div class="section">
+<h1><a id="id12" name="id12">建立共享貯庫</a></h1>
+<ul class="simple">
+<li>mercurial 內建 CGI 支援。<ul>
+<li>自己的貯庫用 CGI 就好，省得麻煩。</li>
+<li>佈署零煩惱；有支援 Python 的 shared hosting 都可以用。</li>
+<li>喜歡的話也可以用 FastCGI。</li>
+</ul>
+</li>
+<li>允許從客戶端 pull 和 push。</li>
+<li>使用 HTTP basic authentication 資訊。</li>
+</ul>
+</div>
+<div class="section">
+<h1><a id="other-mercurial-features" name="other-mercurial-features">other mercurial features</a></h1>
+<ul class="simple">
+<li>貯庫不能放空目錄。<ul>
+<li>mercurial 的 changeset 只記檔案資訊。</li>
+<li>真要加空目錄，得補個 placeholder 檔案。</li>
+</ul>
+</li>
+<li>Patch 管理：mercurial queue。<ul>
+<li>mercurial queue 就是在主貯庫之外，專門給 patch 建的貯庫。</li>
+</ul>
+</li>
+<li>Trac 0.10/11 已經有可用的 mercurial plugin。</li>
+</ul>
+</div>
+<div class="section">
+<h1><a id="id13" name="id13">參考</a></h1>
+<ul class="simple">
+<li>很棒的 mercurial 書：<a class="reference" href="http://hgbook.red-bean.com/">http://hgbook.red-bean.com/</a> (未完成)</li>
+<li>主網站 (wiki)：<a class="reference" href="http://www.selenic.com/mercurial/wiki/index.cgi/Mercurial">http://www.selenic.com/mercurial/wiki/index.cgi/Mercurial</a></li>
+</ul>
+</div>
+<div class="section">
+<h1><a id="end" name="end">END</a></h1>
+<ul class="simple">
+<li>謝謝</li>
+</ul>
+<div align="center" class="align-center"><img alt="MATERIALIZE!!" class="align-center" src="mercurial_tossug200707_seminar_pix/materialize.jpg" /></div>
+<ul class="simple">
+<li>大家</li>
+</ul>
+<!-- vim: set ai et nu: -->
+</div>
+</div>
+</body>
+</html>

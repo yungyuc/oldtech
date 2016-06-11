@@ -1,0 +1,621 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh_tw" lang="zh_tw">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.4: http://docutils.sourceforge.net/" />
+<title>以 Proftpd 架設 FTP 伺服器</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger
+:Contact: goodger@users.sourceforge.net
+:Date: $Date: 2005-06-06 15:09:07 +0200 (Mon, 06 Jun 2005) $
+:Version: $Revision: 3442 $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+*/
+
+/* "! important" is used here to override other ``margin-top`` and
+   ``margin-bottom`` styles that are later in the stylesheet or 
+   more specific.  See http://www.w3.org/TR/CSS1#the-cascade */
+
+body {
+  font-family: Calibri, Georgia, Times New Roman, Times,  Free Times;
+  background-color: #666666;
+}
+
+div.document {
+  background-color: white;
+  clear: both;
+  width: 50em;
+  margin: 0 auto 0 auto;
+  padding: 0.5em;
+  border: 2px ridge black;
+}
+
+.first {
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em;
+  border-top: 2px solid #888888;
+  border-bottom: 2px solid #888888;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin-left: 1em ;
+  border: medium outset ; 
+  padding: 1em ;
+  background-color: #ffffee ;
+  /* width: 40% ; */
+  /* float: right ; */
+ /*  clear: right */ }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+div.section h1, div.section h2, div.section h3, 
+div.section h4, div.section h5, div.section h6 {
+  padding-left: 0.3em;
+  padding-bottom: 0.3em;
+  border-left: 2px solid gray;
+  border-bottom: 2px solid gray;
+}
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em; }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left {
+  clear: left }
+
+img.align-right {
+  clear: right }
+
+img.borderless {
+  border: 0 }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font-family: serif ;
+  font-size: 100% }
+
+pre.line-block {
+  font-family: serif ;
+  font-size: 100% }
+
+pre.literal-block, pre.doctest-block {
+  white-space: pre-wrap;       /* css-3 */
+  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word;       /* Internet Explorer 5.5+ */
+  margin-left: 2em ;
+  margin-right: 2em ;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  padding-left: 1em;
+  padding-right: 1em;
+  border: 1px dotted black;
+}
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid thin gray }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  border-spacing: 0;
+  border: 1 solid black;
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-top: solid thin black;
+  border-left: solid thin black }
+
+table.footnote td.label a {
+  text-decoration: none;
+}
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  border: 0; 
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+tt.docutils {
+}
+
+tt.ltst {
+  font-weight: bold;
+}
+
+tt.ltem {
+  font-style: italic;
+}
+
+ul.auto-toc {
+  list-style-type: none }
+
+/* vim: set ai et nu sw=2 ts=2: */
+
+</style>
+</head>
+<body>
+<div class="document" id="proftpd-ftp">
+<h1 class="title">以 Proftpd 架設 FTP 伺服器</h1>
+<table class="docinfo" frame="void" rules="none">
+<col class="docinfo-name" />
+<col class="docinfo-content" />
+<tbody valign="top">
+<tr class="field"><th class="docinfo-name">author:</th><td class="field-body">Yung-Yu Chen (yungyuc) <a class="reference" href="http://blog.seety.org/everydaywork/">http://blog.seety.org/everydaywork/</a> &lt;<a class="reference" href="mailto:yyc&#64;seety.org">yyc&#64;seety.org</a>&gt;</td>
+</tr>
+<tr class="field"><th class="docinfo-name">copyright:</th><td class="field-body">© 2006, all rights reserved</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="id1" name="id1">目錄</a></p>
+<ul class="auto-toc simple">
+<li><a class="reference" href="#ftp" id="id16" name="id16">1&nbsp;&nbsp;&nbsp;FTP 的功能與歷史</a></li>
+<li><a class="reference" href="#id4" id="id17" name="id17">2&nbsp;&nbsp;&nbsp;為使用者開啟 FTP 支援</a></li>
+<li><a class="reference" href="#id7" id="id18" name="id18">3&nbsp;&nbsp;&nbsp;命令列 FTP 客戶端</a></li>
+<li><a class="reference" href="#id8" id="id19" name="id19">4&nbsp;&nbsp;&nbsp;建立匿名的公開 FTP 服務</a></li>
+<li><a class="reference" href="#proftpd" id="id20" name="id20">5&nbsp;&nbsp;&nbsp;ProFTPd 虛擬主機</a><ul class="auto-toc">
+<li><a class="reference" href="#id13" id="id21" name="id21">5.1&nbsp;&nbsp;&nbsp;以網域名稱分隔 FTP</a></li>
+<li><a class="reference" href="#ip-ftp" id="id22" name="id22">5.2&nbsp;&nbsp;&nbsp;以 IP 分隔 FTP</a></li>
+<li><a class="reference" href="#id14" id="id23" name="id23">5.3&nbsp;&nbsp;&nbsp;用通訊埠區分 FTP</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#id15" id="id24" name="id24">6&nbsp;&nbsp;&nbsp;結語</a></li>
+</ul>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="ftp" name="ftp">1&nbsp;&nbsp;&nbsp;FTP 的功能與歷史</a></h1>
+<p>FTP (File Transfer Protocol) 也是一種很長壽的網際網路服務。最初要在 Unix 系統間跨主機傳檔，通常是依靠一個叫作 uucp (Unix-to-Unix copy) 的程式；不過 uucp 只能作單檔傳輸，而且只有 Unix 能用。所以在網際網路的早期發展階段，FTP 就已經被設計了出來，並且成為檔案主要傳輸方式。</p>
+<p>FTP 這種應用採取主從式的架構。通常是有一個 FTP 伺服器，其中存放了要伺服的檔案，而使用者以 FTP 客戶端軟體連接上 FTP 伺服器來要求檔案，進行傳送。FTP 本身的設計就以「傳輸」檔案為主，所以基本上它與後來的 NFS 或 Samba 等檔案伺服系統不同，並不允許使用者對伺服器上的檔案進行隨機存取<a class="footnote-reference" href="#id3" id="id2" name="id2"><sup>1</sup></a>。</p>
+<table class="docutils footnote" frame="void" id="id3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2" name="id3">[1]</a></td><td>但某些軟體仍然提供編輯 FTP 上檔案的功能，這些軟體通常是文字編輯器。</td></tr>
+</tbody>
+</table>
+<p>今日全球資訊網的風行，多少影響了 FTP 的使用率；有些以前用 FTP 提供下載的檔案，為了方便和網頁作整合，都改成了 HTTP。不過 FTP 仍然是一套適合網際網路檔案傳輸的協定，遇到有大量檔案要提供的時候，常常還是得使用 FTP 伺服器。</p>
+<p>本章我們要探討如何使用 ProFTPd 這一套 FTP 伺服器軟體。過去 FTP 伺服器一直是網路服務主機的一大安全性漏洞，原因在於舊式的 FTP 伺服軟體使用作業系統內的系統工具來實作 FTP 的功能；譬如直接用主機系統內的 <tt class="docutils literal"><span class="pre">/bin/ls</span></tt> 列出檔案系統的內容。等到 ProFTPd 和 vsFTPd 此類強調安全性的 FTP 伺服軟體出現後，情況才較為改觀。</p>
+<p>ProFTPd 的 &quot;Pro&quot; 代表 &quot;Professional&quot;。這套軟體系統的組態設定師法 Apache，所有的設定指令都標籤化，也設計有與 <tt class="docutils literal"><span class="pre">.htaccess</span></tt> 對等的目錄設定檔 <tt class="docutils literal"><span class="pre">.ftpaccess</span></tt>。另外，ProFTPd 支援匿名 FTP、虛擬主機，以及多種認證方式。ProFTPd 也和 Apache 一樣有許多額外的模組，提供了多樣化的延伸功能。</p>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id4" name="id4">2&nbsp;&nbsp;&nbsp;為使用者開啟 FTP 支援</a></h1>
+<p>首先我們要在 Debian 上安裝 ProFTPd：</p>
+<pre class="literal-block">
+$ apt-get install proftpd
+</pre>
+<p>安裝時 dpkg 會詢問要以 Inetd 或 Standalone 方式啟動；Inetd 是比較耗費系統資源，反應也比較慢的方式，所以一般會選用 Standalone 模式，讓 ProFTPd 自行管理連線。</p>
+<p>預設的 <tt class="docutils literal"><span class="pre">proftpd.conf</span></tt> 如下 (被註解掉的部分未列出)<a class="footnote-reference" href="#id6" id="id5" name="id5"><sup>2</sup></a>：</p>
+<table class="docutils footnote" frame="void" id="id6" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id5" name="id6">[2]</a></td><td>和 Apache 一樣，ProFTPd 組態檔的註解符號是 <tt class="docutils literal"><span class="pre">#</span></tt>；所有在 <tt class="docutils literal"><span class="pre">#</span></tt> 這個符號之後的設定均不作用。</td></tr>
+</tbody>
+</table>
+<pre class="literal-block">
+ServerName                      &quot;Debian&quot;
+ServerType                      standalone
+DeferWelcome                    off
+MultilineRFC2228                on
+DefaultServer                   on
+ShowSymlinks                    on
+TimeoutNoTransfer               600
+TimeoutStalled                  600
+TimeoutIdle                     1200
+DisplayLogin                    welcome.msg
+DisplayFirstChdir               .message
+ListOptions                     &quot;-l&quot;
+DenyFilter                      \*.*/
+Port                            21
+MaxInstances                    30
+User                            nobody
+Group                           nogroup
+Umask                           022  022
+AllowOverwrite                  on
+</pre>
+<p>這樣子的組態只允許在系統上有帳號的使用者登入，也就是說，將 ProFTPd 當作提供使用者的檔案窗口來使用。當使用者以自己的帳號登入後，一般會被直接送進家目錄。</p>
+<p>讓我們來看看其中的一些基本設定 (一般來說設為 <tt class="docutils literal"><span class="pre">on</span></tt> 表示開啟設定；設為 <tt class="docutils literal"><span class="pre">off</span></tt> 表示關閉設定)：</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">ServerName</span></tt>：設定伺服器的名稱；這是一個字串。第一行設作 &quot;Debian&quot;，我們可以自行指定喜歡的名字。</li>
+<li><tt class="docutils literal"><span class="pre">ServerType</span></tt>：可以設為 <tt class="docutils literal"><span class="pre">inetd</span></tt> 與 <tt class="docutils literal"><span class="pre">standlone</span></tt> 其中之一，第 2 行這裡會是我們在 <tt class="docutils literal"><span class="pre">apt-get</span></tt> 裡所設定的啟動型態。</li>
+<li><tt class="docutils literal"><span class="pre">DefaultServer</span></tt>：設定為預設伺服器；如果有建立虛擬伺服器的話，所有未被分配到虛擬伺服器內的連結，會回到被設定為預設伺服器的組態中。</li>
+<li><tt class="docutils literal"><span class="pre">ShowSymlinks</span></tt>：設定符號連結 (symbolic link) 的顯示。</li>
+<li><tt class="docutils literal"><span class="pre">DisplayLogin</span></tt>：指定一個當使用者登入時會顯示給客戶端的 ASCII 文字檔。可以用相對或絕對路徑來指定；使用相對路徑時會相對於初始目錄。</li>
+<li><tt class="docutils literal"><span class="pre">DisplayFirstChdir</span></tt>：指定當使用者首次切換至目錄時，會顯示給客戶端的 ASCII 文字檔。</li>
+<li><tt class="docutils literal"><span class="pre">ListOptions</span></tt>：指定使用者列出 FTP 目錄時的格式；以 <tt class="docutils literal"><span class="pre">ls</span></tt> 的參數來表示。</li>
+<li><tt class="docutils literal"><span class="pre">DenyFilter</span></tt>：指定 FTP 指令裡禁止使用的字串，格式為常規表示式。第 13 行的設定 <tt class="docutils literal"><span class="pre">\*.*/</span></tt> 禁止了萬用字元。</li>
+<li><tt class="docutils literal"><span class="pre">Port</span></tt>：指定伺服器使用的通訊埠，21 是 FTP 的標準通訊埠。如果把 <tt class="docutils literal"><span class="pre">Port</span></tt> 設為 0，表示關閉伺服器。</li>
+<li><tt class="docutils literal"><span class="pre">MaxInstances</span></tt>：指定伺服器可產生子行程的最大值。雖然它不等於，但會影響到可同時連線客戶端的最大數目。</li>
+<li><tt class="docutils literal"><span class="pre">User</span></tt>, <tt class="docutils literal"><span class="pre">Group</span></tt>：指定 ProFTPd 伺服器執行所使用的帳號與群組。第 16, 17 行設為作業系統裡權限最低的 <tt class="docutils literal"><span class="pre">nobody</span></tt>, <tt class="docutils literal"><span class="pre">nogroup</span></tt>。</li>
+<li><tt class="docutils literal"><span class="pre">Umask</span></tt>：指定新建檔案 (與目錄) 的權限。這個指令後可接一個或兩個 umask 參數，第一個指定檔案的 umask；第二個指定目錄的 umask。這裡的 umask 與 shell 裡的意義相同，而第 18 行將檔案與目錄的 umask 都設成了 022。</li>
+<li><tt class="docutils literal"><span class="pre">AllowOverwrite</span></tt>：允許覆寫已存在的檔案。</li>
+</ul>
+<p>其它沒有提到的指令此時並不是那麼重要，若有必要，我們之後會再討論。</p>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id7" name="id7">3&nbsp;&nbsp;&nbsp;命令列 FTP 客戶端</a></h1>
+<p>為了測試剛剛建立的 ProFTPd 伺服器，先來安裝 Debian 下的命令列客戶端程式。</p>
+<p>我們使用 <tt class="docutils literal"><span class="pre">ncftp</span></tt> (niceftp)：</p>
+<pre class="literal-block">
+$ apt-get install ncftp
+</pre>
+<p>以 <tt class="docutils literal"><span class="pre">ncftp</span></tt> 用自己的帳號登入伺服器，要加上 <tt class="docutils literal"><span class="pre">-u</span></tt> 參數：</p>
+<pre class="literal-block">
+$ ncftp -u username localhost
+</pre>
+<p>我們登入本機伺服器，故拿 <tt class="docutils literal"><span class="pre">localhost</span></tt> 當主機名稱即可。輸入指令後，伺服器會詢問我們密碼：</p>
+<pre class="literal-block">
+NcFTP 3.1.8 (Jul 27, 2004) by Mike Gleason (http://www.NcFTP.com/contact/).
+Connecting to 127.0.0.1...
+ProFTPD 1.2.10 Server (Debian) [127.0.0.1]
+Logging in...
+Password requested by 127.0.0.1 for user &quot;username&quot;.
+
+    Password required for username.
+
+Password:
+</pre>
+<p>密碼的輸入會以 <tt class="docutils literal"><span class="pre">*</span></tt> 回應在螢幕上；如果密碼輸入正確，即可登入系統：</p>
+<pre class="literal-block">
+User username logged in.
+Logged in to localhost.
+ncftp /home/username &gt;
+</pre>
+<p>在瀏覽 FTP 伺服器的時候，最常用的就是 <tt class="docutils literal"><span class="pre">ls</span></tt> 指令：</p>
+<pre class="literal-block">
+ncftp /home/username &gt; ls
+collect/   etc/       Mail/      OpenFOAM/  var/       work/
+Desktop/   GNUstep/   mbox       tmp/       windows/
+ncftp /home/username &gt;
+</pre>
+<p>我們可以看到自己的家目錄。</p>
+<p>除了 <tt class="docutils literal"><span class="pre">ls</span></tt> 之外，還有一些指令是操作 FTP 的時候會用到的：</p>
+<ol class="arabic simple">
+<li><tt class="docutils literal"><span class="pre">cd</span> <span class="pre">&lt;dirname&gt;</span></tt>：切換伺服器上的目錄，我們用這個指令來巡遊於伺服器端；和 Unix shell 一樣，&quot;<tt class="docutils literal"><span class="pre">..</span></tt>&quot; 代表上一層目錄。</li>
+<li><tt class="docutils literal"><span class="pre">get</span> <span class="pre">&lt;filename&gt;</span></tt>：從伺服器下載檔案至本地。</li>
+</ol>
+<p>3, <tt class="docutils literal"><span class="pre">put</span> <span class="pre">&lt;localfilename&gt;</span></tt>：將本地的檔案上載至伺服器</p>
+<ol class="arabic simple" start="4">
+<li><tt class="docutils literal"><span class="pre">rm</span> <span class="pre">&lt;filename&gt;</span></tt>：刪除伺服器上的檔案。</li>
+<li><tt class="docutils literal"><span class="pre">mkdir</span> <span class="pre">&lt;dirname&gt;</span></tt>：在伺服器上建立目錄。</li>
+<li><tt class="docutils literal"><span class="pre">rmdir</span> <span class="pre">&lt;dirname&gt;</span></tt>：刪除伺服器上的目錄。</li>
+</ol>
+<p><tt class="docutils literal"><span class="pre">ncftp</span></tt> 是比較複雜的 FTP 客戶端程式，有些極簡風格的 FTP 客戶端只允許你直接用 FTP 伺服器的指令來操作，但 <tt class="docutils literal"><span class="pre">ncftp</span></tt> 則提供了比較直覺、shell-like 的指令。``ncftp`` 的指令與 bash 很類似，使用起來相當方便。</p>
+<p>要上傳檔案的時候，我們可能會遇到一個問題：如何找到要上傳的檔案？在 <tt class="docutils literal"><span class="pre">ls</span></tt>, <tt class="docutils literal"><span class="pre">cd</span></tt> 等指令前加上 &quot;<tt class="docutils literal"><span class="pre">l</span></tt>&quot; 即可針對本地目錄進行操作，所以我們可以切換到檔案所在的位置，檢視檔名，再用 <tt class="docutils literal"><span class="pre">put</span></tt> 上傳。</p>
+<p>如果我們想連線到另外的匿名 FTP 伺服器，把 <tt class="docutils literal"><span class="pre">ncftp</span></tt> 後的 <tt class="docutils literal"><span class="pre">-u</span></tt> 參數拿掉即可。</p>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id8" name="id8">4&nbsp;&nbsp;&nbsp;建立匿名的公開 FTP 服務</a></h1>
+<p>除了為主機上的使用者提供檔案傳輸服務之外，FTP 也常用於為廣大的外部使用者提供檔案。因為要服務的外部使用者並不會擁有主機上的帳號 (如果是完全公開的伺服器，通常我們也不想要為他們管理額外的帳號)，所以會以「匿名 (anonymous)」來登入伺服器。故此，公開的 FTP 服務通常都是匿名的，而匿名伺服器多半就會公開提供檔案。</p>
+<p>在 ProFTPd 中是以 <tt class="docutils literal"><span class="pre">&lt;Anonymous&gt;</span></tt> 區塊來設定匿名服務，這個區塊指令的格式為：</p>
+<pre class="literal-block">
+&lt;Anonymous rootdir&gt;
+...
+&lt;/Anonymous&gt;
+</pre>
+<p>起始標籤中的 <tt class="docutils literal"><span class="pre">rootdir</span></tt> 為匿名服務所使用的根目錄位置；一般系統使用者登入時會進入該使用者的家目錄，而匿名登入時則會進入這裡所指定的目錄，並且textbf{只能}存取在這個目錄之下的檔案系統結構。我們通常會把 <tt class="docutils literal"><span class="pre">rootdir</span></tt> 設為主機系統中，一個代表著匿名帳號的使用者的家目錄；在 Debian 上預設為 <tt class="docutils literal"><span class="pre">ftp</span></tt> 這個使用者，而進行</p>
+<pre class="literal-block">
+&lt;Anonymous ~ftp&gt;
+</pre>
+<p>這樣的設定，指定以 <tt class="docutils literal"><span class="pre">ftp</span></tt> 的家目錄作為匿名 FTP 的根目錄。</p>
+<p>Debian 預設的組態檔並沒有把匿名伺服器打開，但相關的指令都寫成註解了。我們可以把這些註解打開，或是把以下我整理出來的這些設定加回去<a class="footnote-reference" href="#id10" id="id9" name="id9"><sup>3</sup></a>：</p>
+<table class="docutils footnote" frame="void" id="id10" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id9" name="id10">[3]</a></td><td>我整理的這些設定完全是從 Debian 的預設組態檔抄出來的，只是經過編排。</td></tr>
+</tbody>
+</table>
+<pre class="literal-block">
+&lt;Anonymous ~ftp&gt;
+  User  ftp
+  Group nogroup
+  UserAlias anonymous ftp
+  DirFakeUser on ftp
+  DirFakeGroup on ftp
+  RequireValidShell off
+  MaxClients 10
+  DisplayLogin welcome.msg
+  DisplayFirstChdir .message
+  &lt;Directory *&gt;
+    &lt;Limit WRITE&gt;
+      DenyAll
+    &lt;/Limit&gt;
+  &lt;/Directory&gt;
+  # &lt;Directory incoming&gt;
+  #   Umask 022 022
+  #   &lt;Limit READ WRITE&gt;
+  #     DenyAll
+  #   &lt;/Limit&gt;
+  #   &lt;Limit STOR&gt;
+  #     AllowAll
+  #   &lt;/Limit&gt;
+  # &lt;/Directory&gt;
+&lt;/Anonymous&gt;
+</pre>
+<p>這裡面有兩個設定指令已經在前面看過了：``DisplayLogin``, <tt class="docutils literal"><span class="pre">DisplayFirstChdir</span></tt>，故不再贅述。</p>
+<p>這些指令可以分成兩組，第一組用於設定匿名伺服器本身的組態：</p>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">User</span></tt>, <tt class="docutils literal"><span class="pre">Group</span></tt>：指定匿名伺服器執行時的帳號與群組身份。使用者在存取時，會套用成這裡指定的帳號與群組所具備的權限。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">UserAlias</span> <span class="pre">&lt;login&gt;</span> <span class="pre">&lt;id&gt;</span></tt>：這個指令把 <tt class="docutils literal"><span class="pre">&lt;login&gt;</span></tt> 這個名稱對應到 <tt class="docutils literal"><span class="pre">&lt;id&gt;</span></tt> 去，亦即當匿名用戶以 <tt class="docutils literal"><span class="pre">&lt;login&gt;</span></tt> 登入的時候，會被當成 <tt class="docutils literal"><span class="pre">&lt;id&gt;</span></tt>。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">DirFakeUser</span></tt>, <tt class="docutils literal"><span class="pre">DirFakeGroup</span></tt>：這兩個指令用來隱藏開放目錄內檔案的真正擁有者與群組。如範例第 5, 6 行的設定，會把匿名伺服器內的擁有者與群組指定為 <tt class="docutils literal"><span class="pre">ftp:ftp</span></tt>，避免被外人得知系統上的使用者名稱，增加入侵者猜測系統帳號與密碼的難度。若是不想要使用這個功能，可以改下</p>
+<pre class="literal-block">
+DirFakeUser off
+DirFakeGroup off
+</pre>
+<p>來關閉它們。</p>
+<p>另外還有一個 <tt class="docutils literal"><span class="pre">DirFakeMode</span></tt> 指令，可以連檔案的權限都隱藏起來。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">RequireValidShell</span></tt>：如果設為 <tt class="docutils literal"><span class="pre">on</span></tt>，則 <tt class="docutils literal"><span class="pre">User</span></tt> 所指定的帳號就必需擁有 shell，才能進入系統。因為在底層系統中代表匿名伺服器的使用者，基於安全的原因，通常都特別不設定有效的 shell (這樣就無法登入底層系統了)，所以我們在這邊要把 <tt class="docutils literal"><span class="pre">RequireValidShell</span></tt> 設為 <tt class="docutils literal"><span class="pre">off</span></tt>。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">MaxClients</span></tt>：設定可以同時對匿名伺服器連線的數目。作用類似的指令還有 <tt class="docutils literal"><span class="pre">MaxClientsPerHost</span></tt>, <tt class="docutils literal"><span class="pre">MaxClientsPerUser</span></tt>，分別指定一個來源主機與一個使用者可以同時連線的數目footnote{當然，對匿名伺服器來說，設定 <tt class="docutils literal"><span class="pre">MaxClientsPerUser</span></tt> 和 <tt class="docutils literal"><span class="pre">MaxClients</span></tt> 是一樣的；因為伺服器只允許 anonymous 這一個使用者的登入。}。</p>
+</li>
+</ul>
+<p>第二組則設定公開目錄的存取權限：</p>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">&lt;Directory&gt;</span></tt> 區塊：為一個或符合條件的目錄進行設定，設定的內容就放在區塊內部。第 11 到第 15 行的 <tt class="docutils literal"><span class="pre">&lt;Directory</span> <span class="pre">*&gt;</span></tt> 指定了匿名伺服器裡的所有目錄。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">&lt;Limit&gt;</span></tt> 區塊：限制可以使用的指令。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">DenyALL</span></tt>：禁止所有的連線。</p>
+<p>這個指令通常是與 <tt class="docutils literal"><span class="pre">&lt;Limit&gt;</span></tt> 區塊並用；以第 12 到 14 行的指令來說，會將 <tt class="docutils literal"><span class="pre">&lt;Directory</span> <span class="pre">*&gt;</span></tt> 下的所有 <tt class="docutils literal"><span class="pre">WRITE</span></tt> (寫入) 權限都關閉。</p>
+</li>
+</ul>
+<p>我把第 16 到 24 行的組態指令註解掉了，因為它是要用來開啟匿名上傳的設定，而且其中的指令已經都說明過了。關於這一段上傳設定，重點在於第 18 到 20 行的 <tt class="docutils literal"><span class="pre">READ</span></tt>, <tt class="docutils literal"><span class="pre">WRITE</span></tt>，和第 21 到 23 行的 <tt class="docutils literal"><span class="pre">STORE</span></tt> 關鍵字。這整段把 <tt class="docutils literal"><span class="pre">incoming</span></tt> 目錄裡匿名的 <tt class="docutils literal"><span class="pre">STORE</span></tt> (儲存，即上傳) 權限打開，而把 <tt class="docutils literal"><span class="pre">READ</span></tt> (讀取) 和 <tt class="docutils literal"><span class="pre">WRITE</span></tt> (寫入，包含覆寫) 都關起來；造成的結果是匿名使用者可以把新檔案 (及目錄) 上傳到伺服器裡的 <tt class="docutils literal"><span class="pre">/incoming</span></tt> 目錄內，但不能讀取，也不能覆寫其中的內容。</p>
+<p>如果真的有需要，再把匿名上傳的設定打開即可；匿名上傳常常會造成管理上的問題。而僅作檔案提供之用的 FTP 伺服器，也不必讓匿名使用者上傳檔案。</p>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="proftpd" name="proftpd">5&nbsp;&nbsp;&nbsp;ProFTPd 虛擬主機</a></h1>
+<p>ProFTPd 也可以提供虛擬的 FTP 伺服器功能，不過這部分並不像 Apache 那麼有彈性。通常有三種狀況可以用 ProFTPd 虛擬主機來完成：在同一個 IP 上用網域名稱來分隔不同的 FTP 伺服器、在同一台主機上以不同的 IP 配合不同的實體或虛擬網路介面來分隔伺服器<a class="footnote-reference" href="#id12" id="id11" name="id11"><sup>4</sup></a>，以及在同一個主機上以相同的 IP 與網域名稱，用不同的通訊埠來分隔伺服器。</p>
+<table class="docutils footnote" frame="void" id="id12" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id11" name="id12">[4]</a></td><td>可以使用多張網路硬體，或是對同一個網路硬體進行 aliasing。</td></tr>
+</tbody>
+</table>
+<p>ProFTPd 的虛擬主機設定指令也相當簡單：把單一虛擬主機相關的指令寫在該虛擬主機的 <tt class="docutils literal"><span class="pre">&lt;VirtualHost&gt;</span></tt> 設定區塊中即可。這三種虛擬主機的設定也可以組合運用。比較需要注意的是有一些全域的指令不能在 <tt class="docutils literal"><span class="pre">&lt;VirtualHost&gt;</span></tt> 區塊裡使用，詳細的資訊請參考 ProFTPd 的指令參考說明。</p>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="id13" name="id13">5.1&nbsp;&nbsp;&nbsp;以網域名稱分隔 FTP</a></h2>
+<p>如果我們希望達到像 Apache 的 name-based 虛擬主機的效果，可以這樣設定：</p>
+<pre class="literal-block">
+&lt;VirtualHost domain.name&gt;
+  ...
+&lt;/VirtualHost&gt;
+</pre>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="ip-ftp" name="ip-ftp">5.2&nbsp;&nbsp;&nbsp;以 IP 分隔 FTP</a></h2>
+<p>和以網域分隔的設法類似，但把 <tt class="docutils literal"><span class="pre">domain.name</span></tt> 換成 IP 位址即可：</p>
+<pre class="literal-block">
+&lt;VirtualHost xxx.xxx.xxx.xxx&gt;
+  ...
+&lt;/VirtualHost&gt;
+</pre>
+<p>使用者將能以可對應到這個 IP 位址的網域名稱來連上虛擬主機，除非所用的網域名稱另外對應到了其它的虛擬主機。</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="id14" name="id14">5.3&nbsp;&nbsp;&nbsp;用通訊埠區分 FTP</a></h2>
+<p>如果我們想在同一個 IP (或網域名稱) 的不同的通訊埠上進行 FTP 服務，可以這樣設定：</p>
+<pre class="literal-block">
+&lt;VirtualHost xxx.xxx.xxx.xxx&gt;
+  Port 2221
+  ...
+&lt;/VirtualHost&gt;
+&lt;VirtualHost xxx.xxx.xxx.xxx&gt;
+  Port 2222
+  ...
+&lt;/VirtualHost&gt;
+</pre>
+<p>這樣就會把服務分別開在 <tt class="docutils literal"><span class="pre">xxx.xxx.xxx.xxx</span></tt> 這個位址的 2221 與 2222 號埠上。</p>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id15" name="id15">6&nbsp;&nbsp;&nbsp;結語</a></h1>
+<p>FTP 可以讓系統上的使用者從其它主機存取自己的資料，也可以當作一種公開檔案下載的服務；如果我們希望，還能利用 FTP 來讓匿名使用者貢獻檔案。</p>
+<p>不過，雖然 ProFTPd 是一個很有彈性又高效率的伺服軟體，受限於 FTP 本身的設計，它並不適合工作環境下的檔案分享；如果我們希望在團隊中共用檔案，可能要視作業環境來選用 Samba 或 NFS (又或者是兩者的混合)。</p>
+<p>我們另外也討論了 ProFTPd 的虛擬主機設定；它可以幫助我們更有彈性地組態我們的 FTP 伺服器。還有更多的應用與設定指令並沒有被討論到，而 ProFTPd 的指令參考手冊可以幫助你進一步了解這個伺服系統的能力與限制。</p>
+</div>
+</div>
+</body>
+</html>

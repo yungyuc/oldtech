@@ -1,0 +1,713 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh_tw" lang="zh_tw">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.4: http://docutils.sourceforge.net/" />
+<title>NIS 伺服系統</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger
+:Contact: goodger@users.sourceforge.net
+:Date: $Date: 2005-06-06 15:09:07 +0200 (Mon, 06 Jun 2005) $
+:Version: $Revision: 3442 $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+*/
+
+/* "! important" is used here to override other ``margin-top`` and
+   ``margin-bottom`` styles that are later in the stylesheet or 
+   more specific.  See http://www.w3.org/TR/CSS1#the-cascade */
+
+body {
+  font-family: Calibri, Georgia, Times New Roman, Times,  Free Times;
+  background-color: #666666;
+}
+
+div.document {
+  background-color: white;
+  clear: both;
+  width: 50em;
+  margin: 0 auto 0 auto;
+  padding: 0.5em;
+  border: 2px ridge black;
+}
+
+.first {
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em;
+  border-top: 2px solid #888888;
+  border-bottom: 2px solid #888888;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin-left: 1em ;
+  border: medium outset ; 
+  padding: 1em ;
+  background-color: #ffffee ;
+  /* width: 40% ; */
+  /* float: right ; */
+ /*  clear: right */ }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+div.section h1, div.section h2, div.section h3, 
+div.section h4, div.section h5, div.section h6 {
+  padding-left: 0.3em;
+  padding-bottom: 0.3em;
+  border-left: 2px solid gray;
+  border-bottom: 2px solid gray;
+}
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em; }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left {
+  clear: left }
+
+img.align-right {
+  clear: right }
+
+img.borderless {
+  border: 0 }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font-family: serif ;
+  font-size: 100% }
+
+pre.line-block {
+  font-family: serif ;
+  font-size: 100% }
+
+pre.literal-block, pre.doctest-block {
+  white-space: pre-wrap;       /* css-3 */
+  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word;       /* Internet Explorer 5.5+ */
+  margin-left: 2em ;
+  margin-right: 2em ;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  padding-left: 1em;
+  padding-right: 1em;
+  border: 1px dotted black;
+}
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid thin gray }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  border-spacing: 0;
+  border: 1 solid black;
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-top: solid thin black;
+  border-left: solid thin black }
+
+table.footnote td.label a {
+  text-decoration: none;
+}
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  border: 0; 
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+tt.docutils {
+}
+
+tt.ltst {
+  font-weight: bold;
+}
+
+tt.ltem {
+  font-style: italic;
+}
+
+ul.auto-toc {
+  list-style-type: none }
+
+/* vim: set ai et nu sw=2 ts=2: */
+
+</style>
+</head>
+<body>
+<div class="document" id="nis">
+<h1 class="title">NIS 伺服系統</h1>
+<table class="docinfo" frame="void" rules="none">
+<col class="docinfo-name" />
+<col class="docinfo-content" />
+<tbody valign="top">
+<tr class="field"><th class="docinfo-name">author:</th><td class="field-body">Yung-Yu Chen (yungyuc) <a class="reference" href="http://blog.seety.org/everydaywork/">http://blog.seety.org/everydaywork/</a> &lt;<a class="reference" href="mailto:yyc&#64;seety.org">yyc&#64;seety.org</a>&gt;</td>
+</tr>
+<tr class="field"><th class="docinfo-name">copyright:</th><td class="field-body">© Copyright 2006, all rights reserved</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="id1" name="id1">目錄</a></p>
+<ul class="auto-toc simple">
+<li><a class="reference" href="#id2" id="id19" name="id19">1&nbsp;&nbsp;&nbsp;何謂 NIS</a></li>
+<li><a class="reference" href="#id3" id="id20" name="id20">2&nbsp;&nbsp;&nbsp;NIS 基本設定</a><ul class="auto-toc">
+<li><a class="reference" href="#id4" id="id21" name="id21">2.1&nbsp;&nbsp;&nbsp;伺服器設定</a></li>
+<li><a class="reference" href="#id5" id="id22" name="id22">2.2&nbsp;&nbsp;&nbsp;客戶端組態</a><ul class="auto-toc">
+<li><a class="reference" href="#nis-domain" id="id23" name="id23">2.2.1&nbsp;&nbsp;&nbsp;在客戶端上利用 NIS domain 伺服器的資料進行登入</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference" href="#nis-mapping" id="id24" name="id24">3&nbsp;&nbsp;&nbsp;NIS mapping</a><ul class="auto-toc">
+<li><a class="reference" href="#id10" id="id25" name="id25">3.1&nbsp;&nbsp;&nbsp;自訂 NIS mapping</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#id17" id="id26" name="id26">4&nbsp;&nbsp;&nbsp;其它設定檔案</a><ul class="auto-toc">
+<li><a class="reference" href="#ypbind-etc-yp-conf" id="id27" name="id27">4.1&nbsp;&nbsp;&nbsp;ypbind 的設定檔：/etc/yp.conf</a></li>
+<li><a class="reference" href="#ypserv-etc-ypserv-conf" id="id28" name="id28">4.2&nbsp;&nbsp;&nbsp;ypserv 設定檔：/etc/ypserv.conf</a></li>
+<li><a class="reference" href="#ypserv-etc-ypserv-securenets" id="id29" name="id29">4.3&nbsp;&nbsp;&nbsp;ypserv 的連線來源限制：/etc/ypserv.securenets</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#id18" id="id30" name="id30">5&nbsp;&nbsp;&nbsp;後話</a></li>
+</ul>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id2" name="id2">1&nbsp;&nbsp;&nbsp;何謂 NIS</a></h1>
+<p>NIS 者，Network Information Service 也。它是 Sun Microsystem (R) 公司的產品，一開始被稱為 yp (Yellow Page)，但因為 Yellow Page 這個名字和電信公司所用的電話簿「黃頁」的登記名稱衝突，故 Sun 只好把它的正式名稱改成 Network Information Service，也就是 NIS。</p>
+<p>事實上，NIS 就是設計來當成區域網路上的「黃頁」使用的，所以一開始才會叫作  Yellow Page。在現實生活中的黃頁 (電話簿) 登錄了許多公司行號與個人的電話號碼，以供人檢索，想知道哪一家公司的電話，查黃頁就知道了；你在電影裡一定也常常看到用黃頁找人的劇情。電腦的世界裡也需要相同的東西，因為電腦彼此間如果要交換訊息的話，必須要對彼此先有一些基本的了解，譬如對方主機的名稱、具有權限的帳號和密碼、允許使用的資源等等，然後才能實際向對方電腦發出資訊連結的要求。這種為電腦而設的黃頁，被稱作目錄服務 (Directory Service)。</p>
+<p>NIS 是在電腦間的區域網路應用風潮興起之後，被廣為使用的目錄服務。在 NIS 的架構中，由 NIS 伺服器擔任目錄主機的工作，為 NIS 客戶端提供電腦名稱解析、帳號密碼查詢、使用者群組查詢以及其它多種資訊的查詢服務。NIS 本身經過了許多的沿革，比起一開始多了許多彈性，安全性也更強。NIS 非常適合為單一工作類型的中小型電腦群組提供統一的操作環境；也就是說，如果有數十台甚至數百台電腦需要組織在一起，來進行同一種工作的話，NIS 可以提供一個統一的登入系統以及一個統一的使用者環境，讓使用者在這個群組中各個不同的電腦節點中工作時，可以使用相同的認證方式來存取被統一管理的資源。</p>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id3" name="id3">2&nbsp;&nbsp;&nbsp;NIS 基本設定</a></h1>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="id4" name="id4">2.1&nbsp;&nbsp;&nbsp;伺服器設定</a></h2>
+<p>在 Debian 中，NIS 伺服端與客戶端的程式都包在 <tt class="docutils literal"><span class="pre">nis</span></tt> 這個套件中，以 <tt class="docutils literal"><span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">nis</span></tt> 進行安裝，伺服器的執行則以 <tt class="docutils literal"><span class="pre">/etc/init.d/nis</span></tt> 指令稿控制。</p>
+<p>在 <tt class="docutils literal"><span class="pre">nis</span></tt> 套件安裝完畢之後，基本上只需要進行三個步驟即可完成 NIS 的設定。</p>
+<ol class="arabic">
+<li><p class="first">在伺服器的 <tt class="docutils literal"><span class="pre">/etc/default/nis</span></tt> 設定檔中指定 <tt class="docutils literal"><span class="pre">NISSERVER</span> <span class="pre">=</span> <span class="pre">master</span></tt>，令其扮演 NIS 主 (master) 伺服器的角色 (見第 6 行)。</p>
+<pre class="literal-block">
+#
+# /etc/defaults/nis     Configuration settings for the NIS daemons.
+#
+
+# Are we a NIS server and if so what kind (values: false, slave, master)
+NISSERVER=master
+
+# Location of the master NIS password file (for yppasswdd).
+# If you change this make sure it matches with /var/yp/Makefile.
+YPPWDDIR=/etc
+
+# Do we allow the user to use ypchsh and/or ypchfn ? The YPCHANGEOK
+# fields are passed with -e to yppasswdd, see it's manpage.
+# Possible values: &quot;chsh&quot;, &quot;chfn&quot;, &quot;chsh,chfn&quot;
+YPCHANGEOK=chsh
+</pre>
+</li>
+<li><p class="first">設定 <tt class="docutils literal"><span class="pre">/etc/defaultdomain</span></tt> 檔，指定此 NIS 伺服器所服務的網域 (domain)，檔案中只要寫入網域的名稱 (單獨一行) 即可。</p>
+</li>
+<li><p class="first">執行 <tt class="docutils literal"><span class="pre">/usr/lib/yp/ypinit</span> <span class="pre">-m</span></tt> 來對 NIS domain 資料庫進行初始化。之後要更新資料庫的話，只要切到 NIS domain 資料庫所在的目錄 <tt class="docutils literal"><span class="pre">/var/yp</span></tt> 下，執行 <tt class="docutils literal"><span class="pre">make</span></tt> 即可footnote{如果不想切換目錄，可以用 <tt class="docutils literal"><span class="pre">make</span> <span class="pre">-C</span> <span class="pre">/var/yp</span></tt> 直接在任何目錄下進行資料庫的更新。}。這個資料庫包含了所有 NIS domain 所供應的資料 (例如 <tt class="docutils literal"><span class="pre">passwd</span></tt>, <tt class="docutils literal"><span class="pre">hosts</span></tt> 等)，一般稱此為 NIS map 或 mapping。</p>
+</li>
+</ol>
+<p>在前述的第 1 步裡，我們把伺服器組態為 master，而從設定檔的註解裡可知，也可以設定為 <tt class="docutils literal"><span class="pre">NISSERVER</span> <span class="pre">=</span> <span class="pre">slave</span></tt>，令其以 NIS domain slave (次要) 伺服器模式運作。</p>
+<p>在 NIS domain slave 伺服器上的 NIS domain 資料庫並不是它自己的，乃是由 master 伺服器所提供。當 master 伺服器上的資料庫更新時，會將新的資料傳給 slave 伺服器，讓 slave 伺服器來更新其資料庫。一般來說，只有客戶端的數量非常多 (數百台客戶端主機)，同時資料庫也非常龐大的 NIS domain，才會考慮利用這種 master/slave 多伺服器的架構來分散 master 伺服器的工作量。在這種架構下，由於 slave 伺服器的資料來源都是相同的，所以即使有許多台 slave 伺服器，也不會發生 domain 資料不同步的問題。</p>
+<p>slave 伺服器的設定是比較特別的主題，要深入探討的話，還牽涉到區域網路的拓璞架構與頻寬的使用規畫，而在一般中小型的 NIS domain 裡又不太用得上，所以我們暫時還不會討論它。有興趣的讀者可以參考 Debian 的 NIS HOWTO。</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="id5" name="id5">2.2&nbsp;&nbsp;&nbsp;客戶端組態</a></h2>
+<p>組態 NIS 客戶端，也就是要把客戶端電腦加進 NIS domain 時，除了 NIS 本身的設定檔之外，還要為系統內的一些服務新增 NIS 支援，才能讓服務轉向存取 NIS 伺服器上提供的資料。</p>
+<p>首先還是要組態 NIS 客戶端程式footnote{在組態之前不要忘記 <tt class="docutils literal"><span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">nis</span></tt>；Debian 的 NIS 伺服端與客戶端程式同時包在這一個套件裡。}：</p>
+<ol class="arabic simple">
+<li><tt class="docutils literal"><span class="pre">/etc/default/nis</span></tt> 內要設定 <tt class="docutils literal"><span class="pre">NISSERVER</span> <span class="pre">=</span> <span class="pre">false</span></tt>。</li>
+<li><tt class="docutils literal"><span class="pre">/etc/defaultdomain</span></tt> 內一樣得寫入欲連結的 NIS domain 名稱。</li>
+</ol>
+<p>通常，客戶端連結到 NIS domain 伺服端的動作，會被稱為 NIS binding (NIS 繫結)。幾乎所有的 NIS 客戶端都只能 bind 到一個 NIS domain 伺服端，所以一台主機沒辦法同時加入兩個以上的 NIS domain<a class="footnote-reference" href="#id7" id="id6" name="id6"><sup>1</sup></a>。</p>
+<table class="docutils footnote" frame="void" id="id7" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id6" name="id7">[1]</a></td><td>之後我們會討論如何為服務加上 NIS 支援，那時就會知道為什麼不能加入複數的 NIS domain。</td></tr>
+</tbody>
+</table>
+<p>組態完畢之後要重新開機，Debian 會自行讀取這些相關的設定檔後 bind 到正確的 NIS domain 伺服器上。這時候要注意，一定要 bind 到正確可以運作的 NIS domain 伺服器，否則 NIS binding 的動作會等待很長的一段時間，然後再宣告失敗；開機時間會被拉得很長。</p>
+<p>正確地 bind 到 NIS domain 上了之後，就可以設定各服務的 NIS 支援，首先得確認系統的 <tt class="docutils literal"><span class="pre">/etc/nsswitch.conf</span></tt> 檔設定。<tt class="docutils literal"><span class="pre">/etc/nsswitch.conf</span></tt> 檔用於設定 glibc 中各元件的 Name Service Switch 項目，一般的設定如cfgfilename~ref{cfg:/etc/nsswitch.conf}；指定 <tt class="docutils literal"><span class="pre">passwd</span></tt>, <tt class="docutils literal"><span class="pre">group</span></tt>, <tt class="docutils literal"><span class="pre">shadow</span></tt> 使用 <tt class="docutils literal"><span class="pre">compat``(ible)</span> <span class="pre">模式，而</span> <span class="pre">``hosts</span></tt> 依序使用 <tt class="docutils literal"><span class="pre">file</span></tt>, <tt class="docutils literal"><span class="pre">nis</span></tt>, <tt class="docutils literal"><span class="pre">dns</span></tt> 等來源資料。</p>
+<pre class="literal-block">
+# /etc/nsswitch.conf
+#
+# Example configuration of GNU Name Service Switch functionality.
+# If you have the `glibc-doc' and `info' packages installed, try:
+# `info libc &quot;Name Service Switch&quot;' for information about this file.
+
+passwd:         compat
+group:          compat
+shadow:         compat
+
+hosts:          files nis dns
+networks:       files
+
+protocols:      db files
+services:       db files
+ethers:         db files
+rpc:            db files
+
+netgroup:       nis
+</pre>
+<div class="section">
+<h3><a class="toc-backref" href="#id1" id="nis-domain" name="nis-domain">2.2.1&nbsp;&nbsp;&nbsp;在客戶端上利用 NIS domain 伺服器的資料進行登入</a></h3>
+<p>除了 <tt class="docutils literal"><span class="pre">/etc/nsswitch.conf</span></tt> 要設定正確之外，各服務也都需要另外注意一些設定。一般的 NIS 系統大都會用 NIS mapping 來提供帳號/密碼/群組的資料，以統一的方式來管理認證與權限，讓使用者可以利用 NIS domain 主機上的帳號來登入。在設定時，首先要處理帳號與密碼的部分，也就是要在 <tt class="docutils literal"><span class="pre">/etc/passwd</span></tt> 與 <tt class="docutils literal"><span class="pre">/etc/shadow</span></tt> 兩個檔案裡加上相關的項目，正確的 <tt class="docutils literal"><span class="pre">/etc/passwd</span></tt> 檔如：</p>
+<pre class="literal-block">
+...
+...
++::::::
+</pre>
+<p>在最後一行要加上 <tt class="docutils literal"><span class="pre">+::::::</span></tt>，表示使用來自 NIS mapping 的資料。正確的 <tt class="docutils literal"><span class="pre">/etc/shadow</span></tt> 檔如：</p>
+<pre class="literal-block">
+...
+...
++::::::::
+</pre>
+<p>在最後一行加上 <tt class="docutils literal"><span class="pre">+::::::::</span></tt>，表示使用來自 NIS mapping 的資料。至於使用者群組，則是要對 <tt class="docutils literal"><span class="pre">/etc/group</span></tt> 作類似的修改：</p>
+<pre class="literal-block">
+...
+...
++:::
+</pre>
+<p>在最後一行加上 <tt class="docutils literal"><span class="pre">+:::</span></tt>，表示使用來自 NIS mapping 的資料。</p>
+<p><tt class="docutils literal"><span class="pre">passwd</span></tt>, <tt class="docutils literal"><span class="pre">shadow</span></tt>, <tt class="docutils literal"><span class="pre">group</span></tt> 都修改完畢後，就可以使用 NIS domain 上的 mapping 資料登入系統了。同時也完成基本的 NIS 客戶端設定。從客戶端這邊的設定過程，可以很明白地發現，為了要讓客戶端可以使用 NIS domain 上的資料進行登入，還要在 <tt class="docutils literal"><span class="pre">passwd</span></tt>, <tt class="docutils literal"><span class="pre">shadow</span></tt> 和 <tt class="docutils literal"><span class="pre">group</span></tt> 加上特別的項目，如此一來，一個客戶端若可以加入超過一個 NIS domain，就很容易會發生認證衝突的狀況。所以一般來說，我們不能也不會讓一個 NIS 客戶端加入超過一個的 NIS domain。</p>
+</div>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="nis-mapping" name="nis-mapping">3&nbsp;&nbsp;&nbsp;NIS mapping</a></h1>
+<p>如前所述，NIS mapping 就是指 NIS domain 所提供的資料庫，NIS 客戶端會從 NIS domain 伺服器下載需要的 mapping 資料，作為各種服務的資料來源。Debian 把 NIS mapping 的資料放在 <tt class="docutils literal"><span class="pre">/var/yp</span></tt> 目錄下，各 domain 會依照其名稱存放 (即如 <tt class="docutils literal"><span class="pre">/var/yp/&lt;nisdomainname&gt;</span></tt>)。</p>
+<p><tt class="docutils literal"><span class="pre">ypcat</span></tt> 這個工具可以用來檢視 NIS mapping 資料，語法是：</p>
+<pre class="literal-block">
+ypcat [-kt] [-d domain] mapname | -x
+  -d domain      不用預設 domain，改用 'domain'
+  -k             顯示 map key
+  -t             禁止轉換成 map nickname
+  -x             顯示 map nickname 轉換表
+</pre>
+<p>其中 mapname 是 map 的名稱。<tt class="docutils literal"><span class="pre">ypcat</span> <span class="pre">-x</span></tt> 是最常見的用法，它會把目前 NIS domain 上的 nickname 顯示出來。所謂的 nickname 就是指 map 名稱的別名，因為一般的 map 都有以 &quot;.&quot; 分隔兩段式名稱，長了一點，所以 domain 就會提供這個 nickname，方便查詢。<tt class="docutils literal"><span class="pre">ypcat</span> <span class="pre">-x</span></tt> 的執行結果通常是：</p>
+<pre class="literal-block">
+$ ypcat -x
+Use &quot;ethers&quot;    for map &quot;ethers.byname&quot;
+Use &quot;aliases&quot;   for map &quot;mail.aliases&quot;
+Use &quot;services&quot;  for map &quot;services.byname&quot;
+Use &quot;protocols&quot; for map &quot;protocols.bynumber&quot;
+Use &quot;hosts&quot;     for map &quot;hosts.byname&quot;
+Use &quot;networks&quot;  for map &quot;networks.byaddr&quot;
+Use &quot;group&quot;     for map &quot;group.byname&quot;
+Use &quot;passwd&quot;    for map &quot;passwd.byname&quot;
+</pre>
+<p>另外，<tt class="docutils literal"><span class="pre">ypmatch</span></tt> 則是另一個簡單的小工具。在各 map 下一筆一筆的資料，被稱作一個 key，``ypmatch`` 可以抓出某個 map 下某個 key 的資料，它的語法如下：</p>
+<pre class="literal-block">
+ypmatch [-d domain] [-kt] key ... mapname | -x
+  -d domain      不用預設 domain，改用 'domain'
+  -k             顯示 map key
+  -t             禁止轉換成 map nickname
+  -x             顯示 map nickname 轉換表
+</pre>
+<p>舉一個例子。<tt class="docutils literal"><span class="pre">ypcat</span> <span class="pre">-k</span> <span class="pre">services</span></tt><a class="footnote-reference" href="#id9" id="id8" name="id8"><sup>2</sup></a> 的執行結果是 (原輸出極長，故此處僅列部分結果)：</p>
+<table class="docutils footnote" frame="void" id="id9" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id8" name="id9">[2]</a></td><td><tt class="docutils literal"><span class="pre">services</span></tt> 就是一個 nickname。</td></tr>
+</tbody>
+</table>
+<pre class="literal-block">
+$ ypcat -k services
+...
+22/tcp ssh              22/tcp
+202/udp at-nbp          202/udp
+779/udp moira_ureg      779/udp
+1001/udp customs        1001/udp
+...
+</pre>
+<p>那麼用 <tt class="docutils literal"><span class="pre">ypmatch</span> <span class="pre">22/tcp</span> <span class="pre">services</span></tt>，就可以僅僅列出下面的結果：</p>
+<pre class="literal-block">
+$ ypmatch 22/tcp services
+ssh             22/tcp
+</pre>
+<p>適用於查詢已知 key 名稱的資料。</p>
+<p>另外，<tt class="docutils literal"><span class="pre">ypdomainname</span></tt> 指令會列出目前加入的 NIS domain 名稱。這個指令雖然與 NIS mapping 無關，但也常常使用。</p>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="id10" name="id10">3.1&nbsp;&nbsp;&nbsp;自訂 NIS mapping</a></h2>
+<p>在 NIS domain 伺服器的 <tt class="docutils literal"><span class="pre">/var/yp</span></tt> 下還會有一個 <tt class="docutils literal"><span class="pre">Makefile</span></tt>，它是自訂 mapping 作業模式的主角。透過 <tt class="docutils literal"><span class="pre">/var/yp/Makefile</span></tt>，我們可以任意地操縱 NIS mapping 的資料來源與 mapping 名稱。讓我們先來參考如下的檔案內容。</p>
+<pre class="literal-block">
+...
+services.byname: $(SERVICES) $(YPDIR)/Makefile
+        &#64;echo &quot;Updating $&#64;...&quot;
+        &#64;$(AWK) '{ if ($$1 !~ &quot;#&quot; &amp;&amp; $$1 != &quot;&quot;) print $$2&quot;\t&quot;$$0 }' \
+                $(SERVICES) | $(DBLOAD) -r -i $(SERVICES) \
+                -o $(YPMAPDIR)/$&#64; - $&#64;
+        -&#64;$(NOPUSH) || $(YPPUSH) -d $(DOMAIN) $&#64;
+
+services.byservicename: $(SERVICES) $(YPDIR)/Makefile
+        &#64;echo &quot;Updating $&#64;...&quot;
+        &#64;$(AWK) '{ if ($$1 !~ &quot;#&quot; &amp;&amp; $$1 != &quot;&quot;) { \
+                TMP = $$2 ; gsub(&quot;[0-9]+&quot;,&quot;&quot;,TMP) ; \
+                print $$1 TMP&quot;\t&quot;$$0 ; \
+                for (N = 3; N &lt;= NF &amp;&amp; $$N !~ &quot;#&quot; ; N++) { \
+                        if ($$N !~ &quot;#&quot; &amp;&amp; $$N != &quot;&quot;) print $$N TMP&quot;\t&quot;$$0 \
+                } } } ' \
+                $(SERVICES) | $(DBLOAD) -r -i $(SERVICES) \
+                -o $(YPMAPDIR)/$&#64; - $&#64;
+        -&#64;$(NOPUSH) || $(YPPUSH) -d $(DOMAIN) $&#64;
+...
+</pre>
+<p>在這一段檔案裡總共列出了兩個完整的 Makefile rule，分別是 services.byname 與 services.byservicename。Makefile 是 <tt class="docutils literal"><span class="pre">make</span> <span class="pre">(1L)</span></tt> 工具的控制檔，而基本上 <tt class="docutils literal"><span class="pre">make</span></tt> 算是一個程式開發工具，不過它的功能非常強大，所以 NIS 就拿 <tt class="docutils literal"><span class="pre">make</span></tt> 來當作 mapping 的產生工具<a class="footnote-reference" href="#id13" id="id11" name="id11"><sup>3</sup></a>。在 UN*X<a class="footnote-reference" href="#id14" id="id12" name="id12"><sup>4</sup></a> 與 OpenSource 的世界裡時常會用到 <tt class="docutils literal"><span class="pre">make</span></tt>，因此這裡對 <tt class="docutils literal"><span class="pre">make</span></tt> 與 Makefile 作點說明。</p>
+<table class="docutils footnote" frame="void" id="id13" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id11" name="id13">[3]</a></td><td>不止 NIS，有很多程式都拿 <tt class="docutils literal"><span class="pre">make</span></tt> 來當作泛用型的控制工具。</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id14" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id12" name="id14">[4]</a></td><td>一般常把 UNIX (R) 與其衍生系統的集合寫作 UN*X，這是為了與 UNIX (R) 本身區別，避免與其註冊名稱衝突。UNIX (R) 是 SCO 公司的註冊商標。</td></tr>
+</tbody>
+</table>
+<p>基本上 Makefile 是由許多個 rule 組成的，每個 rule 的格式都是：</p>
+<pre class="literal-block">
+&lt;rule name 1&gt;: &lt;dependency 1&gt; &lt;dependency 2&gt; ... &lt;dependency n&gt;
+  &lt;command 1&gt;
+  &lt;command 2&gt;
+  .
+  .
+  &lt;command n&gt;
+
+&lt;rule name 2&gt;: &lt;dependency 1&gt; &lt;dependency 2&gt; ... &lt;dependency n&gt;
+  .
+  .
+</pre>
+<p>從第 1 行開始是第一個 rule，它在開頭的地方列出了 rule 的名稱 (通常是一個檔案)，其後接冒號 &quot;:&quot;，然後再接相依 (dependent) 的檔案列表 (<tt class="docutils literal"><span class="pre">&lt;dependency</span> <span class="pre">n&gt;</span></tt>)。所謂的相依檔案是指，如果這個相依檔案比 rule name 所示的檔案為新，表示 rule name 應該要被更新；<tt class="docutils literal"><span class="pre">make</span></tt> 就靠這個來判斷該怎麼更新檔案。在第 2 行之後的都是這個 rule 所要執行的命令，一直到第五行，所有的命令都要以跳格 (tab) 鍵開頭，所以外觀上會比 rule 縮排一個跳格的距離。第 8 行開始就是第二個 rule 了，又要凸排回行首 (第 7 行空白並非必要，但可增加 Makefile 的可讀性)。</p>
+<p>每一個 Makefile rule 的相依檔案數目並沒有上限，彼此間會以空白字元分隔，如果一行寫不下，可以在行尾加上 &quot;&quot; 字元，表示接續下行。因為 rule 名稱通常也會是一個檔案，所以 rule 與 rule 之間可以彼此相依，於是可以寫出很方便的 Makefile 來自動進行更新檔案的動作。</p>
+<p>在 rule name 之後的各行指令，每一行都會被視作一次指令輸入，但如果一個指令沒辦法放進一行裡面 (或是為了提高可讀性)，也可以在行尾加上 &quot;&quot; 來接續下行。</p>
+<p>再回到 <tt class="docutils literal"><span class="pre">/var/yp/Makefile</span></tt>，仍見cfgfilename~ref{cfg:/var/yp/Makefile:partial.sample}。第 2 行是 service.byname 這個 rule，它相依於 <tt class="docutils literal"><span class="pre">$(SERVICES)$</span></tt> 與 <tt class="docutils literal"><span class="pre">$(YPDIR)/Makefile$</span></tt> (在 Makefile 中，<tt class="docutils literal"><span class="pre">$(&lt;varname&gt;)$</span></tt> 形式的文字為字串變數，其名稱就是 <tt class="docutils literal"><span class="pre">&lt;varname&gt;</span></tt>)。``$(SERVICES)$`` 定義在 Makefile 的最前面：</p>
+<pre class="literal-block">
+...
+YPSRCDIR = /etc
+...
+SERVICES    = $(YPSRCDIR)/services
+...
+</pre>
+<p>而 <tt class="docutils literal"><span class="pre">$(YPDIR)$</span></tt> 則是定義為 <tt class="docutils literal"><span class="pre">/var/yp</span></tt>。所以可知 service.byname 僅相依於 <tt class="docutils literal"><span class="pre">/etc/services</span></tt> 與 <tt class="docutils literal"><span class="pre">/var/yp/Makefile</span></tt> 這兩個檔案。service.byservicename 這個 rule 的相依性也一樣是這兩個檔案，並且，再仔細一看cfgfilename~ref{cfg:/var/yp/Makefile:partial.sample}，就會發現它們的動作很單純，一開始先往標準輸出 (一般是螢幕或遠端終端機) 印出 &quot;Updating textless key nametextgreater...&quot; 的字樣，然後用 <tt class="docutils literal"><span class="pre">awk(1)</span></tt> 來處理 <tt class="docutils literal"><span class="pre">/etc/services</span></tt> 的內容，最後進行一些後處理 (第 7 與第 19 行)<a class="footnote-reference" href="#id16" id="id15" name="id15"><sup>5</sup></a>，如此而已。</p>
+<table class="docutils footnote" frame="void" id="id16" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id15" name="id16">[5]</a></td><td>單從這點片段沒辦法看出來是作了什麼樣的後處理，基本上它是在作把 NIS domain 伺服器上的資料傳給 NIS domain slave 伺服器的工作。</td></tr>
+</tbody>
+</table>
+<p>基本上，整個 <tt class="docutils literal"><span class="pre">/var/yp/Makefile</span></tt> 就是由像前述的 rule 組合起來的，彼此間幾乎沒有相依性，另外還多出一些流程控制的敘述，所以非常容易了解。我們可以任意增加新的 map、改變 map 使用的來源檔，都靠修改 <tt class="docutils literal"><span class="pre">/var/yp/Makefile</span></tt> 這個檔案。</p>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id17" name="id17">4&nbsp;&nbsp;&nbsp;其它設定檔案</a></h1>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="ypbind-etc-yp-conf" name="ypbind-etc-yp-conf">4.1&nbsp;&nbsp;&nbsp;ypbind 的設定檔：/etc/yp.conf</a></h2>
+<p>如果是在存取同一個 IP 子網路 (subnet) 中的 NIS domain 時，這個檔案通常可以不用設定，``ypbind`` 會用 IP broadcasting 來取得 NIS domain 伺服器的位置。不過若 NIS 客戶端與 domain 伺服器落在不同的 IP 子網路之下的話，就要在這個檔案裡設定 NIS domain 的伺服器位置。有時候，當同一個子網路下有數個 NIS domain 伺服器時，在 <tt class="docutils literal"><span class="pre">/etc/yp.conf</span></tt> 裡設定 NIS domain 伺服器位置也可以幫助客戶端更快 bind 到 NIS domain，順便減輕子網路內的 broadcasting 負擔。</p>
+<p><tt class="docutils literal"><span class="pre">/etc/yp.conf</span></tt> 的語法很簡單：</p>
+<pre class="literal-block">
+domain &lt;NIS domain name&gt; ypserver &lt;server ip or DN&gt;
+</pre>
+<p>其中 <tt class="docutils literal"><span class="pre">&lt;NIS</span> <span class="pre">domain</span> <span class="pre">name&gt;</span></tt> 是要 bind 的 NIS domain 名稱，而 <tt class="docutils literal"><span class="pre">&lt;server</span> <span class="pre">ip</span> <span class="pre">or</span> <span class="pre">DN&gt;</span></tt> 則用來指定 NIS domain 伺服器的位置，可以用 IP，也可以用 Domain Name。以下為實例。</p>
+<pre class="literal-block">
+#
+# yp.conf       Configuration file for the ypbind process. You can define
+#               NIS servers manually here if they can't be found by
+#               broadcasting on the local net (which is the default).
+#
+#               See the manual page of ypbind for the syntax of this file.
+#
+# IMPORTANT:    For the &quot;ypserver&quot;, use IP addresses, or make sure that
+#               the host is in /etc/hosts. This file is only interpreted
+#               once, and if DNS isn't reachable yet the ypserver cannot
+#               be resolved and ypbind won't ever bind to the server.
+
+# ypserver ypserver.network.com
+domain middleearth ypserver 127.0.0.1
+</pre>
+<p>其中，除了最後一行之外全是註解 (Debian 預設的內容)，而最後一行指定 IP 127.0.0.1 為 middleearth 這個 NIS domain 的伺服器。一般來說，使用者的網路中如果有良好的 Domain Name Server 支援，就可以用 Domain Name 來指定 NIS domain 伺服器位置。不過，也有很多區域網路系統並沒有 Domain Name Server 的存在，這時候就只能用 IP 來指定。</p>
+<p>如果使用者網路上的 Domain Name Server 系統的架構並不完善，或是系統不穩定，筆者建議不要依靠 Domain Name Server，直接以 IP 指定 NIS domain 伺服器的位置。不穩定的 Domain Name Server 只會徒增 NIS domain 系統維護的複雜度。最理想的狀況是，區域網路系統內能同時維護架構良好的 Domain Name Server 與 NIS domain，讓扁平式的 NIS domain 配合階層式的 Domain Name 系統，這樣可以大大增加整個網路目錄的可用性與降低維護成本。</p>
+<p>另外，從第 13 行可以發現，在指定 NIS domain 伺服器時，也可以不用指明要 bind 的 NIS domain 名稱，語法變成：</p>
+<pre class="literal-block">
+ypserver &lt;server ip or DN&gt;
+</pre>
+<p>這樣 <tt class="docutils literal"><span class="pre">ypbind</span></tt> 就會先去查詢 <tt class="docutils literal"><span class="pre">&lt;server</span> <span class="pre">ip</span> <span class="pre">or</span> <span class="pre">DN&gt;</span></tt> 指定的伺服器，如果找到了可以 bind 的 domain，再繼續進行 bind 的動作。</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="ypserv-etc-ypserv-conf" name="ypserv-etc-ypserv-conf">4.2&nbsp;&nbsp;&nbsp;ypserv 設定檔：/etc/ypserv.conf</a></h2>
+<p>這個設定檔可以依照來源主機為 <tt class="docutils literal"><span class="pre">ypserv</span></tt> 來對各 map 提供存取控制。下例是 Debian 系統預設的 <tt class="docutils literal"><span class="pre">/etc/ypserv.conf</span></tt> 內容。一般來說，如果不是為了提昇安全性，或是有相當特別的需要，都不會改到這個檔案的設定。</p>
+<pre class="literal-block">
+#
+# ypserv.conf   In this file you can set certain options for the NIS server,
+#               and you can deny or restrict access to certain maps based
+#               on the originating host.
+#
+#               See ypserv.conf(5) for a description of the syntax.
+#
+
+# The following, when uncommented,  will give you shadow like passwords.
+# Note that it will not work if you have slave NIS servers in your
+# network that do not run the same server as you.
+
+# Host                       : Map              : Security   : Passwd_mangle
+#
+# *                          : passwd.byname    : port       : yes
+# *                          : passwd.byuid     : port       : yes
+# *                          : *                : none
+
+# This is the default - restrict access to the shadow password file,
+# allow access to all others.
+*                            : shadow.byname    : port
+*                            : passwd.adjunct.byname : port
+*                            : *                : none
+</pre>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="ypserv-etc-ypserv-securenets" name="ypserv-etc-ypserv-securenets">4.3&nbsp;&nbsp;&nbsp;ypserv 的連線來源限制：/etc/ypserv.securenets</a></h2>
+<p>這個檔案可以用來限制存取 NIS domain server 的來源位置。語法是：</p>
+<pre class="literal-block">
+&lt;subnet mask IP&gt;    &lt;network IP&gt;
+</pre>
+<p><tt class="docutils literal"><span class="pre">&lt;network</span> <span class="pre">IP&gt;</span></tt> 是允許存取的來源子網路 IP，而 <tt class="docutils literal"><span class="pre">&lt;subnet</span> <span class="pre">mask</span> <span class="pre">IP&gt;</span></tt> 為其子網路遮罩，也以 4 位數字 IP 表示。預設值裡有一行 <tt class="docutils literal"><span class="pre">0.0.0.0</span> <span class="pre">0.0.0.0</span></tt>，會允許所有來源存取 NIS domain map，這是非常危險的作法，只不過 Debian 希望 NIS 一裝好就可以使用，所以才會加上這一行。</p>
+<p>實際在架設 NIS domain 伺服器的時候，``/etc/ypserv.securenets`` 一定要作比較精細的設定，否則若網路上的任何位置都可以存取 NIS domain 資料庫的話，對系統的安全性是極大的傷害footnote{因為 NIS domain 資料庫裡有一個 map 包含了加密後的密碼，若任何人皆可取得這項資料，就可以透過各種破解的手段來取得真正的密碼。一般來說，如果一個系統的密碼檔被外人取得，就可以說是已經被破解掉 80% 了。}。</p>
+<p>舉例而言，假設 NIS domain 伺服器只要服務 192.168.1.0/24 這個子網路，則 <tt class="docutils literal"><span class="pre">/etc/ypserv/securenets</span></tt> 可以設定成如下例。</p>
+<pre class="literal-block">
+#
+# securenets    This file defines the access rights to your NIS server
+#               for NIS clients (and slave servers - ypxfrd uses this
+#               file too). This file contains netmask/network pairs.
+#               A clients IP address needs to match with at least one
+#               of those.
+#
+#               One can use the word &quot;host&quot; instead of a netmask of
+#               255.255.255.255. Only IP addresses are allowed in this
+#               file, not hostnames.
+#
+# Always allow access for localhost
+255.0.0.0       127.0.0.0
+
+# This line gives access to everybody. PLEASE ADJUST!
+#0.0.0.0         0.0.0.0
+
+255.255.255.0   192.168.1.0
+</pre>
+<p>請注意</p>
+<pre class="literal-block">
+0.0.0.0 0.0.0.0
+</pre>
+<p>已經被 remark 掉了，而允許 192.168.1.0/24 子網域存取項目則加在最後一行。</p>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id18" name="id18">5&nbsp;&nbsp;&nbsp;後話</a></h1>
+<p>NIS 是一個非常有歷史的網路目錄服務，NIS domain 沒有階層，domain 與 domain 之間沒有從屬關係，這個特性類似於 Windows 使用者熟悉的舊式 NT domainfootnote{NT domain 是在 NIS domain 之後很久才開始發展的。}。隨著時代的演進，區域網路內部的主機數目也愈來愈多，所以階層式的目錄服務開始發展，例如 Active Directory，它可以讓不同的 domain 互相隸屬，由小目錄構築成一個大目錄。與這種階層式目錄相比，傳統的扁平式 NIS domain 適合於架設用途單純的工作站網路，而比較不適用高泛用型的辦公室網路系統。</p>
+<p>NIS 雖然很老，但卻仍然很好用。它具有相當不錯的群組能力，除了基本的使用者認證之外，NFS automount, netgrp 等等功能也都常被使用。另外，NIS domain 非常有彈性，自訂 NIS map 的來源或資料都非常簡單。如今在 Debian 上的 NIS 伺服器程式支援 <tt class="docutils literal"><span class="pre">ypserv.securenets</span></tt>，已經具有了基本的安全性支援，這對於區域網路系統來說已經相當足夠。</p>
+<p>我們從 NIS 系統在 Debian 上的基本設定，談到 NIS mapping 以及其自訂，還提到了 NIS 客戶端與伺服端的相關設定檔內容，算是對 Debian 的 NIS 系統作了相當完整的討論。經過適當的練習後，你應該可以很熟練地操作 Debian 上的 NIS 系統，並且能在你自己的系統上作最佳的應用。</p>
+</div>
+</div>
+</body>
+</html>

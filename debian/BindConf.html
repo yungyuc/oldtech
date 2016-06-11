@@ -1,0 +1,1152 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh_tw" lang="zh_tw">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.4: http://docutils.sourceforge.net/" />
+<title>網域名稱伺服器</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger
+:Contact: goodger@users.sourceforge.net
+:Date: $Date: 2005-06-06 15:09:07 +0200 (Mon, 06 Jun 2005) $
+:Version: $Revision: 3442 $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+*/
+
+/* "! important" is used here to override other ``margin-top`` and
+   ``margin-bottom`` styles that are later in the stylesheet or 
+   more specific.  See http://www.w3.org/TR/CSS1#the-cascade */
+
+body {
+  font-family: Calibri, Georgia, Times New Roman, Times,  Free Times;
+  background-color: #666666;
+}
+
+div.document {
+  background-color: white;
+  clear: both;
+  width: 50em;
+  margin: 0 auto 0 auto;
+  padding: 0.5em;
+  border: 2px ridge black;
+}
+
+.first {
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em;
+  border-top: 2px solid #888888;
+  border-bottom: 2px solid #888888;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin-left: 1em ;
+  border: medium outset ; 
+  padding: 1em ;
+  background-color: #ffffee ;
+  /* width: 40% ; */
+  /* float: right ; */
+ /*  clear: right */ }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+div.section h1, div.section h2, div.section h3, 
+div.section h4, div.section h5, div.section h6 {
+  padding-left: 0.3em;
+  padding-bottom: 0.3em;
+  border-left: 2px solid gray;
+  border-bottom: 2px solid gray;
+}
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em; }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left {
+  clear: left }
+
+img.align-right {
+  clear: right }
+
+img.borderless {
+  border: 0 }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font-family: serif ;
+  font-size: 100% }
+
+pre.line-block {
+  font-family: serif ;
+  font-size: 100% }
+
+pre.literal-block, pre.doctest-block {
+  white-space: pre-wrap;       /* css-3 */
+  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word;       /* Internet Explorer 5.5+ */
+  margin-left: 2em ;
+  margin-right: 2em ;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  padding-left: 1em;
+  padding-right: 1em;
+  border: 1px dotted black;
+}
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid thin gray }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  border-spacing: 0;
+  border: 1 solid black;
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-top: solid thin black;
+  border-left: solid thin black }
+
+table.footnote td.label a {
+  text-decoration: none;
+}
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  border: 0; 
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+tt.docutils {
+}
+
+tt.ltst {
+  font-weight: bold;
+}
+
+tt.ltem {
+  font-style: italic;
+}
+
+ul.auto-toc {
+  list-style-type: none }
+
+/* vim: set ai et nu sw=2 ts=2: */
+
+</style>
+</head>
+<body>
+<div class="document" id="id1">
+<h1 class="title">網域名稱伺服器</h1>
+<table class="docinfo" frame="void" rules="none">
+<col class="docinfo-name" />
+<col class="docinfo-content" />
+<tbody valign="top">
+<tr class="field"><th class="docinfo-name">author:</th><td class="field-body">Yung-Yu Chen (yungyuc) <a class="reference" href="http://blog.seety.org/everydaywork/">http://blog.seety.org/everydaywork/</a> &lt;<a class="reference" href="mailto:yyc&#64;seety.org">yyc&#64;seety.org</a>&gt;</td>
+</tr>
+<tr class="field"><th class="docinfo-name">copyright:</th><td class="field-body">© Copyright 2006, all rights reserved</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="id2" name="id2">目錄</a></p>
+<ul class="auto-toc simple">
+<li><a class="reference" href="#dns" id="id31" name="id31">1&nbsp;&nbsp;&nbsp;DNS 概論</a><ul class="auto-toc">
+<li><a class="reference" href="#internet-ip" id="id32" name="id32">1.1&nbsp;&nbsp;&nbsp;Internet 通訊與 IP 位址</a></li>
+<li><a class="reference" href="#id9" id="id33" name="id33">1.2&nbsp;&nbsp;&nbsp;DNS 名稱解析</a><ul class="auto-toc">
+<li><a class="reference" href="#internet-dns" id="id34" name="id34">1.2.1&nbsp;&nbsp;&nbsp;Internet DNS 規範</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#id12" id="id35" name="id35">1.3&nbsp;&nbsp;&nbsp;DNS 查詢工具</a><ul class="auto-toc">
+<li><a class="reference" href="#dig" id="id36" name="id36">1.3.1&nbsp;&nbsp;&nbsp;dig</a></li>
+<li><a class="reference" href="#host" id="id37" name="id37">1.3.2&nbsp;&nbsp;&nbsp;host</a></li>
+<li><a class="reference" href="#nslookup" id="id38" name="id38">1.3.3&nbsp;&nbsp;&nbsp;nslookup</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#id19" id="id39" name="id39">1.4&nbsp;&nbsp;&nbsp;DNS 的用途</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#id20" id="id40" name="id40">2&nbsp;&nbsp;&nbsp;DNS 伺服器基本組態</a><ul class="auto-toc">
+<li><a class="reference" href="#id22" id="id41" name="id41">2.1&nbsp;&nbsp;&nbsp;常用的伺服器設定</a><ul class="auto-toc">
+<li><a class="reference" href="#id23" id="id42" name="id42">2.1.1&nbsp;&nbsp;&nbsp;查詢的轉發</a></li>
+<li><a class="reference" href="#id24" id="id43" name="id43">2.1.2&nbsp;&nbsp;&nbsp;存取控制</a></li>
+<li><a class="reference" href="#zone" id="id44" name="id44">2.1.3&nbsp;&nbsp;&nbsp;zone 的相關設定</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#bind9-zone-file" id="id45" name="id45">2.2&nbsp;&nbsp;&nbsp;bind9 zone file</a><ul class="auto-toc">
+<li><a class="reference" href="#soa" id="id46" name="id46">2.2.1&nbsp;&nbsp;&nbsp;SOA</a></li>
+<li><a class="reference" href="#a" id="id47" name="id47">2.2.2&nbsp;&nbsp;&nbsp;A</a></li>
+<li><a class="reference" href="#cname" id="id48" name="id48">2.2.3&nbsp;&nbsp;&nbsp;CNAME</a></li>
+<li><a class="reference" href="#ns" id="id49" name="id49">2.2.4&nbsp;&nbsp;&nbsp;NS</a></li>
+<li><a class="reference" href="#mx" id="id50" name="id50">2.2.5&nbsp;&nbsp;&nbsp;MX</a></li>
+<li><a class="reference" href="#txt" id="id51" name="id51">2.2.6&nbsp;&nbsp;&nbsp;TXT</a></li>
+<li><a class="reference" href="#id25" id="id52" name="id52">2.2.7&nbsp;&nbsp;&nbsp;正查 zone</a></li>
+<li><a class="reference" href="#id26" id="id53" name="id53">2.2.8&nbsp;&nbsp;&nbsp;反查 zone</a><ul class="auto-toc">
+<li><a class="reference" href="#ptr" id="id54" name="id54">2.2.8.1&nbsp;&nbsp;&nbsp;PTR</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#subdomain" id="id55" name="id55">2.2.9&nbsp;&nbsp;&nbsp;子網域 (subdomain)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference" href="#id29" id="id56" name="id56">3&nbsp;&nbsp;&nbsp;網路服務的負載平衡</a></li>
+<li><a class="reference" href="#id30" id="id57" name="id57">4&nbsp;&nbsp;&nbsp;後話</a></li>
+</ul>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id2" id="dns" name="dns">1&nbsp;&nbsp;&nbsp;DNS 概論</a></h1>
+<p>DNS 是 Domain Name System (網域名稱系統) 的縮寫，這個歷史悠久的服務，是自從 Internet 架構建立後不久就開始發展的，它提供名稱解析 (Name Resolution) 的功能，允許我們利用邏輯性的階層方式來對整個 Internet 上的主機進行命名。</p>
+<p>網域名稱系統這個詞的念法是「網域名稱．系統」，它是指「一個系統，提供網域名稱以對 Internet 上的主機進行命名」。網域 (domain) 一詞的原意是「範圍」、「區域」，或在數學上是「域」，這裡用在 Internet 命名上的時候，則可以把它想像成一個邏輯上的區塊，雖非實體，但仍是一個可定義的範圍。</p>
+<p>Internet 上的命名系統不止 DNS 這一種，像 Unix 傳統的 host-based 命名系統、Sun 的 NIS (yp)，以及較新的 WINS 等都是，不過 DNS 架構龐大而富有彈性，使它成為 Internet 的元老級服務系統。</p>
+<p>當今大部分的 Internet 基本服務都需要靠 DNS 才能完全發揮功能，如果沒有 DNS，name-based virtual hosting 統統行不通 (也就沒有虛擬 web 主機業了)，負載平衡也會變得很複雜。最重要的是，不管我們想作什麼事情，都得靠難記的 IP 位址才能定位主機。想想看如果要上網看個新聞網頁，還得打一串像 <tt class="docutils literal"><span class="pre">http://134.2.234.21/</span></tt> 這樣的數字而不是像 <tt class="docutils literal"><span class="pre">http://news.com/</span></tt> 這種美觀大方的網址，那麼我們現在會有這麼多所謂的網路人口嗎？</p>
+<p>所以 DNS 是很重要的網路服務。</p>
+<p>本質上，所有的 Internet 名稱服務都是「名稱」與「IP」的對應表，DNS 也不例外。首先我們要對 IP 有些基本的了解，然後才能說明 DNS 名稱解析的方式。</p>
+<div class="section">
+<h2><a class="toc-backref" href="#id2" id="internet-ip" name="internet-ip">1.1&nbsp;&nbsp;&nbsp;Internet 通訊與 IP 位址</a></h2>
+<p>Internet 依靠 IP (Internet Protocol，網際網路協定) 進行點對點通訊，每個獨立的 IP 連線，被稱為一個 socket (插座)；而 socket 則是一對由 IP 位址 (address) 與 IP 埠 (port) 所構成的組合。所有的 Internet 應用程式都要使用 IP socket 來進行連線，所以被通稱為 socket 程式。</p>
+<p>顧名思義，IP 位址的用途就是定位主機在 Internet 上的位置；每一台在 Internet 上的主機，都必須要有一個 IP 位址<a class="footnote-reference" href="#id4" id="id3" name="id3"><sup>1</sup></a>。所以，想要與在 Internet 上的遠端主機進行通訊，首先就是要知道對方的 IP 位址 (也就是說，找到對方在哪裡)，後續動作才有進行的可能。</p>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3" name="id4">[1]</a></td><td>而 IP 協定中的 IP 埠，則是主機上不同的連線端口，讓同樣的兩台主機，可以藉由不同的 IP 埠建立許多個連線 (socket)。</td></tr>
+</tbody>
+</table>
+<p>IP 協定所定義的 IP 位址對 socket 程式來說是很足夠了，但一般的使用者若直接使用 IP 位址來連線主機，卻非常地不方便。這是因為 IP 位址<a class="footnote-reference" href="#id6" id="id5" name="id5"><sup>2</sup></a>是由 4 個 8 位元的數字所組成的，例如 &quot;<tt class="docutils literal"><span class="pre">11000000.10101000.00000001.00000001</span></tt>&quot; (不過通常會以十進位表示為 &quot;<tt class="docutils literal"><span class="pre">192.168.1.1</span></tt>&quot;)。如果通訊的對象是本地的區域網路，那麼要記憶幾十個這種「數字串燒」，還算作得到。問題是通訊的對象往往在很遠的遠端網路上，若有許多這種數字串，將會非常地難以管理。</p>
+<table class="docutils footnote" frame="void" id="id6" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id5" name="id6">[2]</a></td><td>IP 這個通訊協定本身是有版本的。目前通用的 IP 是版本 4，下一代的 IP 是 IPv6，也就是 Internet Protocol version 6。</td></tr>
+</tbody>
+</table>
+<p>並且，IP 位址是以實體的網路連結方式進行分節，完全無關於擁有該網路之組織的架構。同一個組織裡，若有兩個不同的區域網路分處二地，那麼在透過網際網路彼此連結時幾乎必然會分處兩個不連續<a class="footnote-reference" href="#id8" id="id7" name="id7"><sup>3</sup></a>的 IP 子網路。除了網路管理員之外，一般人幾乎沒辦法知道這兩個子網路是屬於同一個組織的。這會造成許多使用上的不便。舉例來講，公司 A 的 WWW 網站位於子網路甲，IP 位址是 <tt class="docutils literal"><span class="pre">192.168.15.3</span></tt>，而提供其試用軟體下載的 FTP 網站則位於子網路乙，IP 位址是 <tt class="docutils literal"><span class="pre">10.34.234.88</span></tt>。光從 IP 位址，使用者完全沒辦法弄清楚這兩個伺服器的服務內容，更不可能知道它們都是 A 公司的主機。</p>
+<table class="docutils footnote" frame="void" id="id8" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id7" name="id8">[3]</a></td><td>這裡的不連續指的是 IP 位址編號上的不連續。</td></tr>
+</tbody>
+</table>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id2" id="id9" name="id9">1.2&nbsp;&nbsp;&nbsp;DNS 名稱解析</a></h2>
+<p>DNS 在 IP 之外另起一個階層式的架構，讓每一個網域名稱都可以對應到一個 IP 位址。實際上在使用的時候，使用者可以完全不知道主機的 IP 位址，只需要利用網域名稱即可進行連線。當然 socket 程式還是要從主機的網域名稱來查出 IP 位址，才能建立 socket，但這個我們稱作名稱解析 (name resolution) 的動作，都是由程式私底下進行的。</p>
+<p>網域名稱通常是以 26 個英文字母、10 個數字和連字號所組成的，其間以 &quot;<tt class="docutils literal"><span class="pre">.</span></tt>&quot; 分隔階層，舉例來講，``a.b.c``, <tt class="docutils literal"><span class="pre">www.microsoft.com</span></tt>, <tt class="docutils literal"><span class="pre">this-is-my-name.net</span></tt> 等都是有效的網域名稱。</p>
+<p>假設我們有一台主機，它的網域名稱是 <tt class="docutils literal"><span class="pre">canary.troposphere.ground``，那麼其中的</span> <span class="pre">``troposphere.ground</span></tt> 和 <tt class="docutils literal"><span class="pre">ground</span></tt> 就分別代表了兩個網域 (domain)，而 <tt class="docutils literal"><span class="pre">canary</span></tt> 則是在網域中的主機名稱。在 DNS 的世界裡，階層愈高的網域會排在愈後面，所以在習慣上，<tt class="docutils literal"><span class="pre">ground</span></tt> 這一層的網域同時會被稱為 TLD (Top Level Domain)，因為它是「最上層網域」 (第二層以後就沒有特別的頭字語來稱呼了)。一個由主機與完整網域組合起來的網域名稱，被稱為 FQDN (Full Qualified Domain Name)。</p>
+<p>在 DNS 中的每一個網域下面都可以定義新的網域，而這個新的網域會被稱作「子網域」 (subdomain)；從 <tt class="docutils literal"><span class="pre">troposphere.ground</span></tt> 這個網域名稱裡可以看出，它是 <tt class="docutils literal"><span class="pre">ground</span></tt> 的子網域，或者我們也可以說 <tt class="docutils literal"><span class="pre">ground</span></tt> 下還有一個子網域 <tt class="docutils literal"><span class="pre">troposphere</span></tt>。</p>
+<p>根據這種階層式的關係，我們可以知道 <tt class="docutils literal"><span class="pre">canary.troposphere.ground</span></tt> 這台主機屬於 <tt class="docutils literal"><span class="pre">troposphere.ground</span></tt> 網域，而 <tt class="docutils literal"><span class="pre">troposphere.ground</span></tt> 又屬於 <tt class="docutils literal"><span class="pre">ground</span></tt> 網域，彼此的邏輯關係相當清楚。等到哪一天你看到某台主機叫作 <tt class="docutils literal"><span class="pre">raven.troposphere.ground</span></tt> 的時候，就可以判定它與 <tt class="docutils literal"><span class="pre">canary.troposphere.ground</span></tt> 共處於某個邏輯階層；如果你又看到有主機叫作 <tt class="docutils literal"><span class="pre">cheetah.ground</span></tt> 或 <tt class="docutils literal"><span class="pre">eagle.stratosphere.troposphere.ground</span></tt>，某種程度上，也能藉著網域階層分辨出彼此間的關係。</p>
+<p>理論上，良好的 DNS 命名設定就應該像地球的大氣一樣，一層一層地定義清楚，讓使用者更容易釐清各主機間的關係。如果我們的 DNS 系統只需要獨立運作，不必納入其它現存的命名架構，那麼從 TLD 起都可以自己定義，命名上完全自由 (一般建議網域名稱維持在 6 個字母以下，而 TLD 則是至少 2 個字母，愈短愈方便)。在一般私有的小型區域網路上 (不需與外部網路介接或具有高分隔性的網路) 很適合這種 DNS 設定方式，它能讓使用者可以一眼看明各主機間的關係，而且很容易維護。</p>
+<div class="section">
+<h3><a class="toc-backref" href="#id2" id="internet-dns" name="internet-dns">1.2.1&nbsp;&nbsp;&nbsp;Internet DNS 規範</a></h3>
+<p>不過，在大部分應用 DNS 的情況下，是要與現有的 Internet DNS 或私有 DNS 相容的，也就是說，已經有一定的命名原則要遵守了。所以通常我們都不會自行定義 TLD，因為原有的 DNS 系統一定會有 TLD 定義。</p>
+<p>以 Internet 來講，InterNIC <a class="citation-reference" href="#internic" id="id10" name="id10">[INTERNIC]</a> 負責定義所有的 TLD，而 Internet TLD 分為兩種：global TLD 與 regional TLD。global TLD 至少有 3 個字元，是全球任何人士均可申請使用的，具有全球共通的性質，目前已有 <tt class="docutils literal"><span class="pre">.com</span> <span class="pre">.net</span> <span class="pre">.org</span></tt> 以及 <tt class="docutils literal"><span class="pre">.biz</span> <span class="pre">.museum,</span> <span class="pre">...</span></tt> 等其它數個。InterNIC 把 global TLD 的註冊工作分包給全球許多個註冊單位 (registrar)，由 registrar 負責受理註冊者 (registrant) 的申請，而 InterNIC 本身不處理網域名稱的註冊作業。regional TLD 則都是 2 個字元，例如台灣的 <tt class="docutils literal"><span class="pre">.tw</span></tt>、大陸的 <tt class="docutils literal"><span class="pre">.cn</span></tt>，以及日本 <tt class="docutils literal"><span class="pre">.jp</span></tt>、英國 <tt class="docutils literal"><span class="pre">.uk</span></tt>、法國 <tt class="docutils literal"><span class="pre">.fr</span></tt>、美國 <tt class="docutils literal"><span class="pre">.us</span></tt> 等等。我們常常看到的 <tt class="docutils literal"><span class="pre">.ws</span> <span class="pre">.tv</span> <span class="pre">.cc</span> <span class="pre">.to</span> <span class="pre">...</span></tt> 等，也都是某些國家/地區的 regional TLD。regional TLD 則由各國家/地區自行維護，視各國法規而有不同的管理辦法，以台灣而言，是由 twNIC <a class="citation-reference" href="#twnic" id="id11" name="id11">[TWNIC]</a> 負責管理域名的發放。</p>
+</div>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id2" id="id12" name="id12">1.3&nbsp;&nbsp;&nbsp;DNS 查詢工具</a></h2>
+<p>沒看過實際的 DNS 資料的話，是一定沒辦法了解如何建立 DNS 系統的。在 Debian 下，我們可以透過幾個常用的查詢 (query) 工具來取得 DNS 伺服器上的資料：</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">dig</span></tt>：包裝於 <tt class="docutils literal"><span class="pre">dnsutils</span></tt>，可以對 DNS 作相當詳細的查詢。</li>
+<li><tt class="docutils literal"><span class="pre">host</span></tt>：包裝於 <tt class="docutils literal"><span class="pre">host</span></tt>，常用來作 IP 對網域名稱的反查。</li>
+<li><tt class="docutils literal"><span class="pre">nslookup</span></tt>：包裝於 <tt class="docutils literal"><span class="pre">dnsutils</span></tt>，比較老舊的查詢工具。</li>
+</ul>
+<p>功能大同小異，但每個程式的特性和使用方式都不一樣。</p>
+<p>在進行查詢之前，應該要先設定系統的預設 DNS 伺服器。設定檔的位置在 <tt class="docutils literal"><span class="pre">/etc/resolve.conf</span></tt>：</p>
+<pre class="literal-block">
+nameserver 10.11.12.20
+search troposphere.ground
+</pre>
+<p>第一行的 <tt class="docutils literal"><span class="pre">nameserver</span></tt> 指定預設的 DNS 名稱伺服器 (通常以 IP 指定伺服器<a class="footnote-reference" href="#id14" id="id13" name="id13"><sup>4</sup></a>，設定檔內可以有超過一個 <tt class="docutils literal"><span class="pre">nameserver</span></tt> 設定，系統會依序採用；如果第一個 <tt class="docutils literal"><span class="pre">nameserver</span></tt> 失效，系統會跳去使用第二個、第三個 <tt class="docutils literal"><span class="pre">nameserver</span></tt> 所設定的名稱伺服器。第二行的 <tt class="docutils literal"><span class="pre">search</span></tt> 設定系統尋找網域名稱的後飾詞 (suffix)；照範例的設定，如果使用者輸入了 <tt class="docutils literal"><span class="pre">canary</span></tt>，則系統會先去查詢 <tt class="docutils literal"><span class="pre">canary</span></tt> 這個域名，找不到的話，再查詢由 <tt class="docutils literal"><span class="pre">canary</span></tt> 和 <tt class="docutils literal"><span class="pre">troposphere.ground</span></tt> 接在一起所構成的 <tt class="docutils literal"><span class="pre">canary.troposphere.ground</span></tt>，如果還是找不到，才會宣告失敗。<tt class="docutils literal"><span class="pre">search</span></tt> 指令後可以接超過一個網域，其間以空白分隔，例如：</p>
+<table class="docutils footnote" frame="void" id="id14" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id13" name="id14">[4]</a></td><td>但也可以使用 dcfg{/etc/hosts} 中所設定的名稱。並不建議這樣作，會增加設定的複雜度。</td></tr>
+</tbody>
+</table>
+<pre class="literal-block">
+search troposphere.ground ground
+</pre>
+<p>就會指定 <tt class="docutils literal"><span class="pre">troposhphere.ground</span></tt> 和 <tt class="docutils literal"><span class="pre">ground</span></tt> 兩個網域後飾詞。</p>
+<div class="section">
+<h3><a class="toc-backref" href="#id2" id="dig" name="dig">1.3.1&nbsp;&nbsp;&nbsp;dig</a></h3>
+<p><tt class="docutils literal"><span class="pre">dig</span> <span class="pre">(1)</span></tt> 是 bind 所建議使用的查詢工具。它的基本語法如下：</p>
+<pre class="literal-block">
+dig [&#64;server] name [type]
+</pre>
+<p>其中 <tt class="docutils literal"><span class="pre">&#64;server</span></tt> 表示欲查詢的伺服器 (可省略，即使用預設伺服器)；<tt class="docutils literal"><span class="pre">name</span></tt> 是要查詢的網域名稱 (不可省略)；<tt class="docutils literal"><span class="pre">dig</span></tt> 最常見的用法是以預設伺服器，查詢某一網域名稱所包含的 DNS 資料：</p>
+<pre class="literal-block">
+$ dig www.ntu.edu.tw
+
+; &lt;&lt;&gt;&gt; DiG 9.2.2 &lt;&lt;&gt;&gt; www.ntu.edu.tw
+;; global options:  printcmd
+;; Got answer:
+;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 59125
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 3, ADDITIONAL: 3
+
+;; QUESTION SECTION:
+;www.ntu.edu.tw.                        IN      A
+
+;; ANSWER SECTION:
+www.ntu.edu.tw.         86400   IN      CNAME   w3.cc.ntu.edu.tw.
+w3.cc.ntu.edu.tw.       259200  IN      A       140.112.8.130
+
+;; AUTHORITY SECTION:
+cc.ntu.edu.tw.          259200  IN      NS      dns.ntu.edu.tw.
+cc.ntu.edu.tw.          259200  IN      NS      ntu3.ntu.edu.tw.
+cc.ntu.edu.tw.          259200  IN      NS      dns5.ntu.edu.tw.
+
+;; ADDITIONAL SECTION:
+dns.ntu.edu.tw.         86400   IN      A       140.112.254.4
+ntu3.ntu.edu.tw.        604800  IN      A       140.112.2.2
+dns5.ntu.edu.tw.        86400   IN      A       140.112.5.252
+
+;; Query time: 30 msec
+;; SERVER: 140.112.254.4#53(140.112.254.4)
+;; WHEN: Sun Jan 25 21:20:11 2004
+;; MSG SIZE  rcvd: 172
+</pre>
+<p><tt class="docutils literal"><span class="pre">dig</span></tt> 不只傳回網域名稱$rightarrow$IP 的對應，它是把 DNS 裡有關於網域名稱的資料全都傳回來，所以你會發現資料有點多。不過這正好讓我們來觀察 DNS 裡到底有哪些資料。</p>
+<p>上面這個例子是去查詢 &quot;www.ntu.edu.tw&quot; 的資料。以 <tt class="docutils literal"><span class="pre">;</span></tt> 或 <tt class="docutils literal"><span class="pre">;;</span></tt> 開頭的都是 <tt class="docutils literal"><span class="pre">dig</span></tt> 程式所輸出的註解說明，並不是 DNS 中的資料；沒有 <tt class="docutils literal"><span class="pre">;</span></tt> 開頭的就是 DNS 中的資料了。首先你發現 <tt class="docutils literal"><span class="pre">dig</span></tt> 的輸出被分成數個節區 (SECTION)，如果我們都不管 AUTHORITY 和其它相關資訊，那麼第 13 與 14 行的 ANSWER SECTION 就是我們所關心的 IP 位址資料。</p>
+<p>在 DNS 的世界中，每一筆資料被稱為一個「資源紀錄」 (resource record)，簡稱 RR。在 <tt class="docutils literal"><span class="pre">dig</span></tt> 的輸出中，每一筆資料的第四列是 RR 的型態 (type)；例如第 13 行是一個 CNAME RR，而第 14 行是 A RR。RR 的型態有數十種之多，但常用的有 A, CNAME, SOA, NS, MX, PTR 等。此處我們看到的 CNAME 代表網域名稱的別名，而 A 代表網域名稱到 IP 位址的對應，所以第 13 行這個紀錄在說明 DNS 把 <tt class="docutils literal"><span class="pre">www.ntu.edu.tw</span></tt> 對應到 <tt class="docutils literal"><span class="pre">w3.ntu.edu.tw</span></tt> 去，而第 14 行再指定 <tt class="docutils literal"><span class="pre">w3.ntu.edu.tw</span></tt> 的 IP 位址為 <tt class="docutils literal"><span class="pre">140.112.8.130</span></tt>。最後的結果就是 <tt class="docutils literal"><span class="pre">www.ntu.edu.tw</span></tt> 也指到了 <tt class="docutils literal"><span class="pre">140.112.8.130</span></tt> 這個 IP 位址。</p>
+<p>剛剛沒有說明 <tt class="docutils literal"><span class="pre">dig</span></tt> 的 <tt class="docutils literal"><span class="pre">[type]</span></tt> 參數，現在你知道，它就是用來指定查詢型態的，所以可能是 A, CNAME, SOA, NS, MX, PTR ldots 等等，如果用 ANY 的話，則會傳回所有取得的資料，不拘型態 (輸入時型態的大小寫不拘)。不指定 <tt class="docutils literal"><span class="pre">[type]</span></tt> 的話，預設是作 A 型態查詢。以下這個範例，乃是用 dig 來到 <tt class="docutils literal"><span class="pre">dns.ntu.edu.tw</span></tt> 這台 DNS 上對 <tt class="docutils literal"><span class="pre">ntu.edu.tw</span></tt> 這個 domain 作 <tt class="docutils literal"><span class="pre">type=any</span></tt> 的查詢<a class="footnote-reference" href="#id16" id="id15" name="id15"><sup>5</sup></a>：</p>
+<table class="docutils footnote" frame="void" id="id16" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id15" name="id16">[5]</a></td><td>我們假設可以查得到 <tt class="docutils literal"><span class="pre">dns.ntu.edu.tw</span></tt> 的 IP (不管是透過哪台 DNS)，如果查不到的話，就應該用 IP 來指定，如 <tt class="docutils literal"><span class="pre">&#64;140.112.254.4</span></tt>。</td></tr>
+</tbody>
+</table>
+<pre class="literal-block">
+$ dig &#64;dns.ntu.edu.tw ntu.edu.tw any
+
+; &lt;&lt;&gt;&gt; DiG 9.2.2 &lt;&lt;&gt;&gt; &#64;dns.ntu.edu.tw ntu.edu.tw any
+;; global options:  printcmd
+;; Got answer:
+;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 10428
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 8, AUTHORITY: 3, ADDITIONAL: 6
+
+;; QUESTION SECTION:
+;ntu.edu.tw.                    IN      ANY
+
+;; ANSWER SECTION:
+ntu.edu.tw.             14400   IN      MX      20
+  ccsun46.cc.ntu.edu.tw.
+ntu.edu.tw.             14400   IN      MX      0
+  lab408-167.cc.ntu.edu.tw.
+ntu.edu.tw.             14400   IN      MX      0
+  relay3.tp1rc.edu.tw.
+ntu.edu.tw.             86400   IN      A       140.112.254.4
+ntu.edu.tw.             86400   IN      NS      dns.ntu.edu.tw.
+ntu.edu.tw.             86400   IN      NS      ntu3.ntu.edu.tw.
+ntu.edu.tw.             86400   IN      NS      dns5.ntu.edu.tw.
+ntu.edu.tw.             86400   IN      SOA     dns.ntu.edu.tw.
+  madeline.ccms.ntu.edu.tw. 2003112901 86400 3600 604800 172800
+
+;; AUTHORITY SECTION:
+ntu.edu.tw.             86400   IN      NS      dns.ntu.edu.tw.
+ntu.edu.tw.             86400   IN      NS      ntu3.ntu.edu.tw.
+ntu.edu.tw.             86400   IN      NS      dns5.ntu.edu.tw.
+
+;; ADDITIONAL SECTION:
+ccsun46.cc.ntu.edu.tw.  259200  IN      A       140.112.8.46
+lab408-167.cc.ntu.edu.tw. 259200 IN     A       140.112.2.167
+relay3.tp1rc.edu.tw.    22199   IN      A       163.28.16.33
+dns.ntu.edu.tw.         86400   IN      A       140.112.254.4
+ntu3.ntu.edu.tw.        604800  IN      A       140.112.2.2
+dns5.ntu.edu.tw.        86400   IN      A       140.112.5.252
+
+;; Query time: 44 msec
+;; SERVER: 140.112.254.4#53(dns.ntu.edu.tw)
+;; WHEN: Sat Nov 29 12:12:50 2003
+;; MSG SIZE  rcvd: 371
+</pre>
+<p>這回的資訊比剛剛更多，而且不限於 A, CNAME 型態，剛剛提到的 SOA, NS, MX 都跑出來了。</p>
+<p>因為 <tt class="docutils literal"><span class="pre">dig</span></tt> 可以直接從選項來控制查詢的方式，所以除了能從終端機直接下參數觀看傳回的資料外，更便於以外部程式呼叫後用 pipe 來處理結果。配合 scripting 的話，可以輕易地把許多 DNS 資料操作自動化。</p>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id2" id="host" name="host">1.3.2&nbsp;&nbsp;&nbsp;host</a></h3>
+<p><tt class="docutils literal"><span class="pre">host</span> <span class="pre">(1)</span></tt> 這個工具的特色是預設傳回的資料比 <tt class="docutils literal"><span class="pre">dig</span></tt> 少很多，適合於只想知道主機 IP 的時候：</p>
+<pre class="literal-block">
+$ host cheetah.ground
+cheetah.ground              A       10.11.12.20
+</pre>
+<p>它用來作 IP 到域名的反查時更方便：</p>
+<pre class="literal-block">
+$ host 10.11.12.20
+Name: cheetah.ground
+Address: 10.11.12.20
+</pre>
+<p>所謂的反查，是指型態為 PTR 的 RR，PTR 只包含 IP 對應到網域名稱的資料。反查的 DNS 適合為一些靠篩選 IP 來源進行存取控制的程式來提供名稱服務。這樣在判斷來源 IP 時，可以不用把 IP 位址寫死在程式的設定檔內，而能把實際的 IP 範圍獨立出來放到 DNS 裡面，程式裡只需要判斷來源主機的網域名稱是否位於正確的網域內即可，可以提高程式設定的邏輯性。</p>
+<p><tt class="docutils literal"><span class="pre">host</span></tt> 在進行反查的時候會順便正查該域名的 IP (正查與反查常常不是一一對應的)。除了簡單的主機 IP 正反查之外，<tt class="docutils literal"><span class="pre">host</span></tt> 還有許多其它的功能，茲舉其大者：</p>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">host</span> <span class="pre">name</span> <span class="pre">[server]</span></tt></p>
+<p><tt class="docutils literal"><span class="pre">name</span></tt> 是要正查或反查的域名或 IP。這是最簡單的正反查用法，之前已經舉過例子了。在 <tt class="docutils literal"><span class="pre">name</span></tt> 之後可以指定要查詢的 DNS，如果沒有指定的話，預設是利用 dcfg{/etc/resolve.conf} 所設定的 DNS。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">host</span> <span class="pre">-l</span> <span class="pre">zone</span> <span class="pre">[server]</span></tt></p>
+<p>加上 <tt class="docutils literal"><span class="pre">-l</span></tt> 選項，<tt class="docutils literal"><span class="pre">host</span></tt> 就可以列出整個 zone (domain) 裡的所有域名。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">host</span> <span class="pre">-H</span> <span class="pre">zone</span></tt></p>
+<p><tt class="docutils literal"><span class="pre">-H</span></tt> 後以名稱指定 zone，會算出這個 zone 裡所有不同域名的總數。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">host</span> <span class="pre">-C</span> <span class="pre">zone</span></tt></p>
+<p><tt class="docutils literal"><span class="pre">-C</span></tt> 後以名稱指定 zone，則列出這個 zone 的 SOA 紀錄。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">host</span> <span class="pre">-A</span> <span class="pre">host</span></tt></p>
+<p><tt class="docutils literal"><span class="pre">-A</span></tt> 後面接的是主機，它會檢查這台主機域名的正反查資訊。如果正查與反查沒有一一對應，<tt class="docutils literal"><span class="pre">host</span></tt> 就會傳回不吻合的資訊，反之若已正確對應，則不會傳回任何訊息。</p>
+</li>
+</ul>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id2" id="nslookup" name="nslookup">1.3.3&nbsp;&nbsp;&nbsp;nslookup</a></h3>
+<p><tt class="docutils literal"><span class="pre">nslookup</span> <span class="pre">(1)</span></tt> 是老牌的 DNS 查詢工具。在提示符號下輸入 <tt class="docutils literal"><span class="pre">nslookup</span></tt>，就會出現如下的 CLIfootnote{Command Line Interface 的簡寫；文字模式介面。}：</p>
+<pre class="literal-block">
+$ nslookup
+Note:  nslookup is deprecated and may be removed from future releases.
+Consider using the `dig' or `host' programs instead.  Run nslookup with
+the `-sil[ent]' option to prevent this message from appearing.
+&gt;
+</pre>
+<p><tt class="docutils literal"><span class="pre">nslookup</span></tt> 真的很老牌，老到 bind 已經在考慮丟掉這個工具，改以更新的 <tt class="docutils literal"><span class="pre">dig</span></tt> 來代替了，所以每次執行它都要告訴你一次。不過 <tt class="docutils literal"><span class="pre">nslookup</span> <span class="pre">-sil</span></tt> 可以關掉這個訊息 (當然不關掉也不會怎麼樣，不用擔心它不讓你用)<a class="footnote-reference" href="#id18" id="id17" name="id17"><sup>6</sup></a>。</p>
+<table class="docutils footnote" frame="void" id="id18" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id17" name="id18">[6]</a></td><td>你可以在 .bashrc 裡設一個 <tt class="docutils literal"><span class="pre">alias</span> <span class="pre">nslookup='nslookup</span> <span class="pre">-sil'</span></tt>，一勞永逸地關掉這個訊息。</td></tr>
+</tbody>
+</table>
+<p>在 <tt class="docutils literal"><span class="pre">nslookup</span></tt> 的提示符號 <tt class="docutils literal"><span class="pre">&gt;</span></tt> 後可以輸入指令。先試試輸入 <tt class="docutils literal"><span class="pre">server</span></tt>，出來的結果會像這樣：</p>
+<pre class="literal-block">
+&gt; server
+Default server: 127.0.0.1
+Address: 127.0.0.1#53
+Default server: 10.11.12.20
+Address: 10.11.12.20#53
+&gt;
+</pre>
+<p><tt class="docutils literal"><span class="pre">server</span></tt> 後面接伺服器名稱，就能把查詢主機換成設定的主機，例如：</p>
+<pre class="literal-block">
+&gt; server 10.11.12.20
+Default server: 10.11.12.20
+Address: 10.11.12.20#53
+&gt;
+</pre>
+<p>換過去了。接下來，直接輸入 DN 就會開始查詢：</p>
+<pre class="literal-block">
+&gt; cheetah.ground
+Server:         10.11.12.20
+Address:        10.11.12.20#53
+
+Name:   cheetah.ground
+Address: 10.11.12.20
+&gt; ground
+Server:         10.11.12.20
+Address:        10.11.12.20#53
+
+Name:   ground
+Address: 10.11.12.20
+&gt;
+</pre>
+<p>這裡查詢了 <tt class="docutils literal"><span class="pre">cheetah.ground</span></tt> 和 <tt class="docutils literal"><span class="pre">ground</span></tt> 兩個範例域名，都指到了範例伺服器 <tt class="docutils literal"><span class="pre">10.11.12.20</span></tt>。</p>
+<p><tt class="docutils literal"><span class="pre">set</span></tt> 指令可以用來設定 <tt class="docutils literal"><span class="pre">nslookup</span></tt> 對伺服器進行查詢的方式。<tt class="docutils literal"><span class="pre">set</span> <span class="pre">all</span></tt> 會顯示目前的設定：</p>
+<pre class="literal-block">
+&gt; set all
+Default server: 10.11.12.20
+Address: 10.11.12.20#53
+
+Set options:
+  novc                  nodebug         nod2
+  search                recurse
+  timeout = 0           retry = 2       port = 53
+  querytype = A         class = IN
+  srchlist = leaf
+&gt;
+</pre>
+<p>可以設定的選項有很多，例如 <tt class="docutils literal"><span class="pre">class</span></tt>, <tt class="docutils literal"><span class="pre">domain</span></tt>, <tt class="docutils literal"><span class="pre">type</span></tt> ... 等等，最常用的可能是 <tt class="docutils literal"><span class="pre">set</span> <span class="pre">type=any</span></tt>：</p>
+<pre class="literal-block">
+&gt; set type=any
+&gt;
+</pre>
+<p><tt class="docutils literal"><span class="pre">set</span> <span class="pre">type=any</span></tt> 之後的查詢，會傳回該域名的所有 RR。</p>
+</div>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id2" id="id19" name="id19">1.4&nbsp;&nbsp;&nbsp;DNS 的用途</a></h2>
+<p>DNS 除了作簡單的網域名稱/IP 對應之外，還可以藉由這個功能，延伸出許多應用：</p>
+<ul class="simple">
+<li>負載平衡。為同一個網域名稱指定多個 IP，很容易可以為伺服器提供負載平衡的能力。</li>
+<li>name-based 虛擬主機。伺服軟體 (例如 web server) 配合 DNS 的設定，可以在同一台主機上以不同的 DNS 名稱建立虛擬主機。</li>
+<li>電子郵件重導向。利用 MX 紀錄，可以在 DNS 上對電子郵件進行導向操作。也就是說，寄向 A 主機的郵件可以從 DNS 上直接導向 B 主機。</li>
+</ul>
+<p>不過 DNS 在管理上所帶來的便利性，還是它最重要的功能。我們已經把 DNS 介紹過了一遍，從基本概念談到 DNS 資料的操作，相信將會有助於了解何謂 DNS 系統。</p>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id2" id="id20" name="id20">2&nbsp;&nbsp;&nbsp;DNS 伺服器基本組態</a></h1>
+<p>Debian 以 bind 作為系統的 DNS 伺服軟體。bind (Berkeley Internet Name Domain)，是 Internet 上最廣為使用的 DNS 伺服軟體，目前 Debian (sarge) 所提供的是 bind9。</p>
+<p>bind9 在許多功能上不同於之前的版本 (bind4, bind8)，因為基於功能與安全性的理由，ISC 已經將它全部重頭改寫了。目前 Debian 3.0r1 所提供的 bind 版本是 9.2.1；套件名稱是 <tt class="docutils literal"><span class="pre">bind9</span></tt>。在架設 DNS 之前，當然要先把這個伺服軟體套件安裝起來：</p>
+<pre class="literal-block">
+apt-get install bind9 bind9-doc
+</pre>
+<p>上面的指令會順便安裝 <tt class="docutils literal"><span class="pre">bind9</span></tt> 的文件，其中包含了 bind 製作團體所發佈的 Administrator Reference Manual [ARM]，極具參考價值。</p>
+<p>bind9 有兩種設定檔，一種是 bind9 伺服器本身的設定檔，而另一種是存放 DNS 資料用的檔案，稱作 zone 檔。所謂的 zone 就是指網域，但在 bind9 中稱為 zone。Debian 預設將這些檔案都放在 <tt class="docutils literal"><span class="pre">/etc/bind</span></tt> 目錄下，其中 <tt class="docutils literal"><span class="pre">/etc/bind/named.conf</span></tt> 是 bind9 主要的設定檔，而 zone 檔一般都取名作 <tt class="docutils literal"><span class="pre">db.*</span></tt>。</p>
+<p>首先，來看看 <tt class="docutils literal"><span class="pre">/etc/bind/named.conf</span></tt> 該怎麼設定。預設的 <tt class="docutils literal"><span class="pre">named.conf</span></tt> 列於<a class="reference" href="#id21">設定檔 1</a>，其內容主要可以分成兩種區塊：options 和 zone。bind9 的所有全域設定都放在 options 區塊裡，而區塊與區塊間會以一對大括號與分號區隔開來 (和 C 語言的語法一樣)；zone 區塊中則存放了 DNS 網域的設定，一個 bind 可以服務許多個網域，也就會有多個 zone 區塊。在全域 options 裡的設定會應用於所有的 zone 裡面。</p>
+<p id="id21">設定檔 1: 預設的 dcfg{/etc/bind/named.conf} (經過編修)</p>
+<pre class="literal-block">
+options {
+        directory &quot;/var/cache/bind&quot;;
+        auth-nxdomain no;
+};
+
+zone &quot;.&quot; {
+        type hint;
+        file &quot;/etc/bind/db.root&quot;;
+};
+
+zone &quot;localhost&quot; {
+        type master;
+        file &quot;/etc/bind/db.local&quot;;
+};
+
+zone &quot;127.in-addr.arpa&quot; {
+        type master;
+        file &quot;/etc/bind/db.127&quot;;
+};
+
+zone &quot;0.in-addr.arpa&quot; {
+        type master;
+        file &quot;/etc/bind/db.0&quot;;
+};
+
+zone &quot;255.in-addr.arpa&quot; {
+        type master;
+        file &quot;/etc/bind/db.255&quot;;
+};
+</pre>
+<p>options 區塊的基本設定很簡單，在第 2 行的 directory 會設定 bind 的工作目錄，預設為 /var/cache/bind，而第 3 行的 auth-nxdomain no，則用來避免不正常地設定 NXDOMAIN 回應中的 AA (Authoritative Answer) 位元。這樣的預設值已經可以讓伺服器正常地運作了。</p>
+<p>bind9 一安裝好，就預設有 5 個 zone。zone type 總共有 6 種，分別具有不同的功能：</p>
+<ul class="simple">
+<li>master：DNS 主伺服器，包含 zone 的所有 RR 資料。</li>
+<li>slave：master zone 的複製伺服器，它會定期從 master DNS 裡更新資料，再提供給查詢者。</li>
+<li>stub：和 slave zone 一樣作 master zone 的快取，但 stub 只快取 master zone 中的 NS 紀錄。stub 不是 DNS 中的標準型態，只是 bind 提供的附加功能。一般很少用。</li>
+<li>forward：這種 zone 只會把收到的查詢轉發給另一個 DNS 伺服器，取得資料後再送回給查詢者，它本身只快取查到的資料，不包含其它紀錄。</li>
+<li>hint：這是一種特別的 zone，用來「提示」root 名稱伺服器的位置。如果伺服器沒有設定 hint zone 的話，程式會用內建的 hint 表格來找出 root 名稱伺服器。</li>
+<li>delegation-only：這種 zone 只用於 TLD 進行 delegation。</li>
+</ul>
+<p>在預設的 5 個 zone 裡，&quot;.&quot; 是 hint zone，而另外幾個 zone 則分別是：</p>
+<ul class="simple">
+<li>broadcasting zone：&quot;0.in-addr.arpa&quot;, &quot;255.in-addr.arpa&quot;。</li>
+<li>loopback zone：&quot;localhost&quot;, &quot;127.in-addr.arpa&quot;。</li>
+</ul>
+<p>在 zone 名稱尾端若接有 .in-addr.arpa 者，就是反查 zone，而在 .in-addr.arpa 前要以相反順序接上該反查 subnet 的 IP。例如若要為 &quot;192.168.1/24&quot; subnet 設立反查 zone，則 zone 名稱就要寫作 1.168.192.in-addr.arpa。所以，broadcasting 和 loopback zone 都各有一個正查與反查 zone。</p>
+<p>預設的 named.conf 已經可以讓伺服器正常啟動了，一般啟動伺服器會用</p>
+<pre class="literal-block">
+/etc/init.d/bind9 start
+</pre>
+<p>指令。不過這時候伺服器內僅有預設的資料，雖然能動，但實際上是沒有用的。</p>
+<p>當我們要建立 DNS 伺服器時，在最單純的狀態之下，最少都會有一個額外的 master zone，而在一般性的小型辦公室網路中，則通常會設定一個正查的 master zone 加上一個反查的 master zone。slave 多半只會用在較大型的網域，需要多台 DNS 伺服器分擔查詢流量或是作為備援之用。forward zone 可以用來達成某些存取控制的功能，用在比較複雜的 DNS 設定中。</p>
+<div class="section">
+<h2><a class="toc-backref" href="#id2" id="id22" name="id22">2.1&nbsp;&nbsp;&nbsp;常用的伺服器設定</a></h2>
+<p>關於設定 DNS 伺服器，最重要的是如何控制伺服器的行為，其次才是管理 DNS 中的資料。所以在這裡，我們先把 bind 組態檔 named.conf 裡的設定描述清楚，了解如何對客戶端的查詢進行基本的控制。我們先從其中最常用的開始。</p>
+<div class="section">
+<h3><a class="toc-backref" href="#id2" id="id23" name="id23">2.1.1&nbsp;&nbsp;&nbsp;查詢的轉發</a></h3>
+<p>在 named.conf 的全域 options 區段中可以進行以下的設定：</p>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">forwarders</span> <span class="pre">{</span> <span class="pre">ip_addr</span> <span class="pre">[port</span> <span class="pre">ip_port]</span> <span class="pre">;</span> <span class="pre">...</span> <span class="pre">}</span></tt>：</p>
+<p><tt class="docutils literal"><span class="pre">forwarders</span></tt> 指定要轉發至的名稱伺服器位置，如果這台伺服器所有的 zone 都找不到要求的紀錄資料，就會依序把查詢要求轉發到 <tt class="docutils literal"><span class="pre">forwarders</span></tt> 所指定的名稱伺服器去。``forwarders`` 預設是空的，也就是不進行轉發的動作。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">forward</span> <span class="pre">(</span> <span class="pre">only</span> <span class="pre">|</span> <span class="pre">first</span> <span class="pre">)</span></tt>：</p>
+<p>這個選項在 <tt class="docutils literal"><span class="pre">forwarders</span></tt> 有東西時才有作用。預設是 <tt class="docutils literal"><span class="pre">forward</span> <span class="pre">first</span></tt> (只設定 <tt class="docutils literal"><span class="pre">forward</span></tt> 的情況下)，讓伺服器先把查詢要求轉發到 <tt class="docutils literal"><span class="pre">forwarders</span></tt> 所指定的名稱伺服器去，如果查無結果，才會從自己的 zone 裡找資料。另外如果設為 <tt class="docutils literal"><span class="pre">forward</span> <span class="pre">only``，則伺服器只會把查詢轉發到</span> <span class="pre">``forwarders</span></tt> 指定的名稱伺服器，不查詢本地的 zone。</p>
+<p><tt class="docutils literal"><span class="pre">forward</span></tt> 選項會讓伺服器作用成以轉發動作為主，甚至只進行轉發動作的 caching-only DNS。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">recursion</span> <span class="pre">(</span> <span class="pre">yes</span> <span class="pre">|</span> <span class="pre">no</span> <span class="pre">)</span></tt>' ：</p>
+<p>預設是 <tt class="docutils literal"><span class="pre">yes``，讓伺服器在接到查詢要求後會採行所有手段來完成查詢。如果設成</span> <span class="pre">``no``，則若伺服器自身的</span> <span class="pre">zone</span> <span class="pre">或快取內沒有所要求的資料時，就會直接回傳參考資訊。我們在設定</span> <span class="pre">master-only</span> <span class="pre">伺服器時，常常會設成</span> <span class="pre">``recursion</span> <span class="pre">no</span></tt>。</p>
+</li>
+</ul>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id2" id="id24" name="id24">2.1.2&nbsp;&nbsp;&nbsp;存取控制</a></h3>
+<p>在進行存取控制 (access control) 的設定前，要先於全域設定中指定客戶端來源位址的存取控制列表 (access control list)，也就是撰寫正確的 acl 陳述式：</p>
+<pre class="literal-block">
+acl acl-name {
+    address_match_list
+};
+</pre>
+<p>其中 <tt class="docutils literal"><span class="pre">acl-name</span></tt> 是該 acl 的名稱，而 <tt class="docutils literal"><span class="pre">address_match_list</span></tt> 為該 acl 所指定的來源位址列表。``address_match_list`` 的寫法為</p>
+<pre class="literal-block">
+ip_address/netmask; ...
+</pre>
+<p>例如</p>
+<pre class="literal-block">
+acl &quot;localnet&quot; {
+  192.168.1.0/24;
+  192.168.2.128/25;
+};
+</pre>
+<p>者，將指定 &quot;192.168.1.0/24&quot; 這個 class C 和 &quot;192.168.2.128/25&quot; 這後半個 class C 子網路為 acl <tt class="docutils literal"><span class="pre">localnet</span></tt>。另外，bind9 預設有幾個 ACL：</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">any</span></tt>：代表所有主機。</li>
+<li><tt class="docutils literal"><span class="pre">none</span></tt>：代表空列表。</li>
+<li><tt class="docutils literal"><span class="pre">localhost</span></tt>：代表任何一個 ipv4 本機位址。</li>
+<li><tt class="docutils literal"><span class="pre">localnets</span></tt>：代表任何一個本機所在的 ipv4 子網路。</li>
+</ul>
+<p>在 options 裡有幾個可以用來進行存取控制的 allow-* 指令，茲舉其大者：</p>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">allow-notify</span> <span class="pre">{</span> <span class="pre">acl-name</span> <span class="pre">;</span> <span class="pre">acl-name</span> <span class="pre">;</span> <span class="pre">...</span> <span class="pre">}</span></tt>：</p>
+<p>指定可以向 slave 伺服器發出 notify 訊息的主機。這個選項只對 slave 伺服器有意義。預設只允許該 zone 的 master 主機發出 notify。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">allow-query</span> <span class="pre">{</span> <span class="pre">acl-name</span> <span class="pre">;</span> <span class="pre">acl-name</span> <span class="pre">;</span> <span class="pre">...</span> <span class="pre">}</span></tt>：</p>
+<p>指定可以對伺服器發出查詢的主機，預設是允許所有主機的查詢。通常我們會利用這個選項來管理伺服器要服務的對象。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">allow-recursion</span> <span class="pre">{</span> <span class="pre">acl-name</span> <span class="pre">;</span> <span class="pre">acl-name</span> <span class="pre">;</span> <span class="pre">...</span> <span class="pre">}</span></tt>：</p>
+<p>指定可以對伺服器發出遞迴查詢的主機，預設是允許所有主機的遞迴查詢。不過即使主機不能發出遞迴查詢，仍可以取得伺服器已快取住的資料。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">allow-transfer</span> <span class="pre">{</span> <span class="pre">acl-name</span> <span class="pre">;</span> <span class="pre">acl-name</span> <span class="pre">;</span> <span class="pre">...</span> <span class="pre">}</span></tt>：</p>
+<p>指定可以把伺服器 zone 資料轉移出來的主機，預設是允許所有主機進行 transfer。通常我們會對 zone transfer 作比較嚴格的限制。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">blackhole</span> <span class="pre">{</span> <span class="pre">acl-name</span> <span class="pre">;</span> <span class="pre">acl-name</span> <span class="pre">;</span> <span class="pre">...</span> <span class="pre">}</span></tt>：</p>
+<p>被指定為 blockhole 的主機，所有的查詢要求都會被伺服器忽略，而不傳回任何訊息。預設是 <tt class="docutils literal"><span class="pre">none</span></tt>。</p>
+</li>
+</ul>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id2" id="zone" name="zone">2.1.3&nbsp;&nbsp;&nbsp;zone 的相關設定</a></h3>
+<p>在 named.conf 中全域的 options 都會應用到各個 zone 區段內，而一個有效的 zone，通常來說至少需要有：</p>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">type</span> <span class="pre">(</span> <span class="pre">master</span> <span class="pre">|</span> <span class="pre">slave</span> <span class="pre">)</span></tt>：</p>
+<p>用來定義該 zone 的型態；通常是 master 與 slave 這兩種，stub, forward 較少用到，而 delegation-only 則幾乎不會使用。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">file</span> <span class="pre">file-name-string</span></tt>：</p>
+<p>指定該 zone 的資料檔為 <tt class="docutils literal"><span class="pre">file-name-string</span></tt> 所示的檔案。</p>
+</li>
+</ul>
+<p><tt class="docutils literal"><span class="pre">zone</span></tt> 陳述式本身的語法為</p>
+<pre class="literal-block">
+zone zone-name-string {
+  type type-name;
+  file file-name-string;
+  [ options ... ];
+  .
+  .
+};
+</pre>
+<p><tt class="docutils literal"><span class="pre">zone-name-string</span></tt> 是一個字串，用來指定 zone 的名字。如果我們要為 <tt class="docutils literal"><span class="pre">ground</span></tt> 網域建立一個 zone，則 <tt class="docutils literal"><span class="pre">zone-name-string</span></tt> 就是 <tt class="docutils literal"><span class="pre">&quot;ground&quot;</span></tt>，陳述式寫為</p>
+<pre class="literal-block">
+zone &quot;ground&quot; {
+  type master;
+  file &quot;db.ground&quot;;
+};
+</pre>
+<p>像這樣，是一個正查的 master zone。如果我們想建立反查的 zone，就得照之前提過的格式指定 <tt class="docutils literal"><span class="pre">zone-name-string</span></tt>，以 <tt class="docutils literal"><span class="pre">192.168.1/24</span></tt> 這個子網路的反查為例，要用以下的設定：</p>
+<pre class="literal-block">
+zone &quot;1.168.192.in-addr.arpa&quot; {
+  type master;
+  file &quot;db.192.168.1&quot;;
+};
+</pre>
+<p>在 zone 區段中，之前提到的某些全域設定也可以使用，如 <tt class="docutils literal"><span class="pre">forwarders</span></tt>, <tt class="docutils literal"><span class="pre">forward</span></tt>, <tt class="docutils literal"><span class="pre">allow-notify</span></tt>, <tt class="docutils literal"><span class="pre">allow-query</span></tt>, <tt class="docutils literal"><span class="pre">allow-recursion</span></tt>, <tt class="docutils literal"><span class="pre">allow-transfer</span></tt> 等 (acl 則仍需在全域的 options 外設定)。如果同樣的設定同時出現在全域與 zone 區段內，則區段內的設定會覆蓋掉全域設定。通常同一個伺服器在服務多個 zone 時，都會視需要對不同的 zone 設定個別的存取控制。</p>
+<p>zone 中有專用的存取控制選項，最常見的專門選項是用於動態更新：</p>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">allow-update</span> <span class="pre">{</span> <span class="pre">ip_address/netmask</span> <span class="pre">;</span> <span class="pre">...</span> <span class="pre">}</span></tt>：</p>
+<p>指定允許進行 dynamic DNS 更新的來源主機，預設值是禁止任何動態更新。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">update-policy</span></tt>：</p>
+<p>這是 bind9 的新功能，允許伺服器使用公開金鑰系統來驗證客戶端是否有權進行動態更新。</p>
+</li>
+</ul>
+<p>這兩個選項是互斥的，不能同時出現。</p>
+<p>一般來說，zone 區段中只要有基本的型態與檔案名稱設定，最多再加上常用的存取控制選項，就足供大部分的環境使用了。一個 named.conf 有了全域 options 與 zone 區段的設定 ，就可以開始對網域服務。至於像 slave zone、DNSSEC (DNS 安全性) 等進階的主題，容後再議。</p>
+</div>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id2" id="bind9-zone-file" name="bind9-zone-file">2.2&nbsp;&nbsp;&nbsp;bind9 zone file</a></h2>
+<p>named.conf 設定完成之後，就要把網域所需的資料填進 zone file 裡面去。DNS zone file 裡的資料是以紀錄 (resource record, RR) 為單位，而 DNS 紀錄有許多不同的種類，可以算是相當地複雜。這裡我們會對基本的 RR 作說明，不過在實際說明之前，先介紹一下 RR 中固定的資料元件：</p>
+<ul class="simple">
+<li>擁有者名稱 (owner name)：該 RR 所在的網域名稱。</li>
+<li>型態 (type)：一個 16 位元的編號值，指定該 RR 的型態。我們在 zone file 裡會用比較好記的別名進行設定。</li>
+<li>存活時間 (TTL)：time to live。它是一個 32 位元，以秒為單位的整數，作用於 RR 被快取時，讓解析主機可以決定該快取這個 RR 多久。</li>
+<li>類別 (class)：16 位元編碼值，指定 RR 的協定族 (protocol family) 或協定實體 (protocol instance)。在 Internet 幾乎只使用 IN (INternet) 類別，而 hisiod 和 CHAOS 類別甚少實用。</li>
+<li>資源資料 (RDATA)：與型態和類別相依的資料，用來描述該紀錄的資源。</li>
+</ul>
+<p>所有的 master zone，在 zone file 的開頭都會有一個 <tt class="docutils literal"><span class="pre">$TTL</span></tt> 的設定，其後接以秒為單位的整數值，如</p>
+<pre class="literal-block">
+$TTL  608400
+</pre>
+<p>它是 zone file 專用的指令，用來指定所有 RR 的 TTL，這樣就不用為每一個 RR 指定 TTL 值 (所以，如果你想為每一個 RR 個別指定 TTL，那也可以不設定 <tt class="docutils literal"><span class="pre">$TTL</span></tt>，不過很少人會這樣作)。</p>
+<div class="section">
+<h3><a class="toc-backref" href="#id2" id="soa" name="soa">2.2.1&nbsp;&nbsp;&nbsp;SOA</a></h3>
+<p>除了 <tt class="docutils literal"><span class="pre">$TTL</span></tt> 之外，<tt class="docutils literal"><span class="pre">SOA</span></tt> (Start of a zone Of Authority) 是 master zone 必備的 RR，它一定要是第一個 RR，格式是</p>
+<pre class="literal-block">
+&#64;    IN    SOA    admin-host    email (
+     serial;
+     refresh;
+     retry;
+     expire;
+     negative-cache-TTL; )
+</pre>
+<p>其中第一個 &quot;<tt class="docutils literal"><span class="pre">&#64;</span></tt>&quot; 代表 zone 所關聯的網域本身，而 <tt class="docutils literal"><span class="pre">admin-host</span></tt> 是該網域的管理主機；<tt class="docutils literal"><span class="pre">email</span></tt> 為管理員郵件位址。在這些資料的後面，會再由一對括號包起來五個整數值，分別代表</p>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">serial</span></tt>：序號；當其它伺服器在快取這個 zone 時，會依照這個值判斷所取得資料是否比已快取的資料更新，所以當 zone file 內容有改變時，要讓序號至少比原來大 1。</p>
+<p>序號值是一個 32 位元有號整數。有人設定序號的習慣是 yyyymmddnn，總共 10 碼的數字，首四碼是西元年，次二碼是月、再次二碼是日，末二碼為當日序號。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">refresh</span></tt>：DNS 伺服器更新快取的時間，單位為秒，一般設為 7 天。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">retry</span></tt>：DNS 在更新 zone 失敗時，嚐試重新更新的間隔。單位為秒。一般設為 1 天。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">expire</span></tt>：zone data 在 DNS 內失效的時間，單位為秒。一般設為 28 天。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">negative-cache-TTL</span></tt>：這個值是設定其它 DNS 多久會從你這裡取得 no such domain (NXDOMAIN) 的訊息，單位為秒。一般設為 1 天。</p>
+</li>
+</ul>
+<p>我們仍然舉 <tt class="docutils literal"><span class="pre">ground</span></tt> 這個網域的 zone file 為例：</p>
+<pre class="literal-block">
+&#64;    IN     SOA     cheetah.ground.   root.cheetah.ground. (
+     2003122501 ;
+     604800     ;
+     86400      ;
+     2419200    ;
+     86400   )
+</pre>
+<p>注意到我們在設定 &quot;admin-host&quot; 的時候，在尾巴加上了一個 &quot;.&quot;，這是因為在 zone file 中，如果網域名稱沒有加上 &quot;.&quot; 的話，伺服器會自動在後面加上該 zone 所關聯的網域名稱。所以，&quot;cheetah.ground&quot; 這個名稱在 zone file 裡面代表的其實是 &quot;cheetah.ground.ground&quot; 這個網域名稱，如果我們要指定 &quot;cheetah.ground&quot; 這個名稱的話，一定要在後面加上 &quot;.&quot; 才可以，(也就是寫成 &quot;cheetah.ground.&quot;)。另外，因為 &quot;&#64;&quot; 在 zone file 中特別代表與 zone 關聯的網域，所以在設定 &quot;email`` 的時候得用 &quot;.&quot; 來代替 &quot;&#64;&quot;。</p>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id2" id="a" name="a">2.2.2&nbsp;&nbsp;&nbsp;A</a></h3>
+<p><tt class="docutils literal"><span class="pre">A</span></tt> 可以指定網域名稱到 IP 的對應，格式為</p>
+<pre class="literal-block">
+name     IN     A     ip-address
+</pre>
+<p>以 <tt class="docutils literal"><span class="pre">ground</span></tt> 網域中的 <tt class="docutils literal"><span class="pre">cheetah.ground</span></tt> 為例</p>
+<pre class="literal-block">
+cheetah     IN     A     10.11.12.20
+</pre>
+<p>會把 <tt class="docutils literal"><span class="pre">cheetah.ground</span></tt> 指到 10.11.12.20。</p>
+<p>基本上，<tt class="docutils literal"><span class="pre">A</span></tt> 紀錄應該是 zone file 裡最常用的紀錄型態，所有的網域名稱到 IP 的對應都是用 <tt class="docutils literal"><span class="pre">A</span></tt> 紀錄指定的。此外，<tt class="docutils literal"><span class="pre">&#64;</span></tt> 也可以用在 <tt class="docutils literal"><span class="pre">A</span></tt> 記錄裡面，如</p>
+<pre class="literal-block">
+&#64;     IN     A     10.11.12.20
+</pre>
+<p>就會為 zone 關聯網域指定 IP <tt class="docutils literal"><span class="pre">10.11.12.20</span></tt>。</p>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id2" id="cname" name="cname">2.2.3&nbsp;&nbsp;&nbsp;CNAME</a></h3>
+<p><tt class="docutils literal"><span class="pre">CNAME</span></tt> 中的 C 是指 Canonical，可以當作是 DNS 中的別名設定。格式為</p>
+<pre class="literal-block">
+name     IN     CNAME     alias
+</pre>
+<p>假設我們要在 <tt class="docutils literal"><span class="pre">ground</span></tt> 網域內新建一個名稱 <tt class="docutils literal"><span class="pre">predator.ground</span></tt>，設定為 <tt class="docutils literal"><span class="pre">cheetah.ground</span></tt> 的別名：</p>
+<pre class="literal-block">
+predator     IN     CNAME     cheetah
+</pre>
+<p>那麼客戶端在查詢 <tt class="docutils literal"><span class="pre">predator.ground</span></tt> 時，會先查到它是 <tt class="docutils literal"><span class="pre">cheetah.ground</span></tt> 的 <tt class="docutils literal"><span class="pre">CNAME``，再進一步查詢</span> <span class="pre">``cheetah.ground</span></tt> 時，就能取得其 IP (如同第 1 節查詢 <tt class="docutils literal"><span class="pre">www.ntu.edu.tw</span></tt> 時的狀況)。</p>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id2" id="ns" name="ns">2.2.4&nbsp;&nbsp;&nbsp;NS</a></h3>
+<p><tt class="docutils literal"><span class="pre">NS</span></tt> 會指定網域的名稱伺服器，格式為</p>
+<pre class="literal-block">
+name    IN    NS    name-server
+</pre>
+<p><tt class="docutils literal"><span class="pre">name</span></tt> 是被指定的網域，而 <tt class="docutils literal"><span class="pre">name-server</span></tt> 則為名稱伺服器。名稱伺服器可以用 IP，也可以用網域名稱來指定，如果用 IP 的話，會像</p>
+<pre class="literal-block">
+ground.    IN    NS    10.11.12.20
+</pre>
+<p>而如果用網域名稱的話，還要配合 <tt class="docutils literal"><span class="pre">A</span></tt> 紀錄，才能讓客戶端查到名稱伺服器的 IP：</p>
+<pre class="literal-block">
+ground.    IN    NS    ns.ground.
+ns.ground. IN    A     10.11.12.20
+</pre>
+<p>在 zone file 裡指定關聯網域的 <tt class="docutils literal"><span class="pre">NS</span></tt> 時，通常我們會用上 <tt class="docutils literal"><span class="pre">&#64;</span></tt>：</p>
+<pre class="literal-block">
+&#64;          IN    NS    ns
+ns         IN    A     10.11.12.20
+</pre>
+<p>這兩筆紀錄不見得要擺在一起，分開放有時候反而可以加強 zone file 的結構。</p>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id2" id="mx" name="mx">2.2.5&nbsp;&nbsp;&nbsp;MX</a></h3>
+<p><tt class="docutils literal"><span class="pre">MX</span></tt> 紀錄用來設定網域名稱的郵件交換主機 (<tt class="docutils literal"><span class="pre">MX</span></tt> 為 Mail eXchanger 之意)，格式為</p>
+<pre class="literal-block">
+name     IN     MX     proirity     mail-exchanger
+</pre>
+<p><tt class="docutils literal"><span class="pre">name</span></tt> 是網域名稱；<tt class="docutils literal"><span class="pre">priority</span></tt> 為此 <tt class="docutils literal"><span class="pre">MX</span></tt> 的優先度，乃一 16 位元整數，數字愈小優先度愈高；<tt class="docutils literal"><span class="pre">mail-exchanger</span></tt> 為郵件交換主機，通常是另一個網域名稱。</p>
+<p>假設我們要為 <tt class="docutils literal"><span class="pre">ground</span></tt> 網域設定 <tt class="docutils literal"><span class="pre">MX</span></tt>：</p>
+<pre class="literal-block">
+&#64;     IN     MX     10     cheetah
+&#64;     IN     MX     20     horse
+</pre>
+<p>這會把 <tt class="docutils literal"><span class="pre">cheetah.ground</span></tt> 設為 <tt class="docutils literal"><span class="pre">ground</span></tt> 的第一台郵件交換主機，而把 <tt class="docutils literal"><span class="pre">horse.ground</span></tt> 設為第二台郵件交換主機。一般來說，我們習慣以 10 的間隔來設定優先度 (而不會連續設定)，最優先的主機設為 10，第二台主機之後再依次增加優先數值。如此一來才可以保留其它主機的優先度空間。</p>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id2" id="txt" name="txt">2.2.6&nbsp;&nbsp;&nbsp;TXT</a></h3>
+<p><tt class="docutils literal"><span class="pre">TXT</span></tt> 紀錄是網域名稱的說明，格式為</p>
+<pre class="literal-block">
+name     IN     TXT     text
+</pre>
+<p><tt class="docutils literal"><span class="pre">name</span></tt> 為網域名稱，而 <tt class="docutils literal"><span class="pre">text</span></tt> 為該網域的說明文字。假設我們要為 <tt class="docutils literal"><span class="pre">ground</span></tt> 網域設定 <tt class="docutils literal"><span class="pre">this</span> <span class="pre">is</span> <span class="pre">ground</span> <span class="pre">domain.</span></tt> 這樣的說明文字，可以如此設定：</p>
+<pre class="literal-block">
+&#64;     IN     TXT     &quot;this is ground domain.&quot;
+</pre>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id2" id="id25" name="id25">2.2.7&nbsp;&nbsp;&nbsp;正查 zone</a></h3>
+<p>對 zone file 裡的 RR 有了概念之後，我們就要開始了解一般的正查 master zone 裡需要哪些 RR。基本上正查 zone 裡最少需要 <tt class="docutils literal"><span class="pre">SOA</span></tt>, <tt class="docutils literal"><span class="pre">NS</span></tt> 和 <tt class="docutils literal"><span class="pre">A</span></tt> 這三種紀錄，所以再舉 <tt class="docutils literal"><span class="pre">ground</span></tt> 作例子，這一個 zone 若要正常運作，至少會有以下的設定：</p>
+<pre class="literal-block">
+$TTL     86400
+&#64;        IN     SOA   cheetah.ground.   root.cheetah.ground. (
+                     2003122501 ;
+                     604800     ;
+                     86400      ;
+                     2419200    ;
+                     86400      ;  );
+&#64;        IN     A      10.11.12.20
+&#64;        IN     NS     cheetah
+
+cheetah  IN     A      10.11.12.20
+</pre>
+<p>在這個最簡單的例子裡，<tt class="docutils literal"><span class="pre">ground</span></tt> 本身會被指向 <tt class="docutils literal"><span class="pre">10.11.12.20</span></tt>，而 <tt class="docutils literal"><span class="pre">ground</span></tt> 網域的名稱伺服器則由第 9 行的 <tt class="docutils literal"><span class="pre">NS</span></tt> 紀錄指定為 <tt class="docutils literal"><span class="pre">cheetah.ground</span></tt> 主機，最後在第 11 行再把 <tt class="docutils literal"><span class="pre">cheetah.ground</span></tt> 這個名稱指向 <tt class="docutils literal"><span class="pre">10.11.12.20</span></tt>。</p>
+<p>對一般的小型網路來說，網域本身的 IP 常常會和其它網路服務主機的 IP 重疊，亦即同一個主機上提供多種網路服務。在稍有規模的網路上，則通常會用不同的主機提供不同的服務，以免造成主機過重的負擔，影響服務的品質與穩定性。但無論如何，這些組態上的問題都要依據整體網路服務的規畫，沒有絕對的作法。</p>
+<p><tt class="docutils literal"><span class="pre">CNAME</span></tt> 也是正查 master zone 的常用 RR。假設我們的 <tt class="docutils literal"><span class="pre">ground</span></tt> 網域現在需要 WWW 伺服器、email 伺服器、ftp 伺服器，而且希望用一般的 <tt class="docutils literal"><span class="pre">www.ground</span></tt>, <tt class="docutils literal"><span class="pre">mail.ground</span></tt>, <tt class="docutils literal"><span class="pre">ftp.ground</span></tt> 等名稱。那麼我們可以這樣寫：</p>
+<pre class="literal-block">
+$TTL     86400
+&#64;        IN     SOA   cheetah.ground.   root.cheetah.ground. (
+                     2003122501 ;
+                     604800     ;
+                     86400      ;
+                     2419200    ;
+                     86400      ;  );
+&#64;        IN     A      10.11.12.20
+&#64;        IN     NS     ns
+&#64;        IN     MX     10       mail
+
+ns       IN     CNAME  cheetah
+www      IN     CNAME  cheetah
+mail     IN     CNAME  cheetah
+ftp      IN     CNAME  cheetah
+
+cheetah  IN     A      10.11.12.20
+</pre>
+<p>第 12 到第 15 行，我們設了 4 個 <tt class="docutils literal"><span class="pre">CNAME</span></tt>，分別把 <tt class="docutils literal"><span class="pre">ns</span></tt>, <tt class="docutils literal"><span class="pre">www</span></tt>, <tt class="docutils literal"><span class="pre">mail</span></tt>, <tt class="docutils literal"><span class="pre">ftp</span></tt> 等 4 個名稱指到 <tt class="docutils literal"><span class="pre">cheetah.ground</span></tt> 去，而在第 17 行才指定 <tt class="docutils literal"><span class="pre">cheetah.ground</span></tt> 的 IP。另外，我們在第 10 行的地方也順便設定了 <tt class="docutils literal"><span class="pre">ground</span></tt> 網域的 <tt class="docutils literal"><span class="pre">MX</span></tt>，如此一來，寄到 <tt class="docutils literal"><span class="pre">someone&#64;ground</span></tt> 的電子郵件會直接送到 <tt class="docutils literal"><span class="pre">someone&#64;mail.ground</span></tt> 去。</p>
+<p>這種作法常常用在具有數種服務同時運作的網路上，並且具有許多好處。我們會發現，為 <tt class="docutils literal"><span class="pre">www</span></tt>, <tt class="docutils literal"><span class="pre">ftp</span></tt> 等這種常用的網路服務名稱指定別名之後，在 zone file 裡面就可以一目了然的看出網路中有提供哪些服務。其次，在邏輯上，網路服務可以和實際的 IP 位址分得更開；實際在組態網路時，我們可以為網路上的主機取比較具有規則的名稱，方便主機群的管理，需要提供服務的主機再 <tt class="docutils literal"><span class="pre">CNAME</span></tt> 就可以了。</p>
+<p>正查 zone file 的設定一般來說並不複雜，多半只用了 <tt class="docutils literal"><span class="pre">SOA</span></tt>, <tt class="docutils literal"><span class="pre">NS</span></tt>, <tt class="docutils literal"><span class="pre">A</span></tt>, <tt class="docutils literal"><span class="pre">MX</span></tt> 和 <tt class="docutils literal"><span class="pre">CNAME</span></tt> 等幾種紀錄，只是一個真實網域裡的 <tt class="docutils literal"><span class="pre">A</span></tt> 紀錄通常不會像我們所舉的例子一樣那麼少，而有幾台主機，就會有幾個 <tt class="docutils literal"><span class="pre">A</span></tt> 紀錄。當我們在管理數十個甚或數百個 <tt class="docutils literal"><span class="pre">A</span></tt> 紀錄時，網域名稱間的邏輯關聯就相當重要了。所以我們可以這樣說，設定 zone file 的挑戰在於如何利用 DNS 重新定義主機名稱間邏輯關係的能力，找出最容易維護的網域名稱組態。</p>
+<p>先求脫離 IP 位址的魔掌，再想進一步應用 DNS 的其它功能。</p>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id2" id="id26" name="id26">2.2.8&nbsp;&nbsp;&nbsp;反查 zone</a></h3>
+<div class="section">
+<h4><a class="toc-backref" href="#id2" id="ptr" name="ptr">2.2.8.1&nbsp;&nbsp;&nbsp;PTR</a></h4>
+<p>反查 zone 的設定通常又比正查 zone 更單純，絕大部分的反查 zone 只具有 <tt class="docutils literal"><span class="pre">SOA</span></tt>, <tt class="docutils literal"><span class="pre">NS</span></tt> 和 <tt class="docutils literal"><span class="pre">PTR</span></tt> 三種紀錄。<tt class="docutils literal"><span class="pre">PTR</span></tt> 紀錄是之前沒有提過的，它設定了 IP 到網域名稱的對應，格式為</p>
+<pre class="literal-block">
+ip_address      IN     PTR      name
+</pre>
+<p>假設我們要為 <tt class="docutils literal"><span class="pre">10.11.12/24</span></tt> 這個子網路作反查設定，zone file 就要這樣寫</p>
+<pre class="literal-block">
+$TTL    604800
+&#64;       IN      SOA     cheetah.ground. root.cheetah.ground. (
+                     2003122501 ;
+                     604800     ;
+                     86400      ;
+                     2419200    ;
+                     86400      ;  );
+&#64;       IN      NS      ns.ground.
+
+20      IN      PTR     cheetah.ground.
+</pre>
+<p><tt class="docutils literal"><span class="pre">SOA</span></tt>, <tt class="docutils literal"><span class="pre">NS</span></tt> 的寫法都一樣。不過，還是有一點要注意，因為此時反查網域的名稱是 <tt class="docutils literal"><span class="pre">12.11.10.in-addr.arpa</span></tt>，如果我們在任何一個網域名稱後面忘了接 &quot;.&quot; 的話，都會造成很奇怪的結果。例如 <tt class="docutils literal"><span class="pre">ns.ground</span></tt> 會變成 <tt class="docutils literal"><span class="pre">ns.ground.12.11.10.in-addr.arpa</span></tt>，反查網域的名字被接到後面了<a class="footnote-reference" href="#id28" id="id27" name="id27"><sup>7</sup></a>！</p>
+<table class="docutils footnote" frame="void" id="id28" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id27" name="id28">[7]</a></td><td>zone file 指令 <tt class="docutils literal"><span class="pre">$ORIGIN</span></tt> 也可以用來解決這個問題。</td></tr>
+</tbody>
+</table>
+<p>在第 11 行，我們可以看到 <tt class="docutils literal"><span class="pre">PTR</span></tt> 紀錄把 <tt class="docutils literal"><span class="pre">10.11.12.20</span></tt> 指回 <tt class="docutils literal"><span class="pre">cheetah.ground</span></tt> 網域名稱，所以當使用者查詢 <tt class="docutils literal"><span class="pre">10.11.12.20</span></tt> 時，就會得到 <tt class="docutils literal"><span class="pre">cheetah.ground</span></tt> 的回覆。</p>
+</div>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id2" id="subdomain" name="subdomain">2.2.9&nbsp;&nbsp;&nbsp;子網域 (subdomain)</a></h3>
+<ul class="simple">
+<li>ground</li>
+<li>troposphere</li>
+<li>stratosphere</li>
+<li>exosphere</li>
+</ul>
+<p>當我們要在父網域中建立子網域時，必須要在父網域中儲存足夠的資訊，讓查詢者可以找到子網域的 DNS。所謂必要的資訊，就是子網域的 <tt class="docutils literal"><span class="pre">NS</span></tt> 紀錄和 DNS 主機的 <tt class="docutils literal"><span class="pre">A</span></tt> 紀錄，前者指定子網域的 DNS 主機，後者指定該主機的 IP。仍以 <tt class="docutils literal"><span class="pre">ground</span></tt> 網域為例，假設我們要在 <tt class="docutils literal"><span class="pre">ground</span></tt> 網域內建立一個 <tt class="docutils literal"><span class="pre">troposphere</span></tt> 子網域，則寫成</p>
+<pre class="literal-block">
+$TTL    604800
+&#64;       IN      SOA     cheetah.ground. root.cheetah.ground. (
+                     2003122501 ;
+                     604800     ;
+                     86400      ;
+                     2419200    ;
+                     86400      ;  );
+&#64;     IN      A       10.11.12.20
+&#64;       IN      NS      ns
+&#64;     IN      MX      10      mail
+
+ns       IN     CNAME  cheetah
+www      IN     CNAME  cheetah
+mail     IN     CNAME  cheetah
+ftp      IN     CNAME  cheetah
+
+cheetah  IN     A      10.11.12.20
+
+troposphere   IN      NS      ns.troposphere
+ns.troposphere        IN      A       10.11.13.10
+</pre>
+<p>就會建立 <tt class="docutils literal"><span class="pre">troposphere.ground</span></tt> 網域。</p>
+<p>在設定子網域時，要注意該 zone 裡不可以有 <tt class="docutils literal"><span class="pre">forwarders``，所以最好在</span> <span class="pre">``named.conf</span></tt> 中該 zone 的區塊裡加上</p>
+<pre class="literal-block">
+forwarders {};
+</pre>
+<p>的設定。這樣可以防止伺服器在沒有查到子網域下的名稱時把查詢轉發給其它主機；如果查詢被轉發出去的話，伺服器就不會進行遞迴查詢，那麼子網域下的名稱是永遠也查不到的。</p>
+</div>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id2" id="id29" name="id29">3&nbsp;&nbsp;&nbsp;網路服務的負載平衡</a></h1>
+<p>談完了 bind9 的基本設定，我們已經可以組態一個 DNS 了。在這一節裡，我們稍微討論一下 DNS 的進階應用，深入地發揮 DNS 賦予我們的能力。</p>
+<p>透過 bind9 裡重複的紀錄，可以進行簡單的負載平衡組態。</p>
+<p>這裡我們先把名詞定義一下，所謂的負載平衡，是指把從客戶端發出的服務要求，分散到超過一台以上的伺服主機上面去。如果我們在 DNS 裡指定像這樣的 zone RR：</p>
+<pre class="literal-block">
+www      IN     A    10.11.12.30
+www      IN     A    10.11.12.31
+www      IN     A    10.11.12.32
+</pre>
+<p>那麼在查詢的時候，伺服器會輪流把這些 <tt class="docutils literal"><span class="pre">A</span></tt> 送給我們。假設第一次查詢的結果是</p>
+<pre class="literal-block">
+$ host www.ground
+www.ground              A       10.11.12.30
+www.ground              A       10.11.12.31
+www.ground              A       10.11.12.32
+</pre>
+<p>那麼第二次查詢的結果可能會變成</p>
+<pre class="literal-block">
+$ host www.ground
+www.ground              A       10.11.12.32
+www.ground              A       10.11.12.30
+www.ground              A       10.11.12.31
+</pre>
+<p>3 個 <tt class="docutils literal"><span class="pre">A</span></tt> 紀錄，伺服器都會傳回，但排列的順序卻不見得每次都一樣。而客戶端通常會取傳回值中的第一個 IP 進行連線，這樣一來，不同客戶端所發出的連線要求，就會平均地分配到這 3 台主機上去。這就是透過 DNS 進行的負載平衡操作。</p>
+<p>用 DNS 達成負載平衡的動作實在非常地簡單，可能太過於簡單了，以致於有些人不太願意承認這也算是負載平衡。不過，這個方法可以非常有效地平衡伺服器的工作量和頻寬，所以許多大流量的網站都應用了這個方法，你可以試試看幾個知名的網站，例如 <tt class="docutils literal"><span class="pre">http://www.microsoft.com/</span></tt>, <tt class="docutils literal"><span class="pre">http://www.yahoo.com/</span></tt>, <tt class="docutils literal"><span class="pre">http://www.google.com/</span></tt>，每次查詢這些名稱的 IP 時，結果不一定都是相同的。</p>
+<p>當然除了 WWW 伺服器之外，DNS 負載平衡還可以用在其它網路服務上。不過這個方法有天生的限制，如果主機被要求的工作不能夠用同一種方式處理，亦即不同的工作，需要使用不同的方法來處理，DNS 負載平衡就不適用了。舉例而言，常用於大量科學運算的分散記憶體式叢集系統就屬於這一類的負載平衡應用 (只是一般我們稱之為分散式平行計算，而非負載平衡)。</p>
+<p>另外，DNS 負載平衡也不能夠動態調整負載，因為客戶端會連到的主機是隨機的，所以每一台伺服器的處理能力必須相同，否則客戶端就會體驗到不一致的處理能力；系統也沒辦法為某一件負荷特別重的工作提供額外的資源，因為系統無法決定該項工作會連到哪一台主機。為了解決這個問題，後端伺服器可能會搭配其它的負載平衡系統。</p>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id2" id="id30" name="id30">4&nbsp;&nbsp;&nbsp;後話</a></h1>
+<p>本章介紹了作為現代網際網路基礎的 DNS 系統，從原理、設定到實例都有提及，最後還討論了利用 DNS 實作負載平衡的方式。</p>
+<p>不過，DNS (bind9) 還可以作許多複雜的設定，有賴我們進一步去探討。</p>
+<table class="docutils citation" frame="void" id="internic" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id10" name="internic">[INTERNIC]</a></td><td><a class="reference" href="http://www.internic.net/">http://www.internic.net/</a></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="twnic" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id11" name="twnic">[TWNIC]</a></td><td><a class="reference" href="http://www.twnic.net/">http://www.twnic.net/</a></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="arm" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a name="arm">[ARM]</a></td><td>BIND9 Administrator Reference Manual, /usr/share/doc/bind9-doc/arm/Bv9ARM.html</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</body>
+</html>

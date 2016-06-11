@@ -1,0 +1,936 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh_tw" lang="zh_tw">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.4: http://docutils.sourceforge.net/" />
+<title>Apache (2.0) 網頁伺服器</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger
+:Contact: goodger@users.sourceforge.net
+:Date: $Date: 2005-06-06 15:09:07 +0200 (Mon, 06 Jun 2005) $
+:Version: $Revision: 3442 $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+*/
+
+/* "! important" is used here to override other ``margin-top`` and
+   ``margin-bottom`` styles that are later in the stylesheet or 
+   more specific.  See http://www.w3.org/TR/CSS1#the-cascade */
+
+body {
+  font-family: Calibri, Georgia, Times New Roman, Times,  Free Times;
+  background-color: #666666;
+}
+
+div.document {
+  background-color: white;
+  clear: both;
+  width: 50em;
+  margin: 0 auto 0 auto;
+  padding: 0.5em;
+  border: 2px ridge black;
+}
+
+.first {
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em;
+  border-top: 2px solid #888888;
+  border-bottom: 2px solid #888888;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin-left: 1em ;
+  border: medium outset ; 
+  padding: 1em ;
+  background-color: #ffffee ;
+  /* width: 40% ; */
+  /* float: right ; */
+ /*  clear: right */ }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+div.section h1, div.section h2, div.section h3, 
+div.section h4, div.section h5, div.section h6 {
+  padding-left: 0.3em;
+  padding-bottom: 0.3em;
+  border-left: 2px solid gray;
+  border-bottom: 2px solid gray;
+}
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em; }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left {
+  clear: left }
+
+img.align-right {
+  clear: right }
+
+img.borderless {
+  border: 0 }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font-family: serif ;
+  font-size: 100% }
+
+pre.line-block {
+  font-family: serif ;
+  font-size: 100% }
+
+pre.literal-block, pre.doctest-block {
+  white-space: pre-wrap;       /* css-3 */
+  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word;       /* Internet Explorer 5.5+ */
+  margin-left: 2em ;
+  margin-right: 2em ;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  padding-left: 1em;
+  padding-right: 1em;
+  border: 1px dotted black;
+}
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid thin gray }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  border-spacing: 0;
+  border: 1 solid black;
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-top: solid thin black;
+  border-left: solid thin black }
+
+table.footnote td.label a {
+  text-decoration: none;
+}
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  border: 0; 
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+tt.docutils {
+}
+
+tt.ltst {
+  font-weight: bold;
+}
+
+tt.ltem {
+  font-style: italic;
+}
+
+ul.auto-toc {
+  list-style-type: none }
+
+/* vim: set ai et nu sw=2 ts=2: */
+
+</style>
+</head>
+<body>
+<div class="document" id="apache-2-0">
+<h1 class="title">Apache (2.0) 網頁伺服器</h1>
+<table class="docinfo" frame="void" rules="none">
+<col class="docinfo-name" />
+<col class="docinfo-content" />
+<tbody valign="top">
+<tr class="field"><th class="docinfo-name">author:</th><td class="field-body">Yung-Yu Chen (yungyuc) <a class="reference" href="http://blog.seety.org/everydaywork/">http://blog.seety.org/everydaywork/</a> &lt;<a class="reference" href="mailto:yyc&#64;seety.org">yyc&#64;seety.org</a>&gt;</td>
+</tr>
+<tr class="field"><th class="docinfo-name">copyright:</th><td class="field-body">© 2006, all rights reserved</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="id1" name="id1">目錄</a></p>
+<ul class="auto-toc simple">
+<li><a class="reference" href="#id2" id="id25" name="id25">1&nbsp;&nbsp;&nbsp;全球資訊網</a><ul class="auto-toc">
+<li><a class="reference" href="#html-http" id="id26" name="id26">1.1&nbsp;&nbsp;&nbsp;HTML 與 HTTP</a></li>
+<li><a class="reference" href="#apache-apache2" id="id27" name="id27">1.2&nbsp;&nbsp;&nbsp;Apache 與 Apache2 簡介</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#apache2" id="id28" name="id28">2&nbsp;&nbsp;&nbsp;讓 Apache2 動起來</a></li>
+<li><a class="reference" href="#debian-apache2" id="id29" name="id29">3&nbsp;&nbsp;&nbsp;Debian 的 Apache2 組態檔結構</a></li>
+<li><a class="reference" href="#id5" id="id30" name="id30">4&nbsp;&nbsp;&nbsp;基本組態</a><ul class="auto-toc">
+<li><a class="reference" href="#id6" id="id31" name="id31">4.1&nbsp;&nbsp;&nbsp;主機資訊</a></li>
+<li><a class="reference" href="#id7" id="id32" name="id32">4.2&nbsp;&nbsp;&nbsp;文件位置與主要選項</a></li>
+<li><a class="reference" href="#id8" id="id33" name="id33">4.3&nbsp;&nbsp;&nbsp;存取控制</a></li>
+<li><a class="reference" href="#id9" id="id34" name="id34">4.4&nbsp;&nbsp;&nbsp;使用者認證</a></li>
+<li><a class="reference" href="#id10" id="id35" name="id35">4.5&nbsp;&nbsp;&nbsp;其它常用設定</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#ssl" id="id36" name="id36">5&nbsp;&nbsp;&nbsp;以 SSL 進行加密通訊</a><ul class="auto-toc">
+<li><a class="reference" href="#ssl-x-509" id="id37" name="id37">5.1&nbsp;&nbsp;&nbsp;建立 SSL 私鑰與 X.509 憑證</a></li>
+<li><a class="reference" href="#id11" id="id38" name="id38">5.2&nbsp;&nbsp;&nbsp;為網站加上 SSL 支援</a></li>
+<li><a class="reference" href="#openssl" id="id39" name="id39">5.3&nbsp;&nbsp;&nbsp;OpenSSL 常用指令</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#name-based" id="id40" name="id40">6&nbsp;&nbsp;&nbsp;虛擬主機 (name-based)</a><ul class="auto-toc">
+<li><a class="reference" href="#id14" id="id41" name="id41">6.1&nbsp;&nbsp;&nbsp;最簡設定</a></li>
+<li><a class="reference" href="#default" id="id42" name="id42">6.2&nbsp;&nbsp;&nbsp;從 <tt class="docutils literal"><span class="pre">default</span></tt> 修改</a></li>
+<li><a class="reference" href="#id17" id="id43" name="id43">6.3&nbsp;&nbsp;&nbsp;設定符號連結</a></li>
+<li><a class="reference" href="#id18" id="id44" name="id44">6.4&nbsp;&nbsp;&nbsp;名稱設定</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#id21" id="id45" name="id45">7&nbsp;&nbsp;&nbsp;常用的動態網頁模組</a></li>
+<li><a class="reference" href="#id22" id="id46" name="id46">8&nbsp;&nbsp;&nbsp;紀錄與稽核</a><ul class="auto-toc">
+<li><a class="reference" href="#id23" id="id47" name="id47">8.1&nbsp;&nbsp;&nbsp;紀錄檔的預設值與調整</a></li>
+<li><a class="reference" href="#id24" id="id48" name="id48">8.2&nbsp;&nbsp;&nbsp;紀錄分析工具</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id2" name="id2">1&nbsp;&nbsp;&nbsp;全球資訊網</a></h1>
+<p>全球資訊網 (World Wide Web，WWW) 可說是目前網際網路上最重要的應用，像 <a class="reference" href="http://www.google.com">http://www.google.com</a>/、http://www.yahoo.com/ 等，都是我們常瀏覽的 WWW 網站。基本上當我們談到「網站」這個詞的時候，多半指的都是 WWW 網站 (web site)。</p>
+<p>WWW 的特性是站站相連，所以能建構起相當龐大的網際資源。網站們透過所謂的超連結 (hyperlink) 彼此關聯在一起；每一個站點 (site) 都會超連結到許多其它的站點去，互相交織成一張綿密而複雜的大網。</p>
+<p>Apache 是目前最受歡迎也最穩定而功能強大的網頁伺服軟體，本章將說明如何安裝與組態這套系統。不過，在進入主題之前，我們需要建立一些基本的概念。</p>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="html-http" name="html-http">1.1&nbsp;&nbsp;&nbsp;HTML 與 HTTP</a></h2>
+<p>從技術的角度來解釋 WWW 的話，可以說它是一個以 HTTP 協定在網際網路提供以 HTML 檔案為主體的資訊系統。</p>
+<p>HTTP (Hyper Text Transportation Protocol) 是一種無狀態 (stateless) 的 TCP 協定，可以用來傳送各種不同的文件。它最主要的用途是用來傳遞超文件 (hyper text)。而超文件呢，就是由「超文件標記語言」(Hyper Text Markup Language) 所描述的文件，可以與文字、聲音、影像等等多樣化的內容進行連結。</p>
+<p>HTML 是一種標記語言，利用各種標籤 (tag) 來定義 (標記) 資訊內容。HTML 基本上會以純文件檔案的形式存在，其中有許多不同的標籤，把各種資訊分門別類地定義清楚。使用者可以用 WWW 瀏覽器 (browser) 來閱讀 HTML 文件；瀏覽器會把 HTML 文件與相關的檔案從伺服器上用 HTTP 傳回客戶端，然後以 HTML 文件內設計好的格式來顯示 (render) 給使用者。</p>
+<p>HTML 經過長久的演進，目前最新的標準是 XHTML (eXtensible Hyper Text Markup Language)cite{bib:XHTML1.0}，把 HTML 修改為與 XML (eXtensible Markup Language) 相容。不過，許多網站都還沒有直援 XHTML，而是使用 HTML 4 (4.01)，請參考 W3C 所提供的規格以及相關書籍。</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="apache-apache2" name="apache-apache2">1.2&nbsp;&nbsp;&nbsp;Apache 與 Apache2 簡介</a></h2>
+<p>Apache 是目前全世界使用得最多的網頁伺服器，你可以在 Apache Fundation 的網站 <a class="reference" href="http://www.apache.org/">http://www.apache.org/</a> 找到相關的資訊。</p>
+<p>原本 Apache 只是一個開放原始碼的網頁伺服器計畫，但隨著開放原始碼的蓬勃發展，它從只支援網頁伺服器軟體的組織，變成了支援了許多與全球資訊網應用相關的大計畫，並且改名為 Apache Fundation。目前除了 Apache 網頁伺服器之外，比較知名的如 Jakarta、Tomcat 等 Java Container，以及 Java 程式建立工具 Ant，都是 Apache Fundation 名下的開放原始碼計畫。</p>
+<p>單純的網頁伺服器還是叫作 Apache，不過現在有兩個版本：1.3 和 2.0；另外還有一個正在開發中的 2.1 版。Apache2 (2.0) 不是 Apache (1.3) 的單純昇級版，事實上新版經過了完全的改寫，內部構造與舊版的 Apache (1.3) 已經不一樣了。</p>
+<p>Apache 除了穩定與高效率之外，還有一個特點，就是它有許多外加的模組 (module)；Apache 提供了良好的架構，允許其他人為其撰寫模組，擴充或強化它原本的功能。許多動態網頁技術是利用模組來提高執行的效率的，例如 PHP、Perl 與 Python 都有 Apache 模組，並且相較於舊式的 CGI (Common Gateway Interface)，可以達到數十倍到數百倍以上的效能提昇。不過因為 Apache2 與 Apache (1.3) 的內部結構差異十分大，兩者的模組通常不能混用。</p>
+<p>舊版 Apache (1.3) 的程式碼雖然還有在維護，但已經停止增加新功能了；Apache2 經過了幾年的陣痛期，現在已經相當地穩定，也支援了大部分常用的模組。基於以上的理由，以下將只針對 Apache2 進行說明footnote{Apache (1.3) 組態檔裡大部分的關鍵字和 Apache2 是一模一樣的，但 Debian 的開發人員對針對這兩組套件不同的特性作了一些調整，看起來的差別會比較大。}。</p>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="apache2" name="apache2">2&nbsp;&nbsp;&nbsp;讓 Apache2 動起來</a></h1>
+<p>Apache2 支援許多新架構與功能，所以在 Debian 中包了幾個不同的套件，以提供經過不同版本的多行程模組 (Multi-Processing Module，MPM)。</p>
+<p>如果我們用 <tt class="docutils literal"><span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">apache2</span></tt> 來安裝的話，預設是使用比較有效率的 <tt class="docutils literal"><span class="pre">apache2-mpm-worker</span></tt> 套件，它利用執行緒 (thread) 來提昇速度，也比較節省記憶體。相對於 worker，<tt class="docutils literal"><span class="pre">apache2-mpm-prefork</span></tt> 則比較穩定，但沒有使用執行緒，處理連線要求的模式比較類似 Apache 1.3。</p>
+<p>如果伺服的環境要求比較高的效能，請用 worker 套件。本章考慮的是一般的情況，所以採用 prefork，在穩定性與相關模組的支援性上都比較好，可以用以下的 <tt class="docutils literal"><span class="pre">apt</span></tt> 指令來安裝：</p>
+<pre class="literal-block">
+apt-get install apache2 apache2-mpm-prefork
+</pre>
+<p>安裝完畢之後，如果你是在本機上進行安裝的話，打開你的瀏覽器，輸入：</p>
+<pre class="literal-block">
+http://localhost/
+</pre>
+<p>就會出現 Debian 預設的網頁內容。如果我們操作的是遠端主機，請把以上網址中的 <tt class="docutils literal"><span class="pre">localhost</span></tt> 代換成該主機的網路位址，你一樣會看到 Debian 預設的網頁內容。</p>
+<p>你可以用</p>
+<pre class="literal-block">
+$ /etc/init.d/apache2 stop
+</pre>
+<p>來關閉伺服器，再用</p>
+<pre class="literal-block">
+$ /etc/init.d/apache2 start
+</pre>
+<p>來啟動伺服器。</p>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="debian-apache2" name="debian-apache2">3&nbsp;&nbsp;&nbsp;Debian 的 Apache2 組態檔結構</a></h1>
+<p>Debian 把與 Apache2 相關的組態檔案都放在 <tt class="docutils literal"><span class="pre">/etc/apache2</span></tt> 之下<a class="footnote-reference" href="#id4" id="id3" name="id3"><sup>1</sup></a>。這個目錄應該會有以下的內容：</p>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3" name="id4">[1]</a></td><td>如果你也有安裝 Apache (1.3) 的話，它的組態檔則是放在 <tt class="docutils literal"><span class="pre">/etc/apache</span></tt> 之下。兩者分開，避免干擾。</td></tr>
+</tbody>
+</table>
+<pre class="literal-block">
+$ ls
+apache2.conf  httpd.conf       mods-enabled/  sites-available/
+conf.d/       magic            ports.conf     sites-enabled/
+envvars       mods-available/  README         ssl/
+</pre>
+<p>目前 Debian (Sarge) 的 Apache2 預設是用虛擬主機 (name based) 進行組態的；過去並不是這個樣子，但現在這種模式可以讓管理員更便利地組態伺服器。為了善用 Debian 的規畫，我們必須要先了解 <tt class="docutils literal"><span class="pre">/etc/apache2</span></tt> 裡各個檔案與目錄的用途：</p>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">apache2.conf</span></tt>：這是 Apache2 主要的組態檔。基本上在 Debian 幫我們設計好的組態結構裡，這個檔是不必修改的；你可以參考一下此檔案的內容，但通常只有在比較特別的需求下，才有必要改動這個檔案。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">conf.d</span></tt>：這個目錄裡可以用來存放額外的組態檔；``apache2.conf`` 會把這些檔案的內容含括進去，更為減少修改 <tt class="docutils literal"><span class="pre">apache2.conf</span></tt> 的機會。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">sites-enabled</span></tt>：這是一個目錄；在 <tt class="docutils literal"><span class="pre">apache2.conf</span></tt> 的最後一行寫了：</p>
+<pre class="literal-block">
+Include /etc/apache2/sites-enabled/[^.#]*
+</pre>
+<p>這樣的指令，用來把此目錄 (<tt class="docutils literal"><span class="pre">sites-enabled</span></tt>) 內的設定檔含括進來。不過，這個目錄實際上並不存放組態檔案，而是存放指向真正組態檔的符號連結。因此只要改變符號連結的名稱，就可以調整組態檔的載入順序：通常我們這樣作，是為了控制各虛擬主機組態檔的載入過程。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">sites-availible</span></tt>：這個目錄就是真正存放虛擬主機組態檔的地方了。事實上，放在 <tt class="docutils literal"><span class="pre">sites-enabled</span></tt> 裡的符號連結通常就是指向這個目錄裡面的檔案。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">mods-enabled</span></tt>, <tt class="docutils literal"><span class="pre">mods-availible</span></tt>：這一對目錄控制著模組的使用。它們的機制與 <tt class="docutils literal"><span class="pre">site-enabled</span></tt>, <tt class="docutils literal"><span class="pre">site-availible</span></tt> 相同，不同的是 Debian 另外還提供了一組指令來幫助建立符號連結。你可以用 <tt class="docutils literal"><span class="pre">a2enmod</span></tt> 來開啟模組：</p>
+<pre class="literal-block">
+$ a2enmod module_name
+</pre>
+<p>用 <tt class="docutils literal"><span class="pre">a2dismod</span></tt> 關閉模組：</p>
+<pre class="literal-block">
+$ a2dismod module_name
+</pre>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">ports.conf</span></tt>：這個檔案指定伺服器監聽的通訊埠。預設只 <tt class="docutils literal"><span class="pre">Listen</span> <span class="pre">80</span></tt> (http)，通常不必改動；但如果你使用了 ssl 模組，可能會希望也把 443 號埠 (https) 給加上去。</p>
+</li>
+</ul>
+<p>另外還有幾個比較不重要的檔案：</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">envvar</span></tt>：給 <tt class="docutils literal"><span class="pre">apachectl</span></tt> 用的環境設定。</li>
+<li><tt class="docutils literal"><span class="pre">magic</span></tt>：mime 用的 magic。</li>
+<li><tt class="docutils literal"><span class="pre">ssl</span></tt>：存放 ssl 資料的目錄。</li>
+<li><tt class="docutils literal"><span class="pre">httpd.conf</span></tt>：為了保持相容性而留下的設定檔，預設是空的。</li>
+</ul>
+<p>無論是修改了哪一個組態檔的內容，要讓它生效，就必須重新啟動 Apache2：</p>
+<pre class="literal-block">
+$ /etc/init.d/apache2 restart
+</pre>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id5" name="id5">4&nbsp;&nbsp;&nbsp;基本組態</a></h1>
+<p>以前我們會把 Apache 的設定寫到</p>
+<pre class="literal-block">
+/etc/init.d/apache/apache.conf
+</pre>
+<p>或</p>
+<pre class="literal-block">
+/etc/init.d/apache2/apache2.conf
+</pre>
+<p>裡面，但在了解了 Debian 為我們設計好的組態結構之後，你知道其實只需要修改 <tt class="docutils literal"><span class="pre">site-availible</span></tt> 裡的虛擬主機設定檔。</p>
+<p><tt class="docutils literal"><span class="pre">site-availible</span></tt> 裡面一定會有一個預設的虛擬主機 <tt class="docutils literal"><span class="pre">default</span></tt>，而在 <tt class="docutils literal"><span class="pre">site-enabled</span></tt> 裡面用 <tt class="docutils literal"><span class="pre">000-default</span></tt> 連過去，所以 <tt class="docutils literal"><span class="pre">default</span></tt> 會被第一個載入。如果我們要建立簡單的網站，可以把設定直接寫到 <tt class="docutils literal"><span class="pre">default</span></tt> 裡面；不過還有另一種更乾淨的作法：建立個別的虛擬主機檔進行設定，如果可能的話，最好都這樣作。</p>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="id6" name="id6">4.1&nbsp;&nbsp;&nbsp;主機資訊</a></h2>
+<p>首先要設定的應該是主機本身的資訊，有以下的項目：</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">ServerAdmin</span></tt>：指定管理員的電子郵件地址。使用者在連線到伺服器的時候，如果發生問題，就會在伺服器產生的錯誤訊息中看到這個郵件地址。</li>
+<li><tt class="docutils literal"><span class="pre">ServerName</span></tt>：用來指定主機的名稱，通常要設為 FQDN。這項資訊也會用於 name-based 虛擬主機的設定，用來指定各虛擬主機。另外在某些情況下，譬如伺服器向使用者回覆錯誤訊息的時候，使用者會看到這裡設定的伺服器名稱。</li>
+<li><tt class="docutils literal"><span class="pre">ServerAlias</span></tt>：主機的別名；如果主機只有一個名稱的話，就完全不需要這項設定，但若會有超過一個名稱，則可以用它來指定。</li>
+</ul>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="id7" name="id7">4.2&nbsp;&nbsp;&nbsp;文件位置與主要選項</a></h2>
+<p>以下是幾個重要的相關指令：</p>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">DocumentRoot</span></tt>：指定主機根目錄在檔案系統內的位置。舉 <tt class="docutils literal"><span class="pre">default</span></tt> 為例，它把 <tt class="docutils literal"><span class="pre">DocumentRoot</span></tt> 預設為 <tt class="docutils literal"><span class="pre">/var/www</span></tt>，也就是說所有針對該主機的存取動作，都會先到檔案系統內的該處來尋找檔案。除非另有設定，否則 <tt class="docutils literal"><span class="pre">/var/www</span></tt> 內會存放所有由主機所提供的檔案。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">DirectoryIndex</span></tt>：它指定在「瀏覽目錄」時要找尋的檔案名稱。預設為 (在 <tt class="docutils literal"><span class="pre">apache2.conf</span></tt> 檔案裡)：</p>
+<pre class="literal-block">
+DirectoryIndex index.html index.cgi index.pl index.php index.xhtml
+</pre>
+<p>也就是說，當使用者在瀏覽本主機的某目錄時，伺服器會依照 <tt class="docutils literal"><span class="pre">index.html</span></tt>, <tt class="docutils literal"><span class="pre">index.cgi</span></tt>, <tt class="docutils literal"><span class="pre">index.pl</span></tt>, <tt class="docutils literal"><span class="pre">index.php</span></tt>, <tt class="docutils literal"><span class="pre">index.xhtml</span></tt> 的順序來尋找這些檔案，找到的話就以其內容回應給使用者。</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">&lt;Directory</span> <span class="pre">path&gt;...&lt;/Directory&gt;</span></tt>：這一組標籤可以用來指定一組目錄下的設定。仍舉 <tt class="docutils literal"><span class="pre">default</span></tt> 為例：</li>
+</ul>
+<pre class="literal-block">
+&lt;Directory /&gt;
+        Options FollowSymLinks
+        AllowOverride None
+&lt;/Directory&gt;
+</pre>
+<p>為檔案系統根目錄及以下的所有目錄指定兩項設定。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">Alias</span></tt>：為檔案系統內容建立主機上的別名，譬如</p>
+<pre class="literal-block">
+Alias /mydoc /var/local/lib/mydata
+</pre>
+<p>會把 <tt class="docutils literal"><span class="pre">/var/local/lib/mydata</span></tt> 對應到網站上的 <tt class="docutils literal"><span class="pre">/mydoc</span></tt> 去；這特別會用來設定 <tt class="docutils literal"><span class="pre">DocumentRoot</span></tt> 以外的檔案路徑。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">ScriptAlias</span></tt>：這個指令的作用和 <tt class="docutils literal"><span class="pre">Alias</span></tt> 很類似，不過會指定目標路徑的內容為 CGI 指令稿。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">Options</span></tt>：設定許多伺服器的行為選項，可以放在主設定檔、<tt class="docutils literal"><span class="pre">&lt;Directory&gt;</span></tt> 區塊、虛擬主機 (<tt class="docutils literal"><span class="pre">&lt;VirtualHost&gt;</span></tt>) 區塊或 <tt class="docutils literal"><span class="pre">.htaccess</span></tt> 裡面。茲列出較常用也較為重要的選項：</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">FollowSymLinks</span></tt>：允許使用符號連結來移動到其它位置。</li>
+<li><tt class="docutils literal"><span class="pre">SymLinksIfOwnerMatch</span></tt>：作用和 <tt class="docutils literal"><span class="pre">FollowSymLinks</span></tt> 一樣，但只有在符號連結本身和目的位置的擁有者相同的時候才作用。</li>
+<li><tt class="docutils literal"><span class="pre">Includes</span></tt>：開啟 Server Side Include 的功能。</li>
+<li><tt class="docutils literal"><span class="pre">ExecCGI</span></tt>：允許執行 CGI 指令稿程式。</li>
+<li><tt class="docutils literal"><span class="pre">Indexes</span></tt>：如果接到的 http 要求位置是一個目錄，而該目錄內又沒有 <tt class="docutils literal"><span class="pre">DirectoryIndex</span></tt> 所指定的檔案，打開這個選項則會對客戶端回應一個自動產生的目錄索引。</li>
+</ul>
+<p>另外，<tt class="docutils literal"><span class="pre">All</span></tt> 則會開啟除了 <tt class="docutils literal"><span class="pre">MultiViews</span></tt> 之外的所有選項 (而 <tt class="docutils literal"><span class="pre">MultiViews</span></tt> 則是與 HTTP 1.1 content negotiation 有關的功能，在此略過不談)。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">AllowOverride</span></tt>：這個指令只能用在 <tt class="docutils literal"><span class="pre">&lt;Directory&gt;</span></tt> 區塊裡，用以指定可以在 <tt class="docutils literal"><span class="pre">.htaccess</span></tt> 檔footnote{<tt class="docutils literal"><span class="pre">.htaccess</span></tt> 是 Apache 的 per-directory 設定檔；你可以在任何一個伺服器存取得到的目錄內建立一個 <tt class="docutils literal"><span class="pre">.htaccess</span></tt> 檔，在其中撰寫只會套用在該目錄之下的 Apache 指令。}內覆寫的組態項目。``AllowOverride`` 後接的選項通常有：</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">AuthConfig</span></tt>：與使用者認證有關的設定。</li>
+<li><tt class="docutils literal"><span class="pre">FileInfo</span></tt>：管理文件型態的設定。</li>
+<li><tt class="docutils literal"><span class="pre">Indexes</span></tt>：目錄索引方面的設定。</li>
+<li><tt class="docutils literal"><span class="pre">Limit</span></tt>：存取控制設定。</li>
+<li><tt class="docutils literal"><span class="pre">Options</span></tt>：伺服器選項設定。</li>
+</ul>
+<p>除了可以指定以上的群組之外，還有許多細節可以設定。詳細的說明請參考說明手冊。</p>
+</li>
+</ul>
+<p>在架設網頁伺服器時，另一個常作的檔案位置設定是使用者網頁。所謂的使用者網頁，就是使用者可以在自己的家目錄下放置屬於自己、自行管理的網頁空間。目前的 Apache2 把關於使用者網頁的設定移出了主要組態檔，而改放進 <tt class="docutils literal"><span class="pre">mod_userdir</span></tt> 的組態檔裡面。你可以看一下 <tt class="docutils literal"><span class="pre">mod-availible</span></tt> 下面 <tt class="docutils literal"><span class="pre">userdir.conf</span></tt> 的內容：</p>
+<pre class="literal-block">
+&lt;IfModule mod_userdir.c&gt;
+  UserDir public_html
+  UserDir disabled root
+
+  &lt;Directory /home/*/public_html&gt;
+    AllowOverride FileInfo AuthConfig Limit
+    Options MultiViews Indexes SymLinksIfOwnerMatch IncludesNoExec
+  &lt;/Directory&gt;
+&lt;/IfModule&gt;
+</pre>
+<p>這樣的預設設定會把使用者家目錄下的 <tt class="docutils literal"><span class="pre">public_html</span></tt> 指定為使用者網頁的根目錄，而其對應的 URL 則為 <tt class="docutils literal"><span class="pre">http://hostname/~username/</span></tt>。如果我們想修改相關的設定，可以把這些指令複製一份到虛擬主機設定檔內，然後再進行修改；直接修改 <tt class="docutils literal"><span class="pre">userdir.conf</span></tt> 當然也可以達到目的，但會影響到未來 Apache2 的昇級footnote{<tt class="docutils literal"><span class="pre">userdir.conf</span></tt> 檔案是 Apache2 相關套件的一部分，Debian <tt class="docutils literal"><span class="pre">apache2</span></tt> 的維護人員未來有可能改動其內容，所以直接修改它很可能會破壞這些組態檔的相容性。虛擬主機設定檔則完全是我們自訂的內容，不會造成問題。}。</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="id8" name="id8">4.3&nbsp;&nbsp;&nbsp;存取控制</a></h2>
+<p><tt class="docutils literal"><span class="pre">Order</span></tt>, <tt class="docutils literal"><span class="pre">Deny</span></tt>, <tt class="docutils literal"><span class="pre">Allow</span></tt> 這一組指令可以用來控制連線來源。再舉 <tt class="docutils literal"><span class="pre">default</span></tt> 為例：</p>
+<pre class="literal-block">
+Order deny,allow
+Deny from all
+Allow from 127.0.0.0/255.0.0.0 ::1/128
+</pre>
+<p><tt class="docutils literal"><span class="pre">Deny</span> <span class="pre">from</span></tt> 指令是用來指定textbf{不可以}連線的網路來源位址；而 <tt class="docutils literal"><span class="pre">Allow</span> <span class="pre">from</span></tt> 則用來指定<strong>可以</strong>連線的網路來源位址。欲允許或禁止連線的位址要列在指令的後面，其間以空白分隔；來源位址可以使用 IP, IP/netmask, 網域名稱等等方式指定，並且在同一行指令裡可以混用不同的方式。``Order`` 會設定 <tt class="docutils literal"><span class="pre">Deny</span></tt> 和 <tt class="docutils literal"><span class="pre">Allow</span></tt> 作用的順序；如果用 <tt class="docutils literal"><span class="pre">Order</span> <span class="pre">deny,allow</span></tt>，表示允許連線的設定會蓋過禁止連線的設定，即預設為可以連線；若用 <tt class="docutils literal"><span class="pre">Order</span> <span class="pre">allow,deny</span></tt> 則會讓禁止連線的設定蓋過允許連線的設定，即預設為不可以連線。</p>
+<p>以上所舉出 <tt class="docutils literal"><span class="pre">default</span></tt> 內的設定會禁止除了來自 localhost 之外的所有連線 (<tt class="docutils literal"><span class="pre">Allow</span></tt> 指令的第一個參數是 IPv4 的 localhost；第二個參數是 IPv6 的 localhost)。</p>
+<p>如果我們想要更進一步地限制使用者對伺服器的存取，可以使用 <tt class="docutils literal"><span class="pre">&lt;Limit&gt;</span></tt> 指令區塊。``&lt;Limit&gt;`` 可以針對個別的 HTTP 存取方法作限制，能夠限制的有：GET, POST, PUT, DELETE, CONNECT, OPTIONS, PATCH, PROPFIND, PROPPATCH, MKCOL, COPY, MOVE, LOCK 和 UNLOCK。一般並不常會用到這個指令，所以詳細的說明請參考 Apache 使用手冊。</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="id9" name="id9">4.4&nbsp;&nbsp;&nbsp;使用者認證</a></h2>
+<p>Apache 具備 HTTP Auth 的能力，並且內建了 <tt class="docutils literal"><span class="pre">htpasswd</span></tt> 這個工具來幫助我們管理帳號密碼。</p>
+<p>假設我們希望存取某組頁面的人需要用一組帳號密碼登入，那麼我們可以這樣設定：</p>
+<pre class="literal-block">
+AuthType Basic
+AuthName &quot;Restricted Files&quot;
+AuthUserFile /usr/local/apache/passwd/passwords
+Require user mordor
+</pre>
+<p><tt class="docutils literal"><span class="pre">AuthType</span> <span class="pre">Basic</span></tt> 指定使用 &quot;Basic&quot; 的認證模式；另外也可以設定為 &quot;Digest&quot;，不過 &quot;Basic&quot; 是較為常用的設定。``AuthName`` 設定認證的「領域 (Realm)」，你可以把它當作是一個識別項，可以隨意設定。``AuthUserFile`` 指定儲存帳號與密碼的檔案。``Require`` 指令最為重要，它用來「要求」所必須通過的認證內容，在此例中是只允許被認證為 &quot;mordor&quot; 的使用者存取。</p>
+<p>以上關於認證的設定可以放在 <tt class="docutils literal"><span class="pre">&lt;Directory&gt;</span></tt> 區塊及 <tt class="docutils literal"><span class="pre">.htaccess</span></tt> 裡面。</p>
+<p>在組態檔裡設定完畢之後，接下來要建立密碼檔</p>
+<pre class="literal-block">
+$ htpasswd -c /usr/local/apache/passwd/password mordor
+New password:
+Re-type new password:
+Adding password for user mordor
+</pre>
+<p>你可以看一下這個檔案的內容：</p>
+<pre class="literal-block">
+mordor:CA7nCNQe/rcE6
+</pre>
+<p>它的格式非常簡單，就是「<tt class="docutils literal"><span class="pre">帳號:加密過的密碼</span></tt>」。設定完畢之後，使用者就可以用這組帳號密碼登入存取我們所設定限制的頁面了。</p>
+<p>Apache 的 Basic 認證也支援群組功能，請參考 <tt class="docutils literal"><span class="pre">AuthGroupFile</span></tt> 指令的說明文件。</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="id10" name="id10">4.5&nbsp;&nbsp;&nbsp;其它常用設定</a></h2>
+<p>在此列出一些常用的設定指令及其作用，詳細的說明請見 Apache2 的手冊：</p>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">&lt;Location&gt;</span></tt>：指定一個網站上的「位置」，這個位置不必有對應的檔案系統目錄，譬如在 <tt class="docutils literal"><span class="pre">apache2.conf</span></tt> 有以下被註解掉的指令：</p>
+<pre class="literal-block">
+&lt;Location /server-status&gt;
+    SetHandler server-status
+    Order deny,allow
+    Deny from all
+    Allow from .your_domain.com
+&lt;/Location&gt;
+</pre>
+<p>只要你所在的位置是 <tt class="docutils literal"><span class="pre">.your_domain.com</span></tt>，就可以存取網站的 <tt class="docutils literal"><span class="pre">/server-status</span></tt> 目錄，而顯示目前伺服器的狀態。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">AddDefaultCharset</span></tt>：這是 Apache 1.3 時惡名昭彰的指令；會把所有伺服器送出的資料重新用 <tt class="docutils literal"><span class="pre">DefaultCharset</span></tt> 進行編碼。Apache2 的組態檔終於預設關了它，但如果你的伺服器送出的中文資料變成亂碼，問題又不在客戶端身上的話，記得檢查一下這個設定。</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="ssl" name="ssl">5&nbsp;&nbsp;&nbsp;以 SSL 進行加密通訊</a></h1>
+<p>Debian 的 Apache2 套件改變了 Apache (1.3) 處理 SSL 設定的方式。舊的 Debian Apache (1.3) 套件裡並沒有包含 SSL，如果想要使用 SSL 加密功能，要另外安裝專用的套件footnote{<tt class="docutils literal"><span class="pre">apache-ssl</span></tt>}；Apache2 則將之二合為一。</p>
+<p>如果要在 Apache2 裡面使用 SSL，直接打開 <tt class="docutils literal"><span class="pre">mod_ssl</span></tt> 模組即可：</p>
+<pre class="literal-block">
+$ a2enmod ssl
+$ /etc/init.d/apache2 force-reload
+</pre>
+<p>然後你可以用瀏覽器看一下你的 <tt class="docutils literal"><span class="pre">http://localhost/doc/</span></tt>，如果最下面出現了類似</p>
+<pre class="literal-block">
+... mod_ssl/2.0.53 OpenSSL/0.9.7e ...
+</pre>
+<p>的字樣，表示設定成功了。</p>
+<p>不過，僅僅開啟 <tt class="docutils literal"><span class="pre">mod_ssl</span></tt>，只是讓伺服器具備以 SSL 溝通的能力而已，我們還需要指定讓伺服器處理 SSL 連線，以及建立與管理最重要的 SSL 私鑰 (private key) 和憑證 (certificate)。</p>
+<p>在前面的部分有提到 <tt class="docutils literal"><span class="pre">ports.conf</span></tt> 這個設定檔，現在我們就要在裡面加上一行</p>
+<pre class="literal-block">
+Listen 443
+</pre>
+<p>然後再 <tt class="docutils literal"><span class="pre">/etc/init.d/apache2</span> <span class="pre">restart</span></tt>，讓 Apache2 重新啟動之後會監聽標準的 HTTPS (HTTP over SSL) 443 號通訊埠。</p>
+<p>SSL 私鑰與憑證的管理是一件複雜的工作，但卻又至為重要：SSL 的安全性完全建立在私鑰的安全上面。我們要用 OpenSSL 工具來處理這些資訊，並且作一個簡單的示範 (不過不會說明 SSL 與對稱式加密的原理，這超出了本書的範疇)。</p>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="ssl-x-509" name="ssl-x-509">5.1&nbsp;&nbsp;&nbsp;建立 SSL 私鑰與 X.509 憑證</a></h2>
+<p>在產生給 Apache2 使用的私鑰與憑證之前，我們先建立 root CA (Certificate Authority)。產生 root CA 的私鑰 (2048 位元的 RSA 密鑰)：</p>
+<pre class="literal-block">
+$ openssl genrsa -out /etc/ssl/private/myrootca.key 2048
+$ chmod og-rwx /etc/ssl/private/myrootca.key
+</pre>
+<p>最好為 root CA 的私鑰設定一個存取密碼：</p>
+<pre class="literal-block">
+$ openssl rsa -in myrootca.key -out myrootca.passwd.key -des3
+</pre>
+<p>接著，為這個私鑰產生憑證申請書 (request)：</p>
+<pre class="literal-block">
+$ openssl req -new -key /etc/ssl/private/myrootca.key -out /tmp/myrootca.req
+</pre>
+<p>執行了以上的指令後，OpenSSL 會問一些設定上的問題；能夠儘量照實回答是最好的，但因為無論答的適不適當，都不影響後續的設定 (只會影響這個 CA 的可靠程度)，所以我們下一段再討論這些設定問題 (那時就會影響使用了)。最後我們用 root CA 所產生的私鑰來簽發 (sign) 憑證 (也就是說，自己簽發自己的憑證，self-sign)：</p>
+<pre class="literal-block">
+$ openssl x509 -req -days 7305 -sha1 \
+ -extfile /etc/ssl/openssl.cnf -extensions v3_ca \
+ -signkey /etc/ssl/private/myrootca.key \
+ -in /tmp/myrootca.req -out /etc/ssl/certs/myrootca.crt
+</pre>
+<p>root CA 的憑證最好不要過期，所以給定 7305 天，也就是 20 年。</p>
+<p>有了 root CA 之後，我們再來產生給 Apache2 伺服器作 SSL 加解密用的私鑰與憑證。一樣產生私鑰：</p>
+<pre class="literal-block">
+$ openssl genrsa -out /etc/ssl/private/myhost.key 2048
+$ chmod og-rwx /etc/ssl/private/myhost.key
+</pre>
+<p>這回不要設定密碼了，免得啟動伺服器的時候還要被問一次密碼。接著，為這個私鑰產生憑證申請書：</p>
+<pre class="literal-block">
+$ openssl req -new -key /etc/ssl/private/myhost.key -out /tmp/myhost.req
+</pre>
+<p>在執行以上的指令時，OpenSSL 會問你一串問題：</p>
+<ol class="arabic simple">
+<li><tt class="docutils literal"><span class="pre">Country</span> <span class="pre">Name</span> <span class="pre">(2</span> <span class="pre">letter</span> <span class="pre">code)</span> <span class="pre">[AU]:</span></tt> -- 這裡要輸入國別代碼，人在台灣的話請輸入 <tt class="docutils literal"><span class="pre">TW</span></tt>。</li>
+<li><tt class="docutils literal"><span class="pre">State</span> <span class="pre">or</span> <span class="pre">Province</span> <span class="pre">Name</span> <span class="pre">(full</span> <span class="pre">name)</span> <span class="pre">[Some-State]:</span></tt> -- 州/省的名稱，並非動作必要的欄位。</li>
+<li><tt class="docutils literal"><span class="pre">Locality</span> <span class="pre">Name</span> <span class="pre">(eg,</span> <span class="pre">city)</span> <span class="pre">[]:</span></tt> -- 你所在的位置，並非動作必要的欄位。</li>
+<li><tt class="docutils literal"><span class="pre">Organization</span> <span class="pre">Name</span> <span class="pre">(eg,</span> <span class="pre">company)</span> <span class="pre">[Internet</span> <span class="pre">Widgits</span> <span class="pre">Pty</span> <span class="pre">Ltd]:</span></tt> -- 所屬組織，並非動作必要的欄位。</li>
+<li><tt class="docutils literal"><span class="pre">Organizational</span> <span class="pre">Unit</span> <span class="pre">Name</span> <span class="pre">(eg,</span> <span class="pre">section)</span> <span class="pre">[]:</span></tt> -- 在所屬組織內的單位名稱，並非動作必要的欄位。</li>
+<li><tt class="docutils literal"><span class="pre">Common</span> <span class="pre">Name</span> <span class="pre">(eg,</span> <span class="pre">YOUR</span> <span class="pre">name)</span> <span class="pre">[]:</span></tt> -- 這個欄位很重要，要填入這個憑證所用於主機的網域名稱，若不一致的話，將來使用者在瀏覽時永遠會有警告訊息跳出來，抱怨憑證內的網域名稱與所存取的網域名稱不符合。</li>
+<li><tt class="docutils literal"><span class="pre">Email</span> <span class="pre">Address</span> <span class="pre">[]:</span></tt> -- 電子郵件位址，並非動作必要的欄位。</li>
+</ol>
+<p>正確填答了之後，就會產生憑證申請書；因為我們要用自己的 CA 來簽發憑證，所以上面所列出「並非動作必要的欄位」不去詳填也沒有關係。但如果你要向其它正式的 CA 要求憑證，則最好詳細填寫這些資料。接著，以 root CA 的名義簽發憑證：</p>
+<pre class="literal-block">
+$ openssl x509 -req -days 3650 -sha1 \
+ -extfile /etc/ssl/openssl.cnf -extensions v3_req \
+ -CA /etc/ssl/certs/myrootca.crt -CAkey /etc/ssl/private/myrootca.key \
+ -CAserial /etc/ssl/myrootca.srl -CAcreateserial \
+ -in /tmp/myhost.req -out /etc/ssl/certs/myhost.crt
+</pre>
+<p>最後產生的私鑰與憑證，分別會被放在 <tt class="docutils literal"><span class="pre">/etc/ssl</span></tt> 目錄下的 <tt class="docutils literal"><span class="pre">private/myhost.key</span></tt> 與 <tt class="docutils literal"><span class="pre">certs/myhost.crt</span></tt> 檔案內。</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="id11" name="id11">5.2&nbsp;&nbsp;&nbsp;為網站加上 SSL 支援</a></h2>
+<p>私鑰和憑證作好了之後，就要在你的組態檔裡寫入適當的指令，讓伺服器知道你的 SSL 設定：</p>
+<pre class="literal-block">
+SSLEngine On
+SSLCertificateFile /etc/ssl/certs/myhost.crt
+SSLCertificateKeyFile /etc/ssl/private/myhost.key
+</pre>
+<p>以上的指令可以寫在 <tt class="docutils literal"><span class="pre">default</span></tt> 裡。或者，更常見的作法是另外建立一個專門用作 SSL 網站的虛擬主機設定檔，這是因為 SSL 限制一個 IP 只能有一個 certificate，所以我們不能用 name-based 虛擬主機來在同一個 IP 上設定多個 SSL 站台。</p>
+<p>因為我們是用自己建 root CA 來簽發 Apache2 用的憑證，一般瀏覽器根本是不認得的，而會發出警告訊息給使用者。如果想避免這個問題，一是花錢改向正式的 CA 買憑證，二是讓使用者安裝我們自己 CA 的憑證。第二個方法很簡單，把 CA 憑證公開出去讓使用者自行安裝即可；如果是在有統一管理的環境下，也可以預先在使用者的電腦裡安裝憑證。</p>
+<p>一旦我們的 CA 被使用者的電腦當作可信任的來源，則將來所有由此 CA 簽發的憑證，也會自動被信任。這就是我們要分兩段來產生 Apache2 SSL 私鑰與 X.509 憑證的理由：提高管理上的彈性。</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="openssl" name="openssl">5.3&nbsp;&nbsp;&nbsp;OpenSSL 常用指令</a></h2>
+<p>OpenSSL 工具箱裡的指令既多而雜，不常使用很容易就忘記了。本小節的用意是作一個整理，把常用的 OpenSSL 指令列出來，方便查詢使用：</p>
+<ul>
+<li><p class="first">產生有 pass phrase 的 1024 bits 3DES 私鑰</p>
+<pre class="literal-block">
+$ openssl genrsa -des3 -out mykey.pem [-rand randfiles] 1024
+</pre>
+</li>
+<li><p class="first">產生使用者的憑證申請書，效期為 365 天 (1 年)</p>
+<pre class="literal-block">
+$ openssl req -new -days 365 -key mykey.pem -out myreq.pem \
+ -extensions user_ext
+</pre>
+</li>
+<li><p class="first">產生未加密的伺服器憑證申請書</p>
+<pre class="literal-block">
+$ openssl req -extensions server_ext -nodes -keyout myserver.key \
+ -out myserver.req 1024
+</pre>
+</li>
+<li><p class="first">更改私鑰的 pass phrase</p>
+<pre class="literal-block">
+$ openssl rsa -in key.pem.old -out key.pem
+</pre>
+</li>
+<li><p class="first">把私鑰的內容印到標準輸出</p>
+<blockquote>
+<pre class="literal-block">
+$ openssl rsa -noout -text -in key.pem
+</pre>
+</blockquote>
+</li>
+<li><p class="first">核驗憑證申請書</p>
+<pre class="literal-block">
+$ openssl req -noout -text -verify -in userreq.pem
+</pre>
+</li>
+<li><p class="first">將 PEM 私鑰轉為 DER 格式</p>
+<pre class="literal-block">
+$ openssl rsa -in userkey.pem -out userkey.der -outform DER
+</pre>
+</li>
+<li><p class="first">核對憑證鏈</p>
+<pre class="literal-block">
+$ openssl verify [-CApath directory] cert.pem
+</pre>
+</li>
+<li><p class="first">顯示憑證的內容</p>
+<pre class="literal-block">
+$ openssl x509 -noout -text -in cert.pem
+</pre>
+</li>
+<li><p class="first">顯示憑證的 MD5 指紋</p>
+<pre class="literal-block">
+$ openssl x509 -noout -fingerprint -in cert.pem
+</pre>
+</li>
+<li><p class="first">顯示憑證的 SHA1 指紋</p>
+<pre class="literal-block">
+$ openssl x509 -noout -sha1 -fingerprint -in cert.pem
+</pre>
+</li>
+<li><p class="first">把 PEM 憑證轉換成 DER 格式</p>
+<pre class="literal-block">
+$ openssl x509 -in cert.pem -out cert.der -outform DER
+</pre>
+</li>
+</ul>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="name-based" name="name-based">6&nbsp;&nbsp;&nbsp;虛擬主機 (name-based)</a></h1>
+<p>Debian 的 Apache2 套件預設就使用 name-based 虛擬主機來管理，所以我們一定要多加了解這部分的組態。所謂的 name-based 虛擬主機，是指使用者如果透過不同的主機名稱 (即一個 URL 中 <tt class="docutils literal"><span class="pre">http://hostname/path</span></tt> 的 <tt class="docutils literal"><span class="pre">hostname</span></tt> 這個部分) 來存取網站，就會得到不同的回應，「好像是textbf{不同的主機}」。這是一種方便的設定模式，可以讓伺服器的管理更有彈性，也可以讓組態檔更穩定<a class="footnote-reference" href="#id13" id="id12" name="id12"><sup>2</sup></a>；一旦我們要轉移網頁伺服器時，只需把虛擬主機這部分的設定改放到新伺服器即可，能夠避免很多設定混雜的問題 (當然前提是虛擬主機的設定檔要寫得夠好)。</p>
+<table class="docutils footnote" frame="void" id="id13" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id12" name="id13">[2]</a></td><td>我的意思是，組態檔彼此之間更不容易混亂。</td></tr>
+</tbody>
+</table>
+<p>Apache 所支援的虛擬主機有兩種：name-based 與 address-based。一般我們講到虛擬主機都是指 name-based，它可以讓許多虛擬主機共仔在同一個 IP 位址上，而 address-based 則否。</p>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="id14" name="id14">6.1&nbsp;&nbsp;&nbsp;最簡設定</a></h2>
+<p>Name-based 虛擬主機要在 <tt class="docutils literal"><span class="pre">&lt;VirtualHost&gt;</span></tt> 區塊裡面進行設定，以下的指令會建立一個最基本的虛擬主機：</p>
+<pre class="literal-block">
+&lt;VirtualHost *&gt;
+  ServerAdmin webmaster&#64;hostname
+  ServerName hostname
+  ServerAlias hostnamealternative
+
+  DocumentRoot /var/www/somedir
+  &lt;Directory /&gt;
+    Options FollowSymLinks
+    AllowOverride None
+  &lt;/Directory&gt;
+  &lt;Directory /var/www/somedir/&gt;
+    Options Indexes FollowSymLinks MultiViews
+    AllowOverride None
+    Order allow,deny
+    allow from all
+  &lt;/Directory&gt;
+&lt;/VirtualHost&gt;
+</pre>
+<p>name-based 虛擬主機的 <tt class="docutils literal"><span class="pre">&lt;VirtualHost&gt;</span></tt> 區塊一定要寫成 <tt class="docutils literal"><span class="pre">&lt;VirtualHost</span> <span class="pre">*&gt;</span></tt>；或者在是伺服器不止監聽一個通訊埠的情況下，在 <tt class="docutils literal"><span class="pre">*</span></tt> 後面指定埠號，如 <tt class="docutils literal"><span class="pre">&lt;VirtualHost</span> <span class="pre">*:443&gt;</span></tt> (通常會用於啟動了 SSL 的伺服器)。如果把 <tt class="docutils literal"><span class="pre">*</span></tt> 改成 IP 位址，那就變成了 address-based 虛擬主機設定；要注意，address-based 與 name-based 虛擬主機設定是不能共存的，我們只能擇一使用<a class="footnote-reference" href="#id16" id="id15" name="id15"><sup>3</sup></a>。</p>
+<table class="docutils footnote" frame="void" id="id16" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id15" name="id16">[3]</a></td><td>我們不能建立一個又使用 address-based 虛擬主機，又使用 name-based 虛擬主機的伺服器；雖然只有 address-based 虛擬主機才能處理多個 SSL 站台，但為了 name-based 虛擬主機，我們只好放棄這項能力。</td></tr>
+</tbody>
+</table>
+<p>name-based 虛擬主機以 <tt class="docutils literal"><span class="pre">&lt;VirtualHost&gt;</span></tt> 區塊內的 <tt class="docutils literal"><span class="pre">ServerName</span></tt> 來辨識各虛擬主機。``ServerAlias`` 可以用來指定這個虛擬主機的別名，如此一來用 <tt class="docutils literal"><span class="pre">ServerName</span></tt> 和 <tt class="docutils literal"><span class="pre">ServerAlias</span></tt> 所指定的名稱進行存取時，就會連到這個虛擬主機來了。</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="default" name="default">6.2&nbsp;&nbsp;&nbsp;從 <tt class="docutils literal"><span class="pre">default</span></tt> 修改</a></h2>
+<p>設定虛擬主機最快的方式就是從範例修改；我們有現成的範例：</p>
+<pre class="literal-block">
+$ cd /etc/apache2/sites-availible
+$ cp defaults samplehost
+</pre>
+<p>你應該有注意到，預設的 <tt class="docutils literal"><span class="pre">default</span></tt> 內容雖然有用 <tt class="docutils literal"><span class="pre">&lt;VirtualHost&gt;</span></tt> 包起來，但卻缺乏 <tt class="docutils literal"><span class="pre">ServerName</span></tt> 名稱設定。這是故意的，目的是讓它成為真正的「預設」組態；我們在設定自己的虛擬主機時應該要加回去。</p>
+<p>另外一個要注意的地方是複製出來的 <tt class="docutils literal"><span class="pre">samplehost</span></tt> 檔裡第一行的</p>
+<pre class="literal-block">
+NameVirtualHost *
+</pre>
+<p>也應該要拿掉。這是 <tt class="docutils literal"><span class="pre">default</span></tt> 用來開啟 name-based 虛擬主機的指令，在其它的虛擬主機設定檔裡不應該重複出現。</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="id17" name="id17">6.3&nbsp;&nbsp;&nbsp;設定符號連結</a></h2>
+<p>一旦我們設定好了我們的虛擬主機組態檔，就要在 <tt class="docutils literal"><span class="pre">sites-enabled</span></tt> 裡建立一個符號連結。``sites-enabled`` 預設只有 <tt class="docutils literal"><span class="pre">default</span></tt> 的符號連結：</p>
+<pre class="literal-block">
+$ ls -al sites-enabled/
+total 0
+lrwxrwxrwx  1 root root 36 2005-04-14 15:38 000-default -&gt;
+  /etc/apache2/sites-available/default
+</pre>
+<p>我們依樣畫葫蘆另外建一個：</p>
+<pre class="literal-block">
+$ cd /etc/apache2/sites-enabled
+$ ln -s /etc/apache2/sites-availible/samplehost 100-samplehost
+</pre>
+<p>如果我們的組態檔沒有設錯，重新啟動 Apache2 之後，``http://samplehost/`` 的根目錄就會是你所指定位置的內容，而非原本的 <tt class="docutils literal"><span class="pre">/var/www</span></tt> 了。</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="id18" name="id18">6.4&nbsp;&nbsp;&nbsp;名稱設定</a></h2>
+<p>通常虛擬主機的 <tt class="docutils literal"><span class="pre">ServerName</span></tt> 都會使用設在 DNS 上的名稱，而且會是 FQDN<a class="footnote-reference" href="#id20" id="id19" name="id19"><sup>4</sup></a>。不過有時候我們為了測試虛擬主機，也可以直接使用在 <tt class="docutils literal"><span class="pre">/etc/hosts</span></tt> 檔裡設定的名稱。</p>
+<table class="docutils footnote" frame="void" id="id20" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id19" name="id20">[4]</a></td><td>Full Qualified Domain Name，即是以 hostname.domain.name 寫成的名稱，可以拆成主機 (前) 與網域 (後) 兩個部分。</td></tr>
+</tbody>
+</table>
+<p>如果 <tt class="docutils literal"><span class="pre">ServerName</span></tt> 不是 FQDN，Apache2 在啟動時可能會印出警告訊息，請注意這一點。</p>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id21" name="id21">7&nbsp;&nbsp;&nbsp;常用的動態網頁模組</a></h1>
+<p>3P -- PHP, Perl, Python 是目前最為流行的開放原始碼網頁程式工具，Debian 都有為相關的工具模組進行包裝。本節簡單列出在 Debian 下，這些語言工具與 Apache2 相關綁定 (binding) 模組的安裝指令：</p>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">mod_php</span></tt></p>
+<pre class="literal-block">
+$ apt-get install libapache2-mod-php4
+</pre>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">mod_perl</span></tt></p>
+<pre class="literal-block">
+$ apt-get install libapache2-mod-perl2
+</pre>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">mod_python</span></tt></p>
+<pre class="literal-block">
+$ apt-get install libapache2-mod-python
+</pre>
+</li>
+</ul>
+<p>關於這些程式工具的實際使用，請參考相關的說明文件。</p>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id22" name="id22">8&nbsp;&nbsp;&nbsp;紀錄與稽核</a></h1>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="id23" name="id23">8.1&nbsp;&nbsp;&nbsp;紀錄檔的預設值與調整</a></h2>
+<p>對於實際在進行服務的網頁伺服器，一定要時常檢查它的紀錄檔內容。一方面方便我們統計伺服器的使用率與效益，而更重要的是找出不正常的存取或惡意入侵行為。</p>
+<p>Apache2 的紀錄檔存放在 <tt class="docutils literal"><span class="pre">/var/log/apache2</span></tt> 目錄內，<tt class="docutils literal"><span class="pre">access.log</span></tt> 紀錄了網頁的存取動作，而 <tt class="docutils literal"><span class="pre">error.log</span></tt> 則紀錄存取失敗或伺服器錯誤的訊息。Debian 會使用 <tt class="docutils literal"><span class="pre">logrotate</span></tt> 工具定時封存系統中所有的紀錄檔，所以如果你的 Debian 安裝有一段時間以上，可能會在 Apache2 的紀錄檔目錄裡看到以下的內容：</p>
+<pre class="literal-block">
+$ ls
+access.log    access.log.2.gz  error.log    error.log.2.gz
+access.log.1  access.log.3.gz  error.log.1  error.log.3.gz
+</pre>
+<p><tt class="docutils literal"><span class="pre">*.log.1</span></tt> 是最新一次的封存；``logrotate`` 每封存一次紀錄檔，就會把它的檔尾數字加 1，而預設會用 <tt class="docutils literal"><span class="pre">gzip</span></tt> 壓縮編號 2 以上的封存檔。</p>
+<p>如果我們回頭去看一下 <tt class="docutils literal"><span class="pre">default</span></tt> 虛擬主機組態檔的內容，會發現其中有兩行關於紀錄檔的設定：</p>
+<pre class="literal-block">
+ErrorLog /var/log/apache2/error.log
+CustomLog /var/log/apache2/access.log combined
+</pre>
+<p>它們指定了這個虛擬主機的紀錄檔所要存放的位置；正是我們在 <tt class="docutils literal"><span class="pre">/var/log/apache2</span></tt> 下看到的兩個檔案。``CustomLog`` 在紀錄檔名之後所接的參數是該檔案的格式，而這個格式可以使用 <tt class="docutils literal"><span class="pre">LogFormat</span></tt> 自訂；``combined`` 是預先設定在 <tt class="docutils literal"><span class="pre">apache2.conf</span></tt> 組態檔裡的一種格式，而預設的格式還有 <tt class="docutils literal"><span class="pre">common</span></tt>, <tt class="docutils literal"><span class="pre">referer</span></tt> 和 <tt class="docutils literal"><span class="pre">agent</span></tt>footnote{<tt class="docutils literal"><span class="pre">ErrorLog</span></tt> 就不能自訂格式。}。</p>
+<p>另外你也應該要注意到 <tt class="docutils literal"><span class="pre">LogLevel</span></tt> 這個指令，它設定了錯誤紀錄檔 (<tt class="docutils literal"><span class="pre">ErrorLog</span></tt>) 所要紀錄訊息的層級 (並不影響存取紀錄檔)。預設的 <tt class="docutils literal"><span class="pre">LogLevel</span></tt> 是 <tt class="docutils literal"><span class="pre">warn</span></tt>，而以下列出所有可設定的紀錄層級；愈後面的愈詳細，而愈前面的愈嚴重：</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">emerg</span></tt>：嚴重到系統無法運作的事件訊息。</li>
+<li><tt class="docutils literal"><span class="pre">alert</span></tt>：必須立刻處理的問題。</li>
+<li><tt class="docutils literal"><span class="pre">crit</span></tt>：關鍵的例外狀況。</li>
+<li><tt class="docutils literal"><span class="pre">error</span></tt>：有出現錯誤的狀況。</li>
+<li><tt class="docutils literal"><span class="pre">warn</span></tt>：警告訊息。</li>
+<li><tt class="docutils literal"><span class="pre">notice</span></tt>：正常但值得注意的狀況。</li>
+<li><tt class="docutils literal"><span class="pre">info</span></tt>：言之有物的資訊。</li>
+<li><tt class="docutils literal"><span class="pre">debug</span></tt>：用來除錯的訊息。</li>
+</ul>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="id24" name="id24">8.2&nbsp;&nbsp;&nbsp;紀錄分析工具</a></h2>
+<p>能夠分析 Apache2 紀錄檔的工具很多，我們在這裡先介紹一個簡單的稽核工具：<tt class="docutils literal"><span class="pre">logwatch</span></tt>，方便每天監看伺服器的狀況。</p>
+<p>用</p>
+<pre class="literal-block">
+$ apt-get install logwatch
+</pre>
+<p>完裝好程式之後，``logwatch`` 就會用 <tt class="docutils literal"><span class="pre">cron</span></tt> 每天定時產生一次紀錄檔的報表。``logwatch`` 不是只會分析 Apache/Apache2 而已，事實上它是一個用 Perl 寫成的模組化紀錄檔分析軟體，一般安裝好之後，它會每天進行一次 crond, httpd, maild, sshd 等許多紀錄檔的分析，然後把報表用 email 寄給管理員。</p>
+<p><tt class="docutils literal"><span class="pre">logwatch</span></tt> 的使用非常簡單，採用預設值的話幾乎完全不需要再作額外的設定。對 Apache2 來說，它會統計前一天的資料總傳輸量，並且列出已知的惡意攻擊及該攻擊行動的來源、偵測本伺服器的主機，以及所有未分類 (Other) 的存取動作。每天看一次 <tt class="docutils literal"><span class="pre">logwatch</span></tt> 對昨天所作的分析整理，你會很容易了解伺服器的狀況。</p>
+<p>對於有超過一台伺服器要管理的人，可以使用 <tt class="docutils literal"><span class="pre">.forward</span></tt> 檔來把各台主機屬於管理員的信件都集中到一個 email 位址，瀏覽起來會更方便。</p>
+<p>另外，Debian 裡面還有 <tt class="docutils literal"><span class="pre">awstats</span></tt> 和 <tt class="docutils literal"><span class="pre">webalizer</span></tt> 這兩個專門用來分析 Apache2 紀錄檔的工具。它們不只會產生文字報表，還可以建立圖表，並且允許管理員從網頁上來存取這些資料。</p>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,641 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh_tw" lang="zh_tw">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.4: http://docutils.sourceforge.net/" />
+<title>Debian 下的電子郵件系統</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger
+:Contact: goodger@users.sourceforge.net
+:Date: $Date: 2005-06-06 15:09:07 +0200 (Mon, 06 Jun 2005) $
+:Version: $Revision: 3442 $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+*/
+
+/* "! important" is used here to override other ``margin-top`` and
+   ``margin-bottom`` styles that are later in the stylesheet or 
+   more specific.  See http://www.w3.org/TR/CSS1#the-cascade */
+
+body {
+  font-family: Calibri, Georgia, Times New Roman, Times,  Free Times;
+  background-color: #666666;
+}
+
+div.document {
+  background-color: white;
+  clear: both;
+  width: 50em;
+  margin: 0 auto 0 auto;
+  padding: 0.5em;
+  border: 2px ridge black;
+}
+
+.first {
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em;
+  border-top: 2px solid #888888;
+  border-bottom: 2px solid #888888;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin-left: 1em ;
+  border: medium outset ; 
+  padding: 1em ;
+  background-color: #ffffee ;
+  /* width: 40% ; */
+  /* float: right ; */
+ /*  clear: right */ }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+div.section h1, div.section h2, div.section h3, 
+div.section h4, div.section h5, div.section h6 {
+  padding-left: 0.3em;
+  padding-bottom: 0.3em;
+  border-left: 2px solid gray;
+  border-bottom: 2px solid gray;
+}
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em; }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left {
+  clear: left }
+
+img.align-right {
+  clear: right }
+
+img.borderless {
+  border: 0 }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font-family: serif ;
+  font-size: 100% }
+
+pre.line-block {
+  font-family: serif ;
+  font-size: 100% }
+
+pre.literal-block, pre.doctest-block {
+  white-space: pre-wrap;       /* css-3 */
+  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word;       /* Internet Explorer 5.5+ */
+  margin-left: 2em ;
+  margin-right: 2em ;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  padding-left: 1em;
+  padding-right: 1em;
+  border: 1px dotted black;
+}
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid thin gray }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  border-spacing: 0;
+  border: 1 solid black;
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-top: solid thin black;
+  border-left: solid thin black }
+
+table.footnote td.label a {
+  text-decoration: none;
+}
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  border: 0; 
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+tt.docutils {
+}
+
+tt.ltst {
+  font-weight: bold;
+}
+
+tt.ltem {
+  font-style: italic;
+}
+
+ul.auto-toc {
+  list-style-type: none }
+
+/* vim: set ai et nu sw=2 ts=2: */
+
+</style>
+</head>
+<body>
+<div class="document" id="debian">
+<h1 class="title">Debian 下的電子郵件系統</h1>
+<table class="docinfo" frame="void" rules="none">
+<col class="docinfo-name" />
+<col class="docinfo-content" />
+<tbody valign="top">
+<tr class="field"><th class="docinfo-name">author:</th><td class="field-body">Yung-Yu Chen (yungyuc) <a class="reference" href="http://blog.seety.org/everydaywork/">http://blog.seety.org/everydaywork/</a> &lt;<a class="reference" href="mailto:yyc&#64;seety.org">yyc&#64;seety.org</a>&gt;</td>
+</tr>
+<tr class="field"><th class="docinfo-name">copyright:</th><td class="field-body">© 2006, all rights reserved</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="id1" name="id1">目錄</a></p>
+<ul class="auto-toc simple">
+<li><a class="reference" href="#id2" id="id18" name="id18">1&nbsp;&nbsp;&nbsp;郵件系統概論</a></li>
+<li><a class="reference" href="#ssl-tls" id="id19" name="id19">2&nbsp;&nbsp;&nbsp;SSL/TLS 與安全防護</a></li>
+<li><a class="reference" href="#postfix-smtp" id="id20" name="id20">3&nbsp;&nbsp;&nbsp;Postfix：SMTP 伺服器</a></li>
+<li><a class="reference" href="#pop3-over-ssl" id="id21" name="id21">4&nbsp;&nbsp;&nbsp;POP3 伺服器 (over SSL)</a><ul class="auto-toc">
+<li><a class="reference" href="#ipopd" id="id22" name="id22">4.1&nbsp;&nbsp;&nbsp;安裝與組態 <tt class="docutils literal"><span class="pre">ipopd</span></tt></a></li>
+<li><a class="reference" href="#id11" id="id23" name="id23">4.2&nbsp;&nbsp;&nbsp;<tt class="docutils literal"><span class="pre">ipopd</span></tt> 的管理</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#imap-over-ssl" id="id24" name="id24">5&nbsp;&nbsp;&nbsp;IMAP 伺服器 (over SSL)</a><ul class="auto-toc">
+<li><a class="reference" href="#uw-imapd" id="id25" name="id25">5.1&nbsp;&nbsp;&nbsp;安裝與組態 <tt class="docutils literal"><span class="pre">uw-imapd</span></tt></a></li>
+<li><a class="reference" href="#id14" id="id26" name="id26">5.2&nbsp;&nbsp;&nbsp;<tt class="docutils literal"><span class="pre">uw-imapd</span></tt> 的管理</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#id15" id="id27" name="id27">6&nbsp;&nbsp;&nbsp;郵件系統的檔案結構</a><ul class="auto-toc">
+<li><a class="reference" href="#imap-uw-imapd" id="id28" name="id28">6.1&nbsp;&nbsp;&nbsp;IMAP (<tt class="docutils literal"><span class="pre">uw-imapd</span></tt>) 郵件資料夾</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#id16" id="id29" name="id29">7&nbsp;&nbsp;&nbsp;郵件系統相關工具</a><ul class="auto-toc">
+<li><a class="reference" href="#mutt" id="id30" name="id30">7.1&nbsp;&nbsp;&nbsp;mutt</a></li>
+<li><a class="reference" href="#procmail" id="id31" name="id31">7.2&nbsp;&nbsp;&nbsp;procmail</a></li>
+<li><a class="reference" href="#fetchmail" id="id32" name="id32">7.3&nbsp;&nbsp;&nbsp;fetchmail</a></li>
+<li><a class="reference" href="#spamassassin" id="id33" name="id33">7.4&nbsp;&nbsp;&nbsp;spamassassin</a></li>
+<li><a class="reference" href="#archivemail" id="id34" name="id34">7.5&nbsp;&nbsp;&nbsp;archivemail</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#id17" id="id35" name="id35">8&nbsp;&nbsp;&nbsp;結語</a></li>
+</ul>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id2" name="id2">1&nbsp;&nbsp;&nbsp;郵件系統概論</a></h1>
+<p>電子郵件系統一直以來就是網際網路上最大宗、最重要的應用，不過它本身卻是由非常單純的幾個伺服系統所組合起來的一套環境。</p>
+<p>目前的網際網路郵件系統 (之後本章的內容裡將直接簡稱為郵件系統) 主要是由郵件傳輸伺服器 (Mail Transport Agent, MTA) 與郵箱伺服器所組成的。MTA 最主要是使用 SMTP -- 簡單郵件傳輸協定 (Simple Mail Transportation Portocol)，來負責在網際網路上傳遞郵件；郵箱伺服器讓使用者可以存取自己的郵件，但它並不是單一的通訊協定，POP3 與 IMAP 這兩個協定都可以提供郵箱伺服的功能，兩者可以共存，也可以同時使用，但彼此間沒有關聯性。</p>
+<p>MTA 的角色就好像現實生活中的郵局：我們把信件交給郵局，郵局派郵差把各種信件分散到各地的郵局去，各地郵局再把信投遞到收件者的信箱。因此，MTA 也可能會把我們寄出的信件交給其它的 MTA (SMTP 伺服器)，再由其它的伺服器進行下一次投遞 -- 如同現實生活中的郵局一樣；這種動作稱為中繼 (relay)，在十幾年前網路速度緩慢的狀況下是合理的作法<a class="footnote-reference" href="#id5" id="id3" name="id3"><sup>1</sup></a>，然而因為慢慢出現的許多問題，如今已經很少有伺服器會這樣作了。不靠中繼的結果，就是接到我們寄出郵件的 SMTP 主機會和收件者的 SMTP 主機<a class="footnote-reference" href="#id6" id="id4" name="id4"><sup>2</sup></a>溝通，把郵件直接投遞過去。</p>
+<table class="docutils footnote" frame="void" id="id5" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3" name="id5">[1]</a></td><td>進行中繼動作的主要理由之一是，在過去網路連線很昂貴的時代，即使是用作 SMTP 的主機為了省錢，也不見得會有不間斷的網路連線，或是只能對特定主機進行連線，以致於沒辦法直接連到收件者的 SMTP 主機。如此一來把信件交給另一台主機中繼，就成了有效管理郵件傳送的手段之一，而常被大家使用。</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id6" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id4" name="id6">[2]</a></td><td>所謂「收件者的 SMTP 主機」是指可以存取到收件者郵箱的 SMTP 主機；它可以直接把信件存起來。</td></tr>
+</tbody>
+</table>
+<p>使用者的郵件會存在某台主機裡面，而郵箱伺服器就像是現實生活中郵箱的小門，讓遠端的使用者透過它來存取收到的郵件。不過，我們要收取的郵件必須不在本端 (自己的主機上)，郵箱伺服器才有意義。電子郵件與真實郵件的其中一個差別就在於儲存的方式上；電子郵件的「郵箱」只是主機上的一些檔案或是資料庫，如果郵件就在本端的話，那麼根本用不著什麼伺服器，直接開啟檔案或資料庫就可以看到這些郵件 -- 連拿鑰匙開郵箱都不必。</p>
+<p>本章包含了這兩種伺服器的組態與應用。關於 SMTP 伺服器，我們會討論 postfix，這是在 sendmail 之外最方便好用的 MTA；郵箱伺服器方面，我們則會提出 POP3 與 IMAP 這兩種協定在 Debian 上的組態，並且都加上 SSL 安全傳輸層。</p>
+<p>此外，一般來說，我們都會使用一些郵件客戶端程式來幫我們作收發郵件的工作，而這些軟體多半都帶有編輯器，或是可以呼叫外部的編輯器，譬如 Thunderbird, Eudora, Becky!, mutt 和 Outlook Express 等等。郵件客戶端程式就好像是家裡養的小狗一樣 (而且是那種超級聰明的小狗)，每天早上會告訴主人門口的信箱裡有信、把報紙給叼進來，也會幫忙主人把信丟進信箱，雞婆一點的還會提醒主人信裡面有文法錯誤。</p>
+<p>本章也會對 mutt 這個文字模式的郵件客戶端軟體作一點說明，方便讀者直接存取伺服器上的郵件。</p>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="ssl-tls" name="ssl-tls">2&nbsp;&nbsp;&nbsp;SSL/TLS 與安全防護</a></h1>
+<p>網路愈方便，愈需要注意安全防護，對伺服器架設來說尤其是這樣。近十年來，Unix 上的遠端登入工具已經從 telnet 全部轉換為加密編碼的 ssh，郵件系統也多半採用了 SSL 加密機制。</p>
+<p>SSL 是 Secure Sockets Layer (安全插座層) 的縮寫，而 TLS 是 Transport Layer Security (傳輸層安全性) 的縮寫；在 Debian 下，均由 <tt class="docutils literal"><span class="pre">openssl</span></tt> 程式庫工具套件來提供此二者 (SSL v2/3, TLS v1) 的加解密能力。本章所要探討的伺服器也都支援 SSL/TLS。</p>
+<p>然而，從前面對郵件系統的討論，我們其實會發現在傳輸郵件內容的時候進行加密的意義並不大。理由有二：其一是郵件從使用者端寄出去之後，其遞送的路徑通常不是使用者可以決定的，甚至有時候連收件者是否存在都不能確知；其二是郵件在傳輸過程中被截取的機會太多。所以，郵件系統中各種伺服器支援加解密的目的並不是保護郵件的內容<a class="footnote-reference" href="#id8" id="id7" name="id7"><sup>3</sup></a>，而是為了保護使用者登入伺服器的認證資料。</p>
+<table class="docutils footnote" frame="void" id="id8" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id7" name="id8">[3]</a></td><td>如果我們希望強化郵件內容的安全性，應該要直接對郵件內容進行加密。相關的工具與規格有 PGP 和 S/MIME。</td></tr>
+</tbody>
+</table>
+<p>所謂的認證資料，即使用者登入伺服器時傳送的資料，通常就是帳號與密碼。以保護這些資料為前提，除了 SSL/TLS 之外，還有一些其它的手段，譬如對密碼進行編碼 (不直接傳明碼的密碼)、比較進階的密碼驗證等等。不過使用 SSL/TLS 對整個連線進行加密，則是最為直接、可靠，又容易組態的方法。</p>
+<p>本章接下來要討論 MTA 和郵箱伺服器。暫時我們不會討論到 MTA 的認證功能，所以也就不對 MTA 伺服器的 SSL 組態進行說明；而郵箱伺服器都要求使用者進行認證，因此其 SSL/TLS 組態將包含在內。</p>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="postfix-smtp" name="postfix-smtp">3&nbsp;&nbsp;&nbsp;Postfix：SMTP 伺服器</a></h1>
+<p>如果我們用 <tt class="docutils literal"><span class="pre">apt-cache</span> <span class="pre">show</span> <span class="pre">postfix</span></tt> 來看一下 Debian 對 <tt class="docutils literal"><span class="pre">postfix</span></tt> 這個套件所作的說明，你會發現它被設計出來的主要目的之一就是取代 sendmail。有蠻長的一段時間，sendmail 霸佔了網路網路上的絕大部分 SMTP 主機，不過 sendmail 的組態與管理是出了名的複雜困難，因此很多人想用其它的 MTA 來把 sendmail 換掉。然而一方面 sendmail 持續有進行維護與改進 (主要的結構與組態檔的語法卻沒有很大的改變；這是最讓人感到困難的地方)，再方面 sendmail 的功能實在太強大，其它 MTA 很難完全複製過去。也有許多應用因著過去的包袱而被綁死在 sendmail (的組態檔) 上面，更增加了更換 MTA 的困難度。</p>
+<p>經過一段時間的發展，postfix 已經可以取代 sendmail 大部分的功能了，另外我們還可以選擇 qmail 或 (Debian 預設的) exim 等 MTA。因為 Debian 預設安裝的 MTA 是 exim，所以要使用 postfix，我們得手動進行安裝：</p>
+<pre class="literal-block">
+$ apt-get install postfix
+</pre>
+<p>在安裝的時候，dpkg 工具會問我們一些問題：</p>
+<ol class="arabic">
+<li><p class="first">一般的組態型態 (General type of configuration)，總共有五種組態的方式：</p>
+<ul class="simple">
+<li>No configuration：完全不修改 postfix 的組態檔；這只能用於已經組態過 postfix 的情況。如果我們是第一次安裝 postfix，textbf{不能}使用這個選項。</li>
+<li>Internet site：收發 SMTP 郵件。如果其它的型態都不符合你的需要，那就應該用這個選項。</li>
+<li>Internet site using smarthost：直接收取 SMTP 郵件，但外送郵件透過 smarthost 來發送；smarthost 就是一種中繼主機。撥接上網的主機適用於這種組態。</li>
+<li>Satellite system：衛星系統。這個選項會把 postfix 組態成把所有郵件交給 smarthost 來處理，不過 root 和 postmaster 等郵件用的管理位址會傳送給相應的帳號 (在 <tt class="docutils literal"><span class="pre">/etc/aliases</span></tt> 設定)。</li>
+<li>Local delivery only：不收發網際網路郵件，只能在本機的各使用者間傳送。完全沒有網路連線的獨立主機才會使用這個選項。</li>
+</ul>
+<p>架設郵件主機的話，通常我們會使用第二個 &quot;Internet site&quot; 選項；不需郵件功能的獨立主機可以選用最後一個 &quot;Local delivery only&quot; (但這種組態並不能提供電子郵件服務，只是讓 MTA 可以運作而已)。</p>
+</li>
+<li><p class="first">接受 root 郵件的使用者名稱：一般來說超級使用者帳號 root 並不會用來處理日常工作，例如收發電子郵件什麼的。所以，MTA 在設計時就不讓 root 接收外部郵件；如果有人寄信給 root，那麼信件會存到 <tt class="docutils literal"><span class="pre">nobody</span></tt> 的郵箱去。通常寄給 root 的都是重要訊息，因此 postfix 在這裡提供一個機會，讓你指定要把 root 的郵件轉發到哪一個帳號去 (這個功能是靠 <tt class="docutils literal"><span class="pre">/etc/aliases</span></tt> 來達成的)。</p>
+<p>在輸入欄位裡填寫帳號名稱即可；如果填入 <tt class="docutils literal"><span class="pre">NONE</span></tt>，那麼 postfix 就不會進行轉發，而寄給 root 的郵件就會投遞到 <tt class="docutils literal"><span class="pre">nobody</span></tt> 的信箱去。</p>
+</li>
+<li><p class="first">指定外寄郵件的來源主機：postfix 會用這裡所指定的字串來補在外寄郵件標頭的 &quot;From:&quot; 欄位裡 <tt class="docutils literal"><span class="pre">&#64;</span></tt> 的後面。來源主機的名稱應該要是 FQDN，讓它與使用者帳號結合以後成為有效的電子郵件位址。</p>
+</li>
+<li><p class="first">指定可接受內寄郵件的目的主機名稱：電子郵件標頭的 &quot;To:&quot; 欄位裡的電子郵件位址的主機部分，必須要符合這裡所指定的網域名稱字串，postfix 才會接受為內寄郵件。</p>
+<p>這些有效的內寄郵件網域名稱可以超過一個，彼此間以逗號分隔；因為一台主機通常都會有一個以上的主機名稱或網域名稱 (絕大部分的主機都至少會有 localhost 和主機名稱這兩個)，請儘量在這裡指定進來，以免漏失郵件。</p>
+</li>
+<li><p class="first">選擇是否對郵件佇列進行同步化更新：如果開啟佇列的同步化更新，如果系統當機又沒有使用日誌式檔案系統 (例如 ext3 或 reiserfs) 的話，比較不會因為佇列檔案與郵件系統軟體的記憶體不同步而讓郵件漏失；不過比較消耗系統資源。</p>
+<p>專門的郵件伺服器應該要開啟；如果我們不太在意當機問題，留用預設值關閉即可。</p>
+</li>
+<li><p class="first">指定允許中繼郵件傳送的位址：網路上的 SMTP 中繼伺服器過去是造成垃圾郵件横行的主要原因；因為許多 SMTP 伺服器允許所有人透過它來傳送郵件，發廣告信的人就會利用它們寄送大量的廣告信。</p>
+<p>現在大部分的人都知道 SMTP 的中繼功能要好好控管；視我們的 MTA 主機要提供服務的環境，這裡應該填入允許中繼的網路位址。網路位址的格式是 IP/mask，而允許中繼的網路位址可設定多項，彼此間以空白分隔。</p>
+<p>如果不允許其它主機中繼，可設定為 127.0.0.0/8；只讓本地主機外寄。</p>
+</li>
+<li><p class="first">指定郵箱的容量上限：單位是位元組，設為 0 表示無上限。postfix 官方的預設值是 51200000 (約 50MB)。</p>
+</li>
+<li><p class="first">指定本地 address extension 分隔字元：預設是加號 (<tt class="docutils literal"><span class="pre">+</span></tt>)。如果不使用 address extension，可以不指定這個字元。</p>
+</li>
+</ol>
+<p>作完以上的組態以後，我們就有一個可運作的 postfix MTA 了。</p>
+<p>sendmail 是一個非常複雜的軟體系統；作為取代者的 postfix 也有相當多的功能可以調整。我建議讀者也要安裝 <tt class="docutils literal"><span class="pre">postfix-doc</span></tt> 套件，詳細閱讀一下 postfix 原廠的文件。</p>
+<p>如果我們想要使用 TLS 與 SASL 功能，則需要改安裝 <tt class="docutils literal"><span class="pre">postfix-tls</span></tt> 套件；``postfix`` 套件並未包含這兩個模組。TLS 與 SASL 可以為 MTA 提供認證的能力，只讓經過授權的使用者在特定模式下存取特定的功能。詳細的說明與組態請參照原廠文件。</p>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="pop3-over-ssl" name="pop3-over-ssl">4&nbsp;&nbsp;&nbsp;POP3 伺服器 (over SSL)</a></h1>
+<p>POP (Post Office Protocol) 是一種存取伺服器郵箱的通訊協定，也是最常被郵件客戶端使用的存取協定；POP3 是第三版的 POP。既然有第三版，那麼當然有第二版和第一版，只不過除了第三版之外，幾乎沒有人在使用。在 Debian 裡面有好幾個套件都提供 POP3 伺服能力，常用的有 <tt class="docutils literal"><span class="pre">ipopd</span></tt>, <tt class="docutils literal"><span class="pre">qpopper</span></tt>, <tt class="docutils literal"><span class="pre">courier-pop</span></tt> 和 <tt class="docutils literal"><span class="pre">cyrus21-pop3d</span></tt> 等。</p>
+<p>這些 POP3 伺服器都提供 POP3 服務，不過功能與特性並不相同。``ipopd``, <tt class="docutils literal"><span class="pre">qpopper</span></tt> 和 <tt class="docutils literal"><span class="pre">courier-pop</span></tt> 會直接存取 Linux 系統帳號的郵箱 (其中 <tt class="docutils literal"><span class="pre">courier-pop</span></tt> 只支援 maildir 格式的郵箱)；而 <tt class="docutils literal"><span class="pre">cyrus21-pop3d</span></tt> 則把信件存放在另外的位置，由 cyrus 伺服器自行管理，反而不能處理系統郵箱。</p>
+<p>如果我們要為系統郵箱提供 POP3 存取能力，一般會取用這些常見套件中的 <tt class="docutils literal"><span class="pre">ipopd</span></tt> 或 <tt class="docutils literal"><span class="pre">qpopper</span></tt>。``ipopd`` 是美國華盛頓大學 (UW) 所發行維護的一套 POP2/POP3 伺服程式；``qpopper`` 則是由 Qualcomm 發行維護的 POP3 伺服器，有相當多的使用者。在 Debian 下，這兩套 POP 伺服器都是經由 inetd 超級伺服器來執行的 (不過可以手動組態為獨立伺服器模式，在此將不進行說明)，而 <tt class="docutils literal"><span class="pre">ipopd</span></tt> 的 dpkg 組態指令稿則會把 TLS/SSL 一起組態起來。由於相比之下，<tt class="docutils literal"><span class="pre">ipopd</span></tt> 的組態會比較容易點，我們用 UW 的這套軟體來說明如何組態經過 SSL 加密的 POP3 伺服器。</p>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="ipopd" name="ipopd">4.1&nbsp;&nbsp;&nbsp;安裝與組態 <tt class="docutils literal"><span class="pre">ipopd</span></tt></a></h2>
+<p><tt class="docutils literal"><span class="pre">ipopd</span></tt> 的安裝相當簡單，直接下</p>
+<pre class="literal-block">
+$ apt-get install ipopd
+</pre>
+<p>即可。<tt class="docutils literal"><span class="pre">ipopd</span></tt> 相依的 <tt class="docutils literal"><span class="pre">libc-client2002edebian</span></tt> 套件會對其缺乏 maildir 的功能進行警告；此時我們並不需要 maildir 的支援，直接選 Yes 即可。``ipopd`` 本身則會詢問要監聽的通訊埠 (協定)，有 pop2, pop3 和 pop3s 可供選擇。pop2 協定已經過時，通常不需選用；pop3 協定本身未加密，但支援 TLS；pop3s 協定是透過 SSL 進行加密的 pop3 (即 pop3 over SSL)，所有通訊均經過加密編碼。</p>
+<p>近來絕大多數的郵件客戶端都已經支援 pop3s 協定，所以為了安全性的考量，最好只開啟 pop3s 協定；如果同時開啟了 pop3，使用者就可能會用明碼 (未加密的資料) 來在網路上傳送未加密的帳號和密碼<a class="footnote-reference" href="#id10" id="id9" name="id9"><sup>4</sup></a>。因為 <tt class="docutils literal"><span class="pre">ipopd</span></tt> 直接用系統帳號資料來進行認證以供存取使用者郵箱，所以用明碼傳送帳號與密碼是相當危險的：一旦主機的帳號與密碼被人擷取，惡意人士就可以利用這些資料來登入主機進行破壞。</p>
+<table class="docutils footnote" frame="void" id="id10" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id9" name="id10">[4]</a></td><td>會不會用明碼傳送帳號與密碼，要視郵件客戶端而定。如果郵件客戶端支援 TLS，並且有進行相關組態，那麼帳號與密碼就會加密後再傳輸；不支援 TLS 或未組態的話就會使用明碼。</td></tr>
+</tbody>
+</table>
+<p>dpkg 在組態 <tt class="docutils literal"><span class="pre">ipopd</span></tt> 的最後會詢問要不要強制調整通訊埠設定；``ipopd`` 使用 inetd，會把組態寫入 <tt class="docutils literal"><span class="pre">/etc/inetd.conf</span></tt> 裡面 (包括通訊埠等相關設定)，但該檔案是有可能被其它程式或管理員手動修改的。我建議<strong>不要</strong>強制調整，以免在組態其它服務的時候發生衝突；完全用手動調整 <tt class="docutils literal"><span class="pre">inetd.conf</span></tt> 即可。</p>
+<p>問完了所有問題之後，dpkg 就會把相關的檔案安裝到系統裡面。它最後還會把 pop3s 所需的 SSL 金鑰對與憑證給產生出來，存放在 <tt class="docutils literal"><span class="pre">/etc/ssl/certs/ipopd.pem</span></tt> 裡面；我們可以直接用它進行測試。當然，在正式提供服務的時候還是需要取得資訊正確，甚至經過認證的 SSL 金鑰對和憑證。關於 SSL 金鑰與憑證，請參考「Apache (2.0) 網頁伺服器」一章。</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="id11" name="id11">4.2&nbsp;&nbsp;&nbsp;<tt class="docutils literal"><span class="pre">ipopd</span></tt> 的管理</a></h2>
+<p><tt class="docutils literal"><span class="pre">ipopd</span></tt> 是用 inetd 超級伺服器進行服務的程式，所以要組態 inetd 的設定檔 (位於 <tt class="docutils literal"><span class="pre">/etc/inetd.conf</span></tt>)。``inetd.conf`` 的格式已經在「Linux 網路管理」一章裡提過了，我們來看看 dpkg 為 <tt class="docutils literal"><span class="pre">ipopd</span></tt> 寫的 <tt class="docutils literal"><span class="pre">inetd.conf</span></tt> 項目長什麼樣子：</p>
+<pre class="literal-block">
+pop3s stream  tcp     nowait  root    /usr/sbin/tcpd /usr/sbin/ipop3d
+</pre>
+<p>我們在組態 <tt class="docutils literal"><span class="pre">ipopd</span></tt> 的時候選了幾個協定，這裡就會出現幾行；因為我只選了 pop3s，所以這裡就只有 pop3s 一個。</p>
+<p>如果我們想要暫時關閉 POP3 服務，直接在 <tt class="docutils literal"><span class="pre">inetd.conf</span></tt> 裡 pop3s 設定行的開頭加上 <tt class="docutils literal"><span class="pre">#</span></tt> 符號，把該行註解掉之後，重新啟動 inetd 即可。</p>
+<p>至於郵箱的管理，我們留在「郵件系統的檔案結構」一節之後再討論。</p>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="imap-over-ssl" name="imap-over-ssl">5&nbsp;&nbsp;&nbsp;IMAP 伺服器 (over SSL)</a></h1>
+<p>IMAP (Interactive Mail Access Protocol) 是另一種郵箱存取通訊協定。與 POP 相比，IMAP 多了許多功能。POP 顧名思義，把伺服器比擬成現實生活中的郵箱，而提供收信、刪信等等功能；不過在現實生活裡一戶人家只有一個郵箱 (或者說一個門牌號碼只有一個郵箱，比較精確)，POP 也只讓一個帳號擁有一個郵箱。</p>
+<p>IMAP 比 POP 先進了點，它允許使用者在伺服器上面建立資料夾，使用者用客戶端程式登入了 IMAP 伺服器之後，就可以對自己的信件作處理：刪除、複製、建立新資料夾、搬移等等。</p>
+<p>Debian 同樣提供了好些 IMAP 伺服器套件：<tt class="docutils literal"><span class="pre">uw-imapd</span></tt> (對應 <tt class="docutils literal"><span class="pre">ipopd</span></tt>), <tt class="docutils literal"><span class="pre">courier-imap</span></tt> (對應 <tt class="docutils literal"><span class="pre">courier-pop</span></tt>) 與 <tt class="docutils literal"><span class="pre">cyrus21-imapd</span></tt> (對應 <tt class="docutils literal"><span class="pre">cyrus21-pop3d</span></tt>) 等等。這些套件與之前 POP 伺服器套件都是一系列的軟體，本節選擇同樣是由 UW 所開發維護的 <tt class="docutils literal"><span class="pre">uw-imapd</span></tt> 進行討論。</p>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="uw-imapd" name="uw-imapd">5.1&nbsp;&nbsp;&nbsp;安裝與組態 <tt class="docutils literal"><span class="pre">uw-imapd</span></tt></a></h2>
+<p>我們用</p>
+<pre class="literal-block">
+$ apt-get install uw-imapd
+</pre>
+<p>來安裝。和 <tt class="docutils literal"><span class="pre">ipopd</span></tt> 一樣，dpkg 會詢問要監聽的通訊埠，不過在選擇通訊埠的時候，要稍微注意一下名稱。</p>
+<p>我們現在使用的 IMAP 版本 (version) 是 4，修訂版本 (revision) 是 1，所以也常稱之為 IMAP4 或 IMAP4rev1。然而，支援 IMAP4 的通訊埠名稱 (在 Debian 中) 叫作 <tt class="docutils literal"><span class="pre">imap2</span></tt>，相當奇怪吧<a class="footnote-reference" href="#id13" id="id12" name="id12"><sup>5</sup></a>！``imap2`` 是 IMAP version 4 revision 1 所使用的通訊埠，而 <tt class="docutils literal"><span class="pre">imap3</span></tt> 是 IMAP version 3 所使用的通訊埠 (這個版本的協定很少用)，``imaps`` 則是 IMAP version 4 revision 1 over SSL。</p>
+<table class="docutils footnote" frame="void" id="id13" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id12" name="id13">[5]</a></td><td>在 Fedora Core 裡同樣的埠號叫作 <tt class="docutils literal"><span class="pre">imap</span></tt>。我們可以在系統的 <tt class="docutils literal"><span class="pre">/etc/services</span></tt> 裡查得所有的埠號與名稱對應。</td></tr>
+</tbody>
+</table>
+<p>同樣基於安全的理由，我會只組態 imaps 協定給 <tt class="docutils literal"><span class="pre">uw-imapd</span></tt> 使用，讓使用者只能進行加密連線；因為 IMAP 通常是用作 POP3 的替補功能，所以不會有什麼問題。</p>
+<p><tt class="docutils literal"><span class="pre">uw-imapd</span></tt> 也使用 inetd 來執行，故 dpkg 一樣會詢問是否要強制調整通訊埠設定。如果沒有特別的需要，請選擇預設的 No。最後 dpkg 會幫我們建立 SSL/TLS 要用的金鑰與憑證，存放在 <tt class="docutils literal"><span class="pre">/etc/ssl/certs/imapd.pem</span></tt> 裡面。</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="id14" name="id14">5.2&nbsp;&nbsp;&nbsp;<tt class="docutils literal"><span class="pre">uw-imapd</span></tt> 的管理</a></h2>
+<p><tt class="docutils literal"><span class="pre">uw-imapd</span></tt> 在管理上的注意事項與 <tt class="docutils literal"><span class="pre">ipopd</span></tt> 相同。郵箱的管理馬上就在後面進行討論。</p>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id15" name="id15">6&nbsp;&nbsp;&nbsp;郵件系統的檔案結構</a></h1>
+<p>談完了 MTA 以及郵箱伺服器的架設和基本組態，我們就要來了解一下電子郵件在伺服器上是如何儲存的。因為我們在討論這幾個伺服器軟體時，都讓它們直接存取系統郵箱 (或選擇存取系統郵箱的軟體)，所以伺服器的郵箱就是作業系統的郵箱。</p>
+<p>Unix 系列的作業系統在很早期就提供了電子郵件的功能，許多人會用終端機同時連上主機，執行各種工作。大部分的人都只能用這種分時系統的電腦，個人電腦與工作站都還沒有開始流行。所以，最早的電子郵件只是在 Unix 內部遞送的文字訊息，並不需要用到網際網路通訊協定 (SMTP, POP 等)；想收發郵件，只需要使用系統裡面特別的服務程式，把信件內容複製到收件者的郵件佇列 (mail queue) 裡即可。</p>
+<p>Debian GNU/Linux 把這種系統郵箱放在 <tt class="docutils literal"><span class="pre">/var/mail</span></tt> 目錄裡。該目錄裡會存在以系統使用者名稱為名的檔案；這些檔案就是該使用者的郵件佇列。郵件佇列檔的textbf{權限}是要特別注意的部分。佇列檔的擁有者是使用者本人，擁有群組是 <tt class="docutils literal"><span class="pre">mail</span></tt>，檔案的權限是 600；存放目錄 <tt class="docutils literal"><span class="pre">/var/mail</span></tt> 的權限是 2775，擁有者:群組則是 <tt class="docutils literal"><span class="pre">root:mail</span></tt>。MTA 會把寄給系統使用者的郵件存進佇列檔裡面，而 <tt class="docutils literal"><span class="pre">ipopd</span></tt> 與 <tt class="docutils literal"><span class="pre">uw-imapd</span></tt> 也會存取佇列檔以取得使用者的信件。</p>
+<p>郵件佇列檔的內容是純文字的，郵件就是一封接著一封依序寫在檔案裡面；這種檔案格式通常被稱作 mailbox 或 mbox。因為所有郵件都在一個檔案裡面，當郵件總數多或內容大的時候，佇列檔累積下來就會變得很龐大；這也就是為什麼在組態 <tt class="docutils literal"><span class="pre">postfix</span></tt> 的時候，dpkg 會要我們設定郵箱的上限。如果佇列檔太大，MTA 和郵箱伺服器在存取它們的時候效率會下降；太大的檔案也容易損壞，並且不易修護。</p>
+<p>一旦知道了由 MTA 儲存，以及郵箱伺服器存取的郵件來源位置，要管理這些檔案就很簡單了。日常的備份、切分都可以用系統提供的工具如 tar、gzip 等進行。Debian 裡還有許多用來處理 mailbox 的工具，之後我們會來進行討論。</p>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="imap-uw-imapd" name="imap-uw-imapd">6.1&nbsp;&nbsp;&nbsp;IMAP (<tt class="docutils literal"><span class="pre">uw-imapd</span></tt>) 郵件資料夾</a></h2>
+<p>IMAP 的一項重要功能特性就是支援伺服器端的資料夾與郵件管理。我們已經知道系統郵箱就是 mailbox 檔案，所以事實上，``uw-imapd`` 為我們建立的 IMAP 資料夾，就是系統郵箱之外的 mailbox 檔案。</p>
+<p>當我們要使用郵件客戶端連上 IMAP (<tt class="docutils literal"><span class="pre">uw-imapd</span></tt>) 伺服器時，時常會被要求指定一個伺服器基底目錄 (base directory)。以 <tt class="docutils literal"><span class="pre">uw-imapd</span></tt> 來說 (其它存取系統郵箱的 IMAP 伺服器也有相似的行為)，它預設是以使用者的家目錄當成這個基底目錄，然後從基底目錄開始，把所有的檔案當成 mailbox 提供給客戶端。如果我們真的不指定，而用家目錄來當作基底目錄，在郵件客戶端裡就會看到成千上萬的「資料夾」被掃描出來。</p>
+<p>如果我們用了那些不是 mailbox 的檔案作「資料夾」，那可不是什麼好事情，至少不會正常運作；運氣不好的話還會破壞這些檔案。基本上許多郵件客戶端都知道這些伺服器的基本組態，所以在設定類似基底目錄的欄位裡，都會給定 <tt class="docutils literal"><span class="pre">Mail</span></tt> 這一類的預設值。在 Debian 下，大部分的郵件客戶端都用 <tt class="docutils literal"><span class="pre">Mail</span></tt> (家目錄裡面的) 來作為存放已讀郵件的目錄；也就是說，當系統郵箱裡面的信件被閱讀過，而要封存的時候，會封存在這個目錄裡。</p>
+<p>在為使用者提供 IMAP 服務的時候，要特別注意資料夾的問題。</p>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id16" name="id16">7&nbsp;&nbsp;&nbsp;郵件系統相關工具</a></h1>
+<p>歷經了數十年的發展，Unix 世界裡發展出了許多新新舊舊的郵件處理工具。最常用的就是像 elm, pine, mutt 等文字模式的郵件客戶端，近來由於垃圾郵件 (SPAM) 盛行，與 MTA 配合的垃圾信過濾程式也開始發展。此外還有許多重要的工具程式，我們將在本節裡進行討論。</p>
+<p>在說明這些工具之前，有一個最重要的工具 <tt class="docutils literal"><span class="pre">mail</span></tt> 要先提出來。``mail`` 是一個簡單郵件客戶端，如果單獨執行程式，不加參數，就會讀取系統郵箱的內容，提供我們最單純的郵件閱讀方法；讀完的郵件會被搬到家目錄裡的 <tt class="docutils literal"><span class="pre">mbox</span></tt> 檔案。</p>
+<p>我們很少會用 <tt class="docutils literal"><span class="pre">mail</span></tt> 來讀郵件，不過卻常常用它來寄一些測試信。譬如以下的指令會寄信給系統的 <tt class="docutils literal"><span class="pre">test</span></tt> 使用者：</p>
+<pre class="literal-block">
+$ mail test
+Subject: test
+這是郵件的內容。
+Cc:
+</pre>
+<p>在 <tt class="docutils literal"><span class="pre">mail</span></tt> 程式後接使用者名稱作參數，就會寄信給該使用者。執行了程式之後會出現 <tt class="docutils literal"><span class="pre">Subject:</span></tt> 提示符號，讓我們輸入郵件的主旨。按下 Enter 之後，就可以開始輸入郵件的內文；``mail`` 給我們用的是最簡單的行編輯器，只能一行接一行輸入 (用 Enter 鍵換行)，無法上下左右移動。打完了內文之後，用 Ctrl-D 結束輸入。接著會出現 <tt class="docutils literal"><span class="pre">Cc:</span></tt>，提示我們輸入副本抄送的地址，如果沒有的話就直接按 Enter，即可結束。</p>
+<p><tt class="docutils literal"><span class="pre">mail</span></tt> 除了可寄信給系統使用者之外，也可以寄送 SMTP 郵件給網際網路上的電子郵件地址；只要把使用者名稱取代為真正的電子郵件地址即可。</p>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="mutt" name="mutt">7.1&nbsp;&nbsp;&nbsp;mutt</a></h2>
+<p>mutt 是最近幾年開發出來的文字模式郵件客戶端程式，支援多種郵箱協定，不過最常用的還是讀取本機的郵件。如果我們要檢視郵件伺服器上的郵件，我建議安裝 mutt 來使用：</p>
+<pre class="literal-block">
+$ apt-get install mutt
+</pre>
+<p>安裝完畢之後，輸入 <tt class="docutils literal"><span class="pre">mutt</span></tt> 就可以開始執行。</p>
+<p>進入 mutt 之後就會看到系統郵箱的內容，如果要離開請按下 <tt class="docutils literal"><span class="pre">q</span></tt>；在程式的任何地方都可以用 Ctrl-C 來中斷執行，通常會詢問是否要離開 mutt。用 <tt class="docutils literal"><span class="pre">c</span></tt> 指令可以切換其它的 mailbox 郵箱檔案，須手動輸入檔名；在按下 <tt class="docutils literal"><span class="pre">c</span></tt> 之後按 <tt class="docutils literal"><span class="pre">?</span></tt>，mutt 則會開啟一個檔案瀏覽器，讓我們選擇 mailbox。</p>
+<p>對 mutt 用法的討論至此為止 (因為它只是一個郵件客戶端程式，並非伺服器的一部分)，相關的說明在 mutt 文件裡均已寫明，請加以參考。</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="procmail" name="procmail">7.2&nbsp;&nbsp;&nbsp;procmail</a></h2>
+<p>procmail 是一支萬用的郵件處理程式，可以對郵件所有的標頭資訊進行處理。procmail 通常會和 MTA 配合，在 MTA 處理郵件的時候呼叫 procmail，根據使用者的設定來處理郵件。</p>
+<p>在 Debian 下請安裝兩個套件：</p>
+<pre class="literal-block">
+$ apt-get install procmail procmail-lib
+</pre>
+<p><tt class="docutils literal"><span class="pre">procmail-lib</span></tt> 是一大群 procmail 相關的規則集，可以直接呼叫或套用。procmail 的設定檔是由許多規則所組成的，當 MTA 把郵件的處理權交給 procmail 之後，它就會去讀取系統的 (<tt class="docutils literal"><span class="pre">/etc/procmailrc</span></tt>) 與使用者的 procmailrc 設定檔 (家目錄下的 <tt class="docutils literal"><span class="pre">.procmailrc</span></tt>)。</p>
+<p>在安裝 postfix 之前系統如果安裝有 procmail，那麼 dpkg 在組態 postfix 的時候就會詢問是否要使用 procmail 來處理郵件。確定的話，dpkg 會在 <tt class="docutils literal"><span class="pre">/etc/postfix/main.cf</span></tt> (postfix 的主要組態檔) 裡加一行</p>
+<pre class="literal-block">
+mailbox_command = procmail -a &quot;$EXTENSION&quot;
+</pre>
+<p>指定用 procmail 來處理郵件。不想要手動修改 <tt class="docutils literal"><span class="pre">main.cf</span></tt> 的話，請</p>
+<pre class="literal-block">
+$ dpkg-reconfigure postfix
+</pre>
+<p>重新跑一次 postfix 的組態即可。</p>
+<p>procmail 可以完成許多複雜的郵件處理功能，不過因為它是在<strong>收到郵件</strong>的時候執行的，一旦郵件進到了郵箱，就不能用 procmail 來處理了。</p>
+<p>關於 procmail 的使用說明，請參考 <tt class="docutils literal"><span class="pre">procmail</span> <span class="pre">(1)</span></tt>, <tt class="docutils literal"><span class="pre">procmailrc</span> <span class="pre">(5)</span></tt>, <tt class="docutils literal"><span class="pre">procmailrcex</span> <span class="pre">(5)</span></tt> 等 manpage，以及 <tt class="docutils literal"><span class="pre">/usr/share/procmail-lib</span></tt> 目錄裡的存放規則的 rc 檔。</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="fetchmail" name="fetchmail">7.3&nbsp;&nbsp;&nbsp;fetchmail</a></h2>
+<p>fetchmail 是一個遠端郵箱的管理工具，可以讓使用者把遠端 POP3, APOP 和 IMAP 伺服器上的郵件接回來，並且經過本機的 MTA 進行處理，讓我們可以在本機上用 mutt 等客戶端閱讀。</p>
+<p>因為 fetchmail 接回遠端郵件後會讓郵件跑過一次 MTA 的傳送流程，所以可以和 procmail 等處理程式配合得很好；讓 fetchmail 比一般的遠端郵件接收工具更方便，甚至優於許多圖形介面的客戶端程式。利用 fetchmail，許多伺服器上的郵件可以交給同一台伺服器統一管理，而且只要遠端提供有 POP3 或 IMAP 等協定即可，不需要特別設定遠端的轉寄 (forwarding)。</p>
+<p>我們用</p>
+<pre class="literal-block">
+$ apt-get install fetchmail fetchmailconf
+</pre>
+<p>來安裝 <tt class="docutils literal"><span class="pre">fetchmail</span></tt> 及相關套件。``fetchmailconf`` 是一個 X-base 的 GUI 組態套件，可以幫助我們組態 fetchmail；安裝完成後，執行 <tt class="docutils literal"><span class="pre">fetchmailconf</span></tt> 即可。</p>
+<p>fetchmail 也支援 SSL。關於 fetchmail 的執行及其組態檔 (使用者家目錄下的 <tt class="docutils literal"><span class="pre">.fetchmailrc</span></tt>) 的設定，請參考 <tt class="docutils literal"><span class="pre">fetchmail(1)</span></tt> manpage。</p>
+<p>通常我們會讓 fetchmail 配合 cron 定期執行收取外部郵件的動作。關於 cron 系統的使用及設定，請參考 <tt class="docutils literal"><span class="pre">crontab(1)</span></tt> 及 <tt class="docutils literal"><span class="pre">crontab(5)</span></tt> manpage。</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="spamassassin" name="spamassassin">7.4&nbsp;&nbsp;&nbsp;spamassassin</a></h2>
+<p>spamassassin 是一套用 Perl 撰寫的 SPAM 過濾程式，可以和 procmail 配合使用。我們這樣安裝 spamassassin：</p>
+<pre class="literal-block">
+$ apt-get install spamassassin
+</pre>
+<p>它同時會安裝 <tt class="docutils literal"><span class="pre">spamc</span></tt> 套件；套件名稱裡的 <tt class="docutils literal"><span class="pre">c</span></tt> 表示 client (客戶端)。</p>
+<p>我們一般會在 procmail 裡使用 spamassassin 來過濾垃圾郵件。以個別使用者的狀況來說，可以把 spamassassin 提供的 procmail 範例組態檔</p>
+<pre class="literal-block">
+/usr/share/doc/spamassassin/examples/procmailrc.example
+</pre>
+<p>加到你的 <tt class="docutils literal"><span class="pre">.procmailrc</span></tt> 裡最前面的地方去 (如果你還沒有自訂過 procmail 的設定，那也可以直接拿來作 <tt class="docutils literal"><span class="pre">.procmailrc</span></tt>)。如果你想把 spamassassin 組態加到全域 (系統) 的 procmailrc，請先在單一使用者環境裡測試好之後，再移到全域的設定檔；全域設定檔會影響所有使用者的郵件設定，須要特別注意。</p>
+<p>spamassassin 會對郵件全文進行掃瞄，所以是非常消耗系統資源的程式。因此，spamassassin 設計了伺服模式，``spamc`` 就是和 spamassassin 伺服程式 <tt class="docutils literal"><span class="pre">spamd</span></tt> 溝通的客戶端；各使用者呼叫 <tt class="docutils literal"><span class="pre">spamassassin</span></tt> 程式的話，均會執行獨立的 spamassassin Perl 指令稿，但若經由 <tt class="docutils literal"><span class="pre">spamc</span></tt> 對 <tt class="docutils literal"><span class="pre">spamd</span></tt> 進行連線，則可以把所有使用者送出的掃瞄工作集中到一起統整執行，以此增加整體的效率 (單一掃瞄工作是不一定會變快的)。</p>
+<p>如果想要開啟 spamassassin 伺服模式，在 Debian 下要把</p>
+<pre class="literal-block">
+/etc/default/spamassassin
+</pre>
+<p>設定檔裡的 <tt class="docutils literal"><span class="pre">ENABLE=0</span></tt> 改為 <tt class="docutils literal"><span class="pre">ENABLE=1</span></tt>，再執行</p>
+<pre class="literal-block">
+/etc/init.d/spamassassin start
+</pre>
+<p>來啟動 <tt class="docutils literal"><span class="pre">spamd</span></tt>。另外，在所有相關自訂設定裡的 &quot;<tt class="docutils literal"><span class="pre">spamassassin</span></tt>&quot; 字樣，都要取代為 &quot;<tt class="docutils literal"><span class="pre">spamc</span></tt>&quot;，才能改用 <tt class="docutils literal"><span class="pre">spamd</span></tt>；否則仍會執行個別的 <tt class="docutils literal"><span class="pre">spamassassin</span></tt>。</p>
+<p>在</p>
+<pre class="literal-block">
+/usr/share/doc/spamassassin/examples
+</pre>
+<p>還有一些配合工具的範例組態檔，可以參考使用。</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id1" id="archivemail" name="archivemail">7.5&nbsp;&nbsp;&nbsp;archivemail</a></h2>
+<p>archivemail 是一支用 Python 撰寫的 mailbox 封存工具。一個郵件系統經過長時間的使用，使用者的郵箱若不適當地清理，都會變得又大又肥。archivemail 可以指定多種封存條件，把過期的郵件另行儲存至其它 (mailbox) 檔案裡去。不論對系統管理員或一般使用者 (尤其在使用 IMAP 的時候)，這都是方便的工具。</p>
+<p>在 Debian 下請用</p>
+<pre class="literal-block">
+$ apt-get install archivemail
+</pre>
+<p>來安裝 archivemail。相關的設定請參考 <tt class="docutils literal"><span class="pre">archivemail</span> <span class="pre">(1)</span></tt> manpage 以及</p>
+<pre class="literal-block">
+/usr/share/doc/archivemail
+</pre>
+<p>下的說明檔案，尤其可以參考 <tt class="docutils literal"><span class="pre">examples</span></tt> 目錄下的 shell script 範例。</p>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="id17" name="id17">8&nbsp;&nbsp;&nbsp;結語</a></h1>
+<p>在本章中，我們概觀了重要的網際網路電子郵件系統，並且說明 Debian 下 MTA 及郵箱伺服器的安裝與基本組態。最後，我們把幾個重要的郵件相關舉出來，供讀者參考。</p>
+<p>本章所討論的郵件組態都相當的基本，許多進階的功能與特性都需要讀者進一步參考其它文件才能了解。不過，郵件系統牽涉了許多不同的通訊協定與歷史包袱，本來就不是三言兩語可以解釋得完，但又是如此重要，不能不談；本章中任何一節都可以寫成專書來討論，甚至如 procmail，都可以用好幾本書來探討它與不同 MTA 協同運作的組態與應用。</p>
+<p>讀者應該以本書所討論的郵件系統概念為基本，利用其它專書或文件進一步了解整個系統的功能，進一步組態出適用的系統。Debian 系統內附的文件 (均存放於 <tt class="docutils literal"><span class="pre">/usr/share/doc</span></tt> 的各子目錄內) 已經相當豐富，大可以其為起點，再行深入研究。</p>
+</div>
+</div>
+</body>
+</html>
